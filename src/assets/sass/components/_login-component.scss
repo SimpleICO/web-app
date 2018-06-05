@@ -1,10 +1,13 @@
-#home-component {
+#login-component {
   @include main;
   @include flex-column-center;
   background-color: $indigo;
-  text-align: center;
 
   .logo {
     @include logo;
+  }
+
+  textarea {
+    resize: none;
   }
 }

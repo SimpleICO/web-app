@@ -33,7 +33,17 @@
   min-height: 100vh;
 }
 
+@mixin logo {
+  margin-bottom: get-spacer(5);
+  text-align: center;
+  img {
+    height: auto;
+    width: 98px;
+  }
+}
+
 @import "./src/assets/sass/components/home-component";
+@import "./src/assets/sass/components/login-component";
 
 /*
   Media queries
