@@ -1,6 +1,7 @@
 #new-wallet-component {
-  @include main;
   @include flex-column-center;
+  @include with-header;
+  @include main;
   background-color: $indigo;
 
   .logo {
