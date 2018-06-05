@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+@import "./node_modules/bootstrap/scss/functions";
+@import "./node_modules/bootstrap/scss/mixins";
+@import "./src/assets/sass/bootstrap-variables";
+@import "./node_modules/bootstrap/scss/reboot";
+@import "./node_modules/bootstrap/scss/print";
+@import "./node_modules/bootstrap/scss/type";
+@import "./node_modules/bootstrap/scss/images";
+@import "./node_modules/bootstrap/scss/bootstrap-grid";
+@import "./node_modules/bootstrap/scss/forms";
+@import "./node_modules/bootstrap/scss/input-group";
+@import "./node_modules/bootstrap/scss/buttons";
+@import "./node_modules/bootstrap/scss/breadcrumb";
+@import "./node_modules/bootstrap/scss/card";
+@import "./node_modules/bootstrap/scss/utilities";
+
+// EBM variables
+@import "./src/assets/sass/ebm-variables";
+@import "./node_modules/ebm/functions/ebm-functions";
+@import "./node_modules/ebm/helpers/ebm-helpers";
+@import "./src/assets/sass/ebm-fonts-setup";
+@import "./src/assets/sass/ebm-fonts";
+@import "./src/assets/sass/ebm-bootstrap-overrides";
+@import "./node_modules/ebm/control/ebm-text-responsive-control";
+@import "./node_modules/ebm/elements/ebm-icons";
+@import "./node_modules/ebm/control/ebm-container-control";
+@import "./src/assets/sass/ebm-overrides";
+@import "./src/assets/sass/ebm-global";
+@import "./node_modules/ebm/modules/ebm-header";
+
+@mixin main {
+  min-height: 100vh;
+}
+
+@import "./src/assets/sass/components/home-component";
+
+/*
+  Media queries
+*/
+@media #{$xs-only} {}
+@media #{$sm-only} {}
+@media #{$md-only} {}
+@media #{$lg-only} {}
+@media #{$sm-down} {
+  body {}
+}
+@media #{$md-down} {}
+@media #{$lg-down} {}
+@media #{$sm-up} {}
+@media #{$md-up} {}
+@media #{$lg-up} {}
+@media #{$xl-up} {}
+@media #{$xxl-up} {}
+

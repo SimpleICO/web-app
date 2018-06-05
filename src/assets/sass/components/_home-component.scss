@@ -1,0 +1,14 @@
+#home-component {
+  @include main;
+  @include flex-column-center;
+  background-color: $indigo;
+  text-align: center;
+
+  .logo {
+    margin-bottom: get-spacer(5);
+    img {
+      height: auto;
+      width: 98px;
+    }
+  }
+}
