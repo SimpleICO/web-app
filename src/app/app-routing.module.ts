@@ -25,6 +25,12 @@ const routes: Routes = [
     //   contract: EthereumService
     // }
   },
+  { path: 'tokens/index',
+    component: NewWalletComponent,
+    // resolve: {
+    //   contract: EthereumService
+    // }
+  },
 ]
 
 @NgModule({

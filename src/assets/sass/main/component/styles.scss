@@ -72,6 +72,16 @@
   }
 }
 
+.on-error {
+  @include bold;
+  border-radius: $border-radius;
+  margin-top: get-spacer(1);
+  font-size: $font-size-sm;
+  background-color: $red;
+  padding: get-spacer(2);
+  color: white;
+}
+
 /*
   Media queries
 */

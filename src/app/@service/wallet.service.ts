@@ -11,6 +11,11 @@ export class WalletService {
 
   onNewWallet: Subject<Wallet> = new Subject<Wallet>()
 
+  onUnlockError: Subject<any> = new Subject<any>()
+  onUnlockSuccess: Subject<any> = new Subject<any>()
+
+  wallet: Wallet
+
   constructor() {}
 
   generateWallet(){
@@ -20,9 +25,50 @@ export class WalletService {
 
     this.onNewWallet.next(result)
 
-    console.log(result)
-
     return result
   }
 
+  unlock(seed: string){
+    if (!seed) {
+      this.onUnlockError.next({
+        message: 'No input detected'
+      })
+
+      return false
+    }
+
+    seed = seed.trim().replace(/\s\s+/g, ' ')
+
+    if (seed.split(' ').length == 12) {
+      return this.unlockFromMnemonic(seed)
+    }
+
+    return this.unlockFromPrivateKey(seed)
+  }
+
+  unlockFromMnemonic(mnemonic: string){
+    let instance = new Wallet()
+
+    try {
+      this.wallet = instance.unlockFromMnemonic(mnemonic)
+      this.onUnlockSuccess.next(true)
+    } catch (error) {
+      this.onUnlockError.next({
+        message: error.message
+      })
+    }
+  }
+
+  unlockFromPrivateKey(privateKey: string){
+    let instance = new Wallet()
+
+    try {
+      this.wallet = instance.unlockFromPrivateKey(privateKey)
+      this.onUnlockSuccess.next(true)
+    } catch (error) {
+      this.onUnlockError.next({
+        message: error.message
+      })
+    }
+  }
 }
