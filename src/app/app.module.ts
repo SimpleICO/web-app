@@ -8,6 +8,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { HomeModule } from './home/home.module';
 import { LoginModule } from './login/login.module';
 import { NewWalletModule } from './new-wallet/new-wallet.module';
+import { WalletService } from './@service/wallet.service';
 
 
 @NgModule({
@@ -21,7 +22,7 @@ import { NewWalletModule } from './new-wallet/new-wallet.module';
     LoginModule,
     NewWalletModule,
   ],
-  providers: [],
+  providers: [WalletService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
