@@ -9,6 +9,9 @@ import { HomeModule } from './home/home.module';
 import { LoginModule } from './login/login.module';
 import { NewWalletModule } from './new-wallet/new-wallet.module';
 import { WalletService } from './@service/wallet.service';
+import { TokenIndexModule } from './token-index/token-index.module';
+
+import { UnlockRouteGuard } from '@guard/unlock-route-guard'
 
 
 @NgModule({
@@ -21,8 +24,9 @@ import { WalletService } from './@service/wallet.service';
     HomeModule,
     LoginModule,
     NewWalletModule,
+    TokenIndexModule,
   ],
-  providers: [WalletService],
+  providers: [WalletService, UnlockRouteGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

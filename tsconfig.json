@@ -25,6 +25,9 @@
       "@shared/*": [
         "app/@shared/*"
       ],
+      "@guard/*": [
+        "app/@guard/*"
+      ],
       "@model/*": [
         "app/@model/*"
       ],

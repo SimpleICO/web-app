@@ -3,7 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { ContainerComponent as HomeComponent } from './home/container.component';
 import { ContainerComponent as LoginComponent } from './login/container.component';
 import { ContainerComponent as NewWalletComponent } from './new-wallet/container.component';
-// import { EthereumService } from '@service/ethereum.service';
+import { ContainerComponent as TokenIndexComponent } from './token-index/container.component';
+import { WalletService } from '@service/wallet.service';
+import { UnlockRouteGuard } from '@guard/unlock-route-guard'
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -15,21 +17,13 @@ const routes: Routes = [
   },
   { path: 'login',
     component: LoginComponent,
-    // resolve: {
-    //   contract: EthereumService
-    // }
   },
   { path: 'new-wallet',
     component: NewWalletComponent,
-    // resolve: {
-    //   contract: EthereumService
-    // }
   },
-  { path: 'tokens/index',
-    component: NewWalletComponent,
-    // resolve: {
-    //   contract: EthereumService
-    // }
+  { path: 'token/index',
+    component: TokenIndexComponent,
+    canActivate: [UnlockRouteGuard],
   },
 ]
 

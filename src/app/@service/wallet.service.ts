@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Wallet } from '@model/wallet.model';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class WalletService {
 
   accounts: Array<string> = []
-
-  address: string
 
   onNewWallet: Subject<Wallet> = new Subject<Wallet>()
 
@@ -16,7 +15,9 @@ export class WalletService {
 
   wallet: Wallet
 
-  constructor() {}
+  isLocked: boolean = true
+
+  constructor(private router: Router) {}
 
   generateWallet(){
     let wallet = new Wallet()
@@ -26,6 +27,20 @@ export class WalletService {
     this.onNewWallet.next(result)
 
     return result
+  }
+
+  resolve(){
+    if (!this.isUnlocked()) {
+      return this.router.navigateByUrl('/login');
+    }
+
+    return this.isUnlocked()
+  }
+
+  isUnlocked(){
+    return this.wallet != undefined &&
+          this.wallet != null &&
+          !this.isLocked
   }
 
   unlock(seed: string){
@@ -51,8 +66,10 @@ export class WalletService {
 
     try {
       this.wallet = instance.unlockFromMnemonic(mnemonic)
+      this.isLocked = false
       this.onUnlockSuccess.next(true)
     } catch (error) {
+      this.isLocked = true
       this.onUnlockError.next({
         message: error.message
       })
@@ -64,8 +81,10 @@ export class WalletService {
 
     try {
       this.wallet = instance.unlockFromPrivateKey(privateKey)
+      this.isLocked = false
       this.onUnlockSuccess.next(true)
     } catch (error) {
+      this.isLocked = true
       this.onUnlockError.next({
         message: error.message
       })
