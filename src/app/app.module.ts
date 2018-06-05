@@ -7,6 +7,7 @@ import { AppRoutingModule } from './/app-routing.module';
 
 import { HomeModule } from './home/home.module';
 import { LoginModule } from './login/login.module';
+import { NewWalletModule } from './new-wallet/new-wallet.module';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { LoginModule } from './login/login.module';
     AppRoutingModule,
     HomeModule,
     LoginModule,
+    NewWalletModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,18 @@
+#new-wallet-component {
+  @include main;
+  @include flex-column-center;
+  background-color: $indigo;
+
+  .logo {
+    @include logo;
+  }
+
+  textarea {
+    resize: none;
+  }
+
+  .new-wallet-wrapper {
+    @include flex-column-center;
+    min-height: 350px;
+  }
+}

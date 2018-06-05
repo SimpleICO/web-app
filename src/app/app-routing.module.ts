@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ContainerComponent as HomeComponent } from './home/container.component';
 import { ContainerComponent as LoginComponent } from './login/container.component';
+import { ContainerComponent as NewWalletComponent } from './new-wallet/container.component';
 // import { EthereumService } from '@service/ethereum.service';
 
 const routes: Routes = [
@@ -14,6 +15,12 @@ const routes: Routes = [
   },
   { path: 'login',
     component: LoginComponent,
+    // resolve: {
+    //   contract: EthereumService
+    // }
+  },
+  { path: 'new-wallet',
+    component: NewWalletComponent,
     // resolve: {
     //   contract: EthereumService
     // }
