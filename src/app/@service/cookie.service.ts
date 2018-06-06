@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from '@environment/environment';
 
 declare let require: any
 
@@ -11,7 +12,11 @@ export class CookieService {
 
   domain: string = 'localhost'
 
-  constructor() { }
+  constructor() {
+    if (environment.staging) {
+      this.domain = 'simpleico-dev.firebaseapp.com'
+    }
+  }
 
   ngOnInit() {
   }
