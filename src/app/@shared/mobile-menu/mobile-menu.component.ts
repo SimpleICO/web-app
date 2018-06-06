@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedService } from '@service/shared.service';
 
 @Component({
   selector: 'app-mobile-menu',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MobileMenuComponent implements OnInit {
 
-  constructor() { }
+  display: boolean = false
+
+  constructor(
+    public shared: SharedService) {
+  }
 
   ngOnInit() {
+  }
+
+  ngAfterViewInit() {
+    this.shared.onMobileMenu.subscribe(data => {
+      this.display = data.display
+    })
   }
 
 }

@@ -14,7 +14,8 @@ import { AcceptTermsModule } from './accept-terms/accept-terms.module';
 
 import { UnlockRouteGuard } from '@guard/unlock-route-guard';
 import { AcceptTermsRouteGuard } from '@guard/accept-terms-route-guard'
-import { CookieService } from './@service/cookie.service'
+import { CookieService } from './@service/cookie.service';
+import { SharedService } from './@service/shared.service'
 
 
 @NgModule({
@@ -30,7 +31,7 @@ import { CookieService } from './@service/cookie.service'
     TokenIndexModule,
     AcceptTermsModule,
   ],
-  providers: [WalletService, UnlockRouteGuard, CookieService, AcceptTermsRouteGuard],
+  providers: [WalletService, UnlockRouteGuard, CookieService, AcceptTermsRouteGuard, SharedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

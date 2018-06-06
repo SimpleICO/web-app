@@ -57,7 +57,9 @@
 #mobile-menu {
   box-shadow: -1px 0 3px 3px rgba($black, 0.35);
   background-color: darken($indigo, 14%);
+  transition: transform 0.2s ease-in-out;
   padding-top: $header-height-control;
+  transform: translateX(110%);
   position: fixed;
   height: 100vh;
   z-index: 900;
@@ -65,6 +67,10 @@
   bottom: 0;
   right: 0;
   top: 0;
+
+  &.display {
+    transform: translateX(0);
+  }
 
   a {
     @include flex-column-center;
