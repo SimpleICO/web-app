@@ -2,15 +2,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthHeaderComponent } from './auth-header/auth-header.component';
 import { AppRoutingModule } from '../app-routing.module';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   exports: [
-    AuthHeaderComponent
+    AuthHeaderComponent,
+    HeaderComponent
   ],
-  declarations: [AuthHeaderComponent]
+  declarations: [AuthHeaderComponent, HeaderComponent]
 })
 export class SharedModule { }

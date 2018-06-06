@@ -1,0 +1,6 @@
+#token-index {
+  @include flex-column-center;
+  @include with-header;
+  @include main;
+  background-color: $indigo;
+}

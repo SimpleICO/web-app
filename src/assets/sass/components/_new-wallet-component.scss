@@ -8,10 +8,6 @@
     @include logo;
   }
 
-  textarea {
-    resize: none;
-  }
-
   .new-wallet-wrapper {
     @include flex-column-center;
     min-height: 350px;

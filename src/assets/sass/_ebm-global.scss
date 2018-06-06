@@ -15,6 +15,10 @@ body {}
   position: relative;
 }
 
+textarea {
+  resize: none;
+}
+
 /*
   Media queries
 */
