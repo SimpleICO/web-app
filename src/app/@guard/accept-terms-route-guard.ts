@@ -1,13 +1,11 @@
 import { CanActivate, Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { WalletService } from '@service/wallet.service';
 import { CookieService } from '@service/cookie.service';
 
 @Injectable()
-export class UnlockRouteGuard implements CanActivate {
+export class AcceptTermsRouteGuard implements CanActivate {
 
   constructor(
-    private wallet: WalletService,
     private cookie: CookieService,
     private router: Router) {}
 
@@ -17,11 +15,6 @@ export class UnlockRouteGuard implements CanActivate {
       return false
     }
 
-    if (!this.wallet.isUnlocked()) {
-      this.router.navigateByUrl('/login')
-      return false
-    }
-
-    return this.wallet.isUnlocked()
+    return this.cookie.hasAcceptedTerms()
   }
 }

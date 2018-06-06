@@ -1,0 +1,18 @@
+#accept-terms {
+  @include flex-column-center;
+  @include main;
+  background-color: $indigo;
+
+  .logo {
+    @include logo;
+  }
+
+  textarea {
+    resize: none;
+  }
+
+  .new-wallet-wrapper {
+    @include flex-column-center;
+    min-height: 350px;
+  }
+}

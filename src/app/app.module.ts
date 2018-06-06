@@ -10,8 +10,11 @@ import { LoginModule } from './login/login.module';
 import { NewWalletModule } from './new-wallet/new-wallet.module';
 import { WalletService } from './@service/wallet.service';
 import { TokenIndexModule } from './token-index/token-index.module';
+import { AcceptTermsModule } from './accept-terms/accept-terms.module';
 
-import { UnlockRouteGuard } from '@guard/unlock-route-guard'
+import { UnlockRouteGuard } from '@guard/unlock-route-guard';
+import { AcceptTermsRouteGuard } from '@guard/accept-terms-route-guard'
+import { CookieService } from './@service/cookie.service'
 
 
 @NgModule({
@@ -25,8 +28,9 @@ import { UnlockRouteGuard } from '@guard/unlock-route-guard'
     LoginModule,
     NewWalletModule,
     TokenIndexModule,
+    AcceptTermsModule,
   ],
-  providers: [WalletService, UnlockRouteGuard],
+  providers: [WalletService, UnlockRouteGuard, CookieService, AcceptTermsRouteGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
