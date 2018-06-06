@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AuthHeaderComponent } from './auth-header/auth-header.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { HeaderComponent } from './header/header.component';
+import { MobileMenuComponent } from './mobile-menu/mobile-menu.component';
 
 @NgModule({
   imports: [
@@ -11,8 +12,9 @@ import { HeaderComponent } from './header/header.component';
   ],
   exports: [
     AuthHeaderComponent,
-    HeaderComponent
+    HeaderComponent,
+    MobileMenuComponent
   ],
-  declarations: [AuthHeaderComponent, HeaderComponent]
+  declarations: [AuthHeaderComponent, HeaderComponent, MobileMenuComponent]
 })
 export class SharedModule { }

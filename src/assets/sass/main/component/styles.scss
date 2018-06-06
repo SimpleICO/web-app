@@ -29,6 +29,7 @@
   background-color: transparent;
   border-bottom: none;
   position: absolute;
+  z-index: 1000;
   width: 100%;
   right: 0;
   left: 0;
@@ -50,6 +51,58 @@
     font-weight: bold;
     font-size: 35px;
     color: white;
+  }
+}
+
+#mobile-menu {
+  box-shadow: -1px 0 3px 3px rgba($black, 0.35);
+  background-color: darken($indigo, 14%);
+  padding-top: $header-height-control;
+  position: fixed;
+  height: 100vh;
+  z-index: 900;
+  width: 70%;
+  bottom: 0;
+  right: 0;
+  top: 0;
+
+  a {
+    @include flex-column-center;
+  }
+
+  .ether-balance {
+    margin-bottom: get-spacer(3);
+    padding: get-spacer(3);
+    position: relative;
+    color: white;
+    .balance {
+      @include light;
+      font-size: $h4-font-size;
+      padding-right: 28px;
+      display: block;
+    }
+    small {
+      @include bold;
+      text-transform: uppercase;
+    }
+    .go-icon {
+      @include flex-column-center;
+      position: absolute;
+      color: white;
+      width: 28px;
+      bottom: 0;
+      right: 0;
+      top: 0;
+    }
+  }
+  .item {
+    border-bottom: 1px solid darken($indigo, 21%);
+    padding: get-spacer(3);
+    color: white;
+  }
+  .cta {
+    margin-top: get-spacer(3);
+    padding: get-spacer(3);
   }
 }
 
