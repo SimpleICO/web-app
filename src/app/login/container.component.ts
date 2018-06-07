@@ -28,7 +28,7 @@ export class ContainerComponent implements OnInit {
       this.isInvalid = false
       this.errorMessage = ''
 
-      return this.router.navigate(['/token/index']);
+      return this.router.navigate(['/token/new']);
     })
   }
 
