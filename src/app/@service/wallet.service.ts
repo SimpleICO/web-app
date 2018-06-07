@@ -29,6 +29,10 @@ export class WalletService {
     return result
   }
 
+  getAddress(){
+    return this.wallet ? this.wallet.address : '0x00000000000000000'
+  }
+
   resolve(){
     if (!this.isUnlocked()) {
       return this.router.navigateByUrl('/login');
@@ -41,6 +45,12 @@ export class WalletService {
     return this.wallet != undefined &&
           this.wallet != null &&
           !this.isLocked
+  }
+
+  lock(){
+    this.wallet = null
+
+    return this.router.navigateByUrl('/login')
   }
 
   unlock(seed: string){

@@ -7,9 +7,17 @@
   <a href="#" class="item">
     <span>My Tokens</span>
   </a>
+  <span class="item" (click)="wallet.lock()">
+    <span>Logout</span>
+  </span>
   <article class="cta">
     <a [routerLink]="['/token/new']" class="btn btn-block btn-lg btn-primary">
       Create Token
     </a>
+  </article>
+
+  <article class="address">
+    <span class="text-truncate">{{ wallet.getAddress() }}</span>
+    <span class="copy">copy</span>
   </article>
 </section>

@@ -17,4 +17,16 @@ export class SharedService {
     })
   }
 
+  updateCopyTrigger(trigger){
+    trigger.innerHTML = '<i class="icon-checkmark-circle"></i>'
+    trigger.classList.add('btn-success')
+    trigger.classList.remove('btn-outline-white')
+    setTimeout(() => {
+      trigger.innerHTML = 'copy'
+      trigger.classList.remove('copied')
+      trigger.classList.add('btn-outline-white')
+      trigger.classList.remove('btn-success')
+    }, 2000);
+  }
+
 }

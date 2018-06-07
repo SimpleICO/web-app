@@ -23,6 +23,7 @@ export class Wallet {
     try {
       let wallet = this.instance.fromMnemonic(mnemonic)
       this.mnemonic = mnemonic
+      this.address = wallet.address
       console.log(wallet)
       return this
     } catch (error) {
@@ -35,6 +36,7 @@ export class Wallet {
     try {
       let wallet = new this.instance(privateKey)
       this.privateKey = wallet.privateKey
+      this.address = wallet.address
       console.log(wallet)
       return this
     } catch (error) {

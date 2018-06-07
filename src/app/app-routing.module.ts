@@ -35,7 +35,7 @@ const routes: Routes = [
     canActivate: [UnlockRouteGuard, AcceptTermsRouteGuard],
   },
   { path: 'token/new',
-    component: TokenIndexComponent,
+    component: TokenNewComponent,
     // canActivate: [UnlockRouteGuard, AcceptTermsRouteGuard],
   },
 ]
