@@ -1,7 +1,7 @@
 #accept-terms {
   @include flex-column-center;
   @include main;
-  background-color: $indigo;
+  background-color: $purple;
 
   .logo {
     @include logo;

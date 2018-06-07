@@ -1,7 +1,7 @@
 #home-component {
   @include main;
   @include flex-column-center;
-  background-color: $indigo;
+  background-color: $purple;
   text-align: center;
 
   .logo {

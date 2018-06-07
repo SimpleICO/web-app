@@ -5,41 +5,34 @@
     <div class="logo">
       <img src="assets/img/icon-simpleico.png" alt="SimpleICO">
     </div>
-    <div class="new-wallet-wrapper">
-      <button class="btn btn-success btn-lg btn-block" (click)="generateWallet()">Generate new wallet</button>
+    <div class="new-wallet-wrapper" [class.on-new-wallet]="onNewWallet">
+      <article class="notice mb-3">
+        <p>SimpleICO does not store your wallet credentials. Make sure you save them in a safe place.</p>
+      </article>
+      <button class="btn btn-primary btn-lg btn-block btn-generate-wallet mb-4" (click)="generateWallet()">Generate new wallet</button>
 
-      <div class="card bg-dark mt-3">
-        <div class="card-body">
-
-          <fieldset class="input-box bg-dark mb-3">
-            <label for="">Your new ETH address</label>
-            <div class="input-group">
-              <input type="text" class="form-control" value="{{ address }}">
-              <div class="input-group-append">
-                <button class="btn btn-outline-white copy-address" type="button">copy</button>
-              </div>
+      <div class="address-wrapper" [class.display]="display" *ngIf="display">
+        <fieldset class="form-group dark-theme mb-3">
+          <label for="">Your new ETH address</label>
+          <div class="input-group">
+            <input type="text" class="form-control" value="{{ address }}">
+            <div class="input-group-append">
+              <button class="btn btn-outline-white copy-address" type="button">copy</button>
             </div>
-          </fieldset>
-          <fieldset class="input-box bg-dark mb-3">
-            <label for="">Private key</label>
-            <div class="input-group">
-              <input type="text" class="form-control" value="{{ privateKey }}">
-              <div class="input-group-append">
-                <button class="btn btn-outline-white copy-private-key" type="button">copy</button>
-              </div>
+          </div>
+        </fieldset>
+        <fieldset class="form-group dark-theme mb-4">
+          <label for="">Mnemonic seed phrase</label>
+          <div class="input-group">
+            <input type="text" class="form-control" value="{{ mnemonic }}">
+            <div class="input-group-append">
+              <button class="btn btn-outline-white copy-mnemonic" type="button">copy</button>
             </div>
-          </fieldset>
-          <fieldset class="input-box bg-dark mb-2">
-            <label for="">Mnemonic seed phrase</label>
-            <div class="input-group">
-              <input type="text" class="form-control" value="{{ mnemonic }}">
-              <div class="input-group-append">
-                <button class="btn btn-outline-white copy-mnemonic" type="button">copy</button>
-              </div>
-            </div>
-          </fieldset>
-
-        </div>
+          </div>
+        </fieldset>
+        <fieldset class="form-group text-right">
+          <button class="btn btn-outline-primary btn-lg">Login</button>
+        </fieldset>
       </div>
     </div>
   </div>

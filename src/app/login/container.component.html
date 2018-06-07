@@ -3,16 +3,21 @@
     <div class="logo">
       <img src="assets/img/icon-simpleico.png" alt="SimpleICO">
     </div>
-    <div class="card">
+    <fieldset class="form-group dark-theme">
+      <textarea autofocus="autofocus" class="form-control" placeholder="Paste your 12 word seed phrase" [(ngModel)]="seed"></textarea>
+    </fieldset>
+    <button class="btn btn-primary btn-lg btn-block" (click)="wallet.unlock(seed)">Unlock my wallet</button>
+
+    <div class="text-center text-white mt-3">
+      <small class="d-block">Don't have a wallet?</small>
+      <a [routerLink]="['/new-wallet']">Create new wallet</a>
+    </div>
+    <!-- <div class="card">
       <div class="card-body">
-        <fieldset class="form-group">
-          <textarea autofocus="autofocus" class="form-control" placeholder="Paste your mnemonic seed or your private key" [(ngModel)]="seed"></textarea>
-        </fieldset>
-        <button class="btn btn-success btn-lg btn-block" (click)="wallet.unlock(seed)">Unlock my wallet</button>
         <p *ngIf="isInvalid" class="on-error">{{ errorMessage }}</p>
         <hr>
         <a [routerLink]="['/new-wallet']" class="btn btn-outline-success btn-sm btn-block">Create new wallet <i class="icon-chevron-right"></i></a>
       </div>
-    </div>
+    </div> -->
   </div>
 </main>

@@ -23,3 +23,31 @@ input[type="submit"].btn,
     font-weight: bold;
   }
 }
+
+@mixin input-dark-theme {
+  border: 1px solid darken($purple, 14%);
+  background-color: darken($purple, 7%);
+  color: white;
+  &:focus {
+    background-color: darken($purple, 14%);
+  }
+  &:placeholder {
+    color: $gray-300;
+  }
+}
+
+.form-group {
+  &.dark-theme {
+    .form-control {
+      @include input-dark-theme;
+    }
+    label {
+      color: white;
+    }
+  }
+}
+
+
+
+
+

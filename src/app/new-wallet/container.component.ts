@@ -17,11 +17,19 @@ export class ContainerComponent implements OnInit {
   privateKey: string
   mnemonic: string
 
+  display: boolean = false
+  onNewWallet: boolean = false
+
   constructor(private wallet: WalletService) {
     wallet.onNewWallet.subscribe(result => {
+      this.onNewWallet = true
       this.address = result.address
       this.privateKey = result.privateKey
       this.mnemonic = result.mnemonic
+
+      setTimeout(() => {
+        this.display = true
+      }, 600)
     })
   }
 
