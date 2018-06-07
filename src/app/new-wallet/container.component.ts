@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WalletService } from '@service/wallet.service';
+import { Router } from "@angular/router";
 
 declare var require: any
 
@@ -20,7 +21,9 @@ export class ContainerComponent implements OnInit {
   display: boolean = false
   onNewWallet: boolean = false
 
-  constructor(private wallet: WalletService) {
+  constructor(
+    public wallet: WalletService,
+    private router: Router) {
     wallet.onNewWallet.subscribe(result => {
       this.onNewWallet = true
       this.address = result.address
@@ -30,6 +33,10 @@ export class ContainerComponent implements OnInit {
       setTimeout(() => {
         this.display = true
       }, 600)
+    })
+
+    wallet.onUnlockSuccess.subscribe(data => {
+      return this.router.navigate(['/token/index'])
     })
   }
 
