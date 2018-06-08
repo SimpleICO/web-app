@@ -14,8 +14,10 @@ export class ContainerComponent implements OnInit {
     public wallet: WalletService) {}
 
   ngOnInit() {
+    this.wallet.getAccountBalance()
+    console.log(this.wallet.balance)
     // this.wallet.wallet.instance.getBalance()
-    console.log(this.eth.getAccountBalance())
+    // console.log()
     // console.log(balance)
   }
 }

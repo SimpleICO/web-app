@@ -2,6 +2,13 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Wallet } from '@model/wallet.model';
 import { Router } from '@angular/router';
+import { environment as env } from '@environment/environment';
+
+declare var require: any
+
+const JSON_RPC_PROVIDER = 'HTTP://127.0.0.1:7545'
+const Eth = require('ethers')
+const Providers = Eth.providers
 
 @Injectable()
 export class WalletService {
@@ -17,7 +24,25 @@ export class WalletService {
 
   isLocked: boolean = true
 
-  constructor(private router: Router) {}
+  balance = Eth.BigNumber
+  ethBalance: string
+  onGetBalance: Subject<any> = new Subject<any>()
+
+  provider: any
+
+  constructor(
+    private router: Router) {
+    this.onGetBalance.subscribe(balance => {
+      console.log(balance)
+      this.balance = balance
+      this.ethBalance = Eth.utils.formatEther(balance)
+    })
+  }
+
+  async getAccountBalance(address: string = this.getAddress()){
+    let balance = await this.wallet.instance.getBalance()
+    this.onGetBalance.next(balance)
+  }
 
   generateWallet(){
     let wallet = new Wallet()
@@ -27,10 +52,6 @@ export class WalletService {
     this.onNewWallet.next(result)
 
     return result
-  }
-
-  setProvider(provider: any){
-    this.wallet.setProvider(provider)
   }
 
   getAddress(){
@@ -69,10 +90,28 @@ export class WalletService {
     seed = seed.trim().replace(/\s\s+/g, ' ')
 
     if (seed.split(' ').length == 12) {
-      return this.unlockFromMnemonic(seed)
+      this.unlockFromMnemonic(seed)
+      return this.setProvider()
     }
 
-    return this.unlockFromPrivateKey(seed)
+    this.unlockFromPrivateKey(seed)
+    return this.setProvider()
+  }
+
+  setProvider(){
+    if (env.local) {
+      this.setJsonRpcProvider()
+    }
+  }
+
+  setJsonRpcProvider(){
+    this.provider = new Providers.JsonRpcProvider(JSON_RPC_PROVIDER, 'unspecified')
+    this.wallet.setProvider(this.provider)
+  }
+
+  setRopstenProvider(){
+    this.provider = new Providers.InfuraProvider(Providers.networks.ropsten)
+    this.wallet.setProvider(this.provider)
   }
 
   unlockFromMnemonic(mnemonic: string){
