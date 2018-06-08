@@ -36,7 +36,7 @@ const routes: Routes = [
   },
   { path: 'token/new',
     component: TokenNewComponent,
-    // canActivate: [UnlockRouteGuard, AcceptTermsRouteGuard],
+    canActivate: [UnlockRouteGuard, AcceptTermsRouteGuard],
   },
 ]
 

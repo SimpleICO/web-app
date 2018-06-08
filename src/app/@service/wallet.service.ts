@@ -29,6 +29,10 @@ export class WalletService {
     return result
   }
 
+  setProvider(provider: any){
+    this.wallet.setProvider(provider)
+  }
+
   getAddress(){
     return this.wallet ? this.wallet.address : '0x00000000000000000'
   }

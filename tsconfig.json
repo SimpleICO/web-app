@@ -16,8 +16,8 @@
       "dom"
     ],
     "paths": {
-      "simpleico.v1.abi": [
-        "assets/contracts/simpleico.v1.json"
+      "@abi/*": [
+        "assets/contracts/*"
       ],
       "@service/*": [
         "app/@service/*"

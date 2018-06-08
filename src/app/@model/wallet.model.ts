@@ -19,9 +19,14 @@ export class Wallet {
     this.instance = $wallet
   }
 
+  setProvider(provider: any){
+    this.instance.provider = provider
+  }
+
   unlockFromMnemonic(mnemonic: string){
     try {
-      let wallet = this.instance.fromMnemonic(mnemonic)
+      let wallet = $wallet.fromMnemonic(mnemonic)
+      this.instance = wallet
       this.mnemonic = mnemonic
       this.address = wallet.address
       console.log(wallet)
@@ -34,7 +39,8 @@ export class Wallet {
 
   unlockFromPrivateKey(privateKey: string){
     try {
-      let wallet = new this.instance(privateKey)
+      let wallet = new $wallet(privateKey)
+      this.instance = wallet
       this.privateKey = wallet.privateKey
       this.address = wallet.address
       console.log(wallet)

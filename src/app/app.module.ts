@@ -16,7 +16,8 @@ import { AcceptTermsModule } from './accept-terms/accept-terms.module';
 import { UnlockRouteGuard } from '@guard/unlock-route-guard';
 import { AcceptTermsRouteGuard } from '@guard/accept-terms-route-guard'
 import { CookieService } from './@service/cookie.service';
-import { SharedService } from './@service/shared.service'
+import { SharedService } from './@service/shared.service';
+import { EthereumService } from './@service/ethereum.service'
 
 
 @NgModule({
@@ -33,7 +34,7 @@ import { SharedService } from './@service/shared.service'
     AcceptTermsModule,
     TokenNewModule,
   ],
-  providers: [WalletService, UnlockRouteGuard, CookieService, AcceptTermsRouteGuard, SharedService],
+  providers: [WalletService, UnlockRouteGuard, CookieService, AcceptTermsRouteGuard, SharedService, EthereumService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
