@@ -30,19 +30,6 @@ export class EthereumService {
       .toPromise()
   }
 
-        // console.log(value)
-        // this.value = ether(value.data.ETH);
-        // this.tokenSupply = ether(value.data.ETH * MAX_USD_CAP);
-        // console.log(`WEI ${this.value.valueOf()}`); // US$ 1.00 in wei
-        // console.log(`TOKEN SUPPLY ${this.tokenSupply}`); // US$ 1.00 in wei
-
-        // let walletBalance = await web3.eth.getBalance(wallet);
-        // let investorBalance = await web3.eth.getBalance(investor);
-        // console.log(`WALLET ETH BALANCE: ${walletBalance.valueOf()}`);
-        // console.log(`INVESTOR ETH BALANCE: ${investorBalance.valueOf()}`);
-
-        // this.token = await SimpleToken.new(NAME, SYMBOL, DECIMALS, this.tokenSupply, { from: wallet });
-
   async createToken(){
 
     let simpleToken = new SimpleToken(this.wallet.getInstance(), 'My SimpleToken', 'MST')
@@ -67,6 +54,8 @@ export class EthereumService {
     })
 
     console.log(tx)
+
+    this.wallet.getAccountBalance()
   }
 
 }

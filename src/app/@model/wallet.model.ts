@@ -22,6 +22,10 @@ export class Wallet {
 
   constructor(){}
 
+  getBalance(){
+    return this.web3.eth.getBalance(this.address)
+  }
+
   setJsonRpcProvider(){
     let provider = new Web3.providers.HttpProvider(JSON_RPC_PROVIDER)
     this.provider = provider
