@@ -1,0 +1,41 @@
+<div class="modal" *ngIf="display" id="new-token-modal">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-sm-8">
+        <div class="modal-body" *ngIf="onTxnCostCalc">
+          <h4>Calculating transaction cost...</h4>
+          <div class="spinner-wrapper">
+            <svg class="svg" xmlns="http://www.w3.org/2000/svg">
+              <circle class="circle" r="42" cx="50%" cy="50%" fill="transparent" stroke-dasharray="0"></circle>
+              <circle class="bar" r="42" cx="50%" cy="50%" fill="transparent" stroke-dasharray="263.89" [style.stroke-dashoffset]="15"></circle>
+            </svg>
+          </div>
+        </div>
+        <div class="modal-body" *ngIf="onBeforeTokenDeployment">
+          <h4 class="mb-4">Deploying this token will cost you:</h4>
+          <h5>US$ {{ eth.txCost.USD }}</h5>
+          <h5 class="mb-4">ETH {{ eth.txCost.ETH }}</h5>
+          <button class="btn btn-primary btn-block mb-3" (click)="eth.deployToken()">Deploy</button>
+          <button class="btn btn-outline-primary btn-block" (click)="reset()">Cancel</button>
+        </div>
+        <div class="modal-body" *ngIf="onTokenDeployment">
+          <h4 class="mb-4">Deploying your contract, waiting for confirmation...</h4>
+          <div class="spinner-wrapper">
+            <svg class="svg" xmlns="http://www.w3.org/2000/svg">
+              <circle class="circle" r="42" cx="50%" cy="50%" fill="transparent" stroke-dasharray="0"></circle>
+              <circle class="bar" r="42" cx="50%" cy="50%" fill="transparent" stroke-dasharray="263.89" [style.stroke-dashoffset]="15"></circle>
+            </svg>
+          </div>
+        </div>
+        <div class="modal-body" *ngIf="onAfterTokenDeployment">
+          <h4 class="mb-4">All set!</h4>
+          <button class="btn btn-primary btn-block mb-3">Sell my new token</button>
+        </div>
+        <div class="modal-body" *ngIf="onError">
+          <h4 class="mb-4">There was an error...</h4>
+          <button class="btn btn-outline-danger btn-block" (click)="reset()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

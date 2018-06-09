@@ -21,7 +21,16 @@ export class EthereumService {
 
   ethPrice: string = '0.0'
 
-  onBeforeTokenDeployment: Subject<any> = new Subject<any>()
+  onTokenDeployment: Subject<any> = new Subject<any>()
+
+  txCost: any
+
+  defaultGasPrice: number = 15000000000
+
+  gas: number
+
+  currentTokenContract: any
+  currentCrowdsaleContract: any
 
   constructor(
     private wallet: WalletService,
@@ -53,9 +62,10 @@ export class EthereumService {
 
   async createToken(){
 
-    this.onBeforeTokenDeployment.next({
+    this.onTokenDeployment.next({
       displayModal: true,
-      onBeforeTokenDeployment: true,
+      onTxnCostCalc: true,
+      onBeforeTokenDeployment: false,
       onTokenDeployment: false,
       onAfterTokenDeployment: false,
       onError: false,
@@ -71,27 +81,75 @@ export class EthereumService {
     let supply = ethers.utils.parseEther((usdToEth.ETH * MAX_USD_CAP).toString())
 
     let contract = await simpleToken.deploy(supply)
+    this.currentTokenContract = contract
     console.log(contract)
 
     let gas = await contract.estimateGas()
+    this.gas = gas
     console.log(gas)
 
-    let gasPrice = 15000000000
-    let txCost = await this.getTxCost(gas, gasPrice)
+    let txCost = await this.getTxCost(gas, this.defaultGasPrice)
+    this.txCost = txCost
     console.log(txCost)
 
-    // let tx = await contract.send({
-    //   from: this.wallet.getAddress(),
-    //   gas: gas,
-    //   gasPrice: gasPrice,
-    // })
-
-    // console.log(tx)
-
-    await this.wallet.getAccountBalance()
-    this.getTotalEthInUsd(this.wallet.ethBalance)
+    this.onTokenDeployment.next({
+      displayModal: true,
+      onTxnCostCalc: false,
+      onBeforeTokenDeployment: true,
+      onTokenDeployment: false,
+      onAfterTokenDeployment: false,
+      onError: false,
+    })
   }
 
+  async deployToken(){
+    this.onTokenDeployment.next({
+      displayModal: true,
+      onTxnCostCalc: false,
+      onBeforeTokenDeployment: false,
+      onTokenDeployment: true,
+      onAfterTokenDeployment: false,
+      onError: false,
+    })
+
+    let txOptions = {
+      from: this.wallet.getAddress(),
+      gas: this.gas,
+      gasPrice: this.defaultGasPrice,
+    }
+
+    console.log(txOptions)
+
+    try {
+      let tx = await this.currentTokenContract.send(txOptions)
+
+      console.log(tx)
+
+      this.onTokenDeployment.next({
+        displayModal: true,
+        onTxnCostCalc: false,
+        onBeforeTokenDeployment: false,
+        onTokenDeployment: false,
+        onAfterTokenDeployment: true,
+        onError: false,
+      })
+
+      await this.wallet.getAccountBalance()
+      this.getTotalEthInUsd(this.wallet.ethBalance)
+
+    } catch (error) {
+      console.log(error)
+
+      this.onTokenDeployment.next({
+        displayModal: true,
+        onTxnCostCalc: false,
+        onBeforeTokenDeployment: false,
+        onTokenDeployment: false,
+        onAfterTokenDeployment: false,
+        onError: true,
+      })
+    }
+  }
 }
 
 

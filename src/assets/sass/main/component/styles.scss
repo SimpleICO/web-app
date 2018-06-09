@@ -19,6 +19,11 @@
   }
 }
 
+@keyframes spin {
+  from {transform:rotate(0deg);}
+  to {transform:rotate(360deg);}
+}
+
 @import "./src/assets/sass/components/home-component";
 @import "./src/assets/sass/components/login-component";
 @import "./src/assets/sass/components/new-wallet-component";
@@ -164,6 +169,42 @@
   background-color: $red;
   padding: get-spacer(2);
   color: white;
+}
+
+.modal {
+  @include flex-column-center;
+  background-color: rgba($black, 0.7);
+  position: fixed;
+  z-index: 100000;
+  height: 100%;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+  .modal-body {
+    border-radius: $border-radius-lg;
+    background-color: white;
+    padding: get-spacer(3);
+    // min-height: 350px;
+  }
+  .spinner-wrapper {
+    @include flex-column-center;
+    min-height: 240px;
+    .svg {
+      animation: spin 2s infinite linear;
+      height: 100%;
+      width: 100%;
+      circle {
+        transition: stroke-dashoffset 1s linear;
+        stroke-dashoffset: 0;
+        stroke-width: 5px;
+        stroke: $gray-100;
+      }
+      .bar {
+        stroke: $purple;
+      }
+    }
+  }
 }
 
 /*
