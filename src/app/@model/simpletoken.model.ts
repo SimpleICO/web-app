@@ -48,11 +48,6 @@ export class SimpleToken extends Contract {
 
   async deploy(supply: any){
 
-    let txOptions = {
-    }
-
-    console.log(this.name, this.symbol, this.decimals, supply, txOptions)
-
     try {
       return this.instance.deploy({
         data: SimpleTokenInterface.bytecode,

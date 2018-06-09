@@ -1,32 +1,47 @@
 import { Contract } from '@model/contract.model';
+import { Wallet } from '@model/wallet.model';
 
 declare var require: any
 
+const ethers = require('ethers')
+const RATE = ethers.utils.bigNumberify(1)
 const SimpleCrowdsaleInterface = require('@abi/simplecrowdsale.abi.json')
 
 export class SimpleCrowdsale extends Contract {
 
+  instance: any
 
-  // constructor(
-  //   interface: any,
-  //   address: string,
-  //   wallet: Wallet){
+  web3: any
 
-  //   this.connect(interface.abi, wallet.provider)
+  constructor(
+    wallet: Wallet) {
 
-  // }
+    super(wallet)
 
-  // async connect(abi: any, provider: any){
-  //   let c = contract({abi: abi})
+    this.web3 = wallet.web3
+  }
 
-  //   c.setProvider(provider)
+  connect(){
 
-  //   return c.at(this.contractAddress).then(instance => {
+    let _contract = new this.web3.eth.Contract(SimpleCrowdsaleInterface.abi)
 
-  //     console.log(instance)
-  //     this.CanSignContract = instance
-  //     this.onContractInstanceReady.next(instance)
-  //   }).catch(error => console.log(error))
-  // }
+    this.instance = _contract
 
+    console.log(this.instance)
+
+    return this
+  }
+
+  async deploy(tokenAddress: string){
+
+    try {
+      return this.instance.deploy({
+        data: SimpleCrowdsaleInterface.bytecode,
+        arguments: [RATE, this.wallet.address, tokenAddress]
+      })
+    } catch (error) {
+      console.log(error)
+    }
+
+  }
 }

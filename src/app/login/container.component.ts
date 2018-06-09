@@ -31,7 +31,7 @@ export class ContainerComponent implements OnInit {
       this.errorMessage = ''
       this.wallet.setProvider()
       this.wallet.getAccountBalance().then(balance => {
-        this.eth.getTotalEthInUsd(balance)
+        this.eth.getTotalEthInUsd(this.wallet.ethBalance)
       })
 
       return this.router.navigate(['/token/new']);

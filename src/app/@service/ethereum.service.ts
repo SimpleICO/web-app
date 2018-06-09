@@ -43,6 +43,7 @@ export class EthereumService {
     let cost = gas * gasPrice
     let ETH = ethers.utils.formatEther(cost.toString())
     return {
+      cost: cost.toString(),
       ETH: ETH,
       USD: ( ETH * USD ).toFixed(2)
     }
@@ -92,6 +93,31 @@ export class EthereumService {
     this.txCost = txCost
     console.log(txCost)
 
+    this.estimateCrowdaleCost()
+  }
+
+  async estimateCrowdaleCost(){
+    let simpleCrowdsale = new SimpleCrowdsale(this.wallet.getInstance())
+
+    simpleCrowdsale.connect()
+
+    let contract = await simpleCrowdsale.deploy('0x7af6C0ce41aFaf675e5430193066a8d57701A9AC')
+    this.currentCrowdsaleContract = contract
+    console.log(contract)
+
+    let gas = await contract.estimateGas()
+    this.gas += gas
+    console.log(this.gas)
+
+    let txCost = await this.getTxCost(this.gas, this.defaultGasPrice)
+
+    let cost = ethers.utils.bigNumberify(this.txCost.cost)
+    cost = cost.add(ethers.utils.bigNumberify(txCost.cost))
+
+    this.txCost.ETH = ethers.utils.formatEther(cost.toString())
+    this.txCost.USD = (Number(this.txCost.USD) + Number(txCost.USD)).toFixed(2).toString()
+    console.log(this.txCost)
+
     this.onTokenDeployment.next({
       displayModal: true,
       onTxnCostCalc: false,
@@ -100,6 +126,17 @@ export class EthereumService {
       onAfterTokenDeployment: false,
       onError: false,
     })
+  }
+
+  async createCrowdsale(tokenAddress: string){
+
+    let simpleCrowdsale = new SimpleCrowdsale(this.wallet.getInstance())
+
+    simpleCrowdsale.connect()
+
+    let contract = await simpleCrowdsale.deploy(tokenAddress)
+    this.currentCrowdsaleContract = contract
+    console.log(contract)
   }
 
   async deployToken(){
@@ -121,9 +158,18 @@ export class EthereumService {
     console.log(txOptions)
 
     try {
-      let tx = await this.currentTokenContract.send(txOptions)
+      let contract = await this.currentTokenContract.send(txOptions)
+      this.currentTokenContract = contract
+      console.log(contract)
 
-      console.log(tx)
+      let crowdsale = await this.createCrowdsale(contract._address)
+      crowdsale = await this.currentCrowdsaleContract.send(txOptions)
+      this.currentCrowdsaleContract = crowdsale
+      console.log(crowdsale)
+
+      let tokenSupply = await this.currentTokenContract.methods.totalSupply().call()
+
+      await this.currentTokenContract.methods.transfer(this.currentCrowdsaleContract._address, tokenSupply).call()
 
       this.onTokenDeployment.next({
         displayModal: true,
