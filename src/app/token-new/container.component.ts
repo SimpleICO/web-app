@@ -13,11 +13,13 @@ export class ContainerComponent implements OnInit {
     public eth: EthereumService,
     public wallet: WalletService) {}
 
-  ngOnInit() {
-    this.wallet.getAccountBalance()
-    console.log(this.wallet.balance)
-    // this.wallet.wallet.instance.getBalance()
-    // console.log()
-    // console.log(balance)
+  ngOnInit() {}
+
+  onCreateCrowdsale(){
+    this.eth.createToken()
   }
 }
+
+
+
+

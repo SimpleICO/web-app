@@ -1,6 +1,9 @@
 declare var require: any
 
+const JSON_RPC_PROVIDER = 'HTTP://127.0.0.1:7545'
+
 const ethers = require('ethers')
+const Web3 = require('web3')
 const $wallet = ethers.Wallet
 
 export class Wallet {
@@ -15,12 +18,23 @@ export class Wallet {
 
   provider: any
 
-  constructor(){
-    this.instance = $wallet
+  web3: any
+
+  constructor(){}
+
+  setJsonRpcProvider(){
+    let provider = new Web3.providers.HttpProvider(JSON_RPC_PROVIDER)
+    this.provider = provider
+    this.instance.provider = provider
+    this.web3 = new Web3(provider)
   }
 
-  setProvider(provider: any){
+  setRopstenProvider(){
+    // TODO
+    let provider = new Web3.providers.HttpProvider(JSON_RPC_PROVIDER)
+    this.provider = provider
     this.instance.provider = provider
+    this.web3 = new Web3(provider)
   }
 
   unlockFromMnemonic(mnemonic: string){

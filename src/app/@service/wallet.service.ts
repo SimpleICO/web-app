@@ -6,8 +6,8 @@ import { environment as env } from '@environment/environment';
 
 declare var require: any
 
-const JSON_RPC_PROVIDER = 'HTTP://127.0.0.1:7545'
 const Eth = require('ethers')
+const Web3 = require('web3')
 const Providers = Eth.providers
 
 @Injectable()
@@ -28,8 +28,6 @@ export class WalletService {
   ethBalance: string
   onGetBalance: Subject<any> = new Subject<any>()
 
-  provider: any
-
   constructor(
     private router: Router) {
     this.onGetBalance.subscribe(balance => {
@@ -40,8 +38,12 @@ export class WalletService {
   }
 
   async getAccountBalance(address: string = this.getAddress()){
-    let balance = await this.wallet.instance.getBalance()
+    let balance = await this.getInstance().getBalance()
     this.onGetBalance.next(balance)
+  }
+
+  getInstance(): Wallet {
+    return this.wallet
   }
 
   generateWallet(){
@@ -90,28 +92,16 @@ export class WalletService {
     seed = seed.trim().replace(/\s\s+/g, ' ')
 
     if (seed.split(' ').length == 12) {
-      this.unlockFromMnemonic(seed)
-      return this.setProvider()
+      return this.unlockFromMnemonic(seed)
     }
 
-    this.unlockFromPrivateKey(seed)
-    return this.setProvider()
+    return this.unlockFromPrivateKey(seed)
   }
 
   setProvider(){
     if (env.local) {
-      this.setJsonRpcProvider()
+      this.wallet.setJsonRpcProvider()
     }
-  }
-
-  setJsonRpcProvider(){
-    this.provider = new Providers.JsonRpcProvider(JSON_RPC_PROVIDER, 'unspecified')
-    this.wallet.setProvider(this.provider)
-  }
-
-  setRopstenProvider(){
-    this.provider = new Providers.InfuraProvider(Providers.networks.ropsten)
-    this.wallet.setProvider(this.provider)
   }
 
   unlockFromMnemonic(mnemonic: string){

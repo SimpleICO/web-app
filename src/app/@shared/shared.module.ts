@@ -13,7 +13,7 @@ import { MobileMenuComponent } from './mobile-menu/mobile-menu.component';
   exports: [
     AuthHeaderComponent,
     HeaderComponent,
-    MobileMenuComponent
+    MobileMenuComponent,
   ],
   declarations: [AuthHeaderComponent, HeaderComponent, MobileMenuComponent]
 })

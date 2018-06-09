@@ -5,6 +5,10 @@ interface NodeModule {
 }
 
 declare module "*.json" {
-  const value: any
+  const value: any = {
+    abi: any,
+    bytecode: any
+  }
+
   export default value
 }

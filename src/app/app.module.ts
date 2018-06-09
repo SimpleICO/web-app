@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 import { HomeModule } from './home/home.module';
 import { LoginModule } from './login/login.module';
@@ -33,6 +33,7 @@ import { EthereumService } from './@service/ethereum.service'
     TokenIndexModule,
     AcceptTermsModule,
     TokenNewModule,
+    HttpClientModule
   ],
   providers: [WalletService, UnlockRouteGuard, CookieService, AcceptTermsRouteGuard, SharedService, EthereumService],
   bootstrap: [AppComponent]

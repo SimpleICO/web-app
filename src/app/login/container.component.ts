@@ -27,6 +27,8 @@ export class ContainerComponent implements OnInit {
     wallet.onUnlockSuccess.subscribe(data => {
       this.isInvalid = false
       this.errorMessage = ''
+      this.wallet.setProvider()
+      this.wallet.getAccountBalance()
 
       return this.router.navigate(['/token/new']);
     })
