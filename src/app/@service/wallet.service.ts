@@ -26,20 +26,16 @@ export class WalletService {
 
   balance = Eth.BigNumber
   ethBalance: string
-  onGetBalance: Subject<any> = new Subject<any>()
 
   constructor(
     private router: Router) {
-    this.onGetBalance.subscribe(balance => {
-      console.log(balance)
-      this.balance = balance
-      this.ethBalance = Eth.utils.formatEther(balance)
-    })
   }
 
   async getAccountBalance(address: string = this.getAddress()){
     let balance = await this.getInstance().getBalance()
-    this.onGetBalance.next(balance)
+    this.balance = balance
+    this.ethBalance = Eth.utils.formatEther(balance)
+    return balance
   }
 
   getInstance(): Wallet {

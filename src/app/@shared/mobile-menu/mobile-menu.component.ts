@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from '@service/shared.service';
 import { WalletService } from '@service/wallet.service';
+import { EthereumService } from '@service/ethereum.service';
 
 declare var document: any
 declare var require: any
@@ -18,6 +19,7 @@ export class MobileMenuComponent implements OnInit {
 
   constructor(
     public shared: SharedService,
+    public eth: EthereumService,
     public wallet: WalletService) {
   }
 

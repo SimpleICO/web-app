@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { WalletService } from '@service/wallet.service';
+import { EthereumService } from '@service/ethereum.service';
 import { Router } from "@angular/router";
 
 @Component({
@@ -18,6 +19,7 @@ export class ContainerComponent implements OnInit {
 
   constructor(
     public wallet: WalletService,
+    public eth: EthereumService,
     private router: Router) {
     wallet.onUnlockError.subscribe(error => {
       this.isInvalid = true
@@ -28,7 +30,9 @@ export class ContainerComponent implements OnInit {
       this.isInvalid = false
       this.errorMessage = ''
       this.wallet.setProvider()
-      this.wallet.getAccountBalance()
+      this.wallet.getAccountBalance().then(balance => {
+        this.eth.getTotalEthInUsd()
+      })
 
       return this.router.navigate(['/token/new']);
     })

@@ -18,10 +18,18 @@ export class EthereumService {
 
   contracts: Array<Contract> = []
 
+  ethPrice: string = '0.0'
+
   constructor(
     private wallet: WalletService,
     private http: HttpClient) {
 
+  }
+
+  async getTotalEthInUsd(){
+    let ethToUsd = await this.convertCurrency('ETH', 'USD')
+    let total = this.wallet.ethBalance * ethToUsd.USD
+    this.ethPrice = total.toFixed(2)
   }
 
   async convertCurrency(currency, to, amount?): Promise<any> {
@@ -55,7 +63,8 @@ export class EthereumService {
 
     console.log(tx)
 
-    this.wallet.getAccountBalance()
+    await this.wallet.getAccountBalance()
+    this.getTotalEthInUsd()
   }
 
 }
