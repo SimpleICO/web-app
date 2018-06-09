@@ -5,6 +5,7 @@ import { WalletService } from '@service/wallet.service';
 import { Contract } from '@model/contract.model';
 import { SimpleToken } from '@model/simpletoken.model';
 import { SimpleCrowdsale } from '@model/simplecrowdsale.model';
+import { Subject } from 'rxjs';
 
 declare var require: any
 
@@ -20,15 +21,27 @@ export class EthereumService {
 
   ethPrice: string = '0.0'
 
+  onBeforeTokenDeployment: Subject<any> = new Subject<any>()
+
   constructor(
     private wallet: WalletService,
     private http: HttpClient) {
 
   }
 
-  async getTotalEthInUsd(){
-    let ethToUsd = await this.convertCurrency('ETH', 'USD')
-    let total = this.wallet.ethBalance * ethToUsd.USD
+  async getTxCost(gas, gasPrice){
+    let { USD } = await this.convertCurrency('ETH', 'USD')
+    let cost = gas * gasPrice
+    let ETH = ethers.utils.formatEther(cost.toString())
+    return {
+      ETH: ETH,
+      USD: ( ETH * USD ).toFixed(2)
+    }
+  }
+
+  async getTotalEthInUsd(eth){
+    let { USD } = await this.convertCurrency('ETH', 'USD')
+    let total = eth * USD
     this.ethPrice = total.toFixed(2)
   }
 
@@ -39,6 +52,14 @@ export class EthereumService {
   }
 
   async createToken(){
+
+    this.onBeforeTokenDeployment.next({
+      displayModal: true,
+      onBeforeTokenDeployment: true,
+      onTokenDeployment: false,
+      onAfterTokenDeployment: false,
+      onError: false,
+    })
 
     let simpleToken = new SimpleToken(this.wallet.getInstance(), 'My SimpleToken', 'MST')
 
@@ -55,16 +76,20 @@ export class EthereumService {
     let gas = await contract.estimateGas()
     console.log(gas)
 
-    let tx = await contract.send({
-      from: this.wallet.getAddress(),
-      gas: gas,
-      gasPrice: 32000000000,
-    })
+    let gasPrice = 15000000000
+    let txCost = await this.getTxCost(gas, gasPrice)
+    console.log(txCost)
 
-    console.log(tx)
+    // let tx = await contract.send({
+    //   from: this.wallet.getAddress(),
+    //   gas: gas,
+    //   gasPrice: gasPrice,
+    // })
+
+    // console.log(tx)
 
     await this.wallet.getAccountBalance()
-    this.getTotalEthInUsd()
+    this.getTotalEthInUsd(this.wallet.ethBalance)
   }
 
 }

@@ -1,8 +1,9 @@
 import { Contract } from '@model/contract.model';
 import { Wallet } from '@model/wallet.model';
-import * as SimpleTokenInterface from '@abi/simpletoken.abi.json';
 
 declare var require: any
+
+const SimpleTokenInterface = require('@abi/simpletoken.abi.json')
 
 const contract = require('truffle-contract')
 const ethers = require('ethers')

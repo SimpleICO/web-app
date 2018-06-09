@@ -25,7 +25,7 @@ export class WalletService {
   isLocked: boolean = true
 
   balance = Eth.BigNumber
-  ethBalance: string
+  ethBalance: number
 
   constructor(
     private router: Router) {

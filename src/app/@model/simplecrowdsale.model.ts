@@ -1,7 +1,8 @@
 import { Contract } from '@model/contract.model';
-import * as SimpleCrowdsaleInterface from '@abi/simplecrowdsale.abi.json';
 
 declare var require: any
+
+const SimpleCrowdsaleInterface = require('@abi/simplecrowdsale.abi.json')
 
 export class SimpleCrowdsale extends Contract {
 
