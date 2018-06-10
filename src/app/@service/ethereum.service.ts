@@ -208,6 +208,9 @@ export class EthereumService {
 
       await this.simpleToken.instance.methods.transfer(this.simpleCrowdsale.instance._address, this.simpleToken.supply)
 
+      let crowdsaleBeneficiary = await this.simpleCrowdsale.instance.methods.wallet().call()
+      console.log(crowdsaleBeneficiary)
+
       this.onTokenDeployment.next({
         displayModal: true,
         onTxnCostCalc: false,
