@@ -24,6 +24,7 @@ export class SimpleCrowdsale extends Contract {
   }
 
   connect(){
+    // this.web3.setProvider(this.web3.givenProvider)
 
     let _contract = new this.web3.eth.Contract(SimpleCrowdsaleInterface.abi)
 

@@ -152,24 +152,61 @@ export class EthereumService {
     let txOptions = {
       from: this.wallet.getAddress(),
       gas: Web3.utils.toHex(this.gas),
+      gasLimit: Web3.utils.toHex(this.gas),
       gasPrice: Web3.utils.toHex(this.defaultGasPrice),
+      data: this.simpleToken.txObject.encodeABI()
     }
 
     console.log(txOptions)
 
     try {
-      this.simpleToken.instance = await this.simpleToken.txObject.send(txOptions)
-      console.log(this.simpleToken.instance)
+      console.log(this.wallet.getInstance().privateKey)
+      let signedTx = await this.simpleToken.web3.eth.accounts.signTransaction(txOptions, this.wallet.getInstance().privateKey)
+      console.log(signedTx)
+      let receipt = await this.simpleToken.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
+      console.log(receipt)
 
-      await this.createCrowdsale(this.simpleToken.instance._address)
-      this.simpleCrowdsale.instance = await this.simpleCrowdsale.txObject.send(txOptions)
-      console.log(this.simpleCrowdsale.instance)
+      this.simpleToken.instance._address = receipt.contractAddress
 
       let tokenSupply = await this.simpleToken.instance.methods.totalSupply().call()
+      this.simpleToken.supply = tokenSupply
 
-      console.log(this.simpleCrowdsale.instance._address, tokenSupply)
+      await this.createCrowdsale(this.simpleToken.instance._address)
 
-      await this.simpleToken.instance.methods.transfer(this.simpleCrowdsale.instance._address, tokenSupply)
+      this.deployCrowdsale()
+
+    } catch (error) {
+      console.log(error)
+
+      this.onTokenDeployment.next({
+        displayModal: true,
+        onTxnCostCalc: false,
+        onBeforeTokenDeployment: false,
+        onTokenDeployment: false,
+        onAfterTokenDeployment: false,
+        onError: true,
+      })
+    }
+  }
+
+  async deployCrowdsale(){
+    let txOptions = {
+      from: this.wallet.getAddress(),
+      gas: Web3.utils.toHex(this.gas),
+      gasLimit: Web3.utils.toHex(this.gas),
+      gasPrice: Web3.utils.toHex(this.defaultGasPrice),
+      data: this.simpleCrowdsale.txObject.encodeABI()
+    }
+
+    try {
+      let signedTx = await this.simpleCrowdsale.web3.eth.accounts.signTransaction(txOptions, this.wallet.getInstance().privateKey)
+      console.log(signedTx)
+      let receipt = await this.simpleCrowdsale.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
+      console.log(receipt)
+
+      this.simpleCrowdsale.instance._address = receipt.contractAddress
+
+      await this.simpleToken.instance.methods.transfer(this.simpleCrowdsale.instance._address, this.simpleToken.supply)
 
       this.onTokenDeployment.next({
         displayModal: true,

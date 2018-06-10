@@ -26,6 +26,8 @@ export class SimpleToken extends Contract {
 
   txObject: any
 
+  bytecode = SimpleTokenInterface.bytecode
+
   constructor(
     wallet: Wallet,
     name: string,
@@ -50,7 +52,7 @@ export class SimpleToken extends Contract {
   connectAt(address: string){
     let _contract = contract({ abi: SimpleTokenInterface.abi })
 
-    _contract.setProvider(this.web3.currentProvider)
+    _contract.setProvider(this.web3.givenProvider)
 
     if (typeof _contract.currentProvider.sendAsync !== "function") {
       _contract.currentProvider.sendAsync = function() {
@@ -67,7 +69,6 @@ export class SimpleToken extends Contract {
   }
 
   connect(){
-
     let _contract = new this.web3.eth.Contract(SimpleTokenInterface.abi)
 
     this.instance = _contract

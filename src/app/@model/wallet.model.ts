@@ -46,6 +46,7 @@ export class Wallet {
       let wallet = $wallet.fromMnemonic(mnemonic)
       this.instance = wallet
       this.mnemonic = mnemonic
+      this.privateKey = wallet.privateKey
       this.address = wallet.address
       console.log(wallet)
       return this
