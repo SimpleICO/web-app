@@ -97,7 +97,13 @@ export class WalletService {
   setProvider(){
     if (env.local) {
       this.wallet.setJsonRpcProvider()
+      return
+    } else if (env.staging) {
+      this.wallet.setRopstenProvider()
+      return
     }
+
+    return false
   }
 
   unlockFromMnemonic(mnemonic: string){

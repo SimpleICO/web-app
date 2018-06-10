@@ -12,6 +12,7 @@ declare var require: any
 const eth = require('truffle-contract')
 const MAX_USD_CAP = 100.00
 const ethers = require('ethers')
+const Web3 = require('web3')
 
 
 @Injectable()
@@ -29,8 +30,11 @@ export class EthereumService {
 
   gas: number
 
-  currentTokenContract: any
   currentCrowdsaleContract: any
+
+  simpleToken: SimpleToken
+
+  simpleCrowdsale: SimpleCrowdsale
 
   constructor(
     private wallet: WalletService,
@@ -72,20 +76,20 @@ export class EthereumService {
       onError: false,
     })
 
-    let simpleToken = new SimpleToken(this.wallet.getInstance(), 'My SimpleToken', 'MST')
+    this.simpleToken = new SimpleToken(this.wallet.getInstance(), 'My SimpleToken', 'MST')
 
-    simpleToken.connect()
+    this.simpleToken.connect()
 
     let usdToEth = await this.convertCurrency('USD', 'ETH')
     console.log(usdToEth)
 
     let supply = ethers.utils.parseEther((usdToEth.ETH * MAX_USD_CAP).toString())
 
-    let contract = await simpleToken.deploy(supply)
-    this.currentTokenContract = contract
-    console.log(contract)
+    let txObject = await this.simpleToken.deploy(supply)
+    this.simpleToken.txObject = txObject
+    console.log(txObject)
 
-    let gas = await contract.estimateGas()
+    let gas = await this.simpleToken.txObject.estimateGas()
     this.gas = gas
     console.log(gas)
 
@@ -101,11 +105,9 @@ export class EthereumService {
 
     simpleCrowdsale.connect()
 
-    let contract = await simpleCrowdsale.deploy('0x7af6C0ce41aFaf675e5430193066a8d57701A9AC')
-    this.currentCrowdsaleContract = contract
-    console.log(contract)
+    simpleCrowdsale.txObject = await simpleCrowdsale.deploy('0x7af6C0ce41aFaf675e5430193066a8d57701A9AC')
 
-    let gas = await contract.estimateGas()
+    let gas = await simpleCrowdsale.txObject.estimateGas()
     this.gas += gas
     console.log(this.gas)
 
@@ -130,13 +132,11 @@ export class EthereumService {
 
   async createCrowdsale(tokenAddress: string){
 
-    let simpleCrowdsale = new SimpleCrowdsale(this.wallet.getInstance())
+    this.simpleCrowdsale = new SimpleCrowdsale(this.wallet.getInstance())
 
-    simpleCrowdsale.connect()
+    this.simpleCrowdsale.connect()
 
-    let contract = await simpleCrowdsale.deploy(tokenAddress)
-    this.currentCrowdsaleContract = contract
-    console.log(contract)
+    this.simpleCrowdsale.txObject = await this.simpleCrowdsale.deploy(tokenAddress)
   }
 
   async deployToken(){
@@ -151,25 +151,25 @@ export class EthereumService {
 
     let txOptions = {
       from: this.wallet.getAddress(),
-      gas: this.gas,
-      gasPrice: this.defaultGasPrice,
+      gas: Web3.utils.toHex(this.gas),
+      gasPrice: Web3.utils.toHex(this.defaultGasPrice),
     }
 
     console.log(txOptions)
 
     try {
-      let contract = await this.currentTokenContract.send(txOptions)
-      this.currentTokenContract = contract
-      console.log(contract)
+      this.simpleToken.instance = await this.simpleToken.txObject.send(txOptions)
+      console.log(this.simpleToken.instance)
 
-      let crowdsale = await this.createCrowdsale(contract._address)
-      crowdsale = await this.currentCrowdsaleContract.send(txOptions)
-      this.currentCrowdsaleContract = crowdsale
-      console.log(crowdsale)
+      await this.createCrowdsale(this.simpleToken.instance._address)
+      this.simpleCrowdsale.instance = await this.simpleCrowdsale.txObject.send(txOptions)
+      console.log(this.simpleCrowdsale.instance)
 
-      let tokenSupply = await this.currentTokenContract.methods.totalSupply().call()
+      let tokenSupply = await this.simpleToken.instance.methods.totalSupply().call()
 
-      await this.currentTokenContract.methods.transfer(this.currentCrowdsaleContract._address, tokenSupply).call()
+      console.log(this.simpleCrowdsale.instance._address, tokenSupply)
+
+      await this.simpleToken.instance.methods.transfer(this.simpleCrowdsale.instance._address, tokenSupply)
 
       this.onTokenDeployment.next({
         displayModal: true,
@@ -195,6 +195,10 @@ export class EthereumService {
         onError: true,
       })
     }
+  }
+
+  onDeploymentError(contract: any){
+    contract.on('error', console.log)
   }
 }
 

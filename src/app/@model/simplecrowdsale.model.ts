@@ -13,6 +13,8 @@ export class SimpleCrowdsale extends Contract {
 
   web3: any
 
+  txObject: any
+
   constructor(
     wallet: Wallet) {
 

@@ -35,7 +35,7 @@ export class Wallet {
 
   setRopstenProvider(){
     // TODO
-    let provider = new Web3.providers.HttpProvider(JSON_RPC_PROVIDER)
+    let provider = new Web3.providers.HttpProvider('https://ropsten.infura.io/TNxOmHzkTOUaNtxDBxia')
     this.provider = provider
     this.instance.provider = provider
     this.web3 = new Web3(provider)

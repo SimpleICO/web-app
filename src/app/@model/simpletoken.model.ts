@@ -22,6 +22,10 @@ export class SimpleToken extends Contract {
 
   web3: any
 
+  truffleContract: any
+
+  txObject: any
+
   constructor(
     wallet: Wallet,
     name: string,
@@ -33,6 +37,33 @@ export class SimpleToken extends Contract {
     this.symbol = symbol
 
     this.web3 = wallet.web3
+  }
+
+  onTransfer(){
+    this.truffleContract.Transfer().watch((error, result) => {
+      if (error) console.log(error)
+
+      console.log(result)
+    })
+  }
+
+  connectAt(address: string){
+    let _contract = contract({ abi: SimpleTokenInterface.abi })
+
+    _contract.setProvider(this.web3.currentProvider)
+
+    if (typeof _contract.currentProvider.sendAsync !== "function") {
+      _contract.currentProvider.sendAsync = function() {
+        return _contract.currentProvider.send.apply(
+          _contract.currentProvider, arguments
+        );
+      };
+    }
+
+    return _contract.at(address).then(instance => {
+      console.log(instance)
+      this.truffleContract = instance
+    }).catch(console.log)
   }
 
   connect(){
