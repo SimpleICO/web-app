@@ -20,12 +20,12 @@ export class ContainerComponent implements OnInit {
   acceptTerms(){
     this.cookie.acceptTerms()
 
-    this.router.navigateByUrl('/login')
+    this.router.navigateByUrl('/home')
   }
 
   declineTerms(){
     this.cookie.declineTerms()
 
-    this.router.navigateByUrl('/login')
+    this.router.navigateByUrl('/home')
   }
 }

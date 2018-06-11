@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { EthereumService } from '@service/ethereum.service';
 import { WalletService } from '@service/wallet.service';
 
@@ -7,7 +7,13 @@ import { WalletService } from '@service/wallet.service';
   templateUrl: './container.component.html',
   styleUrls: ['./container.component.css']
 })
+
 export class ContainerComponent implements OnInit {
+
+  @Input() token: any = {
+    name: 'My Simple Token',
+    symbol: 'MST'
+  }
 
   constructor(
     public eth: EthereumService,
@@ -16,7 +22,7 @@ export class ContainerComponent implements OnInit {
   ngOnInit() {}
 
   onCreateCrowdsale(){
-    this.eth.createToken()
+    this.eth.createToken(this.token.name, this.token.symbol)
   }
 }
 

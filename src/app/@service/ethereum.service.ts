@@ -30,8 +30,6 @@ export class EthereumService {
 
   gas: number
 
-  currentCrowdsaleContract: any
-
   simpleToken: SimpleToken
 
   simpleCrowdsale: SimpleCrowdsale
@@ -65,7 +63,7 @@ export class EthereumService {
       .toPromise()
   }
 
-  async createToken(){
+  async createToken(name: string, symbol: string){
 
     this.onTokenDeployment.next({
       displayModal: true,
@@ -76,7 +74,7 @@ export class EthereumService {
       onError: false,
     })
 
-    this.simpleToken = new SimpleToken(this.wallet.getInstance(), 'My SimpleToken', 'MST')
+    this.simpleToken = new SimpleToken(this.wallet.getInstance(), name, symbol)
 
     this.simpleToken.connect()
 

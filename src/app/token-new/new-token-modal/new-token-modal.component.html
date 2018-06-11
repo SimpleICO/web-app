@@ -13,7 +13,7 @@
         </div>
         <div class="modal-body" *ngIf="onBeforeTokenDeployment">
           <h4 class="mb-4">Deploying this token will cost you:</h4>
-          <h5>US$ {{ eth.txCost.USD }}</h5>
+          <!-- <h5>US$ {{ eth.txCost.USD }}</h5> -->
           <h5 class="mb-4">ETH {{ eth.txCost.ETH }}</h5>
           <button class="btn btn-primary btn-block mb-3" (click)="eth.deployToken()">Deploy</button>
           <button class="btn btn-outline-primary btn-block" (click)="reset()">Cancel</button>
