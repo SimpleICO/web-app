@@ -32,7 +32,10 @@ export class SimpleCrowdsale extends Contract {
     let provider = new Web3.providers.WebsocketProvider('wss://ropsten.infura.io/ws')
     let web3 = new Web3(provider)
 
-    return web3.eth.subscribe('logs', (error, event) => {
+    return web3.eth.subscribe('logs', {
+      address: this.address,
+      topics: [],
+    }, (error, event) => {
       if (error) return console.error(error)
 
       console.log('Successfully subscribed!', event)
