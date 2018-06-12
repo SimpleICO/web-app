@@ -5,12 +5,17 @@
   <div class="container">
     <h1 class="token-name">{{ token.name }} ({{ token.symbol }})</h1>
     <div class="eth-raised">
-      <span class="balance">ETH {{ crowdsale.ethRaised }}</span>
-      <small>Amount raised</small>
-      <span class="go-icon" (click)="refresh()"><i class="icon-sync"></i></span>
+      <span class="balance text-truncate" style="max-width: 210px">{{ crowdsale.address }}</span>
+      <small>Crowdsale address</small>
+      <span class="go-icon copy-crowdsale-address" (click)="refresh()"><i class="icon-copy"></i></span>
     </div>
     <div class="eth-raised">
-      <span class="balance">{{ token.symbol }} {{ crowdsale.tokens }}</span>
+      <span class="balance"><strong>ETH</strong> {{ crowdsale.ethRaised }}</span>
+      <small>Amount raised</small>
+      <!-- <span class="go-icon" (click)="refresh()"><i class="icon-sync"></i></span> -->
+    </div>
+    <div class="eth-raised">
+      <span class="balance"><strong>{{ token.symbol }}</strong> {{ crowdsale.tokens }}</span>
       <small>Available</small>
     </div>
   </div>

@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EthereumService } from '@service/ethereum.service';
 import { WalletService } from '@service/wallet.service';
+import { SharedService } from '@service/shared.service';
 import { SimpleCrowdsale } from '@model/simplecrowdsale.model';
 import { SimpleToken } from '@model/simpletoken.model';
 
 declare var require: any
 
 const ethers = require('ethers')
+const clipboard = require('clipboard')
 
 @Component({
   selector: 'app-container',
@@ -30,6 +32,8 @@ export class ContainerComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     public eth: EthereumService,
+    public shared: SharedService,
+    private zone: NgZone,
     private wallet: WalletService) {}
 
   ngOnInit() {
@@ -48,6 +52,28 @@ export class ContainerComponent implements OnInit {
       this.getCrowdsaleData()
       this.getTokenData()
     })
+  }
+
+  ngAfterViewInit(){
+    let self = this
+
+    new clipboard(`.copy-crowdsale-address`, {
+      text: function(trigger) {
+
+        self.updateCopyTrigger(trigger)
+
+        return self.crowdsale.getAddress()
+      }
+    })
+  }
+
+  updateCopyTrigger(trigger){
+    trigger.innerHTML = '<i class="icon-checkmark-circle"></i>'
+    trigger.classList.add('copied')
+    setTimeout(() => {
+      trigger.innerHTML = '<i class="icon-copy"></i>'
+      trigger.classList.remove('copied')
+    }, 2000);
   }
 
   refresh(){
@@ -80,6 +106,8 @@ export class ContainerComponent implements OnInit {
         to: tx.to,
         value: `ETH ${ethers.utils.formatEther(tx.value)}`
       })
+
+      this.zone.run(() => console.log('Updated txHistory'))
     } catch (error) {
       console.log(error)
     }

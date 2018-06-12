@@ -17,6 +17,9 @@
       font-size: $h5-font-size;
       padding-right: 28px;
       display: block;
+      strong {
+        @include bold;
+      }
     }
     small {
       @include bold;

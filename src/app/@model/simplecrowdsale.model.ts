@@ -50,7 +50,7 @@ export class SimpleCrowdsale extends Contract {
   }
 
   getAddress(): string {
-    return this.instance._address
+    return this.address
   }
 
   async getEthRaised(){
