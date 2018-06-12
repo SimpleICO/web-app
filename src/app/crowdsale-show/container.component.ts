@@ -48,10 +48,20 @@ export class ContainerComponent implements OnInit {
     })
   }
 
+  refresh(){
+    this.crowdsale.getEthRaised()
+    this.crowdsale.getAvailableTokens(this.token)
+  }
+
   subscribe(){
-    this.crowdsale.subscribeToEvents().on('data', event => {
-      this.crowdsale.getEthRaised()
-    })
+    this.crowdsale.subscribeToEvents()
+      .on('data', event => {
+        console.log(event)
+        this.crowdsale.getEthRaised()
+        this.crowdsale.getAvailableTokens(this.token)
+      }).on('error', error => {
+        console.log(error)
+      })
   }
 
   async getCrowdsaleData(){
@@ -63,6 +73,8 @@ export class ContainerComponent implements OnInit {
   async getTokenData(){
     let tokenAddress = await this.crowdsale.instance.methods.token().call()
     this.token.setAddress(tokenAddress)
+
+    this.crowdsale.getAvailableTokens(this.token)
 
     this.token.getName()
     this.token.getSymbol()

@@ -1,5 +1,6 @@
 import { Contract } from '@model/contract.model';
 import { Wallet } from '@model/wallet.model';
+import { SimpleToken } from '@model/simpletoken.model';
 
 declare var require: any
 
@@ -20,6 +21,8 @@ export class SimpleCrowdsale extends Contract {
 
   address: string
 
+  tokens: string
+
   constructor(
     wallet: Wallet) {
 
@@ -35,10 +38,6 @@ export class SimpleCrowdsale extends Contract {
     return web3.eth.subscribe('logs', {
       address: this.address,
       topics: [],
-    }, (error, event) => {
-      if (error) return console.error(error)
-
-      console.log('Successfully subscribed!', event)
     })
   }
 
@@ -57,6 +56,10 @@ export class SimpleCrowdsale extends Contract {
   async getEthRaised(){
     let weiRaised = await this.instance.methods.weiRaised().call()
     this.ethRaised = ethers.utils.formatEther(weiRaised)
+  }
+
+  async getAvailableTokens(token: SimpleToken){
+    this.tokens = await token.instance.methods.balanceOf(this.address).call()
   }
 
   connect(){

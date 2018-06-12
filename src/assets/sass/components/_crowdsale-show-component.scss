@@ -9,7 +9,6 @@
   }
 
   .eth-raised {
-    margin-bottom: get-spacer(3);
     padding: get-spacer(3) 0;
     position: relative;
     color: white;
@@ -22,6 +21,16 @@
     small {
       @include bold;
       text-transform: uppercase;
+    }
+    .go-icon {
+      @include flex-column-center;
+      position: absolute;
+      font-size: 21px;
+      color: white;
+      width: 28px;
+      bottom: 0;
+      right: 0;
+      top: 0;
     }
   }
 }

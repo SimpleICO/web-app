@@ -244,7 +244,7 @@ export class EthereumService {
     console.log(this.gas, this.simpleToken.supply, this.simpleCrowdsale.getAddress(), this.simpleToken.getAddress(), this.wallet.getAddress())
 
     try {
-      let txObject = this.simpleToken.instance.methods.transfer(this.simpleCrowdsale.getAddress(), Number(this.simpleToken.supply))
+      let txObject = this.simpleToken.instance.methods.transfer(this.simpleCrowdsale.getAddress(), this.simpleToken.supply)
 
       let txOptions = {
         from: this.wallet.getAddress(),

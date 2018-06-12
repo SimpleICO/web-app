@@ -7,6 +7,11 @@
     <div class="eth-raised">
       <span class="balance">ETH {{ crowdsale.ethRaised }}</span>
       <small>Amount raised</small>
+      <span class="go-icon" (click)="refresh()"><i class="icon-sync"></i></span>
+    </div>
+    <div class="eth-raised">
+      <span class="balance">{{ token.symbol }} {{ crowdsale.tokens }}</span>
+      <small>Available</small>
     </div>
   </div>
 </main>
