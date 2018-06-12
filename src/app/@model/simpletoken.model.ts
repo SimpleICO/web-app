@@ -40,9 +40,14 @@ export class SimpleToken extends Contract {
 
   setAddress(address: string){
     this.instance.options.address = address
+    this.instance._address = address
     this.address = address
 
     return this
+  }
+
+  getAddress(){
+    return this.address
   }
 
   async getName(){
