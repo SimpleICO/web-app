@@ -29,7 +29,7 @@
         </div>
         <div class="modal-body" *ngIf="onAfterTokenDeployment">
           <h4 class="mb-4">All set!</h4>
-          <button class="btn btn-primary btn-block mb-3">Sell my new token</button>
+          <a [routerLink]="['/crowdsale', eth.simpleCrowdsale.getAddress(), 'show']" class="btn btn-primary btn-block mb-3">Sell my new token</a>
         </div>
         <div class="modal-body" *ngIf="onError">
           <h4 class="mb-4">There was an error...</h4>

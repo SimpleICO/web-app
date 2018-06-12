@@ -15,6 +15,10 @@ export class SimpleCrowdsale extends Contract {
 
   txObject: any
 
+  ethRaised: string = '0.0'
+
+  address: string
+
   constructor(
     wallet: Wallet) {
 
@@ -23,9 +27,23 @@ export class SimpleCrowdsale extends Contract {
     this.web3 = wallet.web3
   }
 
-  connect(){
-    // this.web3.setProvider(this.web3.givenProvider)
+  setAddress(address: string){
+    this.instance.options.address = address
+    this.address = address
 
+    return this
+  }
+
+  getAddress(): string {
+    return this.instance._address
+  }
+
+  async getEthRaised(){
+    let weiRaised = await this.instance.methods.weiRaised().call()
+    this.ethRaised = ethers.utils.formatEther(weiRaised)
+  }
+
+  connect(){
     let _contract = new this.web3.eth.Contract(SimpleCrowdsaleInterface.abi)
 
     this.instance = _contract

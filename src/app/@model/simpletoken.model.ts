@@ -5,11 +5,6 @@ declare var require: any
 
 const SimpleTokenInterface = require('@abi/simpletoken.abi.json')
 
-const contract = require('truffle-contract')
-const ethers = require('ethers')
-const Web3 = require('web3')
-const BigNumber = ethers.BigNumber
-
 export class SimpleToken extends Contract {
 
   name: string
@@ -28,10 +23,12 @@ export class SimpleToken extends Contract {
 
   bytecode = SimpleTokenInterface.bytecode
 
+  address: string
+
   constructor(
     wallet: Wallet,
-    name: string,
-    symbol: string) {
+    name?: string,
+    symbol?: string) {
 
     super(wallet)
 
@@ -41,31 +38,27 @@ export class SimpleToken extends Contract {
     this.web3 = wallet.web3
   }
 
+  setAddress(address: string){
+    this.instance.options.address = address
+    this.address = address
+
+    return this
+  }
+
+  async getName(){
+    this.name = await this.instance.methods.name().call()
+  }
+
+  async getSymbol(){
+    this.symbol = await this.instance.methods.symbol().call()
+  }
+
   onTransfer(){
     this.truffleContract.Transfer().watch((error, result) => {
       if (error) console.log(error)
 
       console.log(result)
     })
-  }
-
-  connectAt(address: string){
-    let _contract = contract({ abi: SimpleTokenInterface.abi })
-
-    _contract.setProvider(this.web3.givenProvider)
-
-    if (typeof _contract.currentProvider.sendAsync !== "function") {
-      _contract.currentProvider.sendAsync = function() {
-        return _contract.currentProvider.send.apply(
-          _contract.currentProvider, arguments
-        );
-      };
-    }
-
-    return _contract.at(address).then(instance => {
-      console.log(instance)
-      this.truffleContract = instance
-    }).catch(console.log)
   }
 
   connect(){

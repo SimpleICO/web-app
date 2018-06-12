@@ -6,6 +6,7 @@ import { ContainerComponent as NewWalletComponent } from './new-wallet/container
 import { ContainerComponent as TokenIndexComponent } from './token-index/container.component';
 import { ContainerComponent as TokenNewComponent } from './token-new/container.component';
 import { ContainerComponent as AcceptTermsComponent } from './accept-terms/container.component';
+import { ContainerComponent as CrowdsaleShowComponent } from './crowdsale-show/container.component';
 import { WalletService } from '@service/wallet.service';
 import { UnlockRouteGuard } from '@guard/unlock-route-guard'
 import { AcceptTermsRouteGuard } from '@guard/accept-terms-route-guard'
@@ -36,6 +37,10 @@ const routes: Routes = [
   },
   { path: 'token/new',
     component: TokenNewComponent,
+    canActivate: [UnlockRouteGuard, AcceptTermsRouteGuard],
+  },
+  { path: 'crowdsale/:crowdsaleAddress/show',
+    component: CrowdsaleShowComponent,
     canActivate: [UnlockRouteGuard, AcceptTermsRouteGuard],
   },
 ]

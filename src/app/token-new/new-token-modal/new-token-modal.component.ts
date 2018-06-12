@@ -6,6 +6,7 @@ import { EthereumService } from '@service/ethereum.service';
   templateUrl: './new-token-modal.component.html',
   styleUrls: ['./new-token-modal.component.css']
 })
+
 export class NewTokenModalComponent implements OnInit {
 
   display: boolean = false

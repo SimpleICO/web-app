@@ -9,11 +9,9 @@ import { Subject } from 'rxjs';
 
 declare var require: any
 
-const eth = require('truffle-contract')
 const MAX_USD_CAP = 100.00
 const ethers = require('ethers')
 const Web3 = require('web3')
-
 
 @Injectable()
 export class EthereumService {

@@ -1,0 +1,27 @@
+#crowdsale-show {
+  @include with-header;
+  @include main;
+  background-color: $purple;
+
+  .token-name {
+    font-size: $h4-font-size;
+    color: white;
+  }
+
+  .eth-raised {
+    margin-bottom: get-spacer(3);
+    padding: get-spacer(3) 0;
+    position: relative;
+    color: white;
+    .balance {
+      @include light;
+      font-size: $h5-font-size;
+      padding-right: 28px;
+      display: block;
+    }
+    small {
+      @include bold;
+      text-transform: uppercase;
+    }
+  }
+}

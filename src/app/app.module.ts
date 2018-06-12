@@ -17,7 +17,8 @@ import { UnlockRouteGuard } from '@guard/unlock-route-guard';
 import { AcceptTermsRouteGuard } from '@guard/accept-terms-route-guard'
 import { CookieService } from './@service/cookie.service';
 import { SharedService } from './@service/shared.service';
-import { EthereumService } from './@service/ethereum.service'
+import { EthereumService } from './@service/ethereum.service';
+import { CrowdsaleShowModule } from './crowdsale-show/crowdsale-show.module'
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { EthereumService } from './@service/ethereum.service'
     TokenIndexModule,
     AcceptTermsModule,
     TokenNewModule,
-    HttpClientModule
+    HttpClientModule,
+    CrowdsaleShowModule
   ],
   providers: [WalletService, UnlockRouteGuard, CookieService, AcceptTermsRouteGuard, SharedService, EthereumService],
   bootstrap: [AppComponent]
