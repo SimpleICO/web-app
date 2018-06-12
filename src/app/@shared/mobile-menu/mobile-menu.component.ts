@@ -37,6 +37,8 @@ export class MobileMenuComponent implements OnInit {
 
     this.shared.onMobileMenu.subscribe(data => {
       this.display = data.display
+
+      this.wallet.getAccountBalance()
     })
 
     new clipboard(`.copy`, {

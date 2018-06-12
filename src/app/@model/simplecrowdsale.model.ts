@@ -6,6 +6,7 @@ declare var require: any
 const ethers = require('ethers')
 const RATE = ethers.utils.bigNumberify(1)
 const SimpleCrowdsaleInterface = require('@abi/simplecrowdsale.abi.json')
+const Web3 = require('web3')
 
 export class SimpleCrowdsale extends Contract {
 
@@ -25,6 +26,17 @@ export class SimpleCrowdsale extends Contract {
     super(wallet)
 
     this.web3 = wallet.web3
+  }
+
+  subscribeToEvents(){
+    let provider = new Web3.providers.WebsocketProvider('wss://ropsten.infura.io/ws')
+    let web3 = new Web3(provider)
+
+    return web3.eth.subscribe('logs', (error, event) => {
+      if (error) return console.error(error)
+
+      console.log('Successfully subscribed!', event)
+    })
   }
 
   setAddress(address: string){

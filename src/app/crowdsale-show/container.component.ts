@@ -37,6 +37,7 @@ export class ContainerComponent implements OnInit {
       this.crowdsale = new SimpleCrowdsale(this.wallet.getInstance())
       this.crowdsale.connect()
       this.crowdsale.setAddress(this.crowdsaleAddress)
+      // this.crowdsale.subscribeToEvents()
       console.log(this.crowdsale)
 
       this.token = new SimpleToken(this.wallet.getInstance())
