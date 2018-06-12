@@ -14,4 +14,28 @@
       <small>Available</small>
     </div>
   </div>
+
+  <section id="tx-history" class="section">
+    <div class="container">
+      <h5 class="title">Transaction History</h5>
+      <article class="tx row" *ngFor="let tx of txHistory">
+        <div class="col-sm-3 hash">
+          <small>Hash</small>
+          <a href="{{ eth.etherscanURL }}/tx/{{ tx.hash }}" target="_blank" class="text-truncate">{{ tx.hash }}</a>
+        </div>
+        <div class="col-sm-3 from">
+          <small>From</small>
+          <a href="{{ eth.etherscanURL }}/address/{{ tx.from }}" target="_blank" class="text-truncate">{{ tx.from }}</a>
+        </div>
+        <div class="col-sm-3 to">
+          <small>To</small>
+          <a href="{{ eth.etherscanURL }}/address/{{ tx.to }}" target="_blank" class="text-truncate">{{ tx.to }}</a>
+        </div>
+        <div class="col-sm-3 value">
+          <small>Value</small>
+          <span class="text-truncate">{{ tx.value }}</span>
+        </div>
+      </article>
+    </div>
+  </section>
 </main>

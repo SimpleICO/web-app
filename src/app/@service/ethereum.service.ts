@@ -34,9 +34,15 @@ export class EthereumService {
 
   simpleCrowdsale: SimpleCrowdsale
 
+  etherscanURL: string = 'https://ropsten.etherscan.io'
+
   constructor(
     private wallet: WalletService,
     private http: HttpClient) {
+
+    if (env.production) {
+      this.etherscanURL = 'https://etherscan.io'
+    }
 
   }
 

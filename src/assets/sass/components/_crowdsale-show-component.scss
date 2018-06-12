@@ -33,4 +33,29 @@
       top: 0;
     }
   }
+
+  #tx-history {
+    .tx {
+      border-bottom: 1px solid darken($purple, 7%);
+      padding-bottom: get-spacer(3);
+      margin-bottom: get-spacer(3);
+      color: white;
+      > div {
+        @include flex-column-center;
+        margin-top: get-spacer(1);
+        small {
+          @include bold;
+          display: block;
+        }
+        span, a {
+          max-width: 210px;
+          display: block;
+        }
+      }
+      .hash {}
+      .from {}
+      .to {}
+      .value {}
+    }
+  }
 }

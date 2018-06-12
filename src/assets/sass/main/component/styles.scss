@@ -208,6 +208,14 @@
   }
 }
 
+.section {
+  padding: get-spacer(4) 0;
+  .title {
+    text-transform: uppercase;
+    color: white;
+  }
+}
+
 /*
   Media queries
 */

@@ -25,6 +25,8 @@ export class ContainerComponent implements OnInit {
 
   token: SimpleToken
 
+  txHistory: Array<any> = []
+
   constructor(
     private route: ActivatedRoute,
     public eth: EthereumService,
@@ -59,13 +61,42 @@ export class ContainerComponent implements OnInit {
         console.log(event)
         this.crowdsale.getEthRaised()
         this.crowdsale.getAvailableTokens(this.token)
+
+        this.getTransaction(event.transactionHash)
       }).on('error', error => {
         console.log(error)
       })
   }
 
+  async getTransaction(hash: string){
+    try {
+      let tx = await this.crowdsale.web3.eth.getTransaction(hash)
+
+      console.log(tx)
+
+      this.txHistory.unshift({
+        hash: tx.hash,
+        from: tx.from,
+        to: tx.to,
+        value: `ETH ${ethers.utils.formatEther(tx.value)}`
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   async getCrowdsaleData(){
     this.crowdsale.getEthRaised()
+
+    this.crowdsale.web3.eth.getPastLogs({
+      fromBlock: '0x0',
+      address: this.crowdsale.address
+    }).then(res => {
+      console.log(res)
+      res.forEach(rec => {
+        this.getTransaction(rec.transactionHash)
+      })
+    }).catch(err => console.log)
 
     this.getTokenData()
   }
