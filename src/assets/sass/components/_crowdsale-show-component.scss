@@ -1,7 +1,15 @@
+#qr-code {
+  img {
+    height: auto;
+    width: 100%;
+  }
+}
+
 #crowdsale-show {
   @include with-header;
   @include main;
   background-color: $purple;
+
 
   .token-name {
     font-size: $h4-font-size;

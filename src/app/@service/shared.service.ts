@@ -6,9 +6,18 @@ export class SharedService {
 
   onMobileMenu: Subject<any> = new Subject<any>()
 
+  onCrowdsaleShowModal: Subject<any> = new Subject<any>()
+
   isMobileMenuOn: boolean = false
 
   constructor() { }
+
+  displayCrowdsaleShowModal(){
+    this.onCrowdsaleShowModal.next({
+      display: true,
+      onQrCode: true,
+    })
+  }
 
   toggleMobileMenu(){
     this.isMobileMenuOn = !this.isMobileMenuOn

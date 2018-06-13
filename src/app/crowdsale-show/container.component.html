@@ -1,13 +1,15 @@
 <app-header></app-header>
 <app-mobile-menu></app-mobile-menu>
 
+<app-qr-code-modal [crowdsale]="crowdsale"></app-qr-code-modal>
+
 <main id="crowdsale-show">
   <div class="container">
     <h1 class="token-name">{{ token.name }} ({{ token.symbol }})</h1>
     <div class="eth-raised">
       <span class="balance text-truncate" style="max-width: 210px">{{ crowdsale.address }}</span>
       <small>Crowdsale address</small>
-      <span class="go-icon copy-crowdsale-address"><i class="icon-copy"></i></span>
+      <span class="go-icon" (click)="shared.displayCrowdsaleShowModal()"><i class="icon-copy"></i></span>
     </div>
     <div class="eth-raised">
       <span class="balance"><strong>ETH</strong> {{ crowdsale.ethRaised }}</span>

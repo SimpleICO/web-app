@@ -9,7 +9,6 @@ import { SimpleToken } from '@model/simpletoken.model';
 declare var require: any
 
 const ethers = require('ethers')
-const clipboard = require('clipboard')
 
 @Component({
   selector: 'app-container',
@@ -52,28 +51,6 @@ export class ContainerComponent implements OnInit {
       this.getCrowdsaleData()
       this.getTokenData()
     })
-  }
-
-  ngAfterViewInit(){
-    let self = this
-
-    new clipboard(`.copy-crowdsale-address`, {
-      text: function(trigger) {
-
-        self.updateCopyTrigger(trigger)
-
-        return self.crowdsaleAddress
-      }
-    })
-  }
-
-  updateCopyTrigger(trigger){
-    trigger.innerHTML = '<i class="icon-checkmark-circle"></i>'
-    trigger.classList.add('copied')
-    setTimeout(() => {
-      trigger.innerHTML = '<i class="icon-copy"></i>'
-      trigger.classList.remove('copied')
-    }, 2000);
   }
 
   refresh(){
