@@ -26,6 +26,8 @@ export class SimpleCrowdsale extends Contract {
 
   websocket: string
 
+  token: SimpleToken
+
   constructor(
     wallet: Wallet) {
 
@@ -71,6 +73,20 @@ export class SimpleCrowdsale extends Contract {
 
   async getAvailableTokens(token: SimpleToken){
     this.tokens = await token.instance.methods.balanceOf(this.address).call()
+  }
+
+  async setToken(){
+    let address = await this.instance.methods.token().call()
+    this.token = new SimpleToken(this.wallet)
+    this.token.connect()
+    this.token.setAddress(address)
+    this.token.crowdsale = this.getAddress()
+
+    return this
+  }
+
+  getToken(): SimpleToken {
+    return this.token
   }
 
   connect(){

@@ -25,6 +25,8 @@ export class SimpleToken extends Contract {
 
   address: string
 
+  crowdsale: string
+
   constructor(
     wallet: Wallet,
     name?: string,

@@ -1,0 +1,16 @@
+#crowdsale-index {
+  @include with-header;
+  @include main;
+  background-color: $purple;
+
+  .token {
+    padding: get-spacer(3) 0;
+    .name {
+      color: white;
+    }
+    .crowdsale {
+      max-width: 210px;
+      display: block;
+    }
+  }
+}

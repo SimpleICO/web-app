@@ -5,8 +5,11 @@
     <small>Account Balance</small>
     <!-- <span class="go-icon"><i class="icon-chevron-right"></i></span> -->
   </a>
-  <a href="#" class="item">
+  <!-- <a href="#" class="item">
     <span>My Tokens</span>
+  </a> -->
+  <a [routerLink]="['/crowdsale/index']" class="item">
+    <span>Crowdsales</span>
   </a>
   <span class="item" (click)="wallet.lock()">
     <span>Logout</span>
