@@ -1,6 +1,7 @@
 import { Contract } from '@model/contract.model';
 import { Wallet } from '@model/wallet.model';
 import { SimpleToken } from '@model/simpletoken.model';
+import { environment as env } from '@environment/environment';
 
 declare var require: any
 
@@ -23,16 +24,26 @@ export class SimpleCrowdsale extends Contract {
 
   tokens: string
 
+  websocket: string
+
   constructor(
     wallet: Wallet) {
 
     super(wallet)
 
     this.web3 = wallet.web3
+
+    if (env.local) {
+      this.websocket = 'ws://localhost:7545'
+    } else if (env.staging) {
+      this.websocket = 'wss://ropsten.infura.io/ws'
+    } else {
+      this.websocket = ''
+    }
   }
 
   subscribeToEvents(){
-    let provider = new Web3.providers.WebsocketProvider('wss://ropsten.infura.io/ws')
+    let provider = new Web3.providers.WebsocketProvider(this.websocket)
     let web3 = new Web3(provider)
 
     return web3.eth.subscribe('logs', {

@@ -5,12 +5,14 @@ import { WalletService } from '@service/wallet.service';
 import { Contract } from '@model/contract.model';
 import { SimpleToken } from '@model/simpletoken.model';
 import { SimpleCrowdsale } from '@model/simplecrowdsale.model';
+import { SimpleICO } from '@model/simpleico.model';
 import { Subject } from 'rxjs';
 
 declare var require: any
 
 const MAX_USD_CAP = 100.00
 const DUMMY_ADDRESS = '0x7af6C0ce41aFaf675e5430193066a8d57701A9AC'
+const CONTRACT_DUMMY_ADDRESS = '0x523a34E0A5FABDFaa39B3889D80b19Fe77F73aA6'
 const GAS_INCREMENT = 1000
 const ethers = require('ethers')
 const Web3 = require('web3')
@@ -33,6 +35,8 @@ export class EthereumService {
   simpleToken: SimpleToken
 
   simpleCrowdsale: SimpleCrowdsale
+
+  simpleICO: SimpleICO
 
   etherscanURL: string = 'https://ropsten.etherscan.io'
 
@@ -84,10 +88,40 @@ export class EthereumService {
 
     this.simpleToken.connect()
 
+    try {
+      await this.estimateTokenDeploymentCost()
+      await this.estimateCrowdaleCost()
+      await this.estimateTokenTransferCost()
+      await this.estimateSimpleICOCost()
+
+      this.onTokenDeployment.next({
+        displayModal: true,
+        onTxnCostCalc: false,
+        onBeforeTokenDeployment: true,
+        onTokenDeployment: false,
+        onAfterTokenDeployment: false,
+        onError: false,
+      })
+    } catch (error) {
+      console.log(error)
+      this.onTokenDeployment.next({
+        displayModal: true,
+        onTxnCostCalc: false,
+        onBeforeTokenDeployment: false,
+        onTokenDeployment: false,
+        onAfterTokenDeployment: false,
+        onError: true,
+      })
+    }
+
+  }
+
+  async estimateTokenDeploymentCost(){
     let usdToEth = await this.convertCurrency('USD', 'ETH')
     console.log(usdToEth)
 
     let supply = ethers.utils.parseEther((usdToEth.ETH * MAX_USD_CAP).toString())
+    this.simpleToken.supply = supply
 
     let txObject = await this.simpleToken.deploy(supply)
     this.simpleToken.txObject = txObject
@@ -100,9 +134,6 @@ export class EthereumService {
     let txCost = await this.getTxCost(gas, this.defaultGasPrice)
     this.txCost = txCost
     console.log(txCost)
-
-    await this.estimateCrowdaleCost()
-    this.estimateTokenTransferCost()
   }
 
   async estimateCrowdaleCost(){
@@ -127,9 +158,12 @@ export class EthereumService {
   }
 
   async estimateTokenTransferCost(){
-    this.simpleToken.setAddress(DUMMY_ADDRESS)
+    this.simpleToken.setAddress(CONTRACT_DUMMY_ADDRESS)
 
-    let gas = await this.simpleToken.instance.methods.transfer(DUMMY_ADDRESS, "1000000000").estimateGas()
+    let txObject = this.simpleToken.instance.methods.transfer(this.wallet.getAddress(), this.simpleToken.supply.toString())
+    console.log(txObject)
+
+    let gas = await txObject.estimateGas()
     this.gas += gas + GAS_INCREMENT
     console.log(this.gas)
 
@@ -141,15 +175,27 @@ export class EthereumService {
     this.txCost.ETH = ethers.utils.formatEther(cost.toString())
     this.txCost.USD = (Number(this.txCost.USD) + Number(txCost.USD)).toFixed(2).toString()
     console.log(this.txCost)
+  }
 
-    this.onTokenDeployment.next({
-      displayModal: true,
-      onTxnCostCalc: false,
-      onBeforeTokenDeployment: true,
-      onTokenDeployment: false,
-      onAfterTokenDeployment: false,
-      onError: false,
-    })
+  async estimateSimpleICOCost(){
+    this.simpleICO = new SimpleICO(this.wallet.getInstance())
+
+    this.simpleICO.connect()
+
+    this.simpleICO.txObject = await this.simpleICO.instance.methods.addCrowdsale(CONTRACT_DUMMY_ADDRESS)
+
+    let gas = await this.simpleICO.txObject.estimateGas()
+    this.gas += gas + GAS_INCREMENT
+    console.log(this.gas)
+
+    let txCost = await this.getTxCost(this.gas, this.defaultGasPrice)
+
+    let cost = ethers.utils.bigNumberify(this.txCost.cost)
+    cost = cost.add(ethers.utils.bigNumberify(txCost.cost))
+
+    this.txCost.ETH = ethers.utils.formatEther(cost.toString())
+    this.txCost.USD = (Number(this.txCost.USD) + Number(txCost.USD)).toFixed(2).toString()
+    console.log(this.txCost)
   }
 
   async createCrowdsale(tokenAddress: string){
@@ -269,6 +315,45 @@ export class EthereumService {
 
       let balanceOfCrowdsale = await this.simpleToken.instance.methods.balanceOf(this.simpleCrowdsale.getAddress()).call()
       console.log(balanceOfCrowdsale)
+
+      this.addCrowdsaleToSimpleICOContract()
+    } catch (error) {
+      console.log(error)
+
+      this.onTokenDeployment.next({
+        displayModal: true,
+        onTxnCostCalc: false,
+        onBeforeTokenDeployment: false,
+        onTokenDeployment: false,
+        onAfterTokenDeployment: false,
+        onError: true,
+      })
+    }
+  }
+
+  async addCrowdsaleToSimpleICOContract(){
+    try {
+      let txObject = this.simpleICO.instance.methods.addCrowdsale(this.simpleCrowdsale.getAddress())
+
+      let txOptions = {
+        from: this.wallet.getAddress(),
+        to: this.simpleICO.getAddress(),
+        value: '0x0',
+        gas: Web3.utils.toHex(this.gas),
+        gasLimit: Web3.utils.toHex(this.gas),
+        gasPrice: Web3.utils.toHex(this.defaultGasPrice),
+        data: txObject.encodeABI(),
+      }
+
+      let signedTx = await this.simpleICO.web3.eth.accounts.signTransaction(txOptions, this.wallet.getInstance().privateKey)
+      console.log(signedTx)
+      let receipt = await this.simpleICO.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
+      console.log(receipt)
+
+      let crowdsales = await this.simpleICO.instance.methods.getCrowdsales().call()
+      console.log(crowdsales)
+      let crowdsalesByAddress = await this.simpleICO.instance.methods.getCrowdsalesByAddress(this.wallet.getAddress()).call()
+      console.log(crowdsalesByAddress)
 
       this.onTokenDeployment.next({
         displayModal: true,
