@@ -7,7 +7,7 @@
     <div class="eth-raised">
       <span class="balance text-truncate" style="max-width: 210px">{{ crowdsale.address }}</span>
       <small>Crowdsale address</small>
-      <span class="go-icon copy-crowdsale-address" (click)="refresh()"><i class="icon-copy"></i></span>
+      <span class="go-icon copy-crowdsale-address"><i class="icon-copy"></i></span>
     </div>
     <div class="eth-raised">
       <span class="balance"><strong>ETH</strong> {{ crowdsale.ethRaised }}</span>
@@ -19,6 +19,20 @@
       <small>Available</small>
     </div>
   </div>
+
+  <section id="info" class="section">
+    <div class="container">
+      <h5 class="title">Contract information</h5>
+      <article class="info">
+        <small>Crowdsale contract</small>
+        <a href="{{ eth.etherscanURL }}/address/{{ crowdsale.getAddress() }}" target="_blank" class="text-truncate">{{ crowdsale.getAddress() }}</a>
+      </article>
+      <article class="info">
+        <small>ERC20 Token contract</small>
+        <a href="{{ eth.etherscanURL }}/token/{{ token.getAddress() }}" target="_blank" class="text-truncate">{{ token.getAddress() }}</a>
+      </article>
+    </div>
+  </section>
 
   <section id="tx-history" class="section">
     <div class="container">

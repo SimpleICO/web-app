@@ -8,6 +8,17 @@
     color: white;
   }
 
+  .info {
+    padding: get-spacer(2) 0;
+    small {
+      color: white;
+    }
+    a {
+      max-width: 210px;
+      display: block;
+    }
+  }
+
   .eth-raised {
     padding: get-spacer(3) 0;
     position: relative;
@@ -47,7 +58,6 @@
         @include flex-column-center;
         margin-top: get-spacer(1);
         small {
-          @include bold;
           display: block;
         }
         span, a {

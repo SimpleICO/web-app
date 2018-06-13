@@ -62,7 +62,7 @@ export class ContainerComponent implements OnInit {
 
         self.updateCopyTrigger(trigger)
 
-        return self.crowdsale.getAddress()
+        return self.crowdsaleAddress
       }
     })
   }

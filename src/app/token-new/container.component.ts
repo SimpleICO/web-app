@@ -11,8 +11,8 @@ import { WalletService } from '@service/wallet.service';
 export class ContainerComponent implements OnInit {
 
   @Input() token: any = {
-    name: 'My Simple Token',
-    symbol: 'MST'
+    name: '',
+    symbol: ''
   }
 
   constructor(
