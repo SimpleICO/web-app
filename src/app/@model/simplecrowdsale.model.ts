@@ -28,6 +28,8 @@ export class SimpleCrowdsale extends Contract {
 
   token: SimpleToken
 
+  beneficiary: string
+
   constructor(
     wallet: Wallet) {
 
@@ -72,7 +74,12 @@ export class SimpleCrowdsale extends Contract {
   }
 
   async getAvailableTokens(token: SimpleToken){
-    this.tokens = await token.instance.methods.balanceOf(this.address).call()
+    let wei = await token.instance.methods.balanceOf(this.address).call()
+    this.tokens = ethers.utils.formatEther(wei)
+  }
+
+  async getBeneficiary(){
+    this.beneficiary = await this.instance.methods.wallet().call()
   }
 
   async setToken(){

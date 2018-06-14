@@ -26,6 +26,10 @@
     <div class="container">
       <h5 class="title">Contract information</h5>
       <article class="info">
+        <small>Crowdsale beneficiary</small>
+        <a href="{{ eth.etherscanURL }}/address/{{ crowdsale.beneficiary }}" target="_blank" class="text-truncate">{{ crowdsale.beneficiary }}</a>
+      </article>
+      <article class="info">
         <small>Crowdsale contract</small>
         <a href="{{ eth.etherscanURL }}/address/{{ crowdsale.getAddress() }}" target="_blank" class="text-truncate">{{ crowdsale.getAddress() }}</a>
       </article>

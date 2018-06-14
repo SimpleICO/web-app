@@ -92,6 +92,7 @@ export class ContainerComponent implements OnInit {
 
   async getCrowdsaleData(){
     this.crowdsale.getEthRaised()
+    this.crowdsale.getBeneficiary()
 
     this.crowdsale.web3.eth.getPastLogs({
       fromBlock: '0x0',
