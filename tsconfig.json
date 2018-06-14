@@ -22,6 +22,9 @@
       "@service/*": [
         "app/@service/*"
       ],
+      "@error/*": [
+        "app/@error/*"
+      ],
       "@shared/*": [
         "app/@shared/*"
       ],

@@ -11,6 +11,7 @@ export class NewTokenModalComponent implements OnInit {
 
   display: boolean = false
   onTxnCostCalc: boolean = false
+  onInsufficientFunds: boolean = false
   onBeforeTokenDeployment: boolean = false
   onTokenDeployment: boolean = false
   onAfterTokenDeployment: boolean = false
@@ -20,6 +21,7 @@ export class NewTokenModalComponent implements OnInit {
     eth.onTokenDeployment.subscribe(data => {
       this.display = data.displayModal
       this.onTxnCostCalc = data.onTxnCostCalc
+      this.onInsufficientFunds = data.onInsufficientFunds
       this.onBeforeTokenDeployment = data.onBeforeTokenDeployment
       this.onTokenDeployment = data.onTokenDeployment
       this.onAfterTokenDeployment = data.onAfterTokenDeployment

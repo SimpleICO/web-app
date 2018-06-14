@@ -7,6 +7,8 @@ import { SimpleToken } from '@model/simpletoken.model';
 import { SimpleCrowdsale } from '@model/simplecrowdsale.model';
 import { SimpleICO } from '@model/simpleico.model';
 import { Subject } from 'rxjs';
+import { InsufficientFundsError } from '@error/insufficient-funds.error';
+
 
 declare var require: any
 
@@ -78,6 +80,7 @@ export class EthereumService {
     this.onTokenDeployment.next({
       displayModal: true,
       onTxnCostCalc: true,
+      onInsufficientFunds: false,
       onBeforeTokenDeployment: false,
       onTokenDeployment: false,
       onAfterTokenDeployment: false,
@@ -89,14 +92,12 @@ export class EthereumService {
     this.simpleToken.connect()
 
     try {
-      await this.estimateTokenDeploymentCost()
-      await this.estimateCrowdaleCost()
-      await this.estimateTokenTransferCost()
-      await this.estimateSimpleICOCost()
+      await this.estimateTransactionCosts()
 
       this.onTokenDeployment.next({
         displayModal: true,
         onTxnCostCalc: false,
+        onInsufficientFunds: false,
         onBeforeTokenDeployment: true,
         onTokenDeployment: false,
         onAfterTokenDeployment: false,
@@ -104,16 +105,45 @@ export class EthereumService {
       })
     } catch (error) {
       console.log(error)
-      this.onTokenDeployment.next({
-        displayModal: true,
-        onTxnCostCalc: false,
-        onBeforeTokenDeployment: false,
-        onTokenDeployment: false,
-        onAfterTokenDeployment: false,
-        onError: true,
-      })
+      if (error instanceof InsufficientFundsError) {
+        console.log(error instanceof InsufficientFundsError)
+        this.onTokenDeployment.next({
+          displayModal: true,
+          onTxnCostCalc: false,
+          onInsufficientFunds: true,
+          onBeforeTokenDeployment: true,
+          onTokenDeployment: false,
+          onAfterTokenDeployment: false,
+          onError: false,
+        })
+      } else {
+        this.onTokenDeployment.next({
+          displayModal: true,
+          onTxnCostCalc: false,
+          onInsufficientFunds: false,
+          onBeforeTokenDeployment: false,
+          onTokenDeployment: false,
+          onAfterTokenDeployment: false,
+          onError: true,
+        })
+      }
     }
+  }
 
+  async estimateTransactionCosts(){
+    await this.estimateTokenDeploymentCost()
+    await this.estimateCrowdaleCost()
+    await this.estimateTokenTransferCost()
+    await this.estimateSimpleICOCost()
+    await this.wallet.getAccountBalance()
+
+    let hasInsufficientFunds = ethers.utils.bigNumberify(this.txCost.cost).gt(this.wallet.balance)
+
+    console.log(hasInsufficientFunds, this.txCost.cost, this.wallet.balance)
+
+    if (hasInsufficientFunds) {
+      throw new InsufficientFundsError(InsufficientFundsError.MESSAGE)
+    }
   }
 
   async estimateTokenDeploymentCost(){
@@ -211,6 +241,7 @@ export class EthereumService {
     this.onTokenDeployment.next({
       displayModal: true,
       onTxnCostCalc: false,
+      onInsufficientFunds: false,
       onBeforeTokenDeployment: false,
       onTokenDeployment: true,
       onAfterTokenDeployment: false,
@@ -249,6 +280,7 @@ export class EthereumService {
       this.onTokenDeployment.next({
         displayModal: true,
         onTxnCostCalc: false,
+        onInsufficientFunds: false,
         onBeforeTokenDeployment: false,
         onTokenDeployment: false,
         onAfterTokenDeployment: false,
@@ -284,6 +316,7 @@ export class EthereumService {
       this.onTokenDeployment.next({
         displayModal: true,
         onTxnCostCalc: false,
+        onInsufficientFunds: false,
         onBeforeTokenDeployment: false,
         onTokenDeployment: false,
         onAfterTokenDeployment: false,
@@ -323,6 +356,7 @@ export class EthereumService {
       this.onTokenDeployment.next({
         displayModal: true,
         onTxnCostCalc: false,
+        onInsufficientFunds: false,
         onBeforeTokenDeployment: false,
         onTokenDeployment: false,
         onAfterTokenDeployment: false,
@@ -358,6 +392,7 @@ export class EthereumService {
       this.onTokenDeployment.next({
         displayModal: true,
         onTxnCostCalc: false,
+        onInsufficientFunds: false,
         onBeforeTokenDeployment: false,
         onTokenDeployment: false,
         onAfterTokenDeployment: true,
@@ -372,6 +407,7 @@ export class EthereumService {
       this.onTokenDeployment.next({
         displayModal: true,
         onTxnCostCalc: false,
+        onInsufficientFunds: false,
         onBeforeTokenDeployment: false,
         onTokenDeployment: false,
         onAfterTokenDeployment: false,
