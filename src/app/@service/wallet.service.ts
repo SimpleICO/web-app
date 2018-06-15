@@ -38,6 +38,11 @@ export class WalletService {
     return balance
   }
 
+  setEmptyWallet(){
+    this.wallet = new Wallet()
+    this.wallet.setLockedInstance()
+  }
+
   getInstance(): Wallet {
     return this.wallet
   }

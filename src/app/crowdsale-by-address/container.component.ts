@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SimpleICO } from '@model/simpleico.model';
-import { SimpleCrowdsale } from '@model/simplecrowdsale.model';
 import { WalletService } from '@service/wallet.service';
+import { ContainerComponent as CrowdsaleIndexComponent } from '../crowdsale-index/container.component';
 
 @Component({
   selector: 'app-container',
@@ -10,24 +10,24 @@ import { WalletService } from '@service/wallet.service';
   styleUrls: ['./container.component.css']
 })
 
-export class ContainerComponent implements OnInit {
-
-  simpleICO: SimpleICO
-
-  crowdsales: Array<SimpleCrowdsale> = []
+export class ContainerComponent extends CrowdsaleIndexComponent {
 
   address: string
 
   constructor(
-    private wallet: WalletService,
-    private route: ActivatedRoute) {}
+    public wallet: WalletService,
+    private route: ActivatedRoute){
+
+    super(wallet)
+
+  }
 
   ngOnInit() {
     this.simpleICO = new SimpleICO(this.wallet.getInstance())
     this.simpleICO.connect()
 
     this.route.params.subscribe(({ address }) => {
-        this.address = address
+      this.address = address
     })
   }
 
@@ -38,28 +38,6 @@ export class ContainerComponent implements OnInit {
   async getCrowdsalesByAddress(){
     let crowdsales = await this.simpleICO.instance.methods.getCrowdsalesByAddress(this.address).call()
     console.log(crowdsales)
-
-    this.initCrowdsales(crowdsales)
-  }
-
-  async initCrowdsales(crowdsales: Array<string>){
-    if (crowdsales.length <= 0) {
-      return false
-    }
-
-    let address = crowdsales.pop()
-
-    let crowdsale = new SimpleCrowdsale(this.wallet.getInstance())
-    crowdsale.connect()
-    crowdsale.setAddress(address)
-
-    await crowdsale.setToken()
-
-    let token = crowdsale.getToken()
-    await token.getName()
-    await token.getSymbol()
-
-    this.crowdsales.push(crowdsale)
 
     this.initCrowdsales(crowdsales)
   }

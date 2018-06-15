@@ -42,6 +42,10 @@ export class Wallet {
     this.web3 = new Web3(provider)
   }
 
+  setLockedInstance(){
+    this.instance = $wallet
+  }
+
   unlockFromMnemonic(mnemonic: string){
     try {
       let wallet = $wallet.fromMnemonic(mnemonic)

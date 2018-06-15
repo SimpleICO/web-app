@@ -7,6 +7,7 @@ import { ContainerComponent as TokenNewComponent } from './token-new/container.c
 import { ContainerComponent as AcceptTermsComponent } from './accept-terms/container.component';
 import { ContainerComponent as CrowdsaleShowComponent } from './crowdsale-show/container.component';
 import { ContainerComponent as CrowdsaleIndexComponent } from './crowdsale-index/container.component';
+import { ContainerComponent as CrowdsaleIndexPublicComponent } from './crowdsale-index-public/container.component';
 import { ContainerComponent as CrowdsaleByAddressComponent } from './crowdsale-by-address/container.component';
 import { WalletService } from '@service/wallet.service';
 import { UnlockRouteGuard } from '@guard/unlock-route-guard'
@@ -43,6 +44,10 @@ const routes: Routes = [
   { path: 'crowdsale/index',
     component: CrowdsaleIndexComponent,
     canActivate: [UnlockRouteGuard, AcceptTermsRouteGuard],
+  },
+  { path: 'public/crowdsale/index',
+    component: CrowdsaleIndexPublicComponent,
+    canActivate: [AcceptTermsRouteGuard],
   },
   { path: 'crowdsale/:address/address',
     component: CrowdsaleByAddressComponent,

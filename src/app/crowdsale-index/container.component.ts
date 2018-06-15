@@ -17,7 +17,7 @@ export class ContainerComponent implements OnInit {
 
   crowdsales: Array<SimpleCrowdsale> = []
 
-  constructor(private wallet: WalletService) {}
+  constructor(public wallet: WalletService) {}
 
   ngOnInit() {
     this.simpleICO = new SimpleICO(this.wallet.getInstance())
