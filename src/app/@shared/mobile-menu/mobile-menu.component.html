@@ -8,6 +8,9 @@
   <!-- <a href="#" class="item">
     <span>My Tokens</span>
   </a> -->
+  <a [routerLink]="['/crowdsale', wallet.getAddress(), 'address']" class="item">
+    <span>My crowdsales</span>
+  </a>
   <a [routerLink]="['/crowdsale/index']" class="item">
     <span>Crowdsales</span>
   </a>
