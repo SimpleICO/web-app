@@ -45,6 +45,12 @@ export class ContainerComponent implements OnInit {
       return false
     }
 
+    if (String(this.token.supply).length > 18) {
+      this.isInvalid = true
+      this.errorMessage = 'Supply value must be an integer of maximum Ne18'
+      return false
+    }
+
     if (isNaN(Number(this.token.price)) || this.token.price <= 0) {
       this.isInvalid = true
       this.errorMessage = 'Price value must be in ETH and be greater than 0'

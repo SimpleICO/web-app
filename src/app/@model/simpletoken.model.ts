@@ -3,6 +3,8 @@ import { Wallet } from '@model/wallet.model';
 
 declare var require: any
 
+const ethers = require('ethers')
+
 const SimpleTokenInterface = require('@abi/simpletoken.abi.json')
 
 export class SimpleToken extends Contract {
@@ -86,10 +88,15 @@ export class SimpleToken extends Contract {
 
   async deploy(){
 
+    console.log(this.decimals, this.supply)
+
+    let supply = `${this.supply.toString()}${'0'.repeat(this.decimals)}`
+    console.log(supply)
+
     try {
       return this.instance.deploy({
         data: SimpleTokenInterface.bytecode,
-        arguments: [this.name, this.symbol, this.decimals, this.supply]
+        arguments: [this.name, this.symbol, this.decimals, supply]
       })
     } catch (error) {
       console.log(error)

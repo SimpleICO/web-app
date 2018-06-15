@@ -147,12 +147,6 @@ export class EthereumService {
   }
 
   async estimateTokenDeploymentCost(){
-    let usdToEth = await this.convertCurrency('USD', 'ETH')
-    console.log(usdToEth)
-
-    let supply = ethers.utils.parseEther((usdToEth.ETH * MAX_USD_CAP).toString())
-    this.simpleToken.supply = supply
-
     let txObject = await this.simpleToken.deploy()
     this.simpleToken.txObject = txObject
     console.log(txObject)
@@ -259,7 +253,6 @@ export class EthereumService {
     console.log(txOptions)
 
     try {
-      console.log(this.wallet.getInstance().privateKey)
       let signedTx = await this.simpleToken.web3.eth.accounts.signTransaction(txOptions, this.wallet.getInstance().privateKey)
       console.log(signedTx)
       let receipt = await this.simpleToken.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
