@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { ContainerComponent as HomeComponent } from './home/container.component';
 import { ContainerComponent as LoginComponent } from './login/container.component';
 import { ContainerComponent as NewWalletComponent } from './new-wallet/container.component';
-import { ContainerComponent as TokenIndexComponent } from './token-index/container.component';
 import { ContainerComponent as TokenNewComponent } from './token-new/container.component';
 import { ContainerComponent as AcceptTermsComponent } from './accept-terms/container.component';
 import { ContainerComponent as CrowdsaleShowComponent } from './crowdsale-show/container.component';
@@ -31,10 +30,6 @@ const routes: Routes = [
   },
   { path: 'accept-terms',
     component: AcceptTermsComponent,
-  },
-  { path: 'token/index',
-    component: TokenIndexComponent,
-    canActivate: [UnlockRouteGuard, AcceptTermsRouteGuard],
   },
   { path: 'token/new',
     component: TokenNewComponent,
