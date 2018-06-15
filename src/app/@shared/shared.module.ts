@@ -4,6 +4,7 @@ import { AuthHeaderComponent } from './auth-header/auth-header.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { HeaderComponent } from './header/header.component';
 import { MobileMenuComponent } from './mobile-menu/mobile-menu.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { MobileMenuComponent } from './mobile-menu/mobile-menu.component';
     AuthHeaderComponent,
     HeaderComponent,
     MobileMenuComponent,
+    FooterComponent,
   ],
-  declarations: [AuthHeaderComponent, HeaderComponent, MobileMenuComponent]
+  declarations: [AuthHeaderComponent, HeaderComponent, MobileMenuComponent, FooterComponent]
 })
 export class SharedModule { }

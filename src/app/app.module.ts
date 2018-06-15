@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { SharedModule } from '@shared/shared.module';
 
 import { HomeModule } from './home/home.module';
 import { LoginModule } from './login/login.module';
@@ -37,7 +38,8 @@ import { CrowdsaleIndexModule } from './crowdsale-index/crowdsale-index.module'
     TokenNewModule,
     HttpClientModule,
     CrowdsaleShowModule,
-    CrowdsaleIndexModule
+    CrowdsaleIndexModule,
+    SharedModule
   ],
   providers: [WalletService, UnlockRouteGuard, CookieService, AcceptTermsRouteGuard, SharedService, EthereumService],
   bootstrap: [AppComponent]

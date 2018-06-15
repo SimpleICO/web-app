@@ -232,6 +232,17 @@
   }
 }
 
+.footer {
+  background-color: darken($purple, 7%);
+  .copyright {
+    padding: get-spacer(2) 0;
+    text-align: center;
+    display: block;
+    color: white;
+    margin: 0;
+  }
+}
+
 /*
   Media queries
 */
