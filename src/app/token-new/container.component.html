@@ -8,20 +8,51 @@
     <fieldset class="form-group dark-theme">
       <label for="">Token name</label>
       <input
+        required
         autofocus="autofocus"
         type="text"
-        class="form-control form-control-lg"
+        class="form-control"
         placeholder="eg. SimpleICO Coin"
         [(ngModel)]="token.name">
     </fieldset>
     <fieldset class="form-group dark-theme">
       <label for="">Token symbol</label>
       <input
+        required
         type="text"
-        class="form-control form-control-lg"
+        class="form-control"
         placeholder="eg. SIC"
         [(ngModel)]="token.symbol">
     </fieldset>
+    <fieldset class="form-group dark-theme">
+      <label for="">Token supply</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <button class="btn btn-outline-light">{{ token.symbol || 'TOKEN' }}</button>
+        </div>
+        <input
+          required
+          type="number"
+          class="form-control"
+          placeholder="eg. 100"
+          [(ngModel)]="token.supply">
+      </div>
+    </fieldset>
+    <fieldset class="form-group dark-theme">
+      <label for="">Token price</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <button class="btn btn-outline-light">ETH</button>
+        </div>
+        <input
+          required
+          type="number"
+          class="form-control"
+          placeholder="eg. 1.00"
+          [(ngModel)]="token.price">
+      </div>
+    </fieldset>
+    <p *ngIf="isInvalid" class="on-error">{{ errorMessage }}</p>
     <button class="btn btn-primary btn-lg btn-block" (click)="onCreateCrowdsale()">Create Token</button>
   </div>
 </main>

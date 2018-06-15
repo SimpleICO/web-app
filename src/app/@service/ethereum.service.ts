@@ -75,7 +75,7 @@ export class EthereumService {
       .toPromise()
   }
 
-  async createToken(name: string, symbol: string){
+  async createToken(name: string, symbol: string, supply: number, price: number){
 
     this.onTokenDeployment.next({
       displayModal: true,
@@ -87,7 +87,7 @@ export class EthereumService {
       onError: false,
     })
 
-    this.simpleToken = new SimpleToken(this.wallet.getInstance(), name, symbol)
+    this.simpleToken = new SimpleToken(this.wallet.getInstance(), name, symbol, supply, price)
 
     this.simpleToken.connect()
 
@@ -153,7 +153,7 @@ export class EthereumService {
     let supply = ethers.utils.parseEther((usdToEth.ETH * MAX_USD_CAP).toString())
     this.simpleToken.supply = supply
 
-    let txObject = await this.simpleToken.deploy(supply)
+    let txObject = await this.simpleToken.deploy()
     this.simpleToken.txObject = txObject
     console.log(txObject)
 
@@ -171,7 +171,7 @@ export class EthereumService {
 
     simpleCrowdsale.connect()
 
-    simpleCrowdsale.txObject = await simpleCrowdsale.deploy(DUMMY_ADDRESS)
+    simpleCrowdsale.txObject = await simpleCrowdsale.deploy(this.simpleToken.price, DUMMY_ADDRESS)
 
     let gas = await simpleCrowdsale.txObject.estimateGas()
     this.gas += gas + GAS_INCREMENT
@@ -234,7 +234,7 @@ export class EthereumService {
 
     this.simpleCrowdsale.connect()
 
-    this.simpleCrowdsale.txObject = await this.simpleCrowdsale.deploy(tokenAddress)
+    this.simpleCrowdsale.txObject = await this.simpleCrowdsale.deploy(this.simpleToken.price, tokenAddress)
   }
 
   async deployToken(){

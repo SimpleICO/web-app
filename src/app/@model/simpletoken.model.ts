@@ -15,6 +15,8 @@ export class SimpleToken extends Contract {
 
   supply: any
 
+  price: any
+
   web3: any
 
   truffleContract: any
@@ -30,12 +32,16 @@ export class SimpleToken extends Contract {
   constructor(
     wallet: Wallet,
     name?: string,
-    symbol?: string) {
+    symbol?: string,
+    supply?: number,
+    price?: number) {
 
     super(wallet)
 
     this.name = name
     this.symbol = symbol
+    this.supply = supply
+    this.price = price
 
     this.web3 = wallet.web3
   }
@@ -78,12 +84,12 @@ export class SimpleToken extends Contract {
     return this
   }
 
-  async deploy(supply: any){
+  async deploy(){
 
     try {
       return this.instance.deploy({
         data: SimpleTokenInterface.bytecode,
-        arguments: [this.name, this.symbol, this.decimals, supply]
+        arguments: [this.name, this.symbol, this.decimals, this.supply]
       })
     } catch (error) {
       console.log(error)

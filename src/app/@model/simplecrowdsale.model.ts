@@ -106,12 +106,15 @@ export class SimpleCrowdsale extends Contract {
     return this
   }
 
-  async deploy(tokenAddress: string){
+  async deploy(tokenPrice: number, tokenAddress: string){
+
+    console.log(tokenPrice)
+    let price = ethers.utils.parseEther(tokenPrice.toString())
 
     try {
       return this.instance.deploy({
         data: SimpleCrowdsaleInterface.bytecode,
-        arguments: [RATE, this.wallet.address, tokenAddress]
+        arguments: [price, RATE, this.wallet.address, tokenAddress]
       })
     } catch (error) {
       console.log(error)
