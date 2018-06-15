@@ -5,6 +5,8 @@ import { AppRoutingModule } from '../app-routing.module';
 import { HeaderComponent } from './header/header.component';
 import { MobileMenuComponent } from './mobile-menu/mobile-menu.component';
 import { FooterComponent } from './footer/footer.component';
+import { HeaderPublicComponent } from './header-public/header-public.component';
+import { QrCodeModalComponent } from './qr-code-modal/qr-code-modal.component';
 
 @NgModule({
   imports: [
@@ -16,7 +18,9 @@ import { FooterComponent } from './footer/footer.component';
     HeaderComponent,
     MobileMenuComponent,
     FooterComponent,
+    HeaderPublicComponent,
+    QrCodeModalComponent
   ],
-  declarations: [AuthHeaderComponent, HeaderComponent, MobileMenuComponent, FooterComponent]
+  declarations: [AuthHeaderComponent, HeaderComponent, MobileMenuComponent, FooterComponent, HeaderPublicComponent, QrCodeModalComponent]
 })
 export class SharedModule { }

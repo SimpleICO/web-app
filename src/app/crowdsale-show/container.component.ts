@@ -29,11 +29,11 @@ export class ContainerComponent implements OnInit {
   txHistory: Array<any> = []
 
   constructor(
-    private route: ActivatedRoute,
+    public route: ActivatedRoute,
     public eth: EthereumService,
     public shared: SharedService,
     private zone: NgZone,
-    private wallet: WalletService) {}
+    public wallet: WalletService) {}
 
   ngOnInit() {
     this.route.params.subscribe(({ crowdsaleAddress }) => {

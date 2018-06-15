@@ -1,3 +1,5 @@
+<app-header-public></app-header-public>
+
 <main id="crowdsale-index">
   <section class="section">
     <div class="container">
@@ -5,7 +7,7 @@
 
       <article class="token" *ngFor="let crowdsale of crowdsales">
         <span class="name">{{ crowdsale.getToken().name }}</span>
-        <!-- <a [routerLink]="['/crowdsale', crowdsale.getToken().crowdsale, 'show']" class="crowdsale text-truncate">{{ crowdsale.getToken().crowdsale }}</a> -->
+        <a [routerLink]="['/public/crowdsale', crowdsale.getToken().crowdsale, 'show']" class="crowdsale text-truncate">{{ crowdsale.getToken().crowdsale }}</a>
       </article>
     </div>
   </section>

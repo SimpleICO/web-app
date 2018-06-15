@@ -10,4 +10,4 @@ import { SharedModule } from '@shared/shared.module';
   ],
   declarations: [ContainerComponent]
 })
-export class CrowdsaleShowModule { }
+export class CrowdsaleShowPublicModule { }

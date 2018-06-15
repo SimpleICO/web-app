@@ -21,7 +21,8 @@ import { EthereumService } from './@service/ethereum.service';
 import { CrowdsaleShowModule } from './crowdsale-show/crowdsale-show.module';
 import { CrowdsaleIndexModule } from './crowdsale-index/crowdsale-index.module';
 import { CrowdsaleByAddressModule } from './crowdsale-by-address/crowdsale-by-address.module';
-import { CrowdsaleIndexPublicModule } from './crowdsale-index-public/crowdsale-index-public.module'
+import { CrowdsaleIndexPublicModule } from './crowdsale-index-public/crowdsale-index-public.module';
+import { CrowdsaleShowPublicModule } from './crowdsale-show-public/crowdsale-show-public.module'
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { CrowdsaleIndexPublicModule } from './crowdsale-index-public/crowdsale-i
     CrowdsaleIndexModule,
     SharedModule,
     CrowdsaleByAddressModule,
-    CrowdsaleIndexPublicModule
+    CrowdsaleIndexPublicModule,
+    CrowdsaleShowPublicModule
   ],
   providers: [WalletService, UnlockRouteGuard, CookieService, AcceptTermsRouteGuard, SharedService, EthereumService],
   bootstrap: [AppComponent]
