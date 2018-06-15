@@ -83,8 +83,6 @@ export class ContainerComponent implements OnInit {
         to: tx.to,
         value: `ETH ${ethers.utils.formatEther(tx.value)}`
       })
-
-      this.zone.run(() => console.log('Updated txHistory'))
     } catch (error) {
       console.log(error)
     }
@@ -93,6 +91,7 @@ export class ContainerComponent implements OnInit {
   async getCrowdsaleData(){
     this.crowdsale.getEthRaised()
     this.crowdsale.getBeneficiary()
+    this.crowdsale.getPrice()
 
     this.crowdsale.web3.eth.getPastLogs({
       fromBlock: '0x0',
@@ -103,8 +102,6 @@ export class ContainerComponent implements OnInit {
         this.getTransaction(rec.transactionHash)
       })
     }).catch(err => console.log)
-
-    this.getTokenData()
   }
 
   async getTokenData(){

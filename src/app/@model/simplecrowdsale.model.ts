@@ -30,6 +30,8 @@ export class SimpleCrowdsale extends Contract {
 
   beneficiary: string
 
+  price: string
+
   constructor(
     wallet: Wallet) {
 
@@ -80,6 +82,11 @@ export class SimpleCrowdsale extends Contract {
 
   async getBeneficiary(){
     this.beneficiary = await this.instance.methods.wallet().call()
+  }
+
+  async getPrice(){
+    let price = await this.instance.methods.price().call()
+    this.price = ethers.utils.formatEther(price)
   }
 
   async setToken(){
