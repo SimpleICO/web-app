@@ -28,6 +28,8 @@ export class ContainerComponent implements OnInit {
 
   txHistory: Array<any> = []
 
+  txs: Array<string> = []
+
   constructor(
     public route: ActivatedRoute,
     public eth: EthereumService,
@@ -72,6 +74,12 @@ export class ContainerComponent implements OnInit {
   }
 
   async getTransaction(hash: string){
+    if (this.txs.indexOf(hash) != -1) {
+      return false
+    }
+
+    this.txs.push(hash)
+
     try {
       let tx = await this.crowdsale.web3.eth.getTransaction(hash)
 
