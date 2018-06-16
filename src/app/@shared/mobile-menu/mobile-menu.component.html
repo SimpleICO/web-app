@@ -5,9 +5,11 @@
     <small>Account Balance</small>
     <!-- <span class="go-icon"><i class="icon-chevron-right"></i></span> -->
   </a>
-  <!-- <a href="#" class="item">
-    <span>My Tokens</span>
-  </a> -->
+  <article class="ether-balance">
+    <span class="address text-truncate">{{ wallet.getAddress() }}</span>
+    <small>Wallet address</small>
+    <span class="go-icon copy"><i class="icon-copy"></i></span>
+  </article>
   <a [routerLink]="['/crowdsale', wallet.getAddress(), 'address']" class="item">
     <span>My crowdsales</span>
   </a>
@@ -21,10 +23,5 @@
     <a [routerLink]="['/token/new']" class="btn btn-block btn-lg btn-primary">
       Create Token
     </a>
-  </article>
-
-  <article class="address">
-    <span class="text-truncate">{{ wallet.getAddress() }}</span>
-    <span class="copy">copy</span>
   </article>
 </section>

@@ -44,11 +44,18 @@ export class MobileMenuComponent implements OnInit {
     new clipboard(`.copy`, {
       text: function(trigger) {
 
-        self.shared.updateCopyTrigger(trigger)
+        self.updateCopyTrigger(trigger)
 
         return self.wallet.getAddress()
       }
     })
+  }
+
+  updateCopyTrigger(trigger){
+    trigger.innerHTML = '<i class="icon-checkmark-circle"></i>'
+    setTimeout(() => {
+      trigger.innerHTML = '<i class="icon-copy"></i>'
+    }, 2000);
   }
 
 }
