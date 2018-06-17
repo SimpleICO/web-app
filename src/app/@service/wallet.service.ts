@@ -27,8 +27,19 @@ export class WalletService {
   balance = Eth.BigNumber
   ethBalance: number
 
+  network: string
+
   constructor(
     private router: Router) {
+
+    if (env.local) {
+      this.network = 'private'
+    } else if (env.staging) {
+      this.network = 'ropsten'
+    } else {
+      this.network = 'mainnet'
+    }
+
   }
 
   async getAccountBalance(address: string = this.getAddress()){
