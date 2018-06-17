@@ -137,9 +137,10 @@ export class EthereumService {
     await this.estimateSimpleICOCost()
     await this.wallet.getAccountBalance()
 
-    let hasInsufficientFunds = ethers.utils.bigNumberify(this.txCost.cost).gt(this.wallet.balance)
+    let cost = ethers.utils.parseEther(this.txCost.ETH)
+    let hasInsufficientFunds = cost.gt(this.wallet.balance)
 
-    console.log(hasInsufficientFunds, this.txCost.cost, this.wallet.balance)
+    console.log(hasInsufficientFunds, cost.toString(), this.wallet.balance)
 
     if (hasInsufficientFunds) {
       throw new InsufficientFundsError(InsufficientFundsError.MESSAGE)
@@ -242,12 +243,16 @@ export class EthereumService {
       onError: false,
     })
 
+    let nonce = await this.simpleToken.web3.eth.getTransactionCount(this.wallet.getAddress(), 'latest')
+    console.log(`nonce: ${nonce}`)
+
     let txOptions = {
       from: this.wallet.getAddress(),
       gas: Web3.utils.toHex(this.gas),
       gasLimit: Web3.utils.toHex(this.gas),
       gasPrice: Web3.utils.toHex(this.defaultGasPrice),
-      data: this.simpleToken.txObject.encodeABI()
+      data: this.simpleToken.txObject.encodeABI(),
+      nonce: nonce
     }
 
     console.log(txOptions)
@@ -283,12 +288,16 @@ export class EthereumService {
   }
 
   async deployCrowdsale(){
+    let nonce = await this.simpleCrowdsale.web3.eth.getTransactionCount(this.wallet.getAddress(), 'latest')
+    console.log(`nonce: ${nonce}`)
+
     let txOptions = {
       from: this.wallet.getAddress(),
       gas: Web3.utils.toHex(this.gas),
       gasLimit: Web3.utils.toHex(this.gas),
       gasPrice: Web3.utils.toHex(this.defaultGasPrice),
-      data: this.simpleCrowdsale.txObject.encodeABI()
+      data: this.simpleCrowdsale.txObject.encodeABI(),
+      nonce: nonce
     }
 
     try {
@@ -298,9 +307,6 @@ export class EthereumService {
       console.log(receipt)
 
       this.simpleCrowdsale.setAddress(receipt.contractAddress)
-
-      let crowdsaleBeneficiary = await this.simpleCrowdsale.instance.methods.wallet().call()
-      console.log(crowdsaleBeneficiary)
 
       this.transferTokensToCrowdsale()
     } catch (error) {
@@ -322,6 +328,9 @@ export class EthereumService {
     console.log(this.gas, this.simpleToken.supply, this.simpleCrowdsale.getAddress(), this.simpleToken.getAddress(), this.wallet.getAddress())
 
     try {
+      let nonce = await this.simpleToken.web3.eth.getTransactionCount(this.wallet.getAddress(), 'latest')
+      console.log(`nonce: ${nonce}`)
+
       let txObject = this.simpleToken.instance.methods.transfer(this.simpleCrowdsale.getAddress(), this.simpleToken.supply)
 
       let txOptions = {
@@ -332,15 +341,13 @@ export class EthereumService {
         gasLimit: Web3.utils.toHex(this.gas),
         gasPrice: Web3.utils.toHex(this.defaultGasPrice),
         data: txObject.encodeABI(),
+        nonce: nonce
       }
 
       let signedTx = await this.simpleToken.web3.eth.accounts.signTransaction(txOptions, this.wallet.getInstance().privateKey)
       console.log(signedTx)
       let receipt = await this.simpleToken.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
       console.log(receipt)
-
-      let balanceOfCrowdsale = await this.simpleToken.instance.methods.balanceOf(this.simpleCrowdsale.getAddress()).call()
-      console.log(balanceOfCrowdsale)
 
       this.addCrowdsaleToSimpleICOContract()
     } catch (error) {
@@ -360,6 +367,9 @@ export class EthereumService {
 
   async addCrowdsaleToSimpleICOContract(){
     try {
+      let nonce = await this.simpleICO.web3.eth.getTransactionCount(this.wallet.getAddress(), 'latest')
+      console.log(`nonce: ${nonce}`)
+
       let txObject = this.simpleICO.instance.methods.addCrowdsale(this.simpleCrowdsale.getAddress())
 
       let txOptions = {
@@ -370,17 +380,13 @@ export class EthereumService {
         gasLimit: Web3.utils.toHex(this.gas),
         gasPrice: Web3.utils.toHex(this.defaultGasPrice),
         data: txObject.encodeABI(),
+        nonce: nonce
       }
 
       let signedTx = await this.simpleICO.web3.eth.accounts.signTransaction(txOptions, this.wallet.getInstance().privateKey)
       console.log(signedTx)
       let receipt = await this.simpleICO.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
       console.log(receipt)
-
-      let crowdsales = await this.simpleICO.instance.methods.getCrowdsales().call()
-      console.log(crowdsales)
-      let crowdsalesByAddress = await this.simpleICO.instance.methods.getCrowdsalesByAddress(this.wallet.getAddress()).call()
-      console.log(crowdsalesByAddress)
 
       this.onTokenDeployment.next({
         displayModal: true,

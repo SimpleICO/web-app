@@ -1,10 +1,10 @@
 <section id="mobile-menu" [class.display]="display">
-  <a href="#" class="ether-balance">
+  <article class="ether-balance">
     <span class="balance">ETH {{ wallet.ethBalance }}</span>
     <!-- <small>US$ {{ eth.ethPrice }}</small> -->
     <small>Account Balance · {{ wallet.network }}</small>
     <!-- <span class="go-icon"><i class="icon-chevron-right"></i></span> -->
-  </a>
+  </article>
   <article class="ether-balance">
     <span class="address text-truncate">{{ wallet.getAddress() }}</span>
     <small>Wallet address</small>
