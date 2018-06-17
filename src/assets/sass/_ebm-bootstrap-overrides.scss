@@ -34,6 +34,9 @@ input[type="submit"].btn,
   &:placeholder {
     color: $gray-300;
   }
+  &:disabled {
+    background-color: darken($purple, 14%);
+  }
 }
 
 .form-group {

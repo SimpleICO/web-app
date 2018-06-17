@@ -13,8 +13,8 @@ export class ContainerComponent implements OnInit {
   @Input() token: any = {
     name: '',
     symbol: '',
-    supply: '',
-    price: '',
+    supply: '10',
+    price: '0.0001',
   }
 
   isInvalid: boolean = false
