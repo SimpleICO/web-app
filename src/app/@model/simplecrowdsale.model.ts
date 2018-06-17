@@ -44,7 +44,7 @@ export class SimpleCrowdsale extends Contract {
     } else if (env.staging) {
       this.websocket = 'wss://ropsten.infura.io/ws'
     } else {
-      this.websocket = ''
+      this.websocket = 'wss://mainnet.infura.io/ws'
     }
   }
 

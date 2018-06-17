@@ -108,6 +108,8 @@ export class WalletService {
       return
     }
 
+    this.wallet.setMainnetProvider()
+
     return false
   }
 

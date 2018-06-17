@@ -34,9 +34,14 @@ export class Wallet {
   }
 
   setRopstenProvider(){
-    // TODO
     let provider = new Web3.providers.HttpProvider('https://ropsten.infura.io/TNxOmHzkTOUaNtxDBxia')
-    // let provider = new Web3.providers.WebsocketProvider('wss://ropsten.infura.io/ws')
+    this.provider = provider
+    this.instance.provider = provider
+    this.web3 = new Web3(provider)
+  }
+
+  setMainnetProvider(){
+    let provider = new Web3.providers.HttpProvider('https://mainnet.infura.io/TNxOmHzkTOUaNtxDBxia')
     this.provider = provider
     this.instance.provider = provider
     this.web3 = new Web3(provider)
