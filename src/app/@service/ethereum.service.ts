@@ -243,7 +243,7 @@ export class EthereumService {
       onError: false,
     })
 
-    let nonce = await this.simpleToken.web3.eth.getTransactionCount(this.wallet.getAddress(), 'latest')
+    let nonce = await this.simpleToken.web3.eth.getTransactionCount(this.wallet.getAddress(), 'pending')
     console.log(`nonce: ${nonce}`)
 
     let txOptions = {
@@ -288,7 +288,7 @@ export class EthereumService {
   }
 
   async deployCrowdsale(){
-    let nonce = await this.simpleCrowdsale.web3.eth.getTransactionCount(this.wallet.getAddress(), 'latest')
+    let nonce = await this.simpleCrowdsale.web3.eth.getTransactionCount(this.wallet.getAddress(), 'pending')
     console.log(`nonce: ${nonce}`)
 
     let txOptions = {
@@ -328,7 +328,7 @@ export class EthereumService {
     console.log(this.gas, this.simpleToken.supply, this.simpleCrowdsale.getAddress(), this.simpleToken.getAddress(), this.wallet.getAddress())
 
     try {
-      let nonce = await this.simpleToken.web3.eth.getTransactionCount(this.wallet.getAddress(), 'latest')
+      let nonce = await this.simpleToken.web3.eth.getTransactionCount(this.wallet.getAddress(), 'pending')
       console.log(`nonce: ${nonce}`)
 
       let txObject = this.simpleToken.instance.methods.transfer(this.simpleCrowdsale.getAddress(), this.simpleToken.supply)
@@ -367,7 +367,7 @@ export class EthereumService {
 
   async addCrowdsaleToSimpleICOContract(){
     try {
-      let nonce = await this.simpleICO.web3.eth.getTransactionCount(this.wallet.getAddress(), 'latest')
+      let nonce = await this.simpleICO.web3.eth.getTransactionCount(this.wallet.getAddress(), 'pending')
       console.log(`nonce: ${nonce}`)
 
       let txObject = this.simpleICO.instance.methods.addCrowdsale(this.simpleCrowdsale.getAddress())
