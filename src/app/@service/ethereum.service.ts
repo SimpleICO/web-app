@@ -75,6 +75,10 @@ export class EthereumService {
       .toPromise()
   }
 
+  async getNonce(contract: Contract){
+    return await contract.web3.eth.getTransactionCount(this.wallet.getAddress(), 'pending')
+  }
+
   async createToken(name: string, symbol: string, supply: number, price: number){
 
     this.onTokenDeployment.next({
@@ -243,7 +247,7 @@ export class EthereumService {
       onError: false,
     })
 
-    let nonce = await this.simpleToken.web3.eth.getTransactionCount(this.wallet.getAddress(), 'pending')
+    let nonce = await this.getNonce(this.simpleToken)
     console.log(`nonce: ${nonce}`)
 
     let txOptions = {
@@ -252,7 +256,7 @@ export class EthereumService {
       gasLimit: Web3.utils.toHex(this.gas),
       gasPrice: Web3.utils.toHex(this.defaultGasPrice),
       data: this.simpleToken.txObject.encodeABI(),
-      nonce: nonce
+      nonce: Web3.utils.toHex(nonce)
     }
 
     console.log(txOptions)
@@ -288,7 +292,7 @@ export class EthereumService {
   }
 
   async deployCrowdsale(){
-    let nonce = await this.simpleCrowdsale.web3.eth.getTransactionCount(this.wallet.getAddress(), 'pending')
+    let nonce = await this.getNonce(this.simpleCrowdsale)
     console.log(`nonce: ${nonce}`)
 
     let txOptions = {
@@ -297,7 +301,7 @@ export class EthereumService {
       gasLimit: Web3.utils.toHex(this.gas),
       gasPrice: Web3.utils.toHex(this.defaultGasPrice),
       data: this.simpleCrowdsale.txObject.encodeABI(),
-      nonce: nonce
+      nonce: Web3.utils.toHex(nonce)
     }
 
     try {
@@ -328,7 +332,7 @@ export class EthereumService {
     console.log(this.gas, this.simpleToken.supply, this.simpleCrowdsale.getAddress(), this.simpleToken.getAddress(), this.wallet.getAddress())
 
     try {
-      let nonce = await this.simpleToken.web3.eth.getTransactionCount(this.wallet.getAddress(), 'pending')
+      let nonce = await this.getNonce(this.simpleToken)
       console.log(`nonce: ${nonce}`)
 
       let txObject = this.simpleToken.instance.methods.transfer(this.simpleCrowdsale.getAddress(), this.simpleToken.supply)
@@ -341,7 +345,7 @@ export class EthereumService {
         gasLimit: Web3.utils.toHex(this.gas),
         gasPrice: Web3.utils.toHex(this.defaultGasPrice),
         data: txObject.encodeABI(),
-        nonce: nonce
+        nonce: Web3.utils.toHex(nonce)
       }
 
       let signedTx = await this.simpleToken.web3.eth.accounts.signTransaction(txOptions, this.wallet.getInstance().privateKey)
@@ -367,7 +371,7 @@ export class EthereumService {
 
   async addCrowdsaleToSimpleICOContract(){
     try {
-      let nonce = await this.simpleICO.web3.eth.getTransactionCount(this.wallet.getAddress(), 'pending')
+      let nonce = await this.getNonce(this.simpleICO)
       console.log(`nonce: ${nonce}`)
 
       let txObject = this.simpleICO.instance.methods.addCrowdsale(this.simpleCrowdsale.getAddress())
@@ -380,7 +384,7 @@ export class EthereumService {
         gasLimit: Web3.utils.toHex(this.gas),
         gasPrice: Web3.utils.toHex(this.defaultGasPrice),
         data: txObject.encodeABI(),
-        nonce: nonce
+        nonce: Web3.utils.toHex(nonce)
       }
 
       let signedTx = await this.simpleICO.web3.eth.accounts.signTransaction(txOptions, this.wallet.getInstance().privateKey)

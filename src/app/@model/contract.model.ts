@@ -12,6 +12,8 @@ export class Contract {
 
   wallet: Wallet
 
+  web3: any
+
   constructor(wallet: Wallet){
     this.wallet = wallet
   }
