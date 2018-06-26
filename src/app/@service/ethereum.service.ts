@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment as env } from '@environment/environment';
 import { WalletService } from '@service/wallet.service';
+import { DeploymentStateService } from '@service/deployment-state.service';
 import { Contract } from '@model/contract.model';
 import { SimpleToken } from '@model/simpletoken.model';
 import { SimpleCrowdsale } from '@model/simplecrowdsale.model';
@@ -18,6 +19,7 @@ const CONTRACT_DUMMY_ADDRESS = '0x523a34E0A5FABDFaa39B3889D80b19Fe77F73aA6'
 const GAS_INCREMENT = 1000
 const ethers = require('ethers')
 const Web3 = require('web3')
+
 
 @Injectable()
 export class EthereumService {
@@ -44,12 +46,12 @@ export class EthereumService {
 
   constructor(
     private wallet: WalletService,
-    private http: HttpClient) {
+    private http: HttpClient,
+    private deploymentState: DeploymentStateService) {
 
     if (env.production) {
       this.etherscanURL = 'https://etherscan.io'
     }
-
   }
 
   async getTxCost(gas, gasPrice){
@@ -247,6 +249,8 @@ export class EthereumService {
       onError: false,
     })
 
+    this.deploymentState.updateDeploymentData(DeploymentStateService.TOKEN_CREATION)
+
     let nonce = await this.getNonce(this.simpleToken)
     console.log(`nonce: ${nonce}`)
 
@@ -274,7 +278,7 @@ export class EthereumService {
 
       await this.createCrowdsale(this.simpleToken.getAddress())
 
-      this.deployCrowdsale()
+      this.deploymentState.updateDeploymentData(DeploymentStateService.TOKEN_CREATED)
 
     } catch (error) {
       console.log(error)
@@ -292,6 +296,8 @@ export class EthereumService {
   }
 
   async deployCrowdsale(){
+    this.deploymentState.updateDeploymentData(DeploymentStateService.CROWDSALE_CREATION)
+
     let nonce = await this.getNonce(this.simpleCrowdsale)
     console.log(`nonce: ${nonce}`)
 
@@ -329,6 +335,8 @@ export class EthereumService {
   }
 
   async transferTokensToCrowdsale(){
+    this.deploymentState.updateDeploymentData(DeploymentStateService.TOKEN_SUPPLY_TRANSFER)
+
     console.log(this.gas, this.simpleToken.supply, this.simpleCrowdsale.getAddress(), this.simpleToken.getAddress(), this.wallet.getAddress())
 
     try {

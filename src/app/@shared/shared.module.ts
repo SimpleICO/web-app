@@ -7,6 +7,7 @@ import { MobileMenuComponent } from './mobile-menu/mobile-menu.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderPublicComponent } from './header-public/header-public.component';
 import { QrCodeModalComponent } from './qr-code-modal/qr-code-modal.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
   imports: [
@@ -19,8 +20,9 @@ import { QrCodeModalComponent } from './qr-code-modal/qr-code-modal.component';
     MobileMenuComponent,
     FooterComponent,
     HeaderPublicComponent,
-    QrCodeModalComponent
+    QrCodeModalComponent,
+    SpinnerComponent
   ],
-  declarations: [AuthHeaderComponent, HeaderComponent, MobileMenuComponent, FooterComponent, HeaderPublicComponent, QrCodeModalComponent]
+  declarations: [AuthHeaderComponent, HeaderComponent, MobileMenuComponent, FooterComponent, HeaderPublicComponent, QrCodeModalComponent, SpinnerComponent]
 })
 export class SharedModule { }

@@ -23,15 +23,34 @@
           <button class="btn btn-primary btn-block mb-3" (click)="eth.deployToken()" [disabled]="onInsufficientFunds">Deploy</button>
           <button class="btn btn-outline-primary btn-block" (click)="reset()">Cancel</button>
         </div>
+
         <div class="modal-body" *ngIf="onTokenDeployment">
-          <h4 class="mb-4">Deploying your contract, waiting for confirmation...</h4>
-          <div class="spinner-wrapper">
-            <svg class="svg" xmlns="http://www.w3.org/2000/svg">
-              <circle class="circle" r="42" cx="50%" cy="50%" fill="transparent" stroke-dasharray="0"></circle>
-              <circle class="bar" r="42" cx="50%" cy="50%" fill="transparent" stroke-dasharray="263.89" [style.stroke-dashoffset]="15"></circle>
-            </svg>
+          <div class="overlay" *ngIf="state.creatingToken.isActive">
+            <small>Step {{ currentState }} of {{ stateLength }}</small>
+            <h4 class="mb-4">Deploying your token</h4>
+            <app-spinner></app-spinner>
+          </div>
+          <div class="overlay" *ngIf="state.tokenCreated.isActive">
+            <small>Step {{ currentState }} of {{ stateLength }}</small>
+            <h4 class="mb-4">Your token has been created</h4>
+            <h5 class="mb-4">Now, create a token crowdsale or see your token in etherscan</h5>
+            <nav>
+              <button class="btn btn-primary btn-block mb-3" (click)="eth.deployCrowdsale()">Create crowdsale</button>
+              <a href="{{ eth.etherscanURL }}/token/{{ eth.simpleToken.getAddress() }}" class="btn btn-outline-primary btn-block" target="_blank">See token</a>
+            </nav>
+          </div>
+          <div class="overlay" *ngIf="state.creatingCrowdsale.isActive">
+            <small>Step {{ currentState }} of {{ stateLength }}</small>
+            <h4 class="mb-4">Deploying your crowdsale</h4>
+            <app-spinner></app-spinner>
+          </div>
+          <div class="overlay" *ngIf="state.transferingToken.isActive">
+            <small>Step {{ currentState }} of {{ stateLength }}</small>
+            <h4 class="mb-4">Linking your token to your crowdsale</h4>
+            <app-spinner></app-spinner>
           </div>
         </div>
+
         <div class="modal-body" *ngIf="onAfterTokenDeployment">
           <h4 class="mb-4">All set!</h4>
           <a [routerLink]="['/crowdsale', eth.simpleCrowdsale.getAddress(), 'show']" class="btn btn-primary btn-block mb-3">Sell my new token</a>

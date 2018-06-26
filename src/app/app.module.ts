@@ -22,7 +22,8 @@ import { CrowdsaleShowModule } from './crowdsale-show/crowdsale-show.module';
 import { CrowdsaleIndexModule } from './crowdsale-index/crowdsale-index.module';
 import { CrowdsaleByAddressModule } from './crowdsale-by-address/crowdsale-by-address.module';
 import { CrowdsaleIndexPublicModule } from './crowdsale-index-public/crowdsale-index-public.module';
-import { CrowdsaleShowPublicModule } from './crowdsale-show-public/crowdsale-show-public.module'
+import { CrowdsaleShowPublicModule } from './crowdsale-show-public/crowdsale-show-public.module';
+import { DeploymentStateService } from './@service/deployment-state.service'
 
 
 @NgModule({
@@ -45,7 +46,7 @@ import { CrowdsaleShowPublicModule } from './crowdsale-show-public/crowdsale-sho
     CrowdsaleIndexPublicModule,
     CrowdsaleShowPublicModule
   ],
-  providers: [WalletService, UnlockRouteGuard, CookieService, AcceptTermsRouteGuard, SharedService, EthereumService],
+  providers: [WalletService, UnlockRouteGuard, CookieService, AcceptTermsRouteGuard, SharedService, EthereumService, DeploymentStateService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
