@@ -42,6 +42,14 @@ export class WalletService {
 
   }
 
+  setBeneficiaryAddress(address: string){
+    if (!Web3.utils.isAddress(address)) return false
+
+    this.wallet.setBeneficiary(address)
+
+    return this
+  }
+
   async getAccountBalance(address: string = this.getAddress()){
     let balance = await this.getInstance().getBalance()
     this.balance = balance

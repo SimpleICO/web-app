@@ -54,6 +54,15 @@
           [(ngModel)]="token.price">
       </div>
     </fieldset>
+    <fieldset class="form-group dark-theme">
+      <label for="">Beneficiary address</label>
+      <input
+        required
+        type="text"
+        class="form-control"
+        placeholder="eg. 0x123..."
+        [(ngModel)]="beneficiary.address">
+    </fieldset>
     <p *ngIf="isInvalid" class="on-error">{{ errorMessage }}</p>
     <button class="btn btn-primary btn-lg btn-block" (click)="onCreateCrowdsale()">Create Token</button>
   </div>

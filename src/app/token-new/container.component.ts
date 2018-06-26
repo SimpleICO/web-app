@@ -2,6 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { EthereumService } from '@service/ethereum.service';
 import { WalletService } from '@service/wallet.service';
 
+declare let require: any
+
+const Web3 = require('web3')
+
 @Component({
   selector: 'app-container',
   templateUrl: './container.component.html',
@@ -17,12 +21,20 @@ export class ContainerComponent implements OnInit {
     price: '0.0001',
   }
 
+  @Input() beneficiary: any = {
+    address: '',
+  }
+
   isInvalid: boolean = false
   errorMessage: string
 
   constructor(
     public eth: EthereumService,
-    public wallet: WalletService) {}
+    public wallet: WalletService) {
+
+    this.beneficiary.address = wallet.getAddress()
+
+  }
 
   ngOnInit() {}
 
@@ -57,10 +69,18 @@ export class ContainerComponent implements OnInit {
       return false
     }
 
+    if (!Web3.utils.isAddress(this.beneficiary.address)) {
+      this.isInvalid = true
+      this.errorMessage = 'Beneficiary address is invalid'
+
+      return false
+    }
+
     this.isInvalid = false
     this.errorMessage = ''
 
     this.eth.createToken(this.token.name, this.token.symbol, this.token.supply, this.token.price)
+    this.wallet.setBeneficiaryAddress(this.beneficiary.address)
   }
 }
 

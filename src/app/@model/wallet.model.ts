@@ -20,10 +20,18 @@ export class Wallet {
 
   web3: any
 
+  beneficiary: string
+
   constructor(){}
 
   getBalance(){
     return this.web3.eth.getBalance(this.address)
+  }
+
+  setBeneficiary(address: string){
+    this.beneficiary = address
+
+    return this
   }
 
   setJsonRpcProvider(){

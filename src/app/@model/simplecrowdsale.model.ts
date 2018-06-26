@@ -118,10 +118,12 @@ export class SimpleCrowdsale extends Contract {
     console.log(tokenPrice)
     let price = ethers.utils.parseEther(tokenPrice.toString())
 
+    let beneficiary = this.wallet.beneficiary || this.wallet.address
+
     try {
       return this.instance.deploy({
         data: SimpleCrowdsaleInterface.bytecode,
-        arguments: [price, RATE, this.wallet.address, tokenAddress]
+        arguments: [price, RATE, beneficiary, tokenAddress]
       })
     } catch (error) {
       console.log(error)
