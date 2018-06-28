@@ -1,0 +1,60 @@
+<section class="section">
+  <div class="container">
+    <h4 class="text-white mb-4">Create your own ERC20 token and crowdsale</h4>
+    <fieldset class="form-group dark-theme">
+      <label for="">Token name</label>
+      <input
+        required
+        autofocus="autofocus"
+        type="text"
+        class="form-control"
+        placeholder="eg. SimpleICO Coin">
+    </fieldset>
+    <fieldset class="form-group dark-theme">
+      <label for="">Token symbol</label>
+      <input
+        required
+        type="text"
+        class="form-control"
+        placeholder="eg. SIC">
+    </fieldset>
+    <fieldset class="form-group dark-theme">
+      <label for="">Token supply</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <!-- <button class="btn btn-outline-light">{{ token.symbol || 'TOKEN' }}</button> -->
+        </div>
+        <input
+          required
+          disabled="disabled"
+          type="number"
+          class="form-control disabled"
+          placeholder="eg. 100">
+      </div>
+    </fieldset>
+    <fieldset class="form-group dark-theme">
+      <label for="">Token price</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <button class="btn btn-outline-light">ETH</button>
+        </div>
+        <input
+          required
+          disabled="disabled"
+          type="number"
+          class="form-control disabled"
+          placeholder="eg. 1.00">
+      </div>
+    </fieldset>
+    <fieldset class="form-group dark-theme">
+      <label for="">Beneficiary address</label>
+      <input
+        required
+        type="text"
+        class="form-control"
+        placeholder="eg. 0x123...">
+    </fieldset>
+    <!-- <p *ngIf="isInvalid" class="on-error">{{ errorMessage }}</p> -->
+    <button class="btn btn-primary btn-lg btn-block" (click)="onCreateCrowdsale()">Create Token</button>
+  </div>
+</section>

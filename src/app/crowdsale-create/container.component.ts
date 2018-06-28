@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { CrowdsaleDeploymentFactory } from '@factory/crowdsale-deployment.factory';
+import { CrowdsaleDeployment } from '@factory/crowdsale-deployment';
 
 @Component({
   selector: 'app-container',
@@ -7,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContainerComponent implements OnInit {
 
-  constructor() { }
+  crowdsaleType: string
+
+  crowdsale: CrowdsaleDeployment
+
+  constructor(
+    private route: ActivatedRoute,
+    private crowdsaleFactory: CrowdsaleDeploymentFactory) {
+  }
 
   ngOnInit() {
+    this.route.params.subscribe(({ crowdsaleType }) => {
+      this.crowdsaleType = crowdsaleType
+
+      this.crowdsale = this.crowdsaleFactory.init(crowdsaleType)
+
+      console.log(this.crowdsale, this.crowdsale.type)
+    })
   }
 
 }

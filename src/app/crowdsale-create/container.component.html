@@ -2,9 +2,7 @@
 <app-mobile-menu></app-mobile-menu> -->
 
 <main id="crowdsale-create">
-  <section class="section">
-    <div class="container">
-      <h5 class="title">Create crowdsale</h5>
-    </div>
-  </section>
+
+  <app-fixed-supply *ngIf="crowdsale.type == crowdsaleType"></app-fixed-supply>
+
 </main>

@@ -50,7 +50,15 @@ import { DeploymentStateService } from './@service/deployment-state.service';
     CrowdsaleIndexPublicModule,
     CrowdsaleShowPublicModule
   ],
-  providers: [WalletService, UnlockRouteGuard, CookieService, AcceptTermsRouteGuard, SharedService, EthereumService, DeploymentStateService],
+  providers: [
+    WalletService,
+    UnlockRouteGuard,
+    CookieService,
+    AcceptTermsRouteGuard,
+    SharedService,
+    EthereumService,
+    DeploymentStateService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
