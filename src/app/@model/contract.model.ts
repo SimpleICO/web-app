@@ -4,7 +4,7 @@ declare var require: any
 
 const contract = require('truffle-contract')
 
-export class Contract {
+export abstract class Contract {
 
   instance: any
 
@@ -18,6 +18,6 @@ export class Contract {
     this.wallet = wallet
   }
 
-  connect(){}
+  abstract connect()
 
 }

@@ -12,8 +12,6 @@ export class ContainerComponent implements OnInit {
 
   crowdsaleType: string
 
-  crowdsale: CrowdsaleDeployment
-
   constructor(
     private route: ActivatedRoute,
     private crowdsaleFactory: CrowdsaleDeploymentFactory) {
@@ -23,9 +21,9 @@ export class ContainerComponent implements OnInit {
     this.route.params.subscribe(({ crowdsaleType }) => {
       this.crowdsaleType = crowdsaleType
 
-      this.crowdsale = this.crowdsaleFactory.init(crowdsaleType)
+      let deployer = this.crowdsaleFactory.init(crowdsaleType)
 
-      console.log(this.crowdsale, this.crowdsale.type)
+      console.log(deployer, deployer.type)
     })
   }
 

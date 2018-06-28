@@ -54,7 +54,7 @@ export class EthereumService {
     }
   }
 
-  async getTxCost(gas, gasPrice){
+  async getTxCost(gas, gasPrice = this.defaultGasPrice){
     let { USD } = await this.convertCurrency('ETH', 'USD')
     let cost = gas * gasPrice
     let ETH = ethers.utils.formatEther(cost.toString())

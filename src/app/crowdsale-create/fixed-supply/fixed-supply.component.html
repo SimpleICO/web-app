@@ -8,7 +8,8 @@
         autofocus="autofocus"
         type="text"
         class="form-control"
-        placeholder="eg. SimpleICO Coin">
+        placeholder="eg. SimpleICO Coin"
+        [(ngModel)]="token.name">
     </fieldset>
     <fieldset class="form-group dark-theme">
       <label for="">Token symbol</label>
@@ -16,20 +17,22 @@
         required
         type="text"
         class="form-control"
-        placeholder="eg. SIC">
+        placeholder="eg. SIC"
+        [(ngModel)]="token.symbol">
     </fieldset>
     <fieldset class="form-group dark-theme">
       <label for="">Token supply</label>
       <div class="input-group">
         <div class="input-group-prepend">
-          <!-- <button class="btn btn-outline-light">{{ token.symbol || 'TOKEN' }}</button> -->
+          <button class="btn btn-outline-light">{{ token.symbol || 'TOKEN' }}</button>
         </div>
         <input
           required
           disabled="disabled"
           type="number"
           class="form-control disabled"
-          placeholder="eg. 100">
+          placeholder="eg. 100"
+          [(ngModel)]="token.supply">
       </div>
     </fieldset>
     <fieldset class="form-group dark-theme">
@@ -43,7 +46,8 @@
           disabled="disabled"
           type="number"
           class="form-control disabled"
-          placeholder="eg. 1.00">
+          placeholder="eg. 1.00"
+          [(ngModel)]="token.price">
       </div>
     </fieldset>
     <fieldset class="form-group dark-theme">
@@ -52,9 +56,11 @@
         required
         type="text"
         class="form-control"
-        placeholder="eg. 0x123...">
+        placeholder="eg. 0x123..."
+        [(ngModel)]="crowdsale.beneficiary">
+      <small class="text-white" (click)="setBeneficiary()">Use this wallet address</small>
     </fieldset>
-    <!-- <p *ngIf="isInvalid" class="on-error">{{ errorMessage }}</p> -->
+    <p *ngIf="isInvalid" class="on-error">{{ errorMessage }}</p>
     <button class="btn btn-primary btn-lg btn-block" (click)="onCreateCrowdsale()">Create Token</button>
   </div>
 </section>

@@ -1,7 +1,28 @@
-export class CrowdsaleDeployment {
+import { Wallet } from '@model/wallet.model';
+import { EthereumService } from '@service/ethereum.service';
+
+export abstract class CrowdsaleDeployment {
+
+  wallet: Wallet
+
+  eth: EthereumService
 
   type: string
 
-  constructor(){}
+  txCost: any
+
+  gas: number
+
+  gasIncrement: number = 1000
+
+  constructor(wallet: Wallet, eth: EthereumService){
+    this.wallet = wallet
+    this.eth = eth
+  }
+
+  abstract getToken()
+  abstract getCrowdsale()
+  abstract createToken()
+  abstract async estimateTokenDeploymentCost()
 
 }
