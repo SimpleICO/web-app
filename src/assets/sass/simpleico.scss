@@ -1,31 +1,31 @@
 @charset "UTF-8";
 
 
-@import "./node_modules/bootstrap/scss/functions";
-@import "./node_modules/bootstrap/scss/mixins";
-@import "./src/assets/sass/bootstrap-variables";
-@import "./node_modules/bootstrap/scss/reboot";
-@import "./node_modules/bootstrap/scss/print";
-@import "./node_modules/bootstrap/scss/type";
-@import "./node_modules/bootstrap/scss/images";
-@import "./node_modules/bootstrap/scss/bootstrap-grid";
-@import "./node_modules/bootstrap/scss/forms";
-@import "./node_modules/bootstrap/scss/input-group";
-@import "./node_modules/bootstrap/scss/buttons";
-@import "./node_modules/bootstrap/scss/breadcrumb";
-@import "./node_modules/bootstrap/scss/card";
-@import "./node_modules/bootstrap/scss/utilities";
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/mixins";
+@import "sass/bootstrap-variables";
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/print";
+@import "bootstrap/scss/type";
+@import "bootstrap/scss/images";
+@import "bootstrap/scss/bootstrap-grid";
+@import "bootstrap/scss/forms";
+@import "bootstrap/scss/input-group";
+@import "bootstrap/scss/buttons";
+@import "bootstrap/scss/breadcrumb";
+@import "bootstrap/scss/card";
+@import "bootstrap/scss/utilities";
 
 // EBM variables
-@import "./src/assets/sass/ebm-variables";
-@import "./node_modules/ebm/functions/ebm-functions";
-@import "./node_modules/ebm/helpers/ebm-helpers";
-@import "./src/assets/sass/ebm-fonts-setup";
-@import "./src/assets/sass/ebm-fonts";
-@import "./src/assets/sass/ebm-bootstrap-overrides";
-@import "./node_modules/ebm/control/ebm-text-responsive-control";
-@import "./node_modules/ebm/elements/ebm-icons";
-@import "./node_modules/ebm/control/ebm-container-control";
-@import "./src/assets/sass/ebm-overrides";
-@import "./src/assets/sass/ebm-global";
-@import "./node_modules/ebm/modules/ebm-header";
+@import "sass/ebm-variables";
+@import "ebm/functions/ebm-functions";
+@import "ebm/helpers/ebm-helpers";
+@import "sass/ebm-fonts-setup";
+@import "sass/ebm-fonts";
+@import "sass/ebm-bootstrap-overrides";
+@import "ebm/control/ebm-text-responsive-control";
+@import "ebm/elements/ebm-icons";
+@import "ebm/control/ebm-container-control";
+@import "sass/ebm-overrides";
+@import "sass/ebm-global";
+@import "ebm/modules/ebm-header";
