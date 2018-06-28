@@ -10,6 +10,8 @@ import { ContainerComponent as CrowdsaleShowPublicComponent } from './crowdsale-
 import { ContainerComponent as CrowdsaleIndexComponent } from './crowdsale-index/container.component';
 import { ContainerComponent as CrowdsaleIndexPublicComponent } from './crowdsale-index-public/container.component';
 import { ContainerComponent as CrowdsaleByAddressComponent } from './crowdsale-by-address/container.component';
+import { ContainerComponent as CrowdsaleCreateComponent } from './crowdsale-create/container.component';
+import { ContainerComponent as CrowdsaleDeployComponent } from './crowdsale-deploy/container.component';
 import { WalletService } from '@service/wallet.service';
 import { UnlockRouteGuard } from '@guard/unlock-route-guard'
 import { AcceptTermsRouteGuard } from '@guard/accept-terms-route-guard'
@@ -19,9 +21,6 @@ const routes: Routes = [
   { path: 'home',
     component: HomeComponent,
     canActivate: [AcceptTermsRouteGuard],
-    // resolve: {
-    //   contract: EthereumService
-    // }
   },
   { path: 'login',
     component: LoginComponent,
@@ -57,6 +56,14 @@ const routes: Routes = [
   { path: 'crowdsale/:address/address',
     component: CrowdsaleByAddressComponent,
     canActivate: [UnlockRouteGuard, AcceptTermsRouteGuard],
+  },
+  { path: 'crowdsale/:type/create',
+    component: CrowdsaleCreateComponent,
+    // canActivate: [UnlockRouteGuard, AcceptTermsRouteGuard],
+  },
+  { path: 'crowdsale/:type/deploy',
+    component: CrowdsaleDeployComponent,
+    // canActivate: [UnlockRouteGuard, AcceptTermsRouteGuard],
   },
 ]
 

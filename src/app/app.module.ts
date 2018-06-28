@@ -20,15 +20,17 @@ import { SharedService } from './@service/shared.service';
 import { EthereumService } from './@service/ethereum.service';
 import { CrowdsaleShowModule } from './crowdsale-show/crowdsale-show.module';
 import { CrowdsaleIndexModule } from './crowdsale-index/crowdsale-index.module';
+import { CrowdsaleCreateModule } from './crowdsale-create/crowdsale-create.module';
+import { CrowdsaleDeployModule } from './crowdsale-deploy/crowdsale-deploy.module';
 import { CrowdsaleByAddressModule } from './crowdsale-by-address/crowdsale-by-address.module';
 import { CrowdsaleIndexPublicModule } from './crowdsale-index-public/crowdsale-index-public.module';
 import { CrowdsaleShowPublicModule } from './crowdsale-show-public/crowdsale-show-public.module';
-import { DeploymentStateService } from './@service/deployment-state.service'
+import { DeploymentStateService } from './@service/deployment-state.service';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,6 +43,8 @@ import { DeploymentStateService } from './@service/deployment-state.service'
     HttpClientModule,
     CrowdsaleShowModule,
     CrowdsaleIndexModule,
+    CrowdsaleCreateModule,
+    CrowdsaleDeployModule,
     SharedModule,
     CrowdsaleByAddressModule,
     CrowdsaleIndexPublicModule,
