@@ -141,6 +141,12 @@ export abstract class CrowdsaleDeployment {
     this.simpleICO.connect()
   }
 
+  async getTxCost(){
+    let txCost = await this.eth.getTxCost(0)
+    this.txCost = txCost
+    console.log(txCost)
+  }
+
   sumTxCost(txCost){
     this.txCost.cost = this.txCost.cost.add(txCost.cost)
     this.txCost.ETH = ethers.utils.formatEther(this.txCost.cost.toString())
