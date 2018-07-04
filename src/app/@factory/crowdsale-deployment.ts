@@ -28,5 +28,6 @@ export abstract class CrowdsaleDeployment {
   abstract async estimateTokenTransferCost()
   abstract async estimateSimpleICOCost()
   abstract async deployToken()
+  abstract async deployCrowdsale()
 
 }

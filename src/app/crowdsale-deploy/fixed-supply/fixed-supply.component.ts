@@ -109,6 +109,16 @@ export class FixedSupplyComponent implements OnInit {
   async deployCrowdsale(){
     this.steps.deployToken.isCurrent = false
     this.steps.deployCrowdsale.isCurrent = true
+
+    try {
+      await this.deployer.deployCrowdsale()
+
+      this.steps.deployCrowdsale.isComplete = true
+    } catch (error) {
+      console.log(error)
+      this.steps.deployCrowdsale.hasError = true
+      this.steps.deployCrowdsale.errorMessage = `Your crowdsale wasn't deployed but you didn't loose ETH funds. Retry this deployment or go to your token page`
+    }
   }
 
   async estimateTransactionCosts(){

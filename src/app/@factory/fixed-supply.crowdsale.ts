@@ -92,6 +92,29 @@ export class FixedSupplyCrowdsale extends CrowdsaleDeployment {
     this.token.supply = tokenSupply
   }
 
+  async deployCrowdsale(){
+    this.crowdsale.txObject = await this.crowdsale.deploy(this.token.price, this.token.getAddress())
+
+    let nonce = await this.eth.getNonce(this.crowdsale)
+    console.log(`crowdsale nonce: ${nonce}`)
+
+    let txOptions = {
+      from: this.wallet.address,
+      gas: Web3.utils.toHex(this.gas),
+      gasLimit: Web3.utils.toHex(this.gas),
+      gasPrice: Web3.utils.toHex(this.eth.defaultGasPrice),
+      data: this.crowdsale.txObject.encodeABI(),
+      nonce: Web3.utils.toHex(nonce)
+    }
+
+    let signedTx = await this.crowdsale.web3.eth.accounts.signTransaction(txOptions, this.wallet.privateKey)
+    console.log(signedTx)
+    let receipt = await this.crowdsale.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
+    console.log(receipt)
+
+    this.crowdsale.setAddress(receipt.contractAddress)
+  }
+
   async estimateTokenDeploymentCost(){
 
     let txObject = await this.token.deploy()
