@@ -27,7 +27,7 @@ export class SimpleToken extends Token {
 
   bytecode = SimpleTokenInterface.bytecode
 
-  address: string
+  address: string = ''
 
   crowdsale: string
 

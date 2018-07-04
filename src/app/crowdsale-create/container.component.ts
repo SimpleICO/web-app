@@ -3,6 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { CrowdsaleDeploymentFactory } from '@factory/crowdsale-deployment.factory';
 import { CrowdsaleDeployment } from '@factory/crowdsale-deployment';
 
+import { FixedSupplyCrowdsale } from '@factory/fixed-supply.crowdsale';
+import { ExistingTokenCrowdsale } from '@factory/existing-token.crowdsale';
+
 @Component({
   selector: 'app-container',
   templateUrl: './container.component.html',
@@ -12,9 +15,13 @@ export class ContainerComponent implements OnInit {
 
   crowdsaleType: string
 
+  ExistingTokenCrowdsale: string = ExistingTokenCrowdsale._type
+  FixedSupplyCrowdsale: string = FixedSupplyCrowdsale._type
+
   constructor(
     private route: ActivatedRoute,
     private crowdsaleFactory: CrowdsaleDeploymentFactory) {
+
   }
 
   ngOnInit() {

@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { FixedSupplyCrowdsale } from '@factory/fixed-supply.crowdsale';
 import { WalletService } from '@service/wallet.service';
 import { CrowdsaleDeployment } from '@factory/crowdsale-deployment';
 import { EthereumService } from '@service/ethereum.service';
+
+import { FixedSupplyCrowdsale } from '@factory/fixed-supply.crowdsale';
+import { ExistingTokenCrowdsale } from '@factory/existing-token.crowdsale';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +22,7 @@ export class CrowdsaleDeploymentFactory {
     private eth: EthereumService) {
 
     this.deployment[FixedSupplyCrowdsale._type] = FixedSupplyCrowdsale
+    this.deployment[ExistingTokenCrowdsale._type] = ExistingTokenCrowdsale
 
   }
 

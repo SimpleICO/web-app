@@ -4,7 +4,6 @@ import { environment as env } from '@environment/environment';
 import { WalletService } from '@service/wallet.service';
 import { Subject } from 'rxjs';
 
-
 declare var require: any
 
 const ethers = require('ethers')

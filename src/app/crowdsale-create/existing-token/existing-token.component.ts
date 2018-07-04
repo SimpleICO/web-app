@@ -10,11 +10,11 @@ declare let require: any
 const Web3 = require('web3')
 
 @Component({
-  selector: 'app-fixed-supply',
-  templateUrl: './fixed-supply.component.html',
-  styleUrls: ['./fixed-supply.component.css']
+  selector: 'app-existing-token',
+  templateUrl: './existing-token.component.html',
+  styleUrls: ['./existing-token.component.css']
 })
-export class FixedSupplyComponent implements OnInit {
+export class ExistingTokenComponent implements OnInit {
 
   deployer: CrowdsaleDeployment
 
@@ -53,33 +53,15 @@ export class FixedSupplyComponent implements OnInit {
   onCreateCrowdsale(){
     console.log(this.token, this.crowdsale)
 
-    if (this.token.name.length <= 0) {
+    if (this.token.address.length <= 0) {
       this.isInvalid = true
-      this.errorMessage = 'No token name was specified'
+      this.errorMessage = 'No token address was specified'
       return false
     }
 
-    if (this.token.symbol.length <= 0) {
+    if (!Web3.utils.isAddress(this.token.address)) {
       this.isInvalid = true
-      this.errorMessage = 'No token symbol was specified'
-      return false
-    }
-
-    if (isNaN(Number(this.token.supply)) || this.token.supply <= 0) {
-      this.isInvalid = true
-      this.errorMessage = 'Supply value must be an integer greater than 0'
-      return false
-    }
-
-    if (String(this.token.supply).length > 18) {
-      this.isInvalid = true
-      this.errorMessage = 'Supply value must be an integer of maximum Ne18'
-      return false
-    }
-
-    if (isNaN(Number(this.token.price)) || this.token.price <= 0) {
-      this.isInvalid = true
-      this.errorMessage = 'Price value must be in ETH and be greater than 0'
+      this.errorMessage = 'Invalid token address'
       return false
     }
 
@@ -92,6 +74,8 @@ export class FixedSupplyComponent implements OnInit {
 
     this.isInvalid = false
     this.errorMessage = ''
+
+    this.token.setAddress(this.token.address)
 
     return this.router.navigate([`/crowdsale/${this.deployer.type}/deploy`]);
   }

@@ -3,6 +3,8 @@
 
 <main id="crowdsale-create">
 
-  <app-fixed-supply *ngIf="crowdsaleFactory.deployer.type == crowdsaleType"></app-fixed-supply>
+  <app-fixed-supply *ngIf="FixedSupplyCrowdsale == crowdsaleType"></app-fixed-supply>
+
+  <app-existing-token *ngIf="ExistingTokenCrowdsale == crowdsaleType"></app-existing-token>
 
 </main>
