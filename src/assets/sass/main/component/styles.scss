@@ -3,7 +3,6 @@
 @import "sass/simpleico.scss";
 
 @mixin main {
-  margin-bottom: -16px;
   min-height: 100vh;
 }
 
@@ -199,22 +198,28 @@
       }
     }
   }
-  .spinner-wrapper {
-    @include flex-column-center;
-    min-height: 240px;
-    .svg {
-      animation: spin 2s infinite linear;
-      height: 100%;
-      width: 100%;
-      circle {
-        transition: stroke-dashoffset 1s linear;
-        stroke-dashoffset: 0;
-        stroke-width: 5px;
-        stroke: $gray-100;
-      }
-      .bar {
-        stroke: $purple;
-      }
+}
+
+.spin {
+  animation: spin 2s infinite linear;
+  display: inline-block;
+}
+
+.spinner-wrapper {
+  @include flex-column-center;
+  min-height: 240px;
+  .svg {
+    animation: spin 2s infinite linear;
+    height: 100%;
+    width: 100%;
+    circle {
+      transition: stroke-dashoffset 1s linear;
+      stroke-dashoffset: 0;
+      stroke-width: 5px;
+      stroke: $purple;
+    }
+    .bar {
+      stroke: white;
     }
   }
 }

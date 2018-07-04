@@ -11,7 +11,7 @@ export abstract class CrowdsaleDeployment {
 
   txCost: any
 
-  gas: number
+  gas: number = 0
 
   gasIncrement: number = 1000
 
@@ -27,5 +27,6 @@ export abstract class CrowdsaleDeployment {
   abstract async estimateCrowdsaleDeploymentCost()
   abstract async estimateTokenTransferCost()
   abstract async estimateSimpleICOCost()
+  abstract async deployToken()
 
 }

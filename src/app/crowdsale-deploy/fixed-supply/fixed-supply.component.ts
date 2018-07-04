@@ -1,10 +1,12 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CrowdsaleDeploymentFactory } from '@factory/crowdsale-deployment.factory';
 import { CrowdsaleDeployment } from '@factory/crowdsale-deployment';
 import { SimpleToken } from '@token/simpletoken';
 import { SimpleCrowdsale } from '@crowdsale/simplecrowdsale';
 import { InsufficientFundsError } from '@error/insufficient-funds.error';
 import { WalletService } from '@service/wallet.service';
+import { EthereumService } from '@service/ethereum.service';
+import { SharedService } from '@service/shared.service';
 
 declare var require: any
 const ethers = require('ethers')
@@ -23,6 +25,10 @@ export class FixedSupplyComponent implements OnInit {
 
   crowdsale: SimpleCrowdsale
 
+  stepCount: number = 0
+
+  supply: string
+
   steps: any = {
     estimateTxCosts: {
       step: 1,
@@ -30,13 +36,28 @@ export class FixedSupplyComponent implements OnInit {
       isComplete: false,
       hasError: false,
       estimates: []
+    },
+    deployToken: {
+      step: 2,
+      isCurrent: false,
+      isComplete: false,
+      hasError: false,
+      errorMessage: '',
+    },
+    deployCrowdsale: {
+      step: 3,
+      isCurrent: false,
+      isComplete: false,
+      hasError: false,
+      errorMessage: '',
     }
   }
 
   constructor(
     private crowdsaleFactory: CrowdsaleDeploymentFactory,
     private wallet: WalletService,
-    private zone: NgZone) {
+    public eth: EthereumService,
+    public shared: SharedService) {
 
     this.deployer = crowdsaleFactory.deployer
   }
@@ -46,11 +67,18 @@ export class FixedSupplyComponent implements OnInit {
     this.token = this.deployer.getToken()
     this.crowdsale = this.deployer.getCrowdsale()
 
+    this.stepCount = Object.keys(this.steps).length
+
     this.init()
 
   }
 
   async init(){
+    this.steps.estimateTxCosts.isCurrent = true
+    this.steps.estimateTxCosts.isComplete = false
+    this.steps.estimateTxCosts.hasError = false
+    this.steps.estimateTxCosts.estimates = []
+
     try {
       await this.estimateTransactionCosts()
     } catch (error) {
@@ -58,6 +86,29 @@ export class FixedSupplyComponent implements OnInit {
         this.steps.estimateTxCosts.hasError = true
       }
     }
+  }
+
+  async deployToken(){
+    this.supply = this.token.supply.toString()
+
+    this.steps.estimateTxCosts.isCurrent = false
+    this.steps.deployToken.isCurrent = true
+
+    try {
+      await this.deployer.deployToken()
+      this.supply = ethers.utils.bigNumberify(this.token.supply).div(1e18.toString()).toString()
+
+      this.steps.deployToken.isComplete = true
+    } catch (error) {
+      console.log(error)
+      this.steps.deployToken.hasError = true
+      this.steps.deployToken.errorMessage = 'Something bad happened'
+    }
+  }
+
+  async deployCrowdsale(){
+    this.steps.deployToken.isCurrent = false
+    this.steps.deployCrowdsale.isCurrent = true
   }
 
   async estimateTransactionCosts(){
@@ -99,7 +150,6 @@ export class FixedSupplyComponent implements OnInit {
     }
 
     this.steps.estimateTxCosts.isComplete = true
-    this.steps.estimateTxCosts.isCurrent = false
   }
 
 }

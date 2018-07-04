@@ -8,12 +8,14 @@
       </div>
       <div class="col-7 header-right">
         <nav>
-          <button class="btn btn-outline-light">Cancel</button>
+          <button class="btn btn-outline-light" (click)="cancel()">Cancel</button>
         </nav>
       </div>
     </div>
   </div>
 </header>
+
+<app-qr-code-modal [model]="wallet"></app-qr-code-modal>
 
 <main id="crowdsale-deploy">
 

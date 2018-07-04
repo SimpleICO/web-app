@@ -11,6 +11,7 @@ declare var require: any
 const DUMMY_ADDRESS = '0x7af6C0ce41aFaf675e5430193066a8d57701A9AC'
 const CONTRACT_DUMMY_ADDRESS = '0x523a34E0A5FABDFaa39B3889D80b19Fe77F73aA6'
 const ethers = require('ethers')
+const Web3 = require('web3')
 
 export class FixedSupplyCrowdsale extends CrowdsaleDeployment {
 
@@ -64,6 +65,33 @@ export class FixedSupplyCrowdsale extends CrowdsaleDeployment {
     this.txCost.USD = (Number(this.txCost.USD) + Number(txCost.USD)).toFixed(2).toString()
   }
 
+  async deployToken(){
+
+    let nonce = await this.eth.getNonce(this.token)
+    console.log(`token nonce: ${nonce}`)
+
+    let txOptions = {
+      from: this.wallet.address,
+      gas: Web3.utils.toHex(this.gas),
+      gasLimit: Web3.utils.toHex(this.gas),
+      gasPrice: Web3.utils.toHex(this.eth.defaultGasPrice),
+      data: this.token.txObject.encodeABI(),
+      nonce: Web3.utils.toHex(nonce)
+    }
+
+    console.log(txOptions)
+
+    let signedTx = await this.token.web3.eth.accounts.signTransaction(txOptions, this.wallet.privateKey)
+    console.log(signedTx)
+    let receipt = await this.token.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
+    console.log(receipt)
+
+    this.token.setAddress(receipt.contractAddress)
+
+    let tokenSupply = await this.token.instance.methods.totalSupply().call()
+    this.token.supply = tokenSupply
+  }
+
   async estimateTokenDeploymentCost(){
 
     let txObject = await this.token.deploy()
@@ -71,7 +99,7 @@ export class FixedSupplyCrowdsale extends CrowdsaleDeployment {
     console.log(txObject)
 
     let gas = await this.token.txObject.estimateGas()
-    this.gas = gas + this.gasIncrement
+    this.gas += gas + this.gasIncrement
     console.log(gas)
 
     let txCost = await this.eth.getTxCost(gas)
@@ -88,7 +116,7 @@ export class FixedSupplyCrowdsale extends CrowdsaleDeployment {
     console.log(txObject)
 
     let gas = await this.crowdsale.txObject.estimateGas()
-    this.gas = gas + this.gasIncrement
+    this.gas += gas + this.gasIncrement
     console.log(gas)
 
     let txCost = await this.eth.getTxCost(gas)
@@ -107,7 +135,7 @@ export class FixedSupplyCrowdsale extends CrowdsaleDeployment {
     console.log(txObject)
 
     let gas = await this.crowdsale.txObject.estimateGas()
-    this.gas = gas + this.gasIncrement
+    this.gas += gas + this.gasIncrement
     console.log(gas)
 
     let txCost = await this.eth.getTxCost(gas)
@@ -129,7 +157,7 @@ export class FixedSupplyCrowdsale extends CrowdsaleDeployment {
     console.log(txObject)
 
     let gas = await this.simpleICO.txObject.estimateGas()
-    this.gas = gas + this.gasIncrement
+    this.gas += gas + this.gasIncrement
     console.log(gas)
 
     let txCost = await this.eth.getTxCost(gas)

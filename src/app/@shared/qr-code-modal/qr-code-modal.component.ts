@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { SharedService } from '@service/shared.service';
-import { SimpleCrowdsale } from '@model/simplecrowdsale.model';
 
 declare var require: any
 declare var window: any
@@ -26,7 +25,7 @@ export class QrCodeModalComponent implements OnInit {
 
   onQrCode: boolean = false
 
-  @Input() crowdsale: SimpleCrowdsale
+  @Input() model: any
 
   constructor(
     public shared: SharedService) {
@@ -38,18 +37,18 @@ export class QrCodeModalComponent implements OnInit {
 
       setTimeout(() => {
         let qr = qrcode(0, 'H')
-        qr.addData(this.crowdsale.getAddress())
+        qr.addData(this.model.getAddress())
         qr.make()
         this.QR.nativeElement.innerHTML = qr.createImgTag(6, 2)
 
         let self = this
 
-        new clipboard(`.copy-crowdsale-address`, {
+        new clipboard(`.copy-address`, {
           text: function(trigger) {
 
             self.shared.updateCopyTrigger(trigger)
 
-            return self.crowdsale.getAddress()
+            return self.model.getAddress()
           }
         })
       }, 100)

@@ -4,6 +4,7 @@
   background-color: $purple;
 
   .step {
+    @extend .section;
     color: white;
   }
 
@@ -18,6 +19,10 @@
     margin-bottom: get-spacer(3);
     p {
       margin: 0;
+      &:last-child {
+        @include bold;
+        font-size: $font-size-sm;
+      }
     }
   }
 

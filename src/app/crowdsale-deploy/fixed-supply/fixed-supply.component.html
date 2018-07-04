@@ -1,21 +1,79 @@
-<section class="step" id="step-1">
+<section class="step" id="step-1" *ngIf="steps.estimateTxCosts.isCurrent">
   <div class="container">
     <header class="step-header">
-      <h5>Step 1 of N</h5>
+      <h5>Step {{ steps.estimateTxCosts.step }} of {{ stepCount }}</h5>
     </header>
 
     <h4>Calculating transaction costs</h4>
     <article class="estimate" *ngFor="let estimate of steps.estimateTxCosts.estimates">
-      <p>{{ estimate.text }}</p>
       <p>ETH {{ estimate.txCost }}</p>
+      <p>{{ estimate.text }}</p>
     </article>
 
     <div *ngIf="steps.estimateTxCosts.hasError">
-      <p class="on-error">Insufficient funds to execute transaction</p>
+      <p class="on-error">Insufficient funds to execute transaction. Send ETH to your wallet address and retry.</p>
+      <button class="btn btn-primary btn-block mb-3" (click)="shared.displayCrowdsaleShowModal()">See wallet address</button>
+      <button class="btn btn-outline-primary btn-block" (click)="init()">Retry</button>
     </div>
 
     <div *ngIf="steps.estimateTxCosts.isComplete">
-      <button class="btn btn-primary btn-block">Next</button>
+      <button class="btn btn-primary btn-block" (click)="deployToken()">Next</button>
     </div>
+  </div>
+</section>
+
+<section class="step" id="step-2" *ngIf="steps.deployToken.isCurrent">
+  <div class="container">
+    <header class="step-header">
+      <h5>Step {{ steps.deployToken.step }} of {{ stepCount }}</h5>
+    </header>
+
+    <h4><i class="icon-loading2 spin" *ngIf="!steps.deployToken.isComplete"></i> Deploying your ERC20 token</h4>
+    <article class="estimate">
+      <p>{{ token.name }}</p>
+      <p>Name</p>
+    </article>
+    <article class="estimate">
+      <p>{{ token.symbol }}</p>
+      <p>Symbol</p>
+    </article>
+    <article class="estimate">
+      <p>{{ token.price }}</p>
+      <p>Price</p>
+    </article>
+    <article class="estimate">
+      <p>{{ supply }}</p>
+      <p>Supply</p>
+    </article>
+
+    <div *ngIf="steps.deployToken.hasError">
+      <p class="on-error">{{ steps.deployToken.errorMessage }}</p>
+      <button class="btn btn-outline-primary btn-block" (click)="deployToken()">Retry</button>
+    </div>
+
+    <div *ngIf="steps.deployToken.isComplete">
+      <button class="btn btn-primary btn-block" (click)="deployCrowdsale()">Next</button>
+      <a href="{{ eth.etherscanURL }}/token/{{ token.address }}" target="_blank" class="btn btn-outline-primary btn-block">See on etherscan</a>
+    </div>
+
+  </div>
+</section>
+
+<section class="step" id="step-3" *ngIf="steps.deployCrowdsale.isCurrent">
+  <div class="container">
+    <header class="step-header">
+      <h5>Step {{ steps.deployCrowdsale.step }} of {{ stepCount }}</h5>
+    </header>
+
+    <h4><i class="icon-loading2 spin" *ngIf="!steps.deployCrowdsale.isComplete"></i> Deploying your capped crowdsale</h4>
+    <div *ngIf="steps.deployCrowdsale.hasError">
+      <p class="on-error">{{ steps.deployCrowdsale.errorMessage }}</p>
+    </div>
+
+    <div *ngIf="steps.deployCrowdsale.isComplete">
+      <button class="btn btn-primary btn-block">Next</button>
+      <a href="{{ eth.etherscanURL }}/address/{{ crowdsale.address }}" class="btn btn-primary btn-block">See on etherscan</a>
+    </div>
+
   </div>
 </section>
