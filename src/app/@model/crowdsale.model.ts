@@ -4,7 +4,7 @@ declare var require: any
 
 const contract = require('truffle-contract')
 
-export abstract class Contract {
+export abstract class Crowdsale {
 
   instance: any
 
@@ -18,15 +18,7 @@ export abstract class Contract {
 
   txObject: any
 
-  name: string
-
-  symbol: string
-
-  decimals: number
-
-  supply: any
-
-  price: any
+  beneficiary: string
 
   constructor(wallet: Wallet){
     this.wallet = wallet
@@ -35,5 +27,8 @@ export abstract class Contract {
   abstract connect()
   abstract getAddress()
   abstract setAddress(addres: string)
+  abstract setBeneficiary(address: string)
+  abstract async getBeneficiary()
+  abstract async deploy(tokenPrice: number, tokenAddress: string)
 
 }

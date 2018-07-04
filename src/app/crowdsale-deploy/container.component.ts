@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CrowdsaleDeploymentFactory } from '@factory/crowdsale-deployment.factory';
 import { WalletService } from '@service/wallet.service';
-import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-container',
@@ -12,6 +11,8 @@ import { Router } from "@angular/router";
 export class ContainerComponent implements OnInit {
 
   crowdsaleType: string
+
+  withExistingToken: boolean = false
 
   constructor(
     private route: ActivatedRoute,

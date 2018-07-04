@@ -1,4 +1,4 @@
-import { Contract } from '@model/contract.model';
+import { Token } from '@model/token.model';
 import { Wallet } from '@model/wallet.model';
 
 declare var require: any
@@ -7,7 +7,7 @@ const ethers = require('ethers')
 
 const SimpleTokenInterface = require('@abi/simpletoken.abi.json')
 
-export class SimpleToken extends Contract {
+export class SimpleToken extends Token {
 
   name: string = ''
 

@@ -1,4 +1,4 @@
-import { Contract } from '@model/contract.model';
+import { Crowdsale } from '@model/crowdsale.model';
 import { Wallet } from '@model/wallet.model';
 import { SimpleToken } from '@token/simpletoken';
 import { environment as env } from '@environment/environment';
@@ -10,7 +10,7 @@ const RATE = ethers.utils.bigNumberify(1)
 const SimpleCrowdsaleInterface = require('@abi/simplecrowdsale.abi.json')
 const Web3 = require('web3')
 
-export class SimpleCrowdsale extends Contract {
+export class SimpleCrowdsale extends Crowdsale {
 
   instance: any
 

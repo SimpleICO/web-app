@@ -4,7 +4,7 @@ declare var require: any
 
 const contract = require('truffle-contract')
 
-export abstract class Contract {
+export abstract class Token {
 
   instance: any
 
@@ -35,5 +35,6 @@ export abstract class Contract {
   abstract connect()
   abstract getAddress()
   abstract setAddress(addres: string)
+  abstract async deploy()
 
 }

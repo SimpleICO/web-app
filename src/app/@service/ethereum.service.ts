@@ -77,7 +77,7 @@ export class EthereumService {
       .toPromise()
   }
 
-  async getNonce(contract: Contract){
+  async getNonce(contract: any){
     return await contract.web3.eth.getTransactionCount(this.wallet.getAddress(), 'pending')
   }
 }

@@ -4,6 +4,8 @@ import { CrowdsaleDeployment } from '@factory/crowdsale-deployment';
 import { SimpleToken } from '@token/simpletoken';
 import { SimpleCrowdsale } from '@crowdsale/simplecrowdsale';
 import { Router } from "@angular/router";
+import { Crowdsale } from '@model/crowdsale.model';
+import { Token } from '@model/token.model';
 
 declare let require: any
 
@@ -18,9 +20,9 @@ export class FixedSupplyComponent implements OnInit {
 
   deployer: CrowdsaleDeployment
 
-  @Input() token: SimpleToken
+  @Input() token: Token
 
-  @Input() crowdsale: SimpleCrowdsale
+  @Input() crowdsale: Crowdsale
 
   isInvalid: boolean = false
   errorMessage: string
@@ -39,6 +41,7 @@ export class FixedSupplyComponent implements OnInit {
     this.deployer
       .createToken()
       .createCrowdsale()
+      .createSimpleICO()
 
     this.token = this.deployer.getToken()
     this.crowdsale = this.deployer.getCrowdsale()

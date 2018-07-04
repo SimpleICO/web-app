@@ -4,11 +4,14 @@ import { CrowdsaleDeployment } from '@factory/crowdsale-deployment';
 import { SimpleToken } from '@token/simpletoken';
 import { SimpleCrowdsale } from '@crowdsale/simplecrowdsale';
 import { SimpleICO } from '@model/simpleico.model';
+import { Contract } from '@model/contract.model';
 import { InsufficientFundsError } from '@error/insufficient-funds.error';
 import { WalletService } from '@service/wallet.service';
 import { EthereumService } from '@service/ethereum.service';
 import { SharedService } from '@service/shared.service';
 import { Router } from "@angular/router";
+import { Crowdsale } from '@model/crowdsale.model';
+import { Token } from '@model/token.model';
 
 declare var require: any
 const ethers = require('ethers')
@@ -23,9 +26,9 @@ export class FixedSupplyComponent implements OnInit {
 
   deployer: CrowdsaleDeployment
 
-  token: SimpleToken
+  token: Token
 
-  crowdsale: SimpleCrowdsale
+  crowdsale: Crowdsale
 
   stepCount: number = 0
 
@@ -73,14 +76,12 @@ export class FixedSupplyComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.token = this.deployer.getToken()
     this.crowdsale = this.deployer.getCrowdsale()
 
     this.stepCount = Object.keys(this.steps).length
 
     this.init()
-
   }
 
   finish(){
@@ -200,11 +201,4 @@ export class FixedSupplyComponent implements OnInit {
   }
 
 }
-
-
-
-
-
-
-
 
