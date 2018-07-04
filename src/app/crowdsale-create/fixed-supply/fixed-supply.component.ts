@@ -3,6 +3,7 @@ import { CrowdsaleDeploymentFactory } from '@factory/crowdsale-deployment.factor
 import { CrowdsaleDeployment } from '@factory/crowdsale-deployment';
 import { SimpleToken } from '@token/simpletoken';
 import { SimpleCrowdsale } from '@crowdsale/simplecrowdsale';
+import { Router } from "@angular/router";
 
 declare let require: any
 
@@ -25,7 +26,8 @@ export class FixedSupplyComponent implements OnInit {
   errorMessage: string
 
   constructor(
-    private crowdsaleFactory: CrowdsaleDeploymentFactory) {
+    private crowdsaleFactory: CrowdsaleDeploymentFactory,
+    private router: Router) {
 
     this.deployer = crowdsaleFactory.deployer
 
@@ -90,11 +92,6 @@ export class FixedSupplyComponent implements OnInit {
     this.isInvalid = false
     this.errorMessage = ''
 
-    this.estimateTransactionCosts()
+    return this.router.navigate([`/crowdsale/${this.deployer.type}/deploy`]);
   }
-
-  async estimateTransactionCosts(){
-    await this.deployer.estimateTokenDeploymentCost()
-  }
-
 }

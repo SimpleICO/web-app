@@ -36,7 +36,7 @@ export class ContainerComponent implements OnInit {
     })
 
     wallet.onUnlockSuccess.subscribe(data => {
-      return this.router.navigate(['/token/new'])
+      return this.router.navigate(['/crowdsale/fixed-supply/create'])
     })
   }
 

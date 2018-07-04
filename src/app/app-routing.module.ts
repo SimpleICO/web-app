@@ -63,7 +63,7 @@ const routes: Routes = [
   },
   { path: 'crowdsale/:crowdsaleType/deploy',
     component: CrowdsaleDeployComponent,
-    // canActivate: [UnlockRouteGuard, AcceptTermsRouteGuard],
+    canActivate: [UnlockRouteGuard, AcceptTermsRouteGuard],
   },
 ]
 

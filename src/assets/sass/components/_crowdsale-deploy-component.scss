@@ -3,5 +3,22 @@
   @include main;
   background-color: $purple;
 
-  
+  .step {
+    color: white;
+  }
+
+  .step-header {
+    margin-bottom: get-spacer(4);
+    h5 {
+      color: white;
+    }
+  }
+
+  .estimate {
+    margin-bottom: get-spacer(3);
+    p {
+      margin: 0;
+    }
+  }
+
 }

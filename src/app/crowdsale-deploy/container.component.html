@@ -1,10 +1,23 @@
-<!-- <app-header></app-header>
-<app-mobile-menu></app-mobile-menu> -->
-
-<main id="crowdsale-create">
-  <section class="section">
-    <div class="container">
-      <h5 class="title">Deploy Crowdsale</h5>
+<header class="header auth-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-5 header-left">
+        <span class="logo">
+          <img src="assets/img/logo-simpleico.svg" alt="SimpleICO">
+        </span>
+      </div>
+      <div class="col-7 header-right">
+        <nav>
+          <button class="btn btn-outline-light">Cancel</button>
+        </nav>
+      </div>
     </div>
-  </section>
+  </div>
+</header>
+
+<main id="crowdsale-deploy">
+
+  <app-fixed-supply *ngIf="crowdsaleFactory.deployer.type == crowdsaleType"></app-fixed-supply>
+
 </main>
+

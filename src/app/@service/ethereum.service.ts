@@ -59,7 +59,7 @@ export class EthereumService {
     let cost = gas * gasPrice
     let ETH = ethers.utils.formatEther(cost.toString())
     return {
-      cost: cost.toString(),
+      cost: ethers.utils.bigNumberify(cost.toString()),
       ETH: ETH,
       USD: ( ETH * USD ).toFixed(2)
     }

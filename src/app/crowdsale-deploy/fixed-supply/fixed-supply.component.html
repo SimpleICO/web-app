@@ -1,0 +1,21 @@
+<section class="step" id="step-1">
+  <div class="container">
+    <header class="step-header">
+      <h5>Step 1 of N</h5>
+    </header>
+
+    <h4>Calculating transaction costs</h4>
+    <article class="estimate" *ngFor="let estimate of steps.estimateTxCosts.estimates">
+      <p>{{ estimate.text }}</p>
+      <p>ETH {{ estimate.txCost }}</p>
+    </article>
+
+    <div *ngIf="steps.estimateTxCosts.hasError">
+      <p class="on-error">Insufficient funds to execute transaction</p>
+    </div>
+
+    <div *ngIf="steps.estimateTxCosts.isComplete">
+      <button class="btn btn-primary btn-block">Next</button>
+    </div>
+  </div>
+</section>
