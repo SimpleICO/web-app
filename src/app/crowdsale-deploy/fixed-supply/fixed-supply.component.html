@@ -38,7 +38,7 @@
       <p>Symbol</p>
     </article>
     <article class="estimate">
-      <p>{{ token.price }}</p>
+      <p>ETH {{ token.price }}</p>
       <p>Price</p>
     </article>
     <article class="estimate">
@@ -66,13 +66,40 @@
     </header>
 
     <h4><i class="icon-loading2 spin" *ngIf="!steps.deployCrowdsale.isComplete"></i> Deploying your capped crowdsale</h4>
+    <p>This step is linking your token address to a new capped crowdsale contract.</p>
+    <p>This will allow the crowdsale to exchange your token for ETH.</p>
+
     <div *ngIf="steps.deployCrowdsale.hasError">
       <p class="on-error">{{ steps.deployCrowdsale.errorMessage }}</p>
+      <button class="btn btn-outline-primary btn-block" (click)="deployCrowdsale()">Retry</button>
+      <button class="btn btn-outline-primary btn-block">Go to token page</button>
     </div>
 
     <div *ngIf="steps.deployCrowdsale.isComplete">
-      <button class="btn btn-primary btn-block">Next</button>
-      <a href="{{ eth.etherscanURL }}/address/{{ crowdsale.address }}" class="btn btn-primary btn-block">See on etherscan</a>
+      <button class="btn btn-primary btn-block" (click)="transferToken()">Next</button>
+      <a href="{{ eth.etherscanURL }}/address/{{ crowdsale.address }}" target="_blank" class="btn btn-outline-primary btn-block">See on etherscan</a>
+    </div>
+
+  </div>
+</section>
+
+<section class="step" id="step-3" *ngIf="steps.transferToken.isCurrent">
+  <div class="container">
+    <header class="step-header">
+      <h5>Step {{ steps.transferToken.step }} of {{ stepCount }}</h5>
+    </header>
+
+    <h4><i class="icon-loading2 spin" *ngIf="!steps.transferToken.isComplete"></i> Transferring the token supply to your crowdsale</h4>
+    <p>This step will allow your crowdsale contract to manage the token supply and exchange it for ETH that other addresses pay for it.</p>
+    <p>The collected ETH will be transferred to the crowdsale beneficiary you've specified.</p>
+
+    <div *ngIf="steps.transferToken.hasError">
+      <p class="on-error">{{ steps.transferToken.errorMessage }}</p>
+      <button class="btn btn-outline-primary btn-block" (click)="transferToken()">Retry</button>
+    </div>
+
+    <div *ngIf="steps.transferToken.isComplete">
+      <button class="btn btn-primary btn-block" (click)="finish()">Finish</button>
     </div>
 
   </div>

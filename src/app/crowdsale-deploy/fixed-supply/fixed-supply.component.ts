@@ -7,6 +7,7 @@ import { InsufficientFundsError } from '@error/insufficient-funds.error';
 import { WalletService } from '@service/wallet.service';
 import { EthereumService } from '@service/ethereum.service';
 import { SharedService } from '@service/shared.service';
+import { Router } from "@angular/router";
 
 declare var require: any
 const ethers = require('ethers')
@@ -50,6 +51,13 @@ export class FixedSupplyComponent implements OnInit {
       isComplete: false,
       hasError: false,
       errorMessage: '',
+    },
+    transferToken: {
+      step: 4,
+      isCurrent: false,
+      isComplete: false,
+      hasError: false,
+      errorMessage: '',
     }
   }
 
@@ -57,6 +65,7 @@ export class FixedSupplyComponent implements OnInit {
     private crowdsaleFactory: CrowdsaleDeploymentFactory,
     private wallet: WalletService,
     public eth: EthereumService,
+    private router: Router,
     public shared: SharedService) {
 
     this.deployer = crowdsaleFactory.deployer
@@ -71,6 +80,16 @@ export class FixedSupplyComponent implements OnInit {
 
     this.init()
 
+  }
+
+  finish(){
+    try {
+      this.deployer.addCrowdsaleToSimpleICOContract()
+
+      return this.router.navigate([`/crowdsale/${this.crowdsale.address}/show`])
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   async init(){
@@ -102,7 +121,7 @@ export class FixedSupplyComponent implements OnInit {
     } catch (error) {
       console.log(error)
       this.steps.deployToken.hasError = true
-      this.steps.deployToken.errorMessage = 'Something bad happened'
+      this.steps.deployToken.errorMessage = `Your token wasn't deployed but you didn't loose ETH funds. This may be caused by the network performance`
     }
   }
 
@@ -118,6 +137,21 @@ export class FixedSupplyComponent implements OnInit {
       console.log(error)
       this.steps.deployCrowdsale.hasError = true
       this.steps.deployCrowdsale.errorMessage = `Your crowdsale wasn't deployed but you didn't loose ETH funds. Retry this deployment or go to your token page`
+    }
+  }
+
+  async transferToken(){
+    this.steps.transferToken.isCurrent = true
+    this.steps.deployCrowdsale.isCurrent = false
+
+    try {
+      await this.deployer.transferToken()
+
+      this.steps.transferToken.isComplete = true
+    } catch (error) {
+      console.log(error)
+      this.steps.transferToken.hasError = true
+      this.steps.transferToken.errorMessage = `Something went wrong`
     }
   }
 

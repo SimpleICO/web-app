@@ -15,6 +15,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
     AppRoutingModule,
   ],
   exports: [
+    AppRoutingModule,
     AuthHeaderComponent,
     HeaderComponent,
     MobileMenuComponent,

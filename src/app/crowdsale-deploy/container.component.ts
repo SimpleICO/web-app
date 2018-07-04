@@ -26,7 +26,7 @@ export class ContainerComponent implements OnInit {
   }
 
   cancel(){
-    return this.router.navigate([`/crowdsale/${this.crowdsaleType}/create`]);
+    return this.router.navigate([`/crowdsale/${this.crowdsaleType}/create`])
   }
 
 }

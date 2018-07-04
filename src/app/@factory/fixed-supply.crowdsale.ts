@@ -65,6 +65,29 @@ export class FixedSupplyCrowdsale extends CrowdsaleDeployment {
     this.txCost.USD = (Number(this.txCost.USD) + Number(txCost.USD)).toFixed(2).toString()
   }
 
+  async addCrowdsaleToSimpleICOContract(){
+    let nonce = await this.eth.getNonce(this.simpleICO)
+    console.log(`simpleico nonce: ${nonce}`)
+
+    let txObject = this.simpleICO.instance.methods.addCrowdsale(this.crowdsale.getAddress())
+
+    let txOptions = {
+      from: this.wallet.address,
+      to: this.simpleICO.getAddress(),
+      value: '0x0',
+      gas: Web3.utils.toHex(this.gas),
+      gasLimit: Web3.utils.toHex(this.gas),
+      gasPrice: Web3.utils.toHex(this.eth.defaultGasPrice),
+      data: txObject.encodeABI(),
+      nonce: Web3.utils.toHex(nonce)
+    }
+
+    let signedTx = await this.simpleICO.web3.eth.accounts.signTransaction(txOptions, this.wallet.privateKey)
+    console.log(signedTx)
+    let receipt = await this.simpleICO.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
+    console.log(receipt)
+  }
+
   async deployToken(){
 
     let nonce = await this.eth.getNonce(this.token)
@@ -113,6 +136,32 @@ export class FixedSupplyCrowdsale extends CrowdsaleDeployment {
     console.log(receipt)
 
     this.crowdsale.setAddress(receipt.contractAddress)
+  }
+
+  async transferToken(){
+
+    console.log(this.gas, this.token.supply, this.crowdsale.getAddress(), this.token.getAddress(), this.wallet.address)
+
+    let nonce = await this.eth.getNonce(this.token)
+    console.log(`transfer token nonce: ${nonce}`)
+
+    let txObject = this.token.instance.methods.transfer(this.crowdsale.getAddress(), this.token.supply)
+
+    let txOptions = {
+      from: this.wallet.address,
+      to: this.token.getAddress(),
+      value: '0x0',
+      gas: Web3.utils.toHex(this.gas),
+      gasLimit: Web3.utils.toHex(this.gas),
+      gasPrice: Web3.utils.toHex(this.eth.defaultGasPrice),
+      data: txObject.encodeABI(),
+      nonce: Web3.utils.toHex(nonce)
+    }
+
+    let signedTx = await this.token.web3.eth.accounts.signTransaction(txOptions, this.wallet.privateKey)
+    console.log(signedTx)
+    let receipt = await this.token.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
+    console.log(receipt)
   }
 
   async estimateTokenDeploymentCost(){
