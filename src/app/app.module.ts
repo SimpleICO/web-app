@@ -24,7 +24,6 @@ import { CrowdsaleDeployModule } from './crowdsale-deploy/crowdsale-deploy.modul
 import { CrowdsaleByAddressModule } from './crowdsale-by-address/crowdsale-by-address.module';
 import { CrowdsaleIndexPublicModule } from './crowdsale-index-public/crowdsale-index-public.module';
 import { CrowdsaleShowPublicModule } from './crowdsale-show-public/crowdsale-show-public.module';
-import { DeploymentStateService } from './@service/deployment-state.service';
 
 
 @NgModule({
@@ -55,7 +54,6 @@ import { DeploymentStateService } from './@service/deployment-state.service';
     AcceptTermsRouteGuard,
     SharedService,
     EthereumService,
-    DeploymentStateService,
   ],
   bootstrap: [AppComponent]
 })
