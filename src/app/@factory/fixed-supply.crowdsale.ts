@@ -115,6 +115,7 @@ export class FixedSupplyCrowdsale extends CrowdsaleDeployment {
 
       let txOptions = {
         from: this.wallet.address,
+        value: '0x0',
         gas: Web3.utils.toHex(this.gas),
         gasLimit: Web3.utils.toHex(this.gas),
         gasPrice: Web3.utils.toHex(this.eth.defaultGasPrice),
@@ -158,6 +159,7 @@ export class FixedSupplyCrowdsale extends CrowdsaleDeployment {
 
       let txOptions = {
         from: this.wallet.address,
+        value: '0x0',
         gas: Web3.utils.toHex(this.gas),
         gasLimit: Web3.utils.toHex(this.gas),
         gasPrice: Web3.utils.toHex(this.eth.defaultGasPrice),
