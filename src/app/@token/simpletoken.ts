@@ -31,6 +31,8 @@ export class SimpleToken extends Contract {
 
   crowdsale: string
 
+  tx: string
+
   constructor(
     wallet: Wallet) {
 

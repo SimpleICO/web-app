@@ -22,6 +22,7 @@ export abstract class CrowdsaleDeployment {
 
   abstract getToken()
   abstract getCrowdsale()
+  abstract getSimpleICO()
   abstract createToken()
   abstract async estimateTokenDeploymentCost()
   abstract async estimateCrowdsaleDeploymentCost()

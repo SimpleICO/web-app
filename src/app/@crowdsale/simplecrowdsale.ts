@@ -32,6 +32,8 @@ export class SimpleCrowdsale extends Contract {
 
   price: string
 
+  tx: string
+
   constructor(
     wallet: Wallet) {
 

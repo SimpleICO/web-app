@@ -16,6 +16,8 @@ export class SimpleICO extends Contract {
 
   address: string
 
+  tx: string
+
   constructor(wallet: Wallet) {
 
     super(wallet)

@@ -14,7 +14,9 @@ export class CookieService {
 
   constructor() {
     if (environment.staging) {
-      this.domain = 'simpleico-dev.firebaseapp.com'
+      this.domain = 'simpleico-staging.firebaseapp.com'
+    } else if (environment.production) {
+      this.domain = 'simpleico.com'
     }
   }
 

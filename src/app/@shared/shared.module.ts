@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { KeepHtmlPipe } from '@pipe/keep-html.pipe';
 import { AuthHeaderComponent } from './auth-header/auth-header.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { HeaderComponent } from './header/header.component';
@@ -22,8 +23,18 @@ import { SpinnerComponent } from './spinner/spinner.component';
     FooterComponent,
     HeaderPublicComponent,
     QrCodeModalComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    KeepHtmlPipe,
   ],
-  declarations: [AuthHeaderComponent, HeaderComponent, MobileMenuComponent, FooterComponent, HeaderPublicComponent, QrCodeModalComponent, SpinnerComponent]
+  declarations: [
+    AuthHeaderComponent,
+    HeaderComponent,
+    MobileMenuComponent,
+    FooterComponent,
+    HeaderPublicComponent,
+    QrCodeModalComponent,
+    SpinnerComponent,
+    KeepHtmlPipe,
+  ]
 })
 export class SharedModule { }

@@ -3,6 +3,7 @@ import { CrowdsaleDeploymentFactory } from '@factory/crowdsale-deployment.factor
 import { CrowdsaleDeployment } from '@factory/crowdsale-deployment';
 import { SimpleToken } from '@token/simpletoken';
 import { SimpleCrowdsale } from '@crowdsale/simplecrowdsale';
+import { SimpleICO } from '@model/simpleico.model';
 import { InsufficientFundsError } from '@error/insufficient-funds.error';
 import { WalletService } from '@service/wallet.service';
 import { EthereumService } from '@service/ethereum.service';
@@ -63,7 +64,7 @@ export class FixedSupplyComponent implements OnInit {
 
   constructor(
     private crowdsaleFactory: CrowdsaleDeploymentFactory,
-    private wallet: WalletService,
+    public wallet: WalletService,
     public eth: EthereumService,
     private router: Router,
     public shared: SharedService) {
@@ -121,7 +122,9 @@ export class FixedSupplyComponent implements OnInit {
     } catch (error) {
       console.log(error)
       this.steps.deployToken.hasError = true
-      this.steps.deployToken.errorMessage = `Your token wasn't deployed but you didn't loose ETH funds. This may be caused by the network performance`
+      this.steps.deployToken.errorMessage = `Your token wasn't deployed but you didn't lose ETH funds.
+        This may be caused by the network performance.
+        If the <a href="${this.eth.etherscanURL}/address/${this.wallet.getAddress()}">transaction</a> is still running, wait before you retry.`
     }
   }
 
@@ -136,7 +139,7 @@ export class FixedSupplyComponent implements OnInit {
     } catch (error) {
       console.log(error)
       this.steps.deployCrowdsale.hasError = true
-      this.steps.deployCrowdsale.errorMessage = `Your crowdsale wasn't deployed but you didn't loose ETH funds. Retry this deployment or go to your token page`
+      this.steps.deployCrowdsale.errorMessage = `Your crowdsale wasn't deployed but you didn't lose ETH funds. Retry this deployment or go to your token page`
     }
   }
 

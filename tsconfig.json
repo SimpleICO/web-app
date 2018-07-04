@@ -22,6 +22,9 @@
       "@service/*": [
         "app/@service/*"
       ],
+      "@pipe/*": [
+        "app/@pipe/*"
+      ],
       "@factory/*": [
         "app/@factory/*"
       ],

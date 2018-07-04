@@ -32,7 +32,7 @@ export class EthereumService {
 
   txCost: any
 
-  defaultGasPrice: number = 15000000000
+  defaultGasPrice: number = 49000000000
 
   gas: number
 
