@@ -35,6 +35,9 @@ export abstract class Token {
   abstract connect()
   abstract getAddress()
   abstract setAddress(addres: string)
+  abstract async getName()
+  abstract async getSymbol()
+  abstract async getTotalSupply()
   abstract async deploy()
 
 }

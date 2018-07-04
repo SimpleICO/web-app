@@ -29,6 +29,7 @@ export abstract class Crowdsale {
   abstract setAddress(addres: string)
   abstract setBeneficiary(address: string)
   abstract async getBeneficiary()
+  abstract async getPrice()
   abstract async deploy(tokenPrice: number, tokenAddress: string)
 
 }

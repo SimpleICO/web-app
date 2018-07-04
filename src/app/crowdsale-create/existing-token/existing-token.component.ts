@@ -65,6 +65,12 @@ export class ExistingTokenComponent implements OnInit {
       return false
     }
 
+    if (isNaN(Number(this.token.price)) || this.token.price <= 0) {
+      this.isInvalid = true
+      this.errorMessage = 'Price value must be in ETH and be greater than 0'
+      return false
+    }
+
     if (!Web3.utils.isAddress(this.crowdsale.beneficiary)) {
       this.isInvalid = true
       this.errorMessage = 'Beneficiary address is invalid'

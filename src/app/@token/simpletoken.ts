@@ -61,6 +61,10 @@ export class SimpleToken extends Token {
     this.symbol = await this.instance.methods.symbol().call()
   }
 
+  async getTotalSupply(){
+    this.supply = await this.instance.methods.totalSupply().call()
+  }
+
   onTransfer(){
     this.truffleContract.Transfer().watch((error, result) => {
       if (error) console.log(error)

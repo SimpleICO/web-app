@@ -12,6 +12,21 @@
         [(ngModel)]="token.address">
     </fieldset>
     <fieldset class="form-group dark-theme">
+      <label for="">Token price</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <button class="btn btn-outline-light">ETH</button>
+        </div>
+        <input
+          required
+          disabled="disabled"
+          type="number"
+          class="form-control disabled"
+          placeholder="eg. 1.00"
+          [(ngModel)]="token.price">
+      </div>
+    </fieldset>
+    <fieldset class="form-group dark-theme">
       <label for="">Beneficiary address</label>
       <input
         required
