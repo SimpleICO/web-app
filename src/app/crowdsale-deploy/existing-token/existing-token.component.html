@@ -14,8 +14,8 @@
       <p>Symbol</p>
     </article>
     <article class="estimate">
-      <p>ETH {{ token.price }}</p>
-      <p>Price</p>
+      <p>ETH {{ balanceOf }}</p>
+      <p>Balance of</p>
     </article>
     <article class="estimate">
       <p>{{ supply }}</p>
@@ -23,7 +23,7 @@
     </article>
 
     <div *ngIf="steps.tokenInfo.hasError">
-      <p class="on-error">{{ steps.tokenInfo.errorMessage | keepHtml }}</p>
+      <p class="on-error" [innerHTML]="steps.tokenInfo.errorMessage | keepHtml"></p>
       <button class="btn btn-outline-primary btn-block" (click)="init()">Retry</button>
     </div>
 

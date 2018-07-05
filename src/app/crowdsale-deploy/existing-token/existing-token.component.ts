@@ -33,6 +33,8 @@ export class ExistingTokenComponent implements OnInit {
 
   supply: string
 
+  balanceOf: number = 0
+
   steps: any = {
     tokenInfo: {
       step: 1,
@@ -99,6 +101,18 @@ export class ExistingTokenComponent implements OnInit {
     try {
       this.token.getName()
       this.token.getSymbol()
+      await this.token.getBalanceOf()
+
+      let balanceOf = ethers.utils.bigNumberify(this.token.balanceOf)
+      let hasInsufficientOwnership = balanceOf.lte(ethers.utils.bigNumberify(0))
+
+      console.log(hasInsufficientOwnership, balanceOf)
+
+      if (hasInsufficientOwnership) {
+        throw new InsufficientFundsError(InsufficientFundsError.MESSAGE)
+      }
+
+      this.balanceOf = ethers.utils.formatEther(this.token.balanceOf)
 
       await this.token.getTotalSupply()
       this.supply = ethers.utils.bigNumberify(this.token.supply).div(1e18.toString()).toString()
@@ -107,6 +121,9 @@ export class ExistingTokenComponent implements OnInit {
 
     } catch (error) {
       console.log(error)
+      this.steps.tokenInfo.errorMessage = `You have insufficient percentage of the
+        <a href="${this.eth.etherscanURL}/token/${this.token.address}" target="_blank" class="text-truncate d-inline-block" style="width: 98px; margin-bottom: -6px;">${this.token.address}</a> token`
+      this.steps.tokenInfo.hasError = true
     }
   }
 

@@ -33,6 +33,8 @@ export class SimpleToken extends Token {
 
   tx: string
 
+  balanceOf: number = 0
+
   constructor(
     wallet: Wallet) {
 
@@ -51,6 +53,11 @@ export class SimpleToken extends Token {
 
   getAddress(){
     return this.address
+  }
+
+  async getBalanceOf(){
+    let balanceOf = await this.instance.methods.balanceOf(this.wallet.address).call()
+    this.balanceOf = balanceOf
   }
 
   async getName(){

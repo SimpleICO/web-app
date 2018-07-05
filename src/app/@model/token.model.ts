@@ -28,6 +28,8 @@ export abstract class Token {
 
   price: any
 
+  balanceOf: number
+
   constructor(wallet: Wallet){
     this.wallet = wallet
   }
@@ -39,5 +41,6 @@ export abstract class Token {
   abstract async getSymbol()
   abstract async getTotalSupply()
   abstract async deploy()
+  abstract async getBalanceOf()
 
 }
