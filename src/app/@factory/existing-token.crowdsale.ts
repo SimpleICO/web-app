@@ -125,43 +125,65 @@ export class ExistingTokenCrowdsale extends CrowdsaleDeployment {
 
   async transferToken(){
 
+    console.log(this.gas, this.token.balanceOf, this.crowdsale.getAddress(), this.token.getAddress(), this.wallet.address)
+
     return new Promise(async (resolve, reject) => {
-      console.log(this.gas, this.token.supply, this.crowdsale.getAddress(), this.token.getAddress(), this.wallet.address)
 
-      let nonce = await this.eth.getNonce(this.token)
-      console.log(`transfer token nonce: ${nonce}`)
+      try {
 
-      let txObject = this.token.instance.methods.transfer(this.crowdsale.getAddress(), this.token.supply)
+        let nonce = await this.eth.getNonce(this.token)
+        console.log(`transfer token nonce: ${nonce}`)
 
-      let txOptions = {
-        from: this.wallet.address,
-        to: this.token.getAddress(),
-        value: '0x0',
-        gas: Web3.utils.toHex(this.gas),
-        gasLimit: Web3.utils.toHex(this.gas),
-        gasPrice: Web3.utils.toHex(this.eth.defaultGasPrice),
-        data: txObject.encodeABI(),
-        nonce: Web3.utils.toHex(nonce)
-      }
+        let txObject = this.token.instance.methods.transfer(this.crowdsale.getAddress(), this.token.balanceOf)
+        let txOptions = {
+          from: this.wallet.address,
+          to: this.token.getAddress(),
+          value: '0x0',
+          gas: Web3.utils.toHex(this.gas),
+          gasLimit: Web3.utils.toHex(this.gas),
+          gasPrice: Web3.utils.toHex(this.eth.defaultGasPrice),
+          data: txObject.encodeABI(),
+          nonce: Web3.utils.toHex(nonce)
+        }
 
-      let signedTx = await this.token.web3.eth.accounts.signTransaction(txOptions, this.wallet.privateKey)
-      console.log(signedTx)
+        let signedTx = await this.token.web3.eth.accounts.signTransaction(txOptions, this.wallet.privateKey)
+        console.log(signedTx)
 
-      let tx = this.token.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
+        let tx = this.token.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
+        tx.on('transactionHash', hash => {
+          console.log(hash)
+          this.token.tx = hash
+        })
 
-      tx.on('transactionHash', hash => {
-        console.log(hash)
-        this.token.tx = hash
-      })
+        tx.on('error', error => {
+          reject(error)
+        })
 
-      tx.on('error', error => {
+        tx.on('receipt', receipt => {
+          console.log(receipt)
+          resolve(receipt)
+        })
+      } catch (error) {
         reject(error)
-      })
-
-      tx.on('receipt', async receipt => {
-        console.log(receipt)
-        resolve(receipt)
-      })
+      }
     })
+  }
+
+  async estimateTokenTransferCost(){
+
+    let txObject = this.token.instance.methods.transfer(this.wallet.address, this.token.balanceOf)
+    this.token.txObject = txObject
+    console.log(txObject)
+
+    let gas = await this.token.txObject.estimateGas({from: this.wallet.address})
+    this.gas += gas + this.gasIncrement
+    console.log(gas)
+
+    let txCost = await this.eth.getTxCost(gas)
+    console.log(txCost)
+
+    this.sumTxCost(txCost)
+
+    return txCost
   }
 }

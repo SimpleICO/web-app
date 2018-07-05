@@ -23,7 +23,7 @@
     </article>
     <article class="estimate">
       <p>{{ supply }}</p>
-      <p>Supply</p>
+      <p>Total supply</p>
     </article>
 
     <div *ngIf="steps.tokenInfo.hasError">
@@ -95,7 +95,7 @@
     </header>
 
     <h4><i class="icon-loading2 spin" *ngIf="!steps.transferToken.isComplete || steps.transferToken.hasError"></i> Transferring the token supply to your crowdsale</h4>
-    <p>This step will allow your crowdsale contract to manage the token supply and exchange it for ETH that other addresses pay for it.</p>
+    <p>This step will allow your crowdsale contract to manage the token supply and exchange it for ETH.</p>
     <p class="mb-2">The collected ETH will be transferred to the crowdsale beneficiary you've specified.</p>
     <a class="mb-4 d-block" href="{{ eth.etherscanURL }}/address/{{ wallet.getAddress() }}" target="_blank">See transaction</a>
 

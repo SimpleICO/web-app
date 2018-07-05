@@ -100,11 +100,13 @@ export abstract class CrowdsaleDeployment {
 
   async estimateTokenTransferCost(){
 
+    console.log(this.token)
+
     let txObject = this.token.instance.methods.transfer(this.wallet.address, this.token.supply.toString())
-    this.crowdsale.txObject = txObject
+    this.token.txObject = txObject
     console.log(txObject)
 
-    let gas = await this.crowdsale.txObject.estimateGas()
+    let gas = await this.token.txObject.estimateGas()
     this.gas += gas + this.gasIncrement
     console.log(gas)
 
