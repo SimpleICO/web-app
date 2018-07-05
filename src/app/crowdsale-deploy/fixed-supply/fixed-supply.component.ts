@@ -178,6 +178,7 @@ export class FixedSupplyComponent implements OnInit {
       text: 'Transfer token supply to crowdsale',
       txCost: '...'
     })
+    this.token.setAddress(CrowdsaleDeployment.CONTRACT_DUMMY_ADDRESS)
     txCost = await this.deployer.estimateTokenTransferCost()
     let simpleICOCost = await this.deployer.estimateSimpleICOCost()
     let cost = txCost.cost.add(simpleICOCost.cost)

@@ -83,6 +83,8 @@ export class ExistingTokenCrowdsale extends CrowdsaleDeployment {
 
   async deployCrowdsale(){
 
+    console.log(this.token)
+
     return new Promise(async (resolve, reject) => {
       this.crowdsale.txObject = await this.crowdsale.deploy(this.token.price, this.token.getAddress())
 

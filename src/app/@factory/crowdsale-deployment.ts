@@ -7,13 +7,13 @@ import { SimpleICO } from '@model/simpleico.model';
 
 declare var require: any
 
-const DUMMY_ADDRESS = '0x7af6C0ce41aFaf675e5430193066a8d57701A9AC'
-const CONTRACT_DUMMY_ADDRESS = '0x523a34E0A5FABDFaa39B3889D80b19Fe77F73aA6'
-
 const ethers = require('ethers')
 const Web3 = require('web3')
 
 export abstract class CrowdsaleDeployment {
+
+  static readonly CONTRACT_DUMMY_ADDRESS: string = '0x523a34E0A5FABDFaa39B3889D80b19Fe77F73aA6'
+  static readonly DUMMY_ADDRESS: string = '0x7af6C0ce41aFaf675e5430193066a8d57701A9AC'
 
   wallet: Wallet
 
@@ -82,7 +82,7 @@ export abstract class CrowdsaleDeployment {
 
   async estimateCrowdsaleDeploymentCost(){
 
-    let txObject = await this.crowdsale.deploy(this.token.price, DUMMY_ADDRESS)
+    let txObject = await this.crowdsale.deploy(this.token.price, CrowdsaleDeployment.DUMMY_ADDRESS)
     this.crowdsale.txObject = txObject
     console.log(txObject)
 
@@ -99,7 +99,6 @@ export abstract class CrowdsaleDeployment {
   }
 
   async estimateTokenTransferCost(){
-    this.token.setAddress(CONTRACT_DUMMY_ADDRESS)
 
     let txObject = this.token.instance.methods.transfer(this.wallet.address, this.token.supply.toString())
     this.crowdsale.txObject = txObject
@@ -119,7 +118,7 @@ export abstract class CrowdsaleDeployment {
 
   async estimateSimpleICOCost(){
 
-    let txObject = await this.simpleICO.instance.methods.addCrowdsale(CONTRACT_DUMMY_ADDRESS)
+    let txObject = await this.simpleICO.instance.methods.addCrowdsale(CrowdsaleDeployment.CONTRACT_DUMMY_ADDRESS)
 
     this.simpleICO.txObject = txObject
     console.log(txObject)

@@ -82,6 +82,7 @@ export class ExistingTokenComponent implements OnInit {
     this.errorMessage = ''
 
     this.token.setAddress(this.token.address)
+    this.crowdsale.setBeneficiary(this.crowdsale.beneficiary)
 
     return this.router.navigate([`/crowdsale/${this.deployer.type}/deploy`]);
   }

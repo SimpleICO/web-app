@@ -50,13 +50,6 @@ export class ExistingTokenComponent implements OnInit {
       hasError: false,
       estimates: []
     },
-    deployToken: {
-      step: 2,
-      isCurrent: false,
-      isComplete: false,
-      hasError: false,
-      errorMessage: '',
-    },
     deployCrowdsale: {
       step: 3,
       isCurrent: false,
@@ -86,6 +79,8 @@ export class ExistingTokenComponent implements OnInit {
   ngOnInit() {
     this.token = this.deployer.getToken()
     this.crowdsale = this.deployer.getCrowdsale()
+
+    console.log(this.deployer, this.token, this.crowdsale)
 
     this.stepCount = Object.keys(this.steps).length
 
@@ -124,6 +119,48 @@ export class ExistingTokenComponent implements OnInit {
       this.steps.tokenInfo.errorMessage = `You have insufficient percentage of the
         <a href="${this.eth.etherscanURL}/token/${this.token.address}" target="_blank" class="text-truncate d-inline-block" style="width: 98px; margin-bottom: -6px;">${this.token.address}</a> token`
       this.steps.tokenInfo.hasError = true
+    }
+  }
+
+  finish(){
+    try {
+      this.deployer.addCrowdsaleToSimpleICOContract()
+
+      return this.router.navigate([`/crowdsale/${this.crowdsale.address}/show`])
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async deployCrowdsale(){
+    this.steps.estimateTxCosts.isCurrent = false
+    this.steps.estimateTxCosts.isComplete = true
+
+    this.steps.deployCrowdsale.isCurrent = true
+
+    try {
+      await this.deployer.deployCrowdsale()
+
+      this.steps.deployCrowdsale.isComplete = true
+    } catch (error) {
+      console.log(error)
+      this.steps.deployCrowdsale.hasError = true
+      this.steps.deployCrowdsale.errorMessage = `Your crowdsale wasn't deployed but you didn't lose ETH funds. Retry this deployment or go to your token page`
+    }
+  }
+
+  async transferToken(){
+    this.steps.transferToken.isCurrent = true
+    this.steps.deployCrowdsale.isCurrent = false
+
+    try {
+      await this.deployer.transferToken()
+
+      this.steps.transferToken.isComplete = true
+    } catch (error) {
+      console.log(error)
+      this.steps.transferToken.hasError = true
+      this.steps.transferToken.errorMessage = `Something went wrong`
     }
   }
 
