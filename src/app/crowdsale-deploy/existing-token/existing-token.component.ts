@@ -119,6 +119,7 @@ export class ExistingTokenComponent implements OnInit {
       this.steps.tokenInfo.errorMessage = `You have insufficient percentage of the
         <a href="${this.eth.etherscanURL}/token/${this.token.address}" target="_blank" class="text-truncate d-inline-block" style="width: 98px; margin-bottom: -6px;">${this.token.address}</a> token`
       this.steps.tokenInfo.hasError = true
+      this.steps.tokenInfo.isComplete = false
     }
   }
 
@@ -146,6 +147,7 @@ export class ExistingTokenComponent implements OnInit {
     } catch (error) {
       console.log(error)
       this.steps.deployCrowdsale.hasError = true
+      this.steps.deployCrowdsale.isComplete = false
       this.steps.deployCrowdsale.errorMessage = `Your crowdsale wasn't deployed but you didn't lose ETH funds. Retry this deployment or go to your token page`
     }
   }
@@ -162,6 +164,7 @@ export class ExistingTokenComponent implements OnInit {
     } catch (error) {
       console.log(error)
       this.steps.transferToken.hasError = true
+      this.steps.transferToken.isComplete = false
       this.steps.transferToken.errorMessage = `Something went wrong`
     }
   }
@@ -212,6 +215,7 @@ export class ExistingTokenComponent implements OnInit {
     } catch (error) {
       if (error instanceof InsufficientFundsError) {
         this.steps.tokenInfo.hasError = true
+        this.steps.estimateTxCosts.isComplete = false
       }
     }
   }

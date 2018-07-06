@@ -14,7 +14,7 @@ export class EthereumService {
 
   ethPrice: string = '0.0'
 
-  defaultGasPrice: number = 17000000000
+  defaultGasPrice: number = 49000000000
 
   etherscanURL: string = 'https://ropsten.etherscan.io'
 
@@ -25,6 +25,17 @@ export class EthereumService {
     if (env.production) {
       this.etherscanURL = 'https://etherscan.io'
     }
+  }
+
+  /**
+   * [updateGasPrice Set the new ghas price in gwei 1e9]
+   * @param {number} price Price should enter as an integer, eg. 36
+   */
+  updateGasPrice(price: number){
+
+    this.defaultGasPrice = Web3.utils.toWei(price.toString(), 'gwei')
+
+    console.log(`gas price: ${this.defaultGasPrice}`)
   }
 
   async getTxCost(gas, gasPrice = this.defaultGasPrice){

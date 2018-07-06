@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CrowdsaleDeploymentFactory } from '@factory/crowdsale-deployment.factory';
 import { CrowdsaleDeployment } from '@factory/crowdsale-deployment';
 import { SimpleToken } from '@token/simpletoken';
@@ -15,6 +15,7 @@ import { Token } from '@model/token.model';
 
 declare var require: any
 const ethers = require('ethers')
+const Web3 = require('web3')
 
 
 @Component({
@@ -65,6 +66,8 @@ export class FixedSupplyComponent implements OnInit {
     }
   }
 
+  @Input() gasPrice: number
+
   constructor(
     private crowdsaleFactory: CrowdsaleDeploymentFactory,
     public wallet: WalletService,
@@ -73,6 +76,8 @@ export class FixedSupplyComponent implements OnInit {
     public shared: SharedService) {
 
     this.deployer = crowdsaleFactory.deployer
+
+    this.gasPrice = ethers.utils.bigNumberify(eth.defaultGasPrice.toString()).div(1e9.toString()).toString()
   }
 
   ngOnInit() {
@@ -82,6 +87,14 @@ export class FixedSupplyComponent implements OnInit {
     this.stepCount = Object.keys(this.steps).length
 
     this.init()
+  }
+
+  updateGasPrice(){
+
+    this.deployer.gas = 0
+    this.eth.updateGasPrice(this.gasPrice)
+    this.init()
+
   }
 
   finish(){

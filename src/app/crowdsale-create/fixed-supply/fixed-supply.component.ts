@@ -4,6 +4,7 @@ import { CrowdsaleDeployment } from '@factory/crowdsale-deployment';
 import { Router } from "@angular/router";
 import { Crowdsale } from '@model/crowdsale.model';
 import { Token } from '@model/token.model';
+import { EthereumService } from '@service/ethereum.service';
 
 declare let require: any
 
@@ -26,6 +27,7 @@ export class FixedSupplyComponent implements OnInit {
   errorMessage: string
 
   constructor(
+    public eth: EthereumService,
     private crowdsaleFactory: CrowdsaleDeploymentFactory,
     private router: Router) {
 

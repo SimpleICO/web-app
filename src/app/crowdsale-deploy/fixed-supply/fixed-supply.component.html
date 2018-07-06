@@ -10,6 +10,21 @@
       <p>{{ estimate.text }}</p>
     </article>
 
+    <fieldset class="form-group dark-theme" *ngIf="steps.estimateTxCosts.isComplete">
+      <label for="gas-price">Gas Price (GWEI)</label>
+      <div class="input-group">
+        <input
+          name="gas-price"
+          type="number"
+          class="form-control"
+          placeholder="eg. 32"
+          [(ngModel)]="gasPrice">
+        <div class="input-group-append">
+          <button class="btn btn-outline-light" (click)="updateGasPrice()">Update</button>
+        </div>
+      </div>
+    </fieldset>
+
     <div *ngIf="steps.estimateTxCosts.hasError">
       <p class="on-error">Insufficient funds to execute these transactions. Send ETH to your wallet address and retry.</p>
       <button class="btn btn-primary btn-block mb-3" (click)="shared.displayCrowdsaleShowModal()">See wallet address</button>
@@ -44,7 +59,7 @@
       <p>Price</p>
     </article>
     <article class="estimate">
-      <p>{{ supply }}</p>
+      <p>{{ token.symbol }} {{ supply }}</p>
       <p>Supply</p>
     </article>
 
