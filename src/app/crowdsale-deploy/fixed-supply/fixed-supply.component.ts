@@ -94,7 +94,6 @@ export class FixedSupplyComponent implements OnInit {
     this.deployer.gas = 0
     this.eth.updateGasPrice(this.gasPrice)
     this.init()
-
   }
 
   finish(){
@@ -107,11 +106,21 @@ export class FixedSupplyComponent implements OnInit {
     }
   }
 
-  async init(){
+  reset(){
+
+    Object.keys(this.steps).forEach(key => {
+      let step = this.steps[key]
+      step.isCurrent = false
+      step.isComplete = false
+      step.hasError = false
+    })
+
     this.steps.estimateTxCosts.isCurrent = true
-    this.steps.estimateTxCosts.isComplete = false
-    this.steps.estimateTxCosts.hasError = false
     this.steps.estimateTxCosts.estimates = []
+  }
+
+  async init(){
+    this.reset()
 
     try {
       await this.estimateTransactionCosts()

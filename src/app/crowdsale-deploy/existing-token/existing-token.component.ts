@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CrowdsaleDeploymentFactory } from '@factory/crowdsale-deployment.factory';
 import { CrowdsaleDeployment } from '@factory/crowdsale-deployment';
 import { SimpleToken } from '@token/simpletoken';
@@ -66,6 +66,8 @@ export class ExistingTokenComponent implements OnInit {
     }
   }
 
+  @Input() gasPrice: number
+
   constructor(
     private crowdsaleFactory: CrowdsaleDeploymentFactory,
     public wallet: WalletService,
@@ -87,11 +89,28 @@ export class ExistingTokenComponent implements OnInit {
     this.init()
   }
 
-  async init(){
+  updateGasPrice(){
+
+    this.deployer.gas = 0
+    this.eth.updateGasPrice(this.gasPrice)
+    this.estimateTransactionCosts()
+  }
+
+  reset(){
+    Object.keys(this.steps).forEach(key => {
+      let step = this.steps[key]
+      step.isCurrent = false
+      step.isComplete = false
+      step.hasError = false
+    })
 
     this.steps.tokenInfo.isCurrent = true
-    this.steps.tokenInfo.isComplete = false
-    this.steps.tokenInfo.hasError = false
+    this.steps.estimateTxCosts.estimates = []
+  }
+
+  async init(){
+
+    this.reset()
 
     try {
       this.token.getName()

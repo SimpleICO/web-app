@@ -68,6 +68,10 @@
       <button class="btn btn-outline-primary btn-block" (click)="deployToken()">Retry</button>
     </div>
 
+    <div *ngIf="!steps.deployToken.isComplete">
+      <button class="btn btn-outline-primary btn-block" (click)="init()">Retry with higher gas price</button>
+    </div>
+
     <div *ngIf="steps.deployToken.isComplete">
       <button class="btn btn-primary btn-block" (click)="deployCrowdsale()">Next</button>
       <a href="{{ eth.etherscanURL }}/token/{{ token.address }}" target="_blank" class="btn btn-outline-primary btn-block">See on etherscan</a>
