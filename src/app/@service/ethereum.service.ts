@@ -14,7 +14,7 @@ export class EthereumService {
 
   ethPrice: string = '0.0'
 
-  defaultGasPrice: number = 49000000000
+  defaultGasPrice: number = 17000000000
 
   etherscanURL: string = 'https://ropsten.etherscan.io'
 

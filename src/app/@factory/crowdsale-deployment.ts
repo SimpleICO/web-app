@@ -66,10 +66,9 @@ export abstract class CrowdsaleDeployment {
   async estimateTokenDeploymentCost(){
 
     let txObject = await this.token.deploy()
-    this.token.txObject = txObject
     console.log(txObject)
 
-    let gas = await this.token.txObject.estimateGas()
+    let gas = await txObject.estimateGas()
     this.gas += gas + this.gasIncrement
     console.log(gas)
 
@@ -83,10 +82,9 @@ export abstract class CrowdsaleDeployment {
   async estimateCrowdsaleDeploymentCost(){
 
     let txObject = await this.crowdsale.deploy(this.token.price, CrowdsaleDeployment.DUMMY_ADDRESS)
-    this.crowdsale.txObject = txObject
     console.log(txObject)
 
-    let gas = await this.crowdsale.txObject.estimateGas()
+    let gas = await txObject.estimateGas()
     this.gas += gas + this.gasIncrement
     console.log(gas)
 
@@ -103,10 +101,9 @@ export abstract class CrowdsaleDeployment {
     console.log(this.token)
 
     let txObject = this.token.instance.methods.transfer(this.wallet.address, this.token.supply.toString())
-    this.token.txObject = txObject
     console.log(txObject)
 
-    let gas = await this.token.txObject.estimateGas()
+    let gas = await txObject.estimateGas()
     this.gas += gas + this.gasIncrement
     console.log(gas)
 
@@ -121,11 +118,9 @@ export abstract class CrowdsaleDeployment {
   async estimateSimpleICOCost(){
 
     let txObject = await this.simpleICO.instance.methods.addCrowdsale(CrowdsaleDeployment.CONTRACT_DUMMY_ADDRESS)
-
-    this.simpleICO.txObject = txObject
     console.log(txObject)
 
-    let gas = await this.simpleICO.txObject.estimateGas()
+    let gas = await txObject.estimateGas()
     this.gas += gas + this.gasIncrement
     console.log(gas)
 

@@ -114,10 +114,14 @@ export class FixedSupplyComponent implements OnInit {
 
     this.steps.estimateTxCosts.isCurrent = false
     this.steps.deployToken.isCurrent = true
+    this.steps.deployToken.hasError = false
 
     try {
-      await this.deployer.deployToken()
-      this.supply = ethers.utils.bigNumberify(this.token.supply).div(1e18.toString()).toString()
+      let receipt = await this.deployer.deployToken()
+      this.token.setAddress(receipt.contractAddress)
+
+      await this.deployer.getTokenSupply()
+      // this.supply = ethers.utils.bigNumberify(this.token.supply).div(1e18.toString()).toString()
 
       this.steps.deployToken.isComplete = true
     } catch (error) {
@@ -132,6 +136,7 @@ export class FixedSupplyComponent implements OnInit {
   async deployCrowdsale(){
     this.steps.deployToken.isCurrent = false
     this.steps.deployCrowdsale.isCurrent = true
+    this.steps.deployCrowdsale.hasError = false
 
     try {
       await this.deployer.deployCrowdsale()
@@ -147,6 +152,7 @@ export class FixedSupplyComponent implements OnInit {
   async transferToken(){
     this.steps.transferToken.isCurrent = true
     this.steps.deployCrowdsale.isCurrent = false
+    this.steps.transferToken.hasError = false
 
     try {
       await this.deployer.transferToken()

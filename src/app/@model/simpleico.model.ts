@@ -27,7 +27,7 @@ export class SimpleICO extends Contract {
     if (env.local) {
       this.address = '0x346785fe19f197c0184310add71abed4be7ed9e8'
     } else if (env.staging) {
-      this.address = '0x9b240271e1331e084afaedf3a94e5030db4c8adb'
+      this.address = '0x188a53e249d6f303e9bda1dd661c28fecba1593a'
     } else {
       this.address = '0x1911b2c5279a54a1b00ddc7d7990fca926a59a2b'
     }

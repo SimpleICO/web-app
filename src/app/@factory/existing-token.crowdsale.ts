@@ -44,40 +44,46 @@ export class ExistingTokenCrowdsale extends CrowdsaleDeployment {
   async addCrowdsaleToSimpleICOContract(){
 
     return new Promise(async (resolve, reject) => {
-      let nonce = await this.eth.getNonce(this.simpleICO)
-      console.log(`simpleico nonce: ${nonce}`)
 
-      let txObject = this.simpleICO.instance.methods.addCrowdsale(this.crowdsale.getAddress())
+      try {
 
-      let txOptions = {
-        from: this.wallet.address,
-        to: this.simpleICO.getAddress(),
-        value: '0x0',
-        gas: Web3.utils.toHex(this.gas),
-        gasLimit: Web3.utils.toHex(this.gas),
-        gasPrice: Web3.utils.toHex(this.eth.defaultGasPrice),
-        data: txObject.encodeABI(),
-        nonce: Web3.utils.toHex(nonce)
-      }
+        let nonce = await this.eth.getNonce(this.simpleICO)
+        console.log(`simpleico nonce: ${nonce}`)
 
-      let signedTx = await this.simpleICO.web3.eth.accounts.signTransaction(txOptions, this.wallet.privateKey)
-      console.log(signedTx)
+        let txObject = this.simpleICO.instance.methods.addCrowdsale(this.crowdsale.getAddress())
 
-      let tx = this.simpleICO.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
+        let txOptions = {
+          from: this.wallet.address,
+          to: this.simpleICO.getAddress(),
+          value: '0x0',
+          gas: Web3.utils.toHex(this.gas),
+          gasLimit: Web3.utils.toHex(this.gas),
+          gasPrice: Web3.utils.toHex(this.eth.defaultGasPrice),
+          data: txObject.encodeABI(),
+          nonce: Web3.utils.toHex(nonce)
+        }
 
-      tx.on('transactionHash', hash => {
-        console.log(hash)
-        this.simpleICO.tx = hash
-      })
+        let signedTx = await this.simpleICO.web3.eth.accounts.signTransaction(txOptions, this.wallet.privateKey)
+        console.log(signedTx)
 
-      tx.on('error', error => {
+        let tx = this.simpleICO.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
+
+        tx.on('transactionHash', hash => {
+          console.log(hash)
+          this.simpleICO.tx = hash
+        })
+
+        tx.on('error', error => {
+          reject(error)
+        })
+
+        tx.on('receipt', async receipt => {
+          console.log(receipt)
+          resolve(receipt)
+        })
+      } catch (error) {
         reject(error)
-      })
-
-      tx.on('receipt', async receipt => {
-        console.log(receipt)
-        resolve(receipt)
-      })
+      }
     })
   }
 
@@ -86,40 +92,46 @@ export class ExistingTokenCrowdsale extends CrowdsaleDeployment {
     console.log(this.token)
 
     return new Promise(async (resolve, reject) => {
-      this.crowdsale.txObject = await this.crowdsale.deploy(this.token.price, this.token.getAddress())
 
-      let nonce = await this.eth.getNonce(this.crowdsale)
-      console.log(`crowdsale nonce: ${nonce}`)
+      try {
 
-      let txOptions = {
-        from: this.wallet.address,
-        value: '0x0',
-        gas: Web3.utils.toHex(this.gas),
-        gasLimit: Web3.utils.toHex(this.gas),
-        gasPrice: Web3.utils.toHex(this.eth.defaultGasPrice),
-        data: this.crowdsale.txObject.encodeABI(),
-        nonce: Web3.utils.toHex(nonce)
-      }
+        let txObject = await this.crowdsale.deploy(this.token.price, this.token.getAddress())
 
-      let signedTx = await this.crowdsale.web3.eth.accounts.signTransaction(txOptions, this.wallet.privateKey)
-      console.log(signedTx)
+        let nonce = await this.eth.getNonce(this.crowdsale)
+        console.log(`crowdsale nonce: ${nonce}`)
 
-      let tx = this.crowdsale.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
+        let txOptions = {
+          from: this.wallet.address,
+          value: '0x0',
+          gas: Web3.utils.toHex(this.gas),
+          gasLimit: Web3.utils.toHex(this.gas),
+          gasPrice: Web3.utils.toHex(this.eth.defaultGasPrice),
+          data: txObject.encodeABI(),
+          nonce: Web3.utils.toHex(nonce)
+        }
 
-      tx.on('transactionHash', hash => {
-        console.log(hash)
-        this.crowdsale.tx = hash
-      })
+        let signedTx = await this.crowdsale.web3.eth.accounts.signTransaction(txOptions, this.wallet.privateKey)
+        console.log(signedTx)
 
-      tx.on('error', error => {
+        let tx = this.crowdsale.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
+
+        tx.on('transactionHash', hash => {
+          console.log(hash)
+          this.crowdsale.tx = hash
+        })
+
+        tx.on('error', error => {
+          reject(error)
+        })
+
+        tx.on('receipt', async receipt => {
+          console.log(receipt)
+          this.crowdsale.setAddress(receipt.contractAddress)
+          resolve(receipt)
+        })
+      } catch (error) {
         reject(error)
-      })
-
-      tx.on('receipt', async receipt => {
-        console.log(receipt)
-        this.crowdsale.setAddress(receipt.contractAddress)
-        resolve(receipt)
-      })
+      }
     })
   }
 
@@ -135,6 +147,7 @@ export class ExistingTokenCrowdsale extends CrowdsaleDeployment {
         console.log(`transfer token nonce: ${nonce}`)
 
         let txObject = this.token.instance.methods.transfer(this.crowdsale.getAddress(), this.token.balanceOf)
+
         let txOptions = {
           from: this.wallet.address,
           to: this.token.getAddress(),
@@ -172,10 +185,9 @@ export class ExistingTokenCrowdsale extends CrowdsaleDeployment {
   async estimateTokenTransferCost(){
 
     let txObject = this.token.instance.methods.transfer(this.wallet.address, this.token.balanceOf)
-    this.token.txObject = txObject
     console.log(txObject)
 
-    let gas = await this.token.txObject.estimateGas({from: this.wallet.address})
+    let gas = await txObject.estimateGas({from: this.wallet.address})
     this.gas += gas + this.gasIncrement
     console.log(gas)
 

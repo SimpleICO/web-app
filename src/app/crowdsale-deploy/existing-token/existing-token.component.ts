@@ -137,6 +137,7 @@ export class ExistingTokenComponent implements OnInit {
     this.steps.estimateTxCosts.isComplete = true
 
     this.steps.deployCrowdsale.isCurrent = true
+    this.steps.deployCrowdsale.hasError = false
 
     try {
       await this.deployer.deployCrowdsale()
@@ -151,6 +152,7 @@ export class ExistingTokenComponent implements OnInit {
 
   async transferToken(){
     this.steps.transferToken.isCurrent = true
+    this.steps.transferToken.hasError = false
     this.steps.deployCrowdsale.isCurrent = false
 
     try {
