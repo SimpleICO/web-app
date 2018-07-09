@@ -3,7 +3,7 @@
 @import "sass/simpleico.scss";
 
 @mixin main {
-  min-height: 100vh;
+  min-height: 94vh;
 }
 
 @mixin with-header {
@@ -11,7 +11,7 @@
 }
 
 @mixin logo {
-  margin-bottom: get-spacer(5);
+  margin-bottom: get-spacer(4) * 3;
   text-align: center;
   img {
     height: auto;
@@ -58,9 +58,9 @@
   .menu-trigger {
     @include flex-column-center;
     height: $header-height-control;
+    color: theme-color('primary');
     font-weight: bold;
     font-size: 35px;
-    color: white;
   }
 }
 
@@ -109,9 +109,9 @@
     }
     .go-icon {
       @include flex-column-center;
+      color: theme-color('primary');
       text-align: center;
       position: absolute;
-      color: white;
       width: 70px;
       bottom: 0;
       right: 0;
@@ -125,7 +125,7 @@
     border-bottom: 1px solid darken($indigo, 21%);
     padding: get-spacer(3);
     display: block;
-    color: white;
+    color: theme-color('primary');
   }
   .cta {
     margin-top: get-spacer(3);

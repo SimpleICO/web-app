@@ -35,7 +35,7 @@
         class="form-control"
         placeholder="eg. 0x123..."
         [(ngModel)]="crowdsale.beneficiary">
-      <small class="text-white" (click)="setBeneficiary()">Use this wallet address</small>
+      <small class="text-primary" (click)="setBeneficiary()">Use this wallet address</small>
     </fieldset>
     <p *ngIf="isInvalid" class="on-error">{{ errorMessage }}</p>
     <button class="btn btn-primary btn-lg btn-block" (click)="onCreateCrowdsale()">Create Token</button>

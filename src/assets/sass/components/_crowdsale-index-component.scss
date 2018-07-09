@@ -3,6 +3,10 @@
   @include main;
   background-color: $purple;
 
+  .title {
+    @include bold;
+  }
+
   .token {
     padding: get-spacer(3) 0;
     .name {

@@ -1,9 +1,14 @@
-<main id="accept-terms">
+<main id="accept-terms" class="py-5">
+  <div class="container text-white">
+    <p>SIMPLE ICO {{ wallet.version }} IS FOR DEMO PURPOSES ONLY. DO NOT SEND INVESTMENTS TO THE OPEN SOURCE COMPUTER PROGRAMS DEPLOYED USING THIS TOOL.</p>
+    <p>SIMPLE ICO is a tool for configuring OPEN SOURCE COMPUTER PROGRAMS and deploying them to a blockchain network.</p>
+    <p>SIMPLE ICO is not responsible for the MEANING, USE OR PURPOSE that any person chooses to give to these OPEN SOURCE COMPUTER PROGRAMS beyond being OPEN SOURCE COMPUTER PROGRAMS that are executed inside a blockchain  network. SIMPLE ICO is not responsible for the MEANING, USE OR PURPOSE that any person gives to these OPEN SOURCE COMPUTER PROGRAMS, including but not limited to any situation where a person or third-party chooses to market, sell, license and/or distribute these OPEN SOURCE COMPUTER PROGRAMS to other persons and third-parties.</p>
+    <p>Any person that uses this tool can review the programming code for these OPEN SOURCE COMPUTER PROGRAMS which can be <a target="_blank" href="https://github.com/SimpleICO/simple-ico-smart-contracts">viewed here</a>.</p>
+    <p>BY USING THIS TOOL, YOU ACCEPT RESPONSIBILITY for ensuring compliance with all laws and regulations that may apply to the MEANING, USE AND PURPOSE that you choose to give to these OPEN SOURCE COMPUTER PROGRAMS in any country or place where they may be used.</p>
+  </div>
   <div class="container">
-    <h5 class="text-white">Alpha version 2.0 of Simple ICO is exclusively for non-investment demonstration purposes only. Do not send investments to the smart contracts deployed on the ethereum network. </h5>
-    <h5 class="text-white">I accept that I am using Simple ICO Alpha Version 2.0 exclusively for non-investment demonstration purposes only.</h5>
     <nav class="mt-3">
-      <button class="btn btn-outline-light btn-lg" (click)="acceptTerms()">Accept</button>
+      <button class="btn btn-primary btn-lg mr-2" (click)="acceptTerms()">Accept</button>
       <button class="btn btn-outline-light btn-lg" (click)="declineTerms()">Decline</button>
     </nav>
   </div>

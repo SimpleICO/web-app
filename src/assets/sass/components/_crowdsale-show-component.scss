@@ -45,9 +45,9 @@
     }
     .go-icon {
       @include flex-column-center;
+      color: theme-color('primary');
       position: absolute;
       font-size: 21px;
-      color: white;
       width: 28px;
       bottom: 0;
       right: 0;
