@@ -6,8 +6,6 @@ import { EthereumService } from '@service/ethereum.service';
 declare var document: any
 declare var require: any
 
-const clipboard = require('clipboard')
-
 @Component({
   selector: 'app-mobile-menu',
   templateUrl: './mobile-menu.component.html',
@@ -40,22 +38,5 @@ export class MobileMenuComponent implements OnInit {
 
       this.wallet.getAccountBalance()
     })
-
-    new clipboard(`.copy`, {
-      text: function(trigger) {
-
-        self.updateCopyTrigger(trigger)
-
-        return self.wallet.getAddress()
-      }
-    })
   }
-
-  updateCopyTrigger(trigger){
-    trigger.innerHTML = '<i class="icon-checkmark-circle"></i>'
-    setTimeout(() => {
-      trigger.innerHTML = '<i class="icon-copy"></i>'
-    }, 2000);
-  }
-
 }

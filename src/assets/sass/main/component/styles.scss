@@ -34,6 +34,7 @@
 @import "sass/components/crowdsale-index-component";
 @import "sass/components/crowdsale-create-component";
 @import "sass/components/crowdsale-deploy-component";
+@import "sass/components/wallet-component";
 
 .header {
   background-color: transparent;
@@ -77,6 +78,10 @@
   bottom: 0;
   right: 0;
   top: 0;
+
+  > .container {
+    padding: 0;
+  }
 
   &.display {
     transform: translateX(0);
@@ -123,9 +128,9 @@
   }
   .item {
     border-bottom: 1px solid darken($indigo, 21%);
+    color: theme-color('primary');
     padding: get-spacer(3);
     display: block;
-    color: theme-color('primary');
   }
   .cta {
     margin-top: get-spacer(3);
@@ -239,6 +244,13 @@
     display: block;
     color: white;
     margin: 0;
+  }
+}
+
+#qr-code {
+  img {
+    height: auto;
+    width: 100%;
   }
 }
 

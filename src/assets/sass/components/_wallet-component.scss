@@ -1,0 +1,38 @@
+#wallet {
+  @include with-header;
+  @include main;
+  background-color: $purple;
+
+  .eth-raised {
+    padding: get-spacer(3) 0;
+    position: relative;
+    color: white;
+    .balance,
+    .address {
+      @include light;
+      font-size: $h4-font-size;
+      padding-right: 28px;
+      max-width: 210px;
+      display: block;
+      strong {
+        @include bold;
+      }
+    }
+    .balance {
+      font-size: $h5-font-size;
+    }
+    small {
+      text-transform: uppercase;
+    }
+    .go-icon {
+      @include flex-column-center;
+      color: theme-color('primary');
+      position: absolute;
+      font-size: 21px;
+      width: 28px;
+      bottom: 0;
+      right: 0;
+      top: 0;
+    }
+  }
+}

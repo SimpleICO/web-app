@@ -24,11 +24,13 @@ import { CrowdsaleDeployModule } from './crowdsale-deploy/crowdsale-deploy.modul
 import { CrowdsaleByAddressModule } from './crowdsale-by-address/crowdsale-by-address.module';
 import { CrowdsaleIndexPublicModule } from './crowdsale-index-public/crowdsale-index-public.module';
 import { CrowdsaleShowPublicModule } from './crowdsale-show-public/crowdsale-show-public.module';
+import { ContainerComponent } from './wallet/container.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    ContainerComponent,
   ],
   imports: [
     BrowserModule,

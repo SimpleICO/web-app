@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ContainerComponent as HomeComponent } from './home/container.component';
 import { ContainerComponent as LoginComponent } from './login/container.component';
 import { ContainerComponent as NewWalletComponent } from './new-wallet/container.component';
+import { ContainerComponent as WalletComponent } from './wallet/container.component';
 import { ContainerComponent as AcceptTermsComponent } from './accept-terms/container.component';
 import { ContainerComponent as CrowdsaleShowComponent } from './crowdsale-show/container.component';
 import { ContainerComponent as CrowdsaleShowPublicComponent } from './crowdsale-show-public/container.component';
@@ -31,6 +32,10 @@ const routes: Routes = [
   },
   { path: 'accept-terms',
     component: AcceptTermsComponent,
+  },
+  { path: 'wallet',
+    component: WalletComponent,
+    canActivate: [UnlockRouteGuard, AcceptTermsRouteGuard],
   },
   { path: 'crowdsale/:crowdsaleAddress/show',
     component: CrowdsaleShowComponent,
