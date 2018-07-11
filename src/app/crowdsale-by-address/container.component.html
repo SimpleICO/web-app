@@ -1,15 +1,10 @@
-<app-header></app-header>
-<app-mobile-menu></app-mobile-menu>
+<section class="section" id="crowdsale-by-address">
+  <div class="container">
+    <h5 class="title">My crowdsales</h5>
 
-<main id="crowdsale-index">
-  <section class="section">
-    <div class="container">
-      <h5 class="title">My crowdsales</h5>
-
-      <article class="token" *ngFor="let crowdsale of crowdsales">
-        <span class="name">{{ crowdsale.getToken().name }}</span>
-        <a [routerLink]="['/crowdsale', crowdsale.getToken().crowdsale, 'show']" class="crowdsale text-truncate">{{ crowdsale.getToken().crowdsale }}</a>
-      </article>
-    </div>
-  </section>
-</main>
+    <article class="token" *ngFor="let crowdsale of crowdsales">
+      <span class="name">{{ crowdsale.getToken().name }}</span>
+      <a [routerLink]="['/crowdsale', crowdsale.getToken().crowdsale, 'show']" class="crowdsale text-truncate">{{ crowdsale.getToken().crowdsale }}</a>
+    </article>
+  </div>
+</section>

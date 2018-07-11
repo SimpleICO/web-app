@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { SimpleICO } from '@model/simpleico.model';
 import { WalletService } from '@service/wallet.service';
 import { ContainerComponent as CrowdsaleIndexComponent } from '../crowdsale-index/container.component';
 
 @Component({
-  selector: 'app-container',
+  selector: 'app-crowdsale-by-address',
   templateUrl: './container.component.html',
   styleUrls: ['./container.component.css']
 })
@@ -15,8 +14,7 @@ export class ContainerComponent extends CrowdsaleIndexComponent {
   address: string
 
   constructor(
-    public wallet: WalletService,
-    private route: ActivatedRoute){
+    public wallet: WalletService){
 
     super(wallet)
 
@@ -26,9 +24,7 @@ export class ContainerComponent extends CrowdsaleIndexComponent {
     this.simpleICO = new SimpleICO(this.wallet.getInstance())
     this.simpleICO.connect()
 
-    this.route.params.subscribe(({ address }) => {
-      this.address = address
-    })
+    this.address = this.wallet.getAddress()
   }
 
   ngAfterViewInit(){

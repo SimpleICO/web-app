@@ -9,10 +9,8 @@ import { ContainerComponent as CrowdsaleShowComponent } from './crowdsale-show/c
 import { ContainerComponent as CrowdsaleShowPublicComponent } from './crowdsale-show-public/container.component';
 import { ContainerComponent as CrowdsaleIndexComponent } from './crowdsale-index/container.component';
 import { ContainerComponent as CrowdsaleIndexPublicComponent } from './crowdsale-index-public/container.component';
-import { ContainerComponent as CrowdsaleByAddressComponent } from './crowdsale-by-address/container.component';
 import { ContainerComponent as CrowdsaleCreateComponent } from './crowdsale-create/container.component';
 import { ContainerComponent as CrowdsaleDeployComponent } from './crowdsale-deploy/container.component';
-import { WalletService } from '@service/wallet.service';
 import { UnlockRouteGuard } from '@guard/unlock-route-guard'
 import { AcceptTermsRouteGuard } from '@guard/accept-terms-route-guard'
 
@@ -52,10 +50,6 @@ const routes: Routes = [
   { path: 'public/crowdsale/index',
     component: CrowdsaleIndexPublicComponent,
     canActivate: [AcceptTermsRouteGuard],
-  },
-  { path: 'crowdsale/:address/address',
-    component: CrowdsaleByAddressComponent,
-    canActivate: [UnlockRouteGuard, AcceptTermsRouteGuard],
   },
   { path: 'crowdsale/:crowdsaleType/create',
     component: CrowdsaleCreateComponent,
