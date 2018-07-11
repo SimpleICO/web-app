@@ -6,15 +6,13 @@
 <main id="wallet" class="section">
   <div class="container">
     <article class="eth-raised">
-      <span class="address text-truncate">{{ wallet.getAddress() }}</span>
+      <a href="{{ eth.etherscanURL }}/address/{{ wallet.getAddress() }}" target="_blank" class="address text-truncate">{{ wallet.getAddress() }}</a>
       <small>Wallet address</small>
       <span class="go-icon" (click)="shared.displayCrowdsaleShowModal()"><i class="icon-copy"></i></span>
     </article>
     <article class="eth-raised">
       <span class="balance"><strong>ETH</strong> {{ wallet.ethBalance }}</span>
-      <!-- <small>US$ {{ eth.ethPrice }}</small> -->
       <small>Account Balance · {{ wallet.network }}</small>
-      <!-- <span class="go-icon"><i class="icon-chevron-right"></i></span> -->
     </article>
   </div>
 

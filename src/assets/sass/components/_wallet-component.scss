@@ -18,6 +18,9 @@
         @include bold;
       }
     }
+    .address {
+      color: theme-color('primary');
+    }
     .balance {
       font-size: $h5-font-size;
     }

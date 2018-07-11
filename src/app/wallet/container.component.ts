@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WalletService } from '@service/wallet.service';
 import { SharedService } from '@service/shared.service';
+import { EthereumService } from '@service/ethereum.service';
 
 @Component({
   selector: 'app-container',
@@ -11,6 +12,7 @@ export class ContainerComponent implements OnInit {
 
   constructor(
     public wallet: WalletService,
+    public eth: EthereumService,
     public shared: SharedService) {}
 
   ngOnInit() {
