@@ -1,0 +1,13 @@
+#catalog {
+  @include with-header;
+  @include main;
+  background-color: $purple;
+
+  .title {
+    @include bold;
+  }
+
+  .card {
+    margin-top: get-spacer(4);
+  }
+}

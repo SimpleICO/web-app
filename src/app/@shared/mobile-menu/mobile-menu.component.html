@@ -2,18 +2,16 @@
   <div class="container">
     <article class="ether-balance">
       <span class="balance">ETH {{ wallet.ethBalance }}</span>
-      <!-- <small>US$ {{ eth.ethPrice }}</small> -->
       <small>Account Balance · {{ wallet.network }}</small>
-      <!-- <span class="go-icon"><i class="icon-chevron-right"></i></span> -->
     </article>
     <article class="ether-balance">
       <span class="address text-truncate">{{ wallet.getAddress() }}</span>
       <small>Wallet address</small>
       <a [routerLink]="['/wallet']" class="go-icon"><i class="icon-chevron-right"></i></a>
     </article>
-    <!-- <a [routerLink]="['/crowdsale', wallet.getAddress(), 'address']" class="item">
-      <span>My crowdsales</span>
-    </a> -->
+    <a [routerLink]="['/catalog']" class="item">
+      <span>Catalog</span>
+    </a>
     <a [routerLink]="['/crowdsale/index']" class="item">
       <span>All crowdsales</span>
     </a>
