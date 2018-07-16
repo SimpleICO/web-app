@@ -1,17 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
-import { WalletService } from './@service/wallet.service';
 import { AcceptTermsModule } from './accept-terms/accept-terms.module';
-import { CookieService } from './@service/cookie.service';
-import { SharedService } from './@service/shared.service';
-import { EthereumService } from './@service/ethereum.service';
-import { UnlockRouteGuard } from '@guard/unlock-route-guard';
-import { AcceptTermsRouteGuard } from '@guard/accept-terms-route-guard';
+import { ErrorTrackingService } from '@service/error-tracking.service';
 
 import { SharedModule } from '@shared/shared.module';
 import { HomeModule } from './home/home.module';
@@ -53,12 +48,7 @@ import { SettingsModule } from './settings/settings.module';
     SettingsModule,
   ],
   providers: [
-    WalletService,
-    UnlockRouteGuard,
-    CookieService,
-    AcceptTermsRouteGuard,
-    SharedService,
-    EthereumService,
+    { provide: ErrorHandler, useClass: ErrorTrackingService }
   ],
   bootstrap: [AppComponent]
 })

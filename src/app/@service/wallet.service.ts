@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { Wallet } from '@model/wallet.model';
 import { Network } from '@model/network.model';
 import { Router } from '@angular/router';
+import { ErrorTrackingService } from '@service/error-tracking.service';
 import { environment as env } from '@environment/environment';
 
 declare var require: any
@@ -11,7 +12,9 @@ const Eth = require('ethers')
 const Web3 = require('web3')
 const Providers = Eth.providers
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class WalletService {
 
   accounts: Array<string> = []
@@ -33,7 +36,8 @@ export class WalletService {
   version: string = '4.0.0'
 
   constructor(
-    private router: Router) {
+    private router: Router,
+    private errorTracking: ErrorTrackingService) {
 
     if (env.local) {
       this.network = Network.private
@@ -158,6 +162,7 @@ export class WalletService {
       this.wallet = instance.unlockFromMnemonic(mnemonic)
       this.isLocked = false
       this.onUnlockSuccess.next(true)
+      this.errorTracking.setUserContext({ address: this.getAddress() })
     } catch (error) {
       this.isLocked = true
       this.onUnlockError.next({
@@ -173,6 +178,7 @@ export class WalletService {
       this.wallet = instance.unlockFromPrivateKey(privateKey)
       this.isLocked = false
       this.onUnlockSuccess.next(true)
+      this.errorTracking.setUserContext({ address: this.getAddress() })
     } catch (error) {
       this.isLocked = true
       this.onUnlockError.next({

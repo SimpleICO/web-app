@@ -5,7 +5,9 @@ declare let require: any
 
 let Cookies = require('cookies-js')
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class CookieService {
 
   acceptedTermsCookieText: string = 'accepted-alpha-version-notice'

@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { WalletService } from '@service/wallet.service';
 import { CookieService } from '@service/cookie.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class UnlockRouteGuard implements CanActivate {
 
   constructor(

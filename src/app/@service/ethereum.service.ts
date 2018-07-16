@@ -9,7 +9,9 @@ declare var require: any
 const ethers = require('ethers')
 const Web3 = require('web3')
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class EthereumService {
 
   ethPrice: string = '0.0'

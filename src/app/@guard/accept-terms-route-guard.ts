@@ -2,7 +2,9 @@ import { CanActivate, Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { CookieService } from '@service/cookie.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AcceptTermsRouteGuard implements CanActivate {
 
   constructor(
