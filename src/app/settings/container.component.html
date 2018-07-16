@@ -1,0 +1,17 @@
+<app-header></app-header>
+<app-mobile-menu></app-mobile-menu>
+
+<main id="settings">
+  <section class="section">
+    <div class="container">
+      <h5 class="title">Settings</h5>
+
+      <fieldset class="form-group dark-theme pt-3">
+        <label for="network">Network</label>
+        <select name="network" id="network" class="form-control" (change)="selectNetwork()" [(ngModel)]="network">
+          <option [value]="_network" [selected]="_network == network ? true : null" *ngFor="let _network of networks">{{ _network }}</option>
+        </select>
+      </fieldset>
+    </div>
+  </section>
+</main>

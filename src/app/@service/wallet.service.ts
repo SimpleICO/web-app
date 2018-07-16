@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Wallet } from '@model/wallet.model';
+import { Network } from '@model/network.model';
 import { Router } from '@angular/router';
 import { environment as env } from '@environment/environment';
 
@@ -35,11 +36,11 @@ export class WalletService {
     private router: Router) {
 
     if (env.local) {
-      this.network = 'private'
+      this.network = Network.private
     } else if (env.staging) {
-      this.network = 'ropsten'
+      this.network = Network.testnet
     } else {
-      this.network = 'mainnet'
+      this.network = Network.mainnet
     }
 
   }
@@ -118,6 +119,21 @@ export class WalletService {
     }
 
     return this.unlockFromPrivateKey(seed)
+  }
+
+  setProviderByNetwork(network: string = Network.mainnet){
+    this.network = network
+
+    if (network == Network.mainnet) {
+      this.wallet.setMainnetProvider()
+      return
+    } else if (network == Network.testnet) {
+      this.wallet.setRopstenProvider()
+      return
+    }
+
+    this.wallet.setJsonRpcProvider()
+    return
   }
 
   setProvider(){

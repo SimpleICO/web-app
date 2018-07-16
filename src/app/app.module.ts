@@ -26,7 +26,7 @@ import { CrowdsaleIndexPublicModule } from './crowdsale-index-public/crowdsale-i
 import { CrowdsaleShowPublicModule } from './crowdsale-show-public/crowdsale-show-public.module';
 import { CatalogModule } from './catalog/catalog.module';
 import { WalletModule } from './wallet/wallet.module';
-
+import { SettingsModule } from './settings/settings.module';
 
 @NgModule({
   declarations: [
@@ -50,6 +50,7 @@ import { WalletModule } from './wallet/wallet.module';
     CrowdsaleShowPublicModule,
     CatalogModule,
     WalletModule,
+    SettingsModule,
   ],
   providers: [
     WalletService,

@@ -34,7 +34,7 @@ export class ContainerComponent implements OnInit {
         this.eth.getTotalEthInUsd(this.wallet.ethBalance)
       })
 
-      return this.router.navigate(['/crowdsale/fixed-supply/create']);
+      return this.router.navigate(['/catalog']);
     })
   }
 

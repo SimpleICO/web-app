@@ -15,12 +15,15 @@
     <a [routerLink]="['/crowdsale/index']" class="item">
       <span>All crowdsales</span>
     </a>
+    <a [routerLink]="['/settings']" class="item">
+      <span>Settings</span>
+    </a>
     <span class="item" (click)="wallet.lock()">
       <span>Logout</span>
     </span>
     <article class="cta">
-      <a [routerLink]="['/crowdsale/fixed-supply/create']" class="btn btn-block btn-lg btn-primary">
-        Create Token
+      <a [routerLink]="['/catalog']" class="btn btn-block btn-lg btn-primary">
+        Create Crowdsale
       </a>
     </article>
   </div>
