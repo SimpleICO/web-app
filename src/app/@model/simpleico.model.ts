@@ -1,5 +1,6 @@
 import { Contract } from '@model/contract.model';
 import { Wallet } from '@model/wallet.model';
+import { Network } from '@model/network.model';
 import { environment as env } from '@environment/environment';
 
 declare var require: any
@@ -7,6 +8,10 @@ declare var require: any
 const SimpleICOInterface = require('@abi/simpleico.abi.json')
 
 export class SimpleICO extends Contract {
+
+  static readonly PRIVATE: string = '0x346785fe19f197c0184310add71abed4be7ed9e8'
+  static readonly TESTNET: string = '0x188a53e249d6f303e9bda1dd661c28fecba1593a'
+  static readonly MAINNET: string = '0x1911b2c5279a54a1b00ddc7d7990fca926a59a2b'
 
   web3: any
 
@@ -23,14 +28,18 @@ export class SimpleICO extends Contract {
     super(wallet)
 
     this.web3 = wallet.web3
+  }
 
-    if (env.local) {
-      this.address = '0x346785fe19f197c0184310add71abed4be7ed9e8'
-    } else if (env.staging) {
-      this.address = '0x188a53e249d6f303e9bda1dd661c28fecba1593a'
+  setContractAddressByNetwork(){
+    if (this.wallet.network == Network.mainnet) {
+      this.setAddress(SimpleICO.MAINNET)
+    } else if (this.wallet.network == Network.testnet) {
+      this.setAddress(SimpleICO.TESTNET)
     } else {
-      this.address = '0x1911b2c5279a54a1b00ddc7d7990fca926a59a2b'
+      this.setAddress(SimpleICO.PRIVATE)
     }
+
+    return this
   }
 
   setAddress(address: string){
@@ -50,7 +59,7 @@ export class SimpleICO extends Contract {
 
     this.instance = _contract
 
-    this.setAddress(this.getAddress())
+    this.setContractAddressByNetwork()
 
     console.log(this.instance)
 

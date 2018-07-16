@@ -117,6 +117,8 @@ export abstract class CrowdsaleDeployment {
 
   async estimateSimpleICOCost(){
 
+    console.log(this.simpleICO)
+
     let txObject = await this.simpleICO.instance.methods.addCrowdsale(CrowdsaleDeployment.CONTRACT_DUMMY_ADDRESS)
     console.log(txObject)
 

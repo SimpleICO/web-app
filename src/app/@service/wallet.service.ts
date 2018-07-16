@@ -123,6 +123,7 @@ export class WalletService {
 
   setProviderByNetwork(network: string = Network.mainnet){
     this.network = network
+    this.wallet.setNetwork(network)
 
     if (network == Network.mainnet) {
       this.wallet.setMainnetProvider()

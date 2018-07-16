@@ -22,10 +22,18 @@ export class Wallet {
 
   beneficiary: string
 
+  network: string
+
   constructor(){}
 
   getBalance(){
     return this.web3.eth.getBalance(this.address)
+  }
+
+  setNetwork(network: string){
+    this.network = network
+
+    return this
   }
 
   setBeneficiary(address: string){
