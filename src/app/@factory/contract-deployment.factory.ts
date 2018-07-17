@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { WalletService } from '@service/wallet.service';
-import { CrowdsaleDeployment } from '@factory/crowdsale-deployment';
+import { ContractDeployment } from '@factory/contract-deployment';
 import { EthereumService } from '@service/ethereum.service';
 
 import { FixedSupplyCrowdsale } from '@factory/fixed-supply.crowdsale';
@@ -13,7 +13,7 @@ export class ContractDeploymentFactory {
 
   crowdsaleType: string
 
-  deployer: CrowdsaleDeployment
+  deployer: ContractDeployment
 
   deployment: any = {}
 
@@ -29,9 +29,9 @@ export class ContractDeploymentFactory {
   /**
    *
    * @param {string} crowdsaleType [description]
-   * @return CrowdsaleDeployment
+   * @return ContractDeployment
    */
-  init(crowdsaleType: string): CrowdsaleDeployment {
+  init(crowdsaleType: string): ContractDeployment {
 
     let deployer = new this.deployment[crowdsaleType](this.wallet.getInstance(), this.eth)
 

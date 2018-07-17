@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ContractDeploymentFactory } from '@factory/contract-deployment.factory';
-import { CrowdsaleDeployment } from '@factory/crowdsale-deployment';
+import { ContractDeployment } from '@factory/contract-deployment';
 import { Router } from "@angular/router";
 import { Crowdsale } from '@model/crowdsale.model';
 import { Token } from '@model/token.model';
@@ -16,7 +16,7 @@ const Web3 = require('web3')
 })
 export class ExistingTokenComponent implements OnInit {
 
-  deployer: CrowdsaleDeployment
+  deployer: ContractDeployment
 
   @Input() token: Token
 

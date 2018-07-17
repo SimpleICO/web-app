@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ContractDeploymentFactory } from '@factory/contract-deployment.factory';
-import { CrowdsaleDeployment } from '@factory/crowdsale-deployment';
+import { ContractDeployment } from '@factory/contract-deployment';
 import { SimpleToken } from '@token/simpletoken';
 import { SimpleCrowdsale } from '@crowdsale/simplecrowdsale';
 import { SimpleICO } from '@model/simpleico.model';
@@ -23,7 +23,7 @@ const ethers = require('ethers')
 })
 export class ExistingTokenComponent implements OnInit {
 
-  deployer: CrowdsaleDeployment
+  deployer: ContractDeployment
 
   token: Token
 

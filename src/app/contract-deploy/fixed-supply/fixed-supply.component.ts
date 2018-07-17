@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ContractDeploymentFactory } from '@factory/contract-deployment.factory';
-import { CrowdsaleDeployment } from '@factory/crowdsale-deployment';
+import { ContractDeployment } from '@factory/contract-deployment';
 import { SimpleToken } from '@token/simpletoken';
 import { SimpleCrowdsale } from '@crowdsale/simplecrowdsale';
 import { SimpleICO } from '@model/simpleico.model';
@@ -25,7 +25,7 @@ const Web3 = require('web3')
 })
 export class FixedSupplyComponent implements OnInit {
 
-  deployer: CrowdsaleDeployment
+  deployer: ContractDeployment
 
   token: Token
 
@@ -206,7 +206,7 @@ export class FixedSupplyComponent implements OnInit {
       text: 'Transfer token supply to crowdsale',
       txCost: '...'
     })
-    this.token.setAddress(CrowdsaleDeployment.CONTRACT_DUMMY_ADDRESS)
+    this.token.setAddress(ContractDeployment.CONTRACT_DUMMY_ADDRESS)
     txCost = await this.deployer.estimateTokenTransferCost()
     let simpleICOCost = await this.deployer.estimateSimpleICOCost()
     let cost = txCost.cost.add(simpleICOCost.cost)

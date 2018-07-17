@@ -10,7 +10,7 @@ declare var require: any
 const ethers = require('ethers')
 const Web3 = require('web3')
 
-export abstract class CrowdsaleDeployment {
+export abstract class ContractDeployment {
 
   static readonly CONTRACT_DUMMY_ADDRESS: string = '0x523a34E0A5FABDFaa39B3889D80b19Fe77F73aA6'
   static readonly DUMMY_ADDRESS: string = '0x7af6C0ce41aFaf675e5430193066a8d57701A9AC'
@@ -81,7 +81,7 @@ export abstract class CrowdsaleDeployment {
 
   async estimateCrowdsaleDeploymentCost(){
 
-    let txObject = await this.crowdsale.deploy(this.token.price, CrowdsaleDeployment.DUMMY_ADDRESS)
+    let txObject = await this.crowdsale.deploy(this.token.price, ContractDeployment.DUMMY_ADDRESS)
     console.log(txObject)
 
     let gas = await txObject.estimateGas()
@@ -119,7 +119,7 @@ export abstract class CrowdsaleDeployment {
 
     console.log(this.simpleICO)
 
-    let txObject = await this.simpleICO.instance.methods.addCrowdsale(CrowdsaleDeployment.CONTRACT_DUMMY_ADDRESS)
+    let txObject = await this.simpleICO.instance.methods.addCrowdsale(ContractDeployment.CONTRACT_DUMMY_ADDRESS)
     console.log(txObject)
 
     let gas = await txObject.estimateGas()

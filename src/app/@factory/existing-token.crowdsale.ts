@@ -1,4 +1,4 @@
-import { CrowdsaleDeployment } from '@factory/crowdsale-deployment';
+import { ContractDeployment } from '@factory/contract-deployment';
 import { SimpleToken } from '@token/simpletoken';
 import { SimpleCrowdsale } from '@crowdsale/simplecrowdsale';
 import { Wallet } from '@model/wallet.model';
@@ -11,7 +11,7 @@ declare var require: any
 const ethers = require('ethers')
 const Web3 = require('web3')
 
-export class ExistingTokenCrowdsale extends CrowdsaleDeployment {
+export class ExistingTokenCrowdsale extends ContractDeployment {
 
   static readonly _type: string = 'existing-token'
 
