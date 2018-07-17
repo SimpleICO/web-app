@@ -4,7 +4,7 @@ import { ContractDeployment } from '@factory/contract-deployment';
 import { EthereumService } from '@service/ethereum.service';
 
 import { FixedSupplyCrowdsale } from '@factory/fixed-supply.crowdsale';
-import { ExistingTokenCrowdsale } from '@factory/existing-token.crowdsale';
+import { ExistingToken } from '@factory/existing-token';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,7 @@ export class ContractDeploymentFactory {
     private eth: EthereumService) {
 
     this.deployment[FixedSupplyCrowdsale._type] = FixedSupplyCrowdsale
-    this.deployment[ExistingTokenCrowdsale._type] = ExistingTokenCrowdsale
+    this.deployment[ExistingToken._type] = ExistingToken
 
   }
 

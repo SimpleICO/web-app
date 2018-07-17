@@ -4,7 +4,7 @@ import { ContractDeploymentFactory } from '@factory/contract-deployment.factory'
 import { WalletService } from '@service/wallet.service';
 
 import { FixedSupplyCrowdsale } from '@factory/fixed-supply.crowdsale';
-import { ExistingTokenCrowdsale } from '@factory/existing-token.crowdsale';
+import { ExistingToken } from '@factory/existing-token';
 
 @Component({
   selector: 'app-container',
@@ -17,7 +17,7 @@ export class ContainerComponent implements OnInit {
 
   withExistingToken: boolean = false
 
-  ExistingTokenCrowdsale: string = ExistingTokenCrowdsale._type
+  ExistingToken: string = ExistingToken._type
   FixedSupplyCrowdsale: string = FixedSupplyCrowdsale._type
 
   constructor(

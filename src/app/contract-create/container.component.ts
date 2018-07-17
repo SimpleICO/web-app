@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ContractDeploymentFactory } from '@factory/contract-deployment.factory';
 
 import { FixedSupplyCrowdsale } from '@factory/fixed-supply.crowdsale';
-import { ExistingTokenCrowdsale } from '@factory/existing-token.crowdsale';
+import { ExistingToken } from '@factory/existing-token';
 
 @Component({
   selector: 'app-container',
@@ -14,7 +14,7 @@ export class ContainerComponent implements OnInit {
 
   contractType: string
 
-  ExistingTokenCrowdsale: string = ExistingTokenCrowdsale._type
+  ExistingToken: string = ExistingToken._type
   FixedSupplyCrowdsale: string = FixedSupplyCrowdsale._type
 
   constructor(
