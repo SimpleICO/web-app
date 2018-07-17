@@ -5,8 +5,8 @@ import { ContainerComponent as LoginComponent } from './login/container.componen
 import { ContainerComponent as NewWalletComponent } from './new-wallet/container.component';
 import { ContainerComponent as WalletComponent } from './wallet/container.component';
 import { ContainerComponent as AcceptTermsComponent } from './accept-terms/container.component';
-import { ContainerComponent as CrowdsaleShowComponent } from './crowdsale-show/container.component';
-import { ContainerComponent as CrowdsaleShowPublicComponent } from './crowdsale-show-public/container.component';
+import { ContainerComponent as ContractShowComponent } from './contract-show/container.component';
+import { ContainerComponent as ContractShowPublicComponent } from './contract-show-public/container.component';
 import { ContainerComponent as CrowdsaleIndexComponent } from './crowdsale-index/container.component';
 import { ContainerComponent as CrowdsaleIndexPublicComponent } from './crowdsale-index-public/container.component';
 import { ContainerComponent as ContractCreateComponent } from './contract-create/container.component';
@@ -41,12 +41,12 @@ const routes: Routes = [
     component: CatalogComponent,
     canActivate: [UnlockRouteGuard, AcceptTermsRouteGuard],
   },
-  { path: 'crowdsale/:crowdsaleAddress/show',
-    component: CrowdsaleShowComponent,
+  { path: 'contract/:contractAddress/show',
+    component: ContractShowComponent,
     canActivate: [UnlockRouteGuard, AcceptTermsRouteGuard],
   },
-  { path: 'public/crowdsale/:crowdsaleAddress/show',
-    component: CrowdsaleShowPublicComponent,
+  { path: 'public/contract/:contractAddress/show',
+    component: ContractShowPublicComponent,
     canActivate: [AcceptTermsRouteGuard],
   },
   { path: 'crowdsale/index',

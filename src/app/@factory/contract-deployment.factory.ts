@@ -11,7 +11,7 @@ import { ExistingTokenDeployment } from '@factory/existing-token.deployment';
 })
 export class ContractDeploymentFactory {
 
-  crowdsaleType: string
+  contractType: string
 
   deployer: ContractDeployment
 
@@ -28,12 +28,12 @@ export class ContractDeploymentFactory {
 
   /**
    *
-   * @param {string} crowdsaleType [description]
+   * @param {string} contractType [description]
    * @return ContractDeployment
    */
-  init(crowdsaleType: string): ContractDeployment {
+  init(contractType: string): ContractDeployment {
 
-    let deployer = new this.deployment[crowdsaleType](this.wallet.getInstance(), this.eth)
+    let deployer = new this.deployment[contractType](this.wallet.getInstance(), this.eth)
 
     this.deployer = deployer
 

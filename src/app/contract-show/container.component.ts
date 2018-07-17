@@ -18,7 +18,7 @@ const ethers = require('ethers')
 
 export class ContainerComponent implements OnInit {
 
-  crowdsaleAddress: string
+  contractAddress: string
 
   ethRaised: string = '0.0'
 
@@ -38,12 +38,12 @@ export class ContainerComponent implements OnInit {
     public wallet: WalletService) {}
 
   ngOnInit() {
-    this.route.params.subscribe(({ crowdsaleAddress }) => {
-      this.crowdsaleAddress = crowdsaleAddress
+    this.route.params.subscribe(({ contractAddress }) => {
+      this.contractAddress = contractAddress
 
       this.crowdsale = new SimpleCrowdsaleContract(this.wallet.getInstance())
       this.crowdsale.connect()
-      this.crowdsale.setAddress(this.crowdsaleAddress)
+      this.crowdsale.setAddress(this.contractAddress)
       console.log(this.crowdsale)
       this.subscribe()
 

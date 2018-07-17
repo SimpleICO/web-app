@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ContainerComponent as CrowdsaleShowComponent } from '../crowdsale-show/container.component';
+import { ContainerComponent as ContractShowComponent } from '../contract-show/container.component';
 import { SimpleCrowdsaleContract } from '@contract/simplecrowdsale.contract';
 import { SimpleTokenContract } from '@contract/simpletoken.contract';
 
@@ -9,18 +9,18 @@ import { SimpleTokenContract } from '@contract/simpletoken.contract';
   styleUrls: ['./container.component.css']
 })
 
-export class ContainerComponent extends CrowdsaleShowComponent {
+export class ContainerComponent extends ContractShowComponent {
 
   ngOnInit() {
     this.wallet.setEmptyWallet()
     this.wallet.setProvider()
 
-    this.route.params.subscribe(({ crowdsaleAddress }) => {
-      this.crowdsaleAddress = crowdsaleAddress
+    this.route.params.subscribe(({ contractAddress }) => {
+      this.contractAddress = contractAddress
 
       this.crowdsale = new SimpleCrowdsaleContract(this.wallet.getInstance())
       this.crowdsale.connect()
-      this.crowdsale.setAddress(this.crowdsaleAddress)
+      this.crowdsale.setAddress(this.contractAddress)
       console.log(this.crowdsale)
       this.subscribe()
 
