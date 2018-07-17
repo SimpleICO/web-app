@@ -10,7 +10,7 @@ const RATE = ethers.utils.bigNumberify(1)
 const SimpleCrowdsaleInterface = require('@abi/simplecrowdsale.abi.json')
 const Web3 = require('web3')
 
-export class SimpleCrowdsale extends Crowdsale {
+export class SimpleCrowdsaleContract extends Crowdsale {
 
   instance: any
 

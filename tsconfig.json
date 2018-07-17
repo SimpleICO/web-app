@@ -28,14 +28,8 @@
       "@factory/*": [
         "app/@factory/*"
       ],
-      "@crowdsale/*": [
-        "app/@crowdsale/*"
-      ],
       "@contract/*": [
         "app/@contract/*"
-      ],
-      "@token/*": [
-        "app/@token/*"
       ],
       "@error/*": [
         "app/@error/*"

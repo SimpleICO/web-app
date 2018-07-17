@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ContractDeploymentFactory } from '@factory/contract-deployment.factory';
 import { ContractDeployment } from '@factory/contract-deployment';
 import { SimpleTokenContract } from '@contract/simpletoken.contract';
-import { SimpleCrowdsale } from '@crowdsale/simplecrowdsale';
+import { SimpleCrowdsaleContract } from '@contract/simplecrowdsale.contract';
 import { SimpleICO } from '@model/simpleico.model';
 import { InsufficientFundsError } from '@error/insufficient-funds.error';
 import { WalletService } from '@service/wallet.service';

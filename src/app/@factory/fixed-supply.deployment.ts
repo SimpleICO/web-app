@@ -1,6 +1,6 @@
 import { ContractDeployment } from '@factory/contract-deployment';
 import { SimpleTokenContract } from '@contract/simpletoken.contract';
-import { SimpleCrowdsale } from '@crowdsale/simplecrowdsale';
+import { SimpleCrowdsaleContract } from '@contract/simplecrowdsale.contract';
 import { Wallet } from '@model/wallet.model';
 import { SimpleICO } from '@model/simpleico.model';
 import { EthereumService } from '@service/ethereum.service';
@@ -32,7 +32,7 @@ export class FixedSupply extends ContractDeployment {
   }
 
   createCrowdsale(){
-    this.crowdsale = new SimpleCrowdsale(this.wallet)
+    this.crowdsale = new SimpleCrowdsaleContract(this.wallet)
 
     this.crowdsale.connect()
 
