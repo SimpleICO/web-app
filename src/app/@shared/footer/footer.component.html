@@ -1,5 +1,9 @@
 <footer class="footer">
   <div class="container">
+    <div *ngIf="wallet.isUnlocked()" class="network {{ wallet.network }}" (click)="toggleNetwork()">
+      <span class="name">{{ wallet.network }}</span>
+      <span class="toggle"></span>
+    </div>
     <small class="copyright">&copy; Decentralized Technologies, S.A. 2018</small>
   </div>
 </footer>

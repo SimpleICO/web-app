@@ -46,7 +46,6 @@ export class WalletService {
     } else {
       this.network = Network.mainnet
     }
-
   }
 
   setBeneficiaryAddress(address: string){

@@ -240,13 +240,42 @@
 
 .footer {
   background-color: darken($purple, 7%);
-  .copyright {
+  .copyright,
+  .network {
     padding: get-spacer(2) 0;
-    text-align: center;
+    text-align: right;
     display: block;
     color: white;
     margin: 0;
   }
+  .network {
+    @include flex-row-end;
+    > span {
+      @include flex-column-center;
+    }
+    .name {
+      font-size: $font-size-sm;
+    }
+    .toggle {
+      &:after {
+        margin-left: get-spacer(2);
+        font-family: 'icomoon';
+      }
+    }
+    &.mainnet {
+      .toggle:after {
+        content: '\e671';
+        color: $green;
+      }
+    }
+    &.ropsten {
+      .toggle:after {
+        content: '\e670';
+        color: $red;
+      }
+    }
+  }
+  .copyright {}
 }
 
 #qr-code {
