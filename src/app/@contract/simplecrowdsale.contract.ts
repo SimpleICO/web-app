@@ -2,6 +2,7 @@ import { Crowdsale } from '@model/crowdsale.model';
 import { Wallet } from '@model/wallet.model';
 import { SimpleTokenContract } from '@contract/simpletoken.contract';
 import { environment as env } from '@environment/environment';
+import { Network } from '@model/network.model';
 
 declare var require: any
 
@@ -11,6 +12,10 @@ const SimpleCrowdsaleInterface = require('@abi/simplecrowdsale.abi.json')
 const Web3 = require('web3')
 
 export class SimpleCrowdsaleContract extends Crowdsale {
+
+  static readonly WEBSOCKET_PRIVATE = 'ws://localhost:7545'
+  static readonly WEBSOCKET_TESTNET = 'wss://ropsten.infura.io/ws'
+  static readonly WEBSOCKET_MAINNET = 'wss://mainnet.infura.io/ws'
 
   instance: any
 
@@ -40,17 +45,22 @@ export class SimpleCrowdsaleContract extends Crowdsale {
     super(wallet)
 
     this.web3 = wallet.web3
+  }
 
-    if (env.local) {
-      this.websocket = 'ws://localhost:7545'
-    } else if (env.staging) {
-      this.websocket = 'wss://ropsten.infura.io/ws'
-    } else {
-      this.websocket = 'wss://mainnet.infura.io/ws'
-    }
+  setWebsocketByNetwork(){
+    let websockets = {}
+    websockets[Network.mainnet] = SimpleCrowdsaleContract.WEBSOCKET_MAINNET
+    websockets[Network.testnet] = SimpleCrowdsaleContract.WEBSOCKET_TESTNET
+    websockets[Network.private] = SimpleCrowdsaleContract.WEBSOCKET_PRIVATE
+
+    this.websocket = websockets[this.wallet.network]
+
+    return this
   }
 
   subscribeToEvents(){
+    this.setWebsocketByNetwork()
+
     let provider = new Web3.providers.WebsocketProvider(this.websocket)
     let web3 = new Web3(provider)
 
