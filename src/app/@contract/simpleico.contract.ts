@@ -31,13 +31,15 @@ export class SimpleICOContract extends SimpleICO {
   }
 
   setContractAddressByNetwork(){
-    if (this.wallet.network == Network.mainnet) {
-      this.setAddress(SimpleICOContract.MAINNET)
-    } else if (this.wallet.network == Network.testnet) {
-      this.setAddress(SimpleICOContract.TESTNET)
-    } else {
-      this.setAddress(SimpleICOContract.PRIVATE)
-    }
+
+    let addresses = {}
+    addresses[Network.mainnet] = SimpleICOContract.MAINNET
+    addresses[Network.testnet] = SimpleICOContract.TESTNET
+    addresses[Network.private] = SimpleICOContract.PRIVATE
+
+    console.log(addresses, this.wallet.network)
+
+    this.setAddress(addresses[this.wallet.network])
 
     return this
   }

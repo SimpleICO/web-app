@@ -151,6 +151,7 @@ export class WalletService {
     }
 
     this.wallet.setMainnetProvider()
+    this.wallet.setNetwork(this.network)
 
     return false
   }
