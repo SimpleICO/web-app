@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ContainerComponent as CrowdsaleShowComponent } from '../crowdsale-show/container.component';
-// import { ActivatedRoute } from '@angular/router';
-// import { WalletService } from '@service/wallet.service';
-import { SimpleCrowdsale } from '@model/simplecrowdsale.model';
-import { SimpleToken } from '@model/simpletoken.model';
+import { SimpleCrowdsaleContract } from '@contract/simplecrowdsale.contract';
+import { SimpleTokenContract } from '@contract/simpletoken.contract';
 
 @Component({
   selector: 'app-container',
@@ -20,13 +18,13 @@ export class ContainerComponent extends CrowdsaleShowComponent {
     this.route.params.subscribe(({ crowdsaleAddress }) => {
       this.crowdsaleAddress = crowdsaleAddress
 
-      this.crowdsale = new SimpleCrowdsale(this.wallet.getInstance())
+      this.crowdsale = new SimpleCrowdsaleContract(this.wallet.getInstance())
       this.crowdsale.connect()
       this.crowdsale.setAddress(this.crowdsaleAddress)
       console.log(this.crowdsale)
       this.subscribe()
 
-      this.token = new SimpleToken(this.wallet.getInstance())
+      this.token = new SimpleTokenContract(this.wallet.getInstance())
       this.token.connect()
 
       this.getCrowdsaleData()

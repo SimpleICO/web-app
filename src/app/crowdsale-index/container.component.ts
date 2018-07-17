@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WalletService } from '@service/wallet.service';
 import { SimpleICOContract } from '@contract/simpleico.contract';
-import { SimpleCrowdsale } from '@model/simplecrowdsale.model';
+import { SimpleCrowdsaleContract } from '@contract/simplecrowdsale.contract';
 
 declare var require: any
 
@@ -15,7 +15,7 @@ export class ContainerComponent implements OnInit {
 
   simpleICO: SimpleICOContract
 
-  crowdsales: Array<SimpleCrowdsale> = []
+  crowdsales: Array<SimpleCrowdsaleContract> = []
 
   constructor(public wallet: WalletService) {}
 
@@ -42,7 +42,7 @@ export class ContainerComponent implements OnInit {
 
     let address = crowdsales.pop()
 
-    let crowdsale = new SimpleCrowdsale(this.wallet.getInstance())
+    let crowdsale = new SimpleCrowdsaleContract(this.wallet.getInstance())
     crowdsale.connect()
     crowdsale.setAddress(address)
 

@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { EthereumService } from '@service/ethereum.service';
 import { WalletService } from '@service/wallet.service';
 import { SharedService } from '@service/shared.service';
-import { SimpleCrowdsale } from '@model/simplecrowdsale.model';
-import { SimpleToken } from '@model/simpletoken.model';
+import { SimpleCrowdsaleContract } from '@contract/simplecrowdsale.contract';
+import { SimpleTokenContract } from '@contract/simpletoken.contract';
 
 declare var require: any
 
@@ -22,9 +22,9 @@ export class ContainerComponent implements OnInit {
 
   ethRaised: string = '0.0'
 
-  crowdsale: SimpleCrowdsale
+  crowdsale: SimpleCrowdsaleContract
 
-  token: SimpleToken
+  token: SimpleTokenContract
 
   txHistory: Array<any> = []
 
@@ -41,13 +41,13 @@ export class ContainerComponent implements OnInit {
     this.route.params.subscribe(({ crowdsaleAddress }) => {
       this.crowdsaleAddress = crowdsaleAddress
 
-      this.crowdsale = new SimpleCrowdsale(this.wallet.getInstance())
+      this.crowdsale = new SimpleCrowdsaleContract(this.wallet.getInstance())
       this.crowdsale.connect()
       this.crowdsale.setAddress(this.crowdsaleAddress)
       console.log(this.crowdsale)
       this.subscribe()
 
-      this.token = new SimpleToken(this.wallet.getInstance())
+      this.token = new SimpleTokenContract(this.wallet.getInstance())
       this.token.connect()
 
       this.getCrowdsaleData()
