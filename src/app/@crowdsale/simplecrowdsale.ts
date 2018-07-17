@@ -1,6 +1,6 @@
 import { Crowdsale } from '@model/crowdsale.model';
 import { Wallet } from '@model/wallet.model';
-import { SimpleToken } from '@token/simpletoken';
+import { SimpleTokenContract } from '@contract/simpletoken.contract';
 import { environment as env } from '@environment/environment';
 
 declare var require: any
@@ -26,7 +26,7 @@ export class SimpleCrowdsale extends Crowdsale {
 
   websocket: string
 
-  token: SimpleToken
+  token: SimpleTokenContract
 
   beneficiary: string
 
@@ -77,7 +77,7 @@ export class SimpleCrowdsale extends Crowdsale {
     this.ethRaised = ethers.utils.formatEther(weiRaised)
   }
 
-  async getAvailableTokens(token: SimpleToken){
+  async getAvailableTokens(token: SimpleTokenContract){
     let wei = await token.instance.methods.balanceOf(this.address).call()
     this.tokens = ethers.utils.formatEther(wei)
   }
@@ -97,7 +97,7 @@ export class SimpleCrowdsale extends Crowdsale {
 
   async setToken(){
     let address = await this.instance.methods.token().call()
-    this.token = new SimpleToken(this.wallet)
+    this.token = new SimpleTokenContract(this.wallet)
     this.token.connect()
     this.token.setAddress(address)
     this.token.crowdsale = this.getAddress()
@@ -105,7 +105,7 @@ export class SimpleCrowdsale extends Crowdsale {
     return this
   }
 
-  getToken(): SimpleToken {
+  getToken(): SimpleTokenContract {
     return this.token
   }
 

@@ -1,5 +1,5 @@
 import { ContractDeployment } from '@factory/contract-deployment';
-import { SimpleToken } from '@token/simpletoken';
+import { SimpleTokenContract } from '@contract/simpletoken.contract';
 import { SimpleCrowdsale } from '@crowdsale/simplecrowdsale';
 import { Wallet } from '@model/wallet.model';
 import { SimpleICO } from '@model/simpleico.model';
@@ -26,7 +26,7 @@ export class ExistingTokenDeployment extends ContractDeployment {
   async deployToken(){}
 
   createToken(){
-    this.token = new SimpleToken(this.wallet)
+    this.token = new SimpleTokenContract(this.wallet)
 
     this.token.connect()
 

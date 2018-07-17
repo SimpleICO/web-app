@@ -31,6 +31,9 @@
       "@crowdsale/*": [
         "app/@crowdsale/*"
       ],
+      "@contract/*": [
+        "app/@contract/*"
+      ],
       "@token/*": [
         "app/@token/*"
       ],
