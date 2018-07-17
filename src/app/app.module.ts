@@ -15,7 +15,7 @@ import { NewWalletModule } from './new-wallet/new-wallet.module';
 import { CrowdsaleShowModule } from './crowdsale-show/crowdsale-show.module';
 import { CrowdsaleIndexModule } from './crowdsale-index/crowdsale-index.module';
 import { ContractCreateModule } from './contract-create/contract-create.module';
-import { CrowdsaleDeployModule } from './crowdsale-deploy/crowdsale-deploy.module';
+import { ContractDeployModule } from './contract-deploy/contract-deploy.module';
 import { CrowdsaleByAddressModule } from './crowdsale-by-address/crowdsale-by-address.module';
 import { CrowdsaleIndexPublicModule } from './crowdsale-index-public/crowdsale-index-public.module';
 import { CrowdsaleShowPublicModule } from './crowdsale-show-public/crowdsale-show-public.module';
@@ -38,7 +38,7 @@ import { SettingsModule } from './settings/settings.module';
     CrowdsaleShowModule,
     CrowdsaleIndexModule,
     ContractCreateModule,
-    CrowdsaleDeployModule,
+    ContractDeployModule,
     SharedModule,
     CrowdsaleByAddressModule,
     CrowdsaleIndexPublicModule,

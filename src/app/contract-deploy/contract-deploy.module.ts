@@ -18,4 +18,4 @@ import { ExistingTokenComponent } from './existing-token/existing-token.componen
     ExistingTokenComponent,
   ]
 })
-export class CrowdsaleDeployModule { }
+export class ContractDeployModule { }

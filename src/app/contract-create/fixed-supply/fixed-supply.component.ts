@@ -95,6 +95,6 @@ export class FixedSupplyComponent implements OnInit {
     this.isInvalid = false
     this.errorMessage = ''
 
-    return this.router.navigate([`/crowdsale/${this.deployer.type}/deploy`]);
+    return this.router.navigate([`/contract/${this.deployer.type}/deploy`]);
   }
 }

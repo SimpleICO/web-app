@@ -84,6 +84,6 @@ export class ExistingTokenComponent implements OnInit {
     this.token.setAddress(this.token.address)
     this.crowdsale.setBeneficiary(this.crowdsale.beneficiary)
 
-    return this.router.navigate([`/crowdsale/${this.deployer.type}/deploy`]);
+    return this.router.navigate([`/contract/${this.deployer.type}/deploy`]);
   }
 }

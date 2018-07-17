@@ -17,10 +17,10 @@
 
 <app-qr-code-modal [model]="wallet"></app-qr-code-modal>
 
-<main id="crowdsale-deploy">
+<main id="contract-deploy">
 
-  <app-fixed-supply *ngIf="FixedSupplyCrowdsale == crowdsaleType"></app-fixed-supply>
-  <app-existing-token *ngIf="ExistingTokenCrowdsale == crowdsaleType"></app-existing-token>
+  <app-fixed-supply *ngIf="FixedSupplyCrowdsale == contractType"></app-fixed-supply>
+  <app-existing-token *ngIf="ExistingTokenCrowdsale == contractType"></app-existing-token>
 
 </main>
 

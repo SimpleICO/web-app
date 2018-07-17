@@ -13,7 +13,7 @@ import { ExistingTokenCrowdsale } from '@factory/existing-token.crowdsale';
 })
 export class ContainerComponent implements OnInit {
 
-  crowdsaleType: string
+  contractType: string
 
   withExistingToken: boolean = false
 
@@ -27,13 +27,13 @@ export class ContainerComponent implements OnInit {
     public wallet: WalletService) {}
 
   ngOnInit() {
-    this.route.params.subscribe(({ crowdsaleType }) => {
-      this.crowdsaleType = crowdsaleType
+    this.route.params.subscribe(({ contractType }) => {
+      this.contractType = contractType
     })
   }
 
   cancel(){
-    return this.router.navigate([`/crowdsale/${this.crowdsaleType}/create`])
+    return this.router.navigate([`/contract/${this.contractType}/create`])
   }
 
 }

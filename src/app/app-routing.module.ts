@@ -10,7 +10,7 @@ import { ContainerComponent as CrowdsaleShowPublicComponent } from './crowdsale-
 import { ContainerComponent as CrowdsaleIndexComponent } from './crowdsale-index/container.component';
 import { ContainerComponent as CrowdsaleIndexPublicComponent } from './crowdsale-index-public/container.component';
 import { ContainerComponent as ContractCreateComponent } from './contract-create/container.component';
-import { ContainerComponent as CrowdsaleDeployComponent } from './crowdsale-deploy/container.component';
+import { ContainerComponent as ContractDeployComponent } from './contract-deploy/container.component';
 import { ContainerComponent as CatalogComponent } from './catalog/container.component';
 import { ContainerComponent as SettingsComponent } from './settings/container.component';
 import { UnlockRouteGuard } from '@guard/unlock-route-guard';
@@ -61,8 +61,8 @@ const routes: Routes = [
     component: ContractCreateComponent,
     canActivate: [UnlockRouteGuard, AcceptTermsRouteGuard],
   },
-  { path: 'crowdsale/:crowdsaleType/deploy',
-    component: CrowdsaleDeployComponent,
+  { path: 'contract/:contractType/deploy',
+    component: ContractDeployComponent,
     canActivate: [UnlockRouteGuard, AcceptTermsRouteGuard],
   },
   { path: 'settings',
