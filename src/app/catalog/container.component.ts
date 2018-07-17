@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FixedSupplyCrowdsale } from '@factory/fixed-supply.crowdsale';
-import { ExistingToken } from '@factory/existing-token';
+import { FixedSupply } from '@factory/fixed-supply.deployment';
+import { ExistingTokenDeployment } from '@factory/existing-token.deployment';
 
 @Component({
   selector: 'app-container',
@@ -11,8 +11,8 @@ import { ExistingToken } from '@factory/existing-token';
 
 export class ContainerComponent implements OnInit {
 
-  ExistingToken: string = ExistingToken._type
-  FixedSupplyCrowdsale: string = FixedSupplyCrowdsale._type
+  ExistingTokenDeployment: string = ExistingTokenDeployment._type
+  FixedSupply: string = FixedSupply._type
 
   constructor() {}
 

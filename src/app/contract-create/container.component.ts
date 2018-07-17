@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ContractDeploymentFactory } from '@factory/contract-deployment.factory';
 
-import { FixedSupplyCrowdsale } from '@factory/fixed-supply.crowdsale';
-import { ExistingToken } from '@factory/existing-token';
+import { FixedSupply } from '@factory/fixed-supply.deployment';
+import { ExistingTokenDeployment } from '@factory/existing-token.deployment';
 
 @Component({
   selector: 'app-container',
@@ -14,8 +14,8 @@ export class ContainerComponent implements OnInit {
 
   contractType: string
 
-  ExistingToken: string = ExistingToken._type
-  FixedSupplyCrowdsale: string = FixedSupplyCrowdsale._type
+  ExistingTokenDeployment: string = ExistingTokenDeployment._type
+  FixedSupply: string = FixedSupply._type
 
   constructor(
     private route: ActivatedRoute,

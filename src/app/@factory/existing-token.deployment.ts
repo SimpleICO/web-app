@@ -11,7 +11,7 @@ declare var require: any
 const ethers = require('ethers')
 const Web3 = require('web3')
 
-export class ExistingToken extends ContractDeployment {
+export class ExistingTokenDeployment extends ContractDeployment {
 
   static readonly _type: string = 'existing-token'
 
@@ -20,7 +20,7 @@ export class ExistingToken extends ContractDeployment {
   constructor(wallet: Wallet, eth: EthereumService){
     super(wallet, eth)
 
-    this.type = ExistingToken._type
+    this.type = ExistingTokenDeployment._type
   }
 
   async deployToken(){}
