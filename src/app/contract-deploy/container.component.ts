@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CrowdsaleDeploymentFactory } from '@factory/crowdsale-deployment.factory';
+import { ContractDeploymentFactory } from '@factory/contract-deployment.factory';
 import { WalletService } from '@service/wallet.service';
 
 import { FixedSupplyCrowdsale } from '@factory/fixed-supply.crowdsale';
@@ -23,7 +23,7 @@ export class ContainerComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private crowdsaleFactory: CrowdsaleDeploymentFactory,
+    private contractFactory: ContractDeploymentFactory,
     public wallet: WalletService) {}
 
   ngOnInit() {

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CrowdsaleDeploymentFactory } from '@factory/crowdsale-deployment.factory';
+import { ContractDeploymentFactory } from '@factory/contract-deployment.factory';
 import { CrowdsaleDeployment } from '@factory/crowdsale-deployment';
 import { SimpleToken } from '@token/simpletoken';
 import { SimpleCrowdsale } from '@crowdsale/simplecrowdsale';
@@ -69,13 +69,13 @@ export class ExistingTokenComponent implements OnInit {
   @Input() gasPrice: number
 
   constructor(
-    private crowdsaleFactory: CrowdsaleDeploymentFactory,
+    private contractFactory: ContractDeploymentFactory,
     public wallet: WalletService,
     public eth: EthereumService,
     private router: Router,
     public shared: SharedService) {
 
-    this.deployer = crowdsaleFactory.deployer
+    this.deployer = contractFactory.deployer
   }
 
   ngOnInit() {

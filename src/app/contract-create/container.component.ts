@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CrowdsaleDeploymentFactory } from '@factory/crowdsale-deployment.factory';
-import { CrowdsaleDeployment } from '@factory/crowdsale-deployment';
+import { ContractDeploymentFactory } from '@factory/contract-deployment.factory';
 
 import { FixedSupplyCrowdsale } from '@factory/fixed-supply.crowdsale';
 import { ExistingTokenCrowdsale } from '@factory/existing-token.crowdsale';
@@ -20,7 +19,7 @@ export class ContainerComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private crowdsaleFactory: CrowdsaleDeploymentFactory) {
+    private contractFactory: ContractDeploymentFactory) {
 
   }
 
@@ -28,7 +27,7 @@ export class ContainerComponent implements OnInit {
     this.route.params.subscribe(({ contractType }) => {
       this.contractType = contractType
 
-      let deployer = this.crowdsaleFactory.init(contractType)
+      let deployer = this.contractFactory.init(contractType)
 
       console.log(deployer, deployer.type)
     })

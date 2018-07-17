@@ -9,7 +9,7 @@ import { ExistingTokenCrowdsale } from '@factory/existing-token.crowdsale';
 @Injectable({
   providedIn: 'root'
 })
-export class CrowdsaleDeploymentFactory {
+export class ContractDeploymentFactory {
 
   crowdsaleType: string
 

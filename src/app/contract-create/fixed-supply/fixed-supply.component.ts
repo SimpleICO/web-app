@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CrowdsaleDeploymentFactory } from '@factory/crowdsale-deployment.factory';
+import { ContractDeploymentFactory } from '@factory/contract-deployment.factory';
 import { CrowdsaleDeployment } from '@factory/crowdsale-deployment';
 import { Router } from "@angular/router";
 import { Crowdsale } from '@model/crowdsale.model';
@@ -28,10 +28,10 @@ export class FixedSupplyComponent implements OnInit {
 
   constructor(
     public eth: EthereumService,
-    private crowdsaleFactory: CrowdsaleDeploymentFactory,
+    private contractFactory: ContractDeploymentFactory,
     private router: Router) {
 
-    this.deployer = crowdsaleFactory.deployer
+    this.deployer = contractFactory.deployer
 
   }
 
