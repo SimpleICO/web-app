@@ -1,9 +1,9 @@
 import { Wallet } from '@model/wallet.model';
-import { Contract } from '@model/contract.model';
+import { SimpleICO } from '@model/simpleico.model';
 import { EthereumService } from '@service/ethereum.service';
 import { Crowdsale } from '@model/crowdsale.model';
 import { Token } from '@model/token.model';
-import { SimpleICO } from '@model/simpleico.model';
+import { SimpleICOContract } from '@contract/simpleico.contract';
 
 declare var require: any
 
@@ -23,7 +23,7 @@ export abstract class ContractDeployment {
 
   crowdsale: Crowdsale
 
-  simpleICO: Contract
+  simpleICO: SimpleICO
 
   type: string
 
@@ -135,7 +135,7 @@ export abstract class ContractDeployment {
   }
 
   createSimpleICO(){
-    this.simpleICO = new SimpleICO(this.wallet)
+    this.simpleICO = new SimpleICOContract(this.wallet)
     this.simpleICO.connect()
   }
 

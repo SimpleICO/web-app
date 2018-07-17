@@ -2,7 +2,7 @@ import { ContractDeployment } from '@factory/contract-deployment';
 import { SimpleTokenContract } from '@contract/simpletoken.contract';
 import { SimpleCrowdsaleContract } from '@contract/simplecrowdsale.contract';
 import { Wallet } from '@model/wallet.model';
-import { SimpleICO } from '@model/simpleico.model';
+import { SimpleICOContract } from '@contract/simpleico.contract';
 import { EthereumService } from '@service/ethereum.service';
 import { Subject } from 'rxjs';
 

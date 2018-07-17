@@ -3,7 +3,7 @@ import { ContractDeploymentFactory } from '@factory/contract-deployment.factory'
 import { ContractDeployment } from '@factory/contract-deployment';
 import { SimpleTokenContract } from '@contract/simpletoken.contract';
 import { SimpleCrowdsaleContract } from '@contract/simplecrowdsale.contract';
-import { SimpleICO } from '@model/simpleico.model';
+import { SimpleICOContract } from '@contract/simpleico.contract';
 import { InsufficientFundsError } from '@error/insufficient-funds.error';
 import { WalletService } from '@service/wallet.service';
 import { EthereumService } from '@service/ethereum.service';

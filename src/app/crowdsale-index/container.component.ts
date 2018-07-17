@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WalletService } from '@service/wallet.service';
-import { SimpleICO } from '@model/simpleico.model';
+import { SimpleICOContract } from '@contract/simpleico.contract';
 import { SimpleCrowdsale } from '@model/simplecrowdsale.model';
 
 declare var require: any
@@ -13,14 +13,14 @@ declare var require: any
 
 export class ContainerComponent implements OnInit {
 
-  simpleICO: SimpleICO
+  simpleICO: SimpleICOContract
 
   crowdsales: Array<SimpleCrowdsale> = []
 
   constructor(public wallet: WalletService) {}
 
   ngOnInit() {
-    this.simpleICO = new SimpleICO(this.wallet.getInstance())
+    this.simpleICO = new SimpleICOContract(this.wallet.getInstance())
     this.simpleICO.connect()
   }
 

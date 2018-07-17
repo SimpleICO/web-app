@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SimpleICO } from '@model/simpleico.model';
+import { SimpleICOContract } from '@contract/simpleico.contract';
 import { WalletService } from '@service/wallet.service';
 import { ContainerComponent as CrowdsaleIndexComponent } from '../crowdsale-index/container.component';
 
@@ -21,7 +21,7 @@ export class ContainerComponent extends CrowdsaleIndexComponent {
   }
 
   ngOnInit() {
-    this.simpleICO = new SimpleICO(this.wallet.getInstance())
+    this.simpleICO = new SimpleICOContract(this.wallet.getInstance())
     this.simpleICO.connect()
 
     this.address = this.wallet.getAddress()
