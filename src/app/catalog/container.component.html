@@ -4,15 +4,15 @@
 <main id="catalog">
   <section class="section">
     <div class="container">
-      <h5 class="title">Crowdsales catalog</h5>
+      <h5 class="title">Smart Contracts Catalog</h5>
 
-      <a [routerLink]="['/crowdsale', FixedSupplyCrowdsale, 'create']" class="card bg-purple border-light text-white">
+      <a [routerLink]="['/crowdsale', FixedSupplyCrowdsale, 'create']" class="card bg-primary border-light text-white">
         <h5 class="card-header">Simple ERC20 Token</h5>
         <div class="card-body">
           <p class="card-text">Deploy an ERC20 token with a name, symbol, supply and a price. A crowdsale will take charge of exchanging your token for ETH.</p>
         </div>
       </a>
-      <a [routerLink]="['/crowdsale', ExistingTokenCrowdsale, 'create']" class="card bg-purple border-light text-white">
+      <a [routerLink]="['/crowdsale', ExistingTokenCrowdsale, 'create']" class="card bg-primary border-light text-white">
         <h5 class="card-header">Existing ERC20 Token</h5>
         <div class="card-body">
           <p class="card-text">Deploy a crowdsale for an existing ERC20 token. You need to own a percentage of the token.</p>
