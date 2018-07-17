@@ -13,7 +13,7 @@ import { ExistingTokenCrowdsale } from '@factory/existing-token.crowdsale';
 })
 export class ContainerComponent implements OnInit {
 
-  crowdsaleType: string
+  contractType: string
 
   ExistingTokenCrowdsale: string = ExistingTokenCrowdsale._type
   FixedSupplyCrowdsale: string = FixedSupplyCrowdsale._type
@@ -25,10 +25,10 @@ export class ContainerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe(({ crowdsaleType }) => {
-      this.crowdsaleType = crowdsaleType
+    this.route.params.subscribe(({ contractType }) => {
+      this.contractType = contractType
 
-      let deployer = this.crowdsaleFactory.init(crowdsaleType)
+      let deployer = this.crowdsaleFactory.init(contractType)
 
       console.log(deployer, deployer.type)
     })

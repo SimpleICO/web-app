@@ -1,0 +1,10 @@
+<app-header></app-header>
+<app-mobile-menu></app-mobile-menu>
+
+<main id="contract-create">
+
+  <app-fixed-supply *ngIf="FixedSupplyCrowdsale == contractType"></app-fixed-supply>
+
+  <app-existing-token *ngIf="ExistingTokenCrowdsale == contractType"></app-existing-token>
+
+</main>
