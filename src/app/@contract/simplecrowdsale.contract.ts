@@ -124,14 +124,11 @@ export class SimpleCrowdsaleContract extends Crowdsale {
 
     this.instance = _contract
 
-    console.log(this.instance)
-
     return this
   }
 
   async deploy(tokenPrice: number, tokenAddress: string){
 
-    console.log(tokenPrice)
     let price = ethers.utils.parseEther(tokenPrice.toString())
 
     let beneficiary = this.beneficiary || this.wallet.address

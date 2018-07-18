@@ -34,8 +34,6 @@ export class ExistingTokenComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.deployer)
-
     this.deployer
       .createToken()
       .createCrowdsale()
@@ -51,7 +49,6 @@ export class ExistingTokenComponent implements OnInit {
   }
 
   onCreateCrowdsale(){
-    console.log(this.token, this.crowdsale)
 
     if (this.token.address.length <= 0) {
       this.isInvalid = true

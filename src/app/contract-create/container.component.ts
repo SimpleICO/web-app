@@ -28,8 +28,6 @@ export class ContainerComponent implements OnInit {
       this.contractType = contractType
 
       let deployer = this.contractFactory.init(contractType)
-
-      console.log(deployer, deployer.type)
     })
   }
 

@@ -81,8 +81,6 @@ export class ExistingTokenComponent implements OnInit {
     this.token = this.deployer.getToken()
     this.crowdsale = this.deployer.getCrowdsale()
 
-    console.log(this.deployer, this.token, this.crowdsale)
-
     this.stepCount = Object.keys(this.steps).length
 
     this.init()
@@ -118,8 +116,6 @@ export class ExistingTokenComponent implements OnInit {
 
       let balanceOf = ethers.utils.bigNumberify(this.token.balanceOf)
       let hasInsufficientOwnership = balanceOf.lte(ethers.utils.bigNumberify(0))
-
-      console.log(hasInsufficientOwnership, balanceOf)
 
       if (hasInsufficientOwnership) {
         throw new InsufficientFundsError(InsufficientFundsError.MESSAGE)
@@ -223,8 +219,6 @@ export class ExistingTokenComponent implements OnInit {
 
       let wei = this.deployer.txCost.WEI
       let hasInsufficientFunds = wei.gt(this.wallet.balance)
-
-      console.log(hasInsufficientFunds, wei.toString(), this.wallet.balance)
 
       if (hasInsufficientFunds) {
         throw new InsufficientFundsError(InsufficientFundsError.MESSAGE)

@@ -45,7 +45,6 @@ export class FixedSupplyComponent implements OnInit {
       this.crowdsale = new SimpleCrowdsaleContract(this.wallet.getInstance())
       this.crowdsale.connect()
       this.crowdsale.setAddress(this.contractAddress)
-      console.log(this.crowdsale)
       this.subscribe()
 
       this.token = new SimpleTokenContract(this.wallet.getInstance())
@@ -64,7 +63,6 @@ export class FixedSupplyComponent implements OnInit {
   subscribe(){
     this.crowdsale.subscribeToEvents()
       .on('data', event => {
-        console.log(event)
         this.crowdsale.getEthRaised()
         this.crowdsale.getAvailableTokens(this.token)
 
@@ -83,8 +81,6 @@ export class FixedSupplyComponent implements OnInit {
 
     try {
       let tx = await this.crowdsale.web3.eth.getTransaction(hash)
-
-      console.log(tx)
 
       this.txHistory.unshift({
         hash: tx.hash,
@@ -106,7 +102,6 @@ export class FixedSupplyComponent implements OnInit {
       fromBlock: '0x0',
       address: this.crowdsale.address
     }).then(res => {
-      console.log(res)
       res.forEach(rec => {
         this.getTransaction(rec.transactionHash)
       })

@@ -74,7 +74,6 @@ export class Wallet {
       this.mnemonic = mnemonic
       this.privateKey = wallet.privateKey
       this.address = wallet.address
-      console.log(wallet)
       return this
     } catch (error) {
       console.log(error)
@@ -88,7 +87,6 @@ export class Wallet {
       this.instance = wallet
       this.privateKey = wallet.privateKey
       this.address = wallet.address
-      console.log(wallet)
       return this
     } catch (error) {
       console.log(error)

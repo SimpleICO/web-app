@@ -72,27 +72,15 @@ export class SimpleTokenContract extends Token {
     this.supply = await this.instance.methods.totalSupply().call()
   }
 
-  onTransfer(){
-    this.truffleContract.Transfer().watch((error, result) => {
-      if (error) console.log(error)
-
-      console.log(result)
-    })
-  }
-
   connect(){
     let _contract = new this.web3.eth.Contract(SimpleTokenInterface.abi)
 
     this.instance = _contract
 
-    console.log(this.instance)
-
     return this
   }
 
   async deploy(){
-
-    console.log(this.decimals, this.supply)
 
     try {
       return this.instance.deploy({

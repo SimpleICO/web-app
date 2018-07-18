@@ -37,8 +37,6 @@ export class SimpleICOContract extends SimpleICO {
     addresses[Network.testnet] = SimpleICOContract.TESTNET
     addresses[Network.private] = SimpleICOContract.PRIVATE
 
-    console.log(addresses, this.wallet.network)
-
     this.setAddress(addresses[this.wallet.network])
 
     return this
@@ -62,8 +60,6 @@ export class SimpleICOContract extends SimpleICO {
     this.instance = _contract
 
     this.setContractAddressByNetwork()
-
-    console.log(this.instance)
 
     return this
   }

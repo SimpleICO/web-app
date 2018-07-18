@@ -37,7 +37,6 @@ export class ContainerComponent extends FixedSupplyComponent {
 
   async getCrowdsalesByAddress(){
     let crowdsales = await this.simpleICO.instance.methods.getCrowdsalesByAddress(this.address).call()
-    console.log(crowdsales)
 
     this.initCrowdsales(crowdsales)
   }

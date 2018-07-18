@@ -40,7 +40,6 @@ export class FixedSupplyComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.deployer)
 
     this.deployer
       .createToken()
@@ -57,7 +56,6 @@ export class FixedSupplyComponent implements OnInit {
   }
 
   onCreateCrowdsale(){
-    console.log(this.token, this.crowdsale)
 
     if (this.token.name.length <= 0) {
       this.isInvalid = true

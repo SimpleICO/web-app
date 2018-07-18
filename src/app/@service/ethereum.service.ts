@@ -36,8 +36,6 @@ export class EthereumService {
   updateGasPrice(price: number){
 
     this.defaultGasPrice = Web3.utils.toWei(price.toString(), 'gwei')
-
-    console.log(`gas price: ${this.defaultGasPrice}`)
   }
 
   async getTxCost(gas, gasPrice = this.defaultGasPrice){

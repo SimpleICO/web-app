@@ -48,7 +48,6 @@ export class FixedSupplyDeployment
       try {
 
         let nonce = await this.eth.getNonce(this.simpleICO)
-        console.log(`simpleico nonce: ${nonce}`)
 
         let txObject = this.simpleICO.instance.methods.addCrowdsale(this.crowdsale.getAddress())
 
@@ -64,12 +63,10 @@ export class FixedSupplyDeployment
         }
 
         let signedTx = await this.simpleICO.web3.eth.accounts.signTransaction(txOptions, this.wallet.privateKey)
-        console.log(signedTx)
 
         let tx = this.simpleICO.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
 
         tx.on('transactionHash', hash => {
-          console.log(hash)
           this.simpleICO.tx = hash
         })
 
@@ -78,7 +75,6 @@ export class FixedSupplyDeployment
         })
 
         tx.on('receipt', async receipt => {
-          console.log(receipt)
           resolve(receipt)
         })
       } catch (error) {
@@ -94,7 +90,6 @@ export class FixedSupplyDeployment
       try {
 
         let nonce = await this.eth.getNonce(this.token)
-        console.log(`token nonce: ${nonce}`)
 
         let txObject = await this.token.deploy()
 
@@ -108,15 +103,11 @@ export class FixedSupplyDeployment
           nonce: Web3.utils.toHex(nonce)
         }
 
-        console.log(txOptions)
-
         let signedTx = await this.token.web3.eth.accounts.signTransaction(txOptions, this.wallet.privateKey)
-        console.log(signedTx)
 
         let tx = this.token.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
 
         tx.on('transactionHash', hash => {
-          console.log(hash)
           this.token.tx = hash
         })
 
@@ -125,7 +116,6 @@ export class FixedSupplyDeployment
         })
 
         tx.on('receipt', receipt => {
-          console.log(receipt)
           resolve(receipt)
         })
       } catch (error) {
@@ -142,7 +132,6 @@ export class FixedSupplyDeployment
         let txObject = await this.crowdsale.deploy(this.token.price, this.token.getAddress())
 
         let nonce = await this.eth.getNonce(this.crowdsale)
-        console.log(`crowdsale nonce: ${nonce}`)
 
         let txOptions = {
           from: this.wallet.address,
@@ -155,12 +144,10 @@ export class FixedSupplyDeployment
         }
 
         let signedTx = await this.crowdsale.web3.eth.accounts.signTransaction(txOptions, this.wallet.privateKey)
-        console.log(signedTx)
 
         let tx = this.crowdsale.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
 
         tx.on('transactionHash', hash => {
-          console.log(hash)
           this.crowdsale.tx = hash
         })
 
@@ -169,7 +156,6 @@ export class FixedSupplyDeployment
         })
 
         tx.on('receipt', async receipt => {
-          console.log(receipt)
           this.crowdsale.setAddress(receipt.contractAddress)
           resolve(receipt)
         })
@@ -185,10 +171,7 @@ export class FixedSupplyDeployment
 
       try {
 
-        console.log(this.gas, this.token.supply, this.crowdsale.getAddress(), this.token.getAddress(), this.wallet.address)
-
         let nonce = await this.eth.getNonce(this.token)
-        console.log(`transfer token nonce: ${nonce}`)
 
         let txObject = this.token.instance.methods.transfer(this.crowdsale.getAddress(), this.token.supply)
 
@@ -204,12 +187,10 @@ export class FixedSupplyDeployment
         }
 
         let signedTx = await this.token.web3.eth.accounts.signTransaction(txOptions, this.wallet.privateKey)
-        console.log(signedTx)
 
         let tx = this.token.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
 
         tx.on('transactionHash', hash => {
-          console.log(hash)
           this.token.tx = hash
         })
 
@@ -218,7 +199,6 @@ export class FixedSupplyDeployment
         })
 
         tx.on('receipt', async receipt => {
-          console.log(receipt)
           resolve(receipt)
         })
       } catch (error) {

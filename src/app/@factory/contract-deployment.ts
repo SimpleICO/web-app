@@ -70,15 +70,12 @@ export abstract class ContractDeployment {
   async estimateTokenDeploymentCost(){
 
     let txObject = await this.token.deploy()
-    console.log(txObject)
 
     let gas = await txObject.estimateGas()
     this.gas += gas + this.gasIncrement
-    console.log(gas)
 
     let txCost = await this.eth.getTxCost(gas)
     this.txCost = txCost
-    console.log(txCost)
 
     return txCost
   }
@@ -86,14 +83,11 @@ export abstract class ContractDeployment {
   async estimateCrowdsaleDeploymentCost(){
 
     let txObject = await this.crowdsale.deploy(this.token.price, ContractDeployment.DUMMY_ADDRESS)
-    console.log(txObject)
 
     let gas = await txObject.estimateGas()
     this.gas += gas + this.gasIncrement
-    console.log(gas)
 
     let txCost = await this.eth.getTxCost(gas)
-    console.log(txCost)
 
     this.sumTxCost(txCost)
 
@@ -102,17 +96,12 @@ export abstract class ContractDeployment {
 
   async estimateTokenTransferCost(){
 
-    console.log(this.token)
-
     let txObject = this.token.instance.methods.transfer(this.wallet.address, this.token.supply.toString())
-    console.log(txObject)
 
     let gas = await txObject.estimateGas()
     this.gas += gas + this.gasIncrement
-    console.log(gas)
 
     let txCost = await this.eth.getTxCost(gas)
-    console.log(txCost)
 
     this.sumTxCost(txCost)
 
@@ -121,17 +110,12 @@ export abstract class ContractDeployment {
 
   async estimateSimpleICOCost(){
 
-    console.log(this.simpleICO)
-
     let txObject = await this.simpleICO.instance.methods.addCrowdsale(ContractDeployment.CONTRACT_DUMMY_ADDRESS)
-    console.log(txObject)
 
     let gas = await txObject.estimateGas()
     this.gas += gas + this.gasIncrement
-    console.log(gas)
 
     let txCost = await this.eth.getTxCost(gas)
-    console.log(txCost)
 
     this.sumTxCost(txCost)
 
@@ -146,7 +130,6 @@ export abstract class ContractDeployment {
   async getTxCost(){
     let txCost = await this.eth.getTxCost(0)
     this.txCost = txCost
-    console.log(txCost)
   }
 
   sumTxCost(txCost){

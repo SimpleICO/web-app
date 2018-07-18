@@ -50,7 +50,6 @@ export class ExistingTokenDeployment
       try {
 
         let nonce = await this.eth.getNonce(this.simpleICO)
-        console.log(`simpleico nonce: ${nonce}`)
 
         let txObject = this.simpleICO.instance.methods.addCrowdsale(this.crowdsale.getAddress())
 
@@ -66,12 +65,10 @@ export class ExistingTokenDeployment
         }
 
         let signedTx = await this.simpleICO.web3.eth.accounts.signTransaction(txOptions, this.wallet.privateKey)
-        console.log(signedTx)
 
         let tx = this.simpleICO.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
 
         tx.on('transactionHash', hash => {
-          console.log(hash)
           this.simpleICO.tx = hash
         })
 
@@ -80,7 +77,6 @@ export class ExistingTokenDeployment
         })
 
         tx.on('receipt', async receipt => {
-          console.log(receipt)
           resolve(receipt)
         })
       } catch (error) {
@@ -91,8 +87,6 @@ export class ExistingTokenDeployment
 
   async deployCrowdsale(){
 
-    console.log(this.token)
-
     return new Promise(async (resolve, reject) => {
 
       try {
@@ -100,7 +94,6 @@ export class ExistingTokenDeployment
         let txObject = await this.crowdsale.deploy(this.token.price, this.token.getAddress())
 
         let nonce = await this.eth.getNonce(this.crowdsale)
-        console.log(`crowdsale nonce: ${nonce}`)
 
         let txOptions = {
           from: this.wallet.address,
@@ -113,12 +106,10 @@ export class ExistingTokenDeployment
         }
 
         let signedTx = await this.crowdsale.web3.eth.accounts.signTransaction(txOptions, this.wallet.privateKey)
-        console.log(signedTx)
 
         let tx = this.crowdsale.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
 
         tx.on('transactionHash', hash => {
-          console.log(hash)
           this.crowdsale.tx = hash
         })
 
@@ -127,7 +118,6 @@ export class ExistingTokenDeployment
         })
 
         tx.on('receipt', async receipt => {
-          console.log(receipt)
           this.crowdsale.setAddress(receipt.contractAddress)
           resolve(receipt)
         })
@@ -139,14 +129,11 @@ export class ExistingTokenDeployment
 
   async transferToken(){
 
-    console.log(this.gas, this.token.balanceOf, this.crowdsale.getAddress(), this.token.getAddress(), this.wallet.address)
-
     return new Promise(async (resolve, reject) => {
 
       try {
 
         let nonce = await this.eth.getNonce(this.token)
-        console.log(`transfer token nonce: ${nonce}`)
 
         let txObject = this.token.instance.methods.transfer(this.crowdsale.getAddress(), this.token.balanceOf)
 
@@ -162,11 +149,9 @@ export class ExistingTokenDeployment
         }
 
         let signedTx = await this.token.web3.eth.accounts.signTransaction(txOptions, this.wallet.privateKey)
-        console.log(signedTx)
 
         let tx = this.token.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
         tx.on('transactionHash', hash => {
-          console.log(hash)
           this.token.tx = hash
         })
 
@@ -175,7 +160,6 @@ export class ExistingTokenDeployment
         })
 
         tx.on('receipt', receipt => {
-          console.log(receipt)
           resolve(receipt)
         })
       } catch (error) {
@@ -187,14 +171,11 @@ export class ExistingTokenDeployment
   async estimateTokenTransferCost(){
 
     let txObject = this.token.instance.methods.transfer(this.wallet.address, this.token.balanceOf)
-    console.log(txObject)
 
     let gas = await txObject.estimateGas({from: this.wallet.address})
     this.gas += gas + this.gasIncrement
-    console.log(gas)
 
     let txCost = await this.eth.getTxCost(gas)
-    console.log(txCost)
 
     this.sumTxCost(txCost)
 

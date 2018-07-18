@@ -143,7 +143,6 @@ export class FixedSupplyComponent implements OnInit {
       this.token.setAddress(receipt.contractAddress)
 
       await this.deployer.getTokenSupply()
-      // this.supply = ethers.utils.bigNumberify(this.token.supply).div(1e18.toString()).toString()
 
       this.steps.deployToken.isComplete = true
     } catch (error) {
@@ -219,8 +218,6 @@ export class FixedSupplyComponent implements OnInit {
 
     let wei = this.deployer.txCost.WEI
     let hasInsufficientFunds = wei.gt(this.wallet.balance)
-
-    console.log(hasInsufficientFunds, wei.toString(), this.wallet.balance)
 
     if (hasInsufficientFunds) {
       throw new InsufficientFundsError(InsufficientFundsError.MESSAGE)

@@ -32,7 +32,6 @@ export class FixedSupplyComponent implements OnInit {
 
   async getCrowdsales(){
     let crowdsales = await this.simpleICO.instance.methods.getCrowdsales().call()
-    console.log(crowdsales)
 
     this.initCrowdsales(crowdsales)
   }

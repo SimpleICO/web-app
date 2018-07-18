@@ -18,7 +18,6 @@ export class FixedSupplyComponent extends PrivateFixedSupplyComponent {
       this.crowdsale = new SimpleCrowdsaleContract(this.wallet.getInstance())
       this.crowdsale.connect()
       this.crowdsale.setAddress(this.contractAddress)
-      console.log(this.crowdsale)
       this.subscribe()
 
       this.token = new SimpleTokenContract(this.wallet.getInstance())
