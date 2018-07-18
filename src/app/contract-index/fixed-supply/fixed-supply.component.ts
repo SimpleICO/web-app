@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WalletService } from '@service/wallet.service';
+import { SettingsService } from '@service/settings.service';
 import { SimpleICOContract } from '@contract/simpleico.contract';
 import { SimpleCrowdsaleContract } from '@contract/simplecrowdsale.contract';
 
@@ -19,7 +20,15 @@ export class FixedSupplyComponent implements OnInit {
   FixedSupplyDeployment: string = FixedSupplyDeployment._type
 
   constructor(
-    public wallet: WalletService) {}
+    public wallet: WalletService,
+    public settings: SettingsService) {
+
+    settings.onNetworkChange.subscribe((networkChanged) => {
+      this.crowdsales = []
+      this.ngOnInit()
+      this.getCrowdsales()
+    })
+  }
 
   ngOnInit() {
     this.simpleICO = new SimpleICOContract(this.wallet.getInstance())

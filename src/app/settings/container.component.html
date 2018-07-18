@@ -9,7 +9,7 @@
       <fieldset class="form-group dark-theme pt-3">
         <label for="network">Network</label>
         <select name="network" id="network" class="form-control" (change)="selectNetwork()" [(ngModel)]="network">
-          <option [value]="_network" [selected]="_network == network ? true : null" *ngFor="let _network of networks">{{ _network }}</option>
+          <option [value]="_network" [selected]="_network == network ? true : null" *ngFor="let _network of settings.networks">{{ _network }}</option>
         </select>
       </fieldset>
     </div>

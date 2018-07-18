@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SimpleICOContract } from '@contract/simpleico.contract';
 import { WalletService } from '@service/wallet.service';
+import { SettingsService } from '@service/settings.service';
 import { FixedSupplyComponent } from '../contract-index/fixed-supply/fixed-supply.component';
 
 import { FixedSupplyDeployment } from '@factory/fixed-supply.deployment';
@@ -18,10 +19,16 @@ export class ContainerComponent extends FixedSupplyComponent {
   FixedSupplyDeployment: string = FixedSupplyDeployment._type
 
   constructor(
-    public wallet: WalletService){
+    public wallet: WalletService,
+    public settings: SettingsService){
 
-    super(wallet)
+    super(wallet, settings)
 
+    settings.onNetworkChange.subscribe((networkChanged) => {
+      this.crowdsales = []
+      this.ngOnInit()
+      this.getCrowdsalesByAddress()
+    })
   }
 
   ngOnInit() {

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment as env } from '@environment/environment';
 import { WalletService } from '@service/wallet.service';
 import { Subject } from 'rxjs';
+import { Network } from '@model/network.model';
 
 declare var require: any
 
@@ -14,19 +15,31 @@ const Web3 = require('web3')
 })
 export class EthereumService {
 
+  static readonly ETHERSCAN_MAINNET: string = 'https://etherscan.io'
+  static readonly ETHERSCAN_TESTNET: string = 'https://ropsten.etherscan.io'
+
   ethPrice: string = '0.0'
 
   defaultGasPrice: number = 49000000000
 
-  etherscanURL: string = 'https://ropsten.etherscan.io'
+  etherscanURL: string
 
   constructor(
     private wallet: WalletService,
     private http: HttpClient) {
 
-    if (env.production) {
-      this.etherscanURL = 'https://etherscan.io'
-    }
+    this.setEtherScanURLByNetwork()
+  }
+
+  setEtherScanURLByNetwork(){
+
+    let networks = {}
+    networks[Network.mainnet] = EthereumService.ETHERSCAN_MAINNET
+    networks[Network.testnet] = EthereumService.ETHERSCAN_TESTNET
+
+    this.etherscanURL = networks[this.wallet.network]
+
+    return this
   }
 
   /**

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { WalletService } from '@service/wallet.service';
 import { Network } from '@model/network.model';
+import { SettingsService } from '@service/settings.service';
 
 @Component({
   selector: 'app-container',
@@ -11,12 +12,10 @@ export class ContainerComponent implements OnInit {
 
   @Input() network: string
 
-  networks: Array<string> = [
-    Network.mainnet,
-    Network.testnet
-  ]
+  constructor(
+    private wallet: WalletService,
+    public settings: SettingsService) {
 
-  constructor(private wallet: WalletService) {
     this.network = wallet.network
   }
 
@@ -24,7 +23,6 @@ export class ContainerComponent implements OnInit {
   }
 
   selectNetwork(){
-    this.wallet.setProviderByNetwork(this.network)
+    this.settings.setNetwork(this.network)
   }
-
 }
