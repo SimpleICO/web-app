@@ -6,9 +6,8 @@ import { SharedService } from '@service/shared.service';
 import { SimpleCrowdsaleContract } from '@contract/simplecrowdsale.contract';
 import { SimpleTokenContract } from '@contract/simpletoken.contract';
 
-declare var require: any
-
-const ethers = require('ethers')
+import { FixedSupply } from '@factory/fixed-supply.deployment';
+import { ExistingTokenDeployment } from '@factory/existing-token.deployment';
 
 @Component({
   selector: 'app-container',
@@ -20,105 +19,18 @@ export class ContainerComponent implements OnInit {
 
   contractAddress: string
 
-  ethRaised: string = '0.0'
+  contractType: string
 
-  crowdsale: SimpleCrowdsaleContract
-
-  token: SimpleTokenContract
-
-  txHistory: Array<any> = []
-
-  txs: Array<string> = []
+  ExistingTokenDeployment: string = ExistingTokenDeployment._type
+  FixedSupply: string = FixedSupply._type
 
   constructor(
-    public route: ActivatedRoute,
-    public eth: EthereumService,
-    public shared: SharedService,
-    private zone: NgZone,
-    public wallet: WalletService) {}
+    public route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.route.params.subscribe(({ contractAddress }) => {
+    this.route.params.subscribe(({ contractAddress, contractType }) => {
       this.contractAddress = contractAddress
-
-      this.crowdsale = new SimpleCrowdsaleContract(this.wallet.getInstance())
-      this.crowdsale.connect()
-      this.crowdsale.setAddress(this.contractAddress)
-      console.log(this.crowdsale)
-      this.subscribe()
-
-      this.token = new SimpleTokenContract(this.wallet.getInstance())
-      this.token.connect()
-
-      this.getCrowdsaleData()
-      this.getTokenData()
+      this.contractType = contractType
     })
-  }
-
-  refresh(){
-    this.crowdsale.getEthRaised()
-    this.crowdsale.getAvailableTokens(this.token)
-  }
-
-  subscribe(){
-    this.crowdsale.subscribeToEvents()
-      .on('data', event => {
-        console.log(event)
-        this.crowdsale.getEthRaised()
-        this.crowdsale.getAvailableTokens(this.token)
-
-        this.getTransaction(event.transactionHash)
-      }).on('error', error => {
-        console.log(error)
-      })
-  }
-
-  async getTransaction(hash: string){
-    if (this.txs.indexOf(hash) != -1) {
-      return false
-    }
-
-    this.txs.push(hash)
-
-    try {
-      let tx = await this.crowdsale.web3.eth.getTransaction(hash)
-
-      console.log(tx)
-
-      this.txHistory.unshift({
-        hash: tx.hash,
-        from: tx.from,
-        to: tx.to,
-        value: `ETH ${ethers.utils.formatEther(tx.value)}`
-      })
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  async getCrowdsaleData(){
-    this.crowdsale.getEthRaised()
-    this.crowdsale.getBeneficiary()
-    this.crowdsale.getPrice()
-
-    this.crowdsale.web3.eth.getPastLogs({
-      fromBlock: '0x0',
-      address: this.crowdsale.address
-    }).then(res => {
-      console.log(res)
-      res.forEach(rec => {
-        this.getTransaction(rec.transactionHash)
-      })
-    }).catch(err => console.log)
-  }
-
-  async getTokenData(){
-    let tokenAddress = await this.crowdsale.instance.methods.token().call()
-    this.token.setAddress(tokenAddress)
-
-    this.crowdsale.getAvailableTokens(this.token)
-
-    this.token.getName()
-    this.token.getSymbol()
   }
 }

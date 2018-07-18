@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ContainerComponent as ContractShowComponent } from '../contract-show/container.component';
-import { SimpleCrowdsaleContract } from '@contract/simplecrowdsale.contract';
-import { SimpleTokenContract } from '@contract/simpletoken.contract';
+import { ActivatedRoute } from '@angular/router';
+import { WalletService } from '@service/wallet.service';
+
+import { FixedSupply } from '@factory/fixed-supply.deployment';
+import { ExistingTokenDeployment } from '@factory/existing-token.deployment';
 
 @Component({
   selector: 'app-container',
@@ -9,26 +11,26 @@ import { SimpleTokenContract } from '@contract/simpletoken.contract';
   styleUrls: ['./container.component.css']
 })
 
-export class ContainerComponent extends ContractShowComponent {
+export class ContainerComponent implements OnInit {
+
+  contractAddress: string
+
+  contractType: string
+
+  ExistingTokenDeployment: string = ExistingTokenDeployment._type
+  FixedSupply: string = FixedSupply._type
+
+  constructor(
+    public route: ActivatedRoute,
+    public wallet: WalletService) {}
 
   ngOnInit() {
     this.wallet.setEmptyWallet()
     this.wallet.setProvider()
 
-    this.route.params.subscribe(({ contractAddress }) => {
+    this.route.params.subscribe(({ contractAddress, contractType }) => {
       this.contractAddress = contractAddress
-
-      this.crowdsale = new SimpleCrowdsaleContract(this.wallet.getInstance())
-      this.crowdsale.connect()
-      this.crowdsale.setAddress(this.contractAddress)
-      console.log(this.crowdsale)
-      this.subscribe()
-
-      this.token = new SimpleTokenContract(this.wallet.getInstance())
-      this.token.connect()
-
-      this.getCrowdsaleData()
-      this.getTokenData()
+      this.contractType = contractType
     })
   }
 
