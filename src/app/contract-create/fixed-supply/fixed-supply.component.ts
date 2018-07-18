@@ -6,6 +6,8 @@ import { Crowdsale } from '@model/crowdsale.model';
 import { Token } from '@model/token.model';
 import { EthereumService } from '@service/ethereum.service';
 
+import { ExistingTokenDeployment } from '@factory/existing-token.deployment';
+
 declare let require: any
 
 const Web3 = require('web3')
@@ -16,6 +18,8 @@ const Web3 = require('web3')
   styleUrls: ['./fixed-supply.component.css']
 })
 export class FixedSupplyComponent implements OnInit {
+
+  ExistingTokenDeployment: string = ExistingTokenDeployment._type
 
   deployer: ContractDeployment
 

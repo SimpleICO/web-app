@@ -4,7 +4,6 @@ import { WalletService } from '@service/wallet.service';
 import { FixedSupplyComponent } from '../contract-index/fixed-supply/fixed-supply.component';
 
 import { FixedSupplyDeployment } from '@factory/fixed-supply.deployment';
-import { ExistingTokenDeployment } from '@factory/existing-token.deployment';
 
 @Component({
   selector: 'app-crowdsale-by-address',
@@ -16,7 +15,6 @@ export class ContainerComponent extends FixedSupplyComponent {
 
   address: string
 
-  ExistingTokenDeployment: string = ExistingTokenDeployment._type
   FixedSupplyDeployment: string = FixedSupplyDeployment._type
 
   constructor(
