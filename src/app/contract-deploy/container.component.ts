@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ContractDeploymentFactory } from '@factory/contract-deployment.factory';
 import { WalletService } from '@service/wallet.service';
 
-import { FixedSupply } from '@factory/fixed-supply.deployment';
+import { FixedSupplyDeployment } from '@factory/fixed-supply.deployment';
 import { ExistingTokenDeployment } from '@factory/existing-token.deployment';
 
 @Component({
@@ -18,7 +18,7 @@ export class ContainerComponent implements OnInit {
   withExistingToken: boolean = false
 
   ExistingTokenDeployment: string = ExistingTokenDeployment._type
-  FixedSupply: string = FixedSupply._type
+  FixedSupplyDeployment: string = FixedSupplyDeployment._type
 
   constructor(
     private route: ActivatedRoute,

@@ -3,6 +3,9 @@ import { WalletService } from '@service/wallet.service';
 import { SimpleICOContract } from '@contract/simpleico.contract';
 import { SimpleCrowdsaleContract } from '@contract/simplecrowdsale.contract';
 
+import { FixedSupplyDeployment } from '@factory/fixed-supply.deployment';
+import { ExistingTokenDeployment } from '@factory/existing-token.deployment';
+
 declare var require: any
 
 @Component({
@@ -16,6 +19,9 @@ export class ContainerComponent implements OnInit {
   simpleICO: SimpleICOContract
 
   crowdsales: Array<SimpleCrowdsaleContract> = []
+
+  ExistingTokenDeployment: string = ExistingTokenDeployment._type
+  FixedSupplyDeployment: string = FixedSupplyDeployment._type
 
   constructor(public wallet: WalletService) {}
 

@@ -6,7 +6,7 @@ import { SharedService } from '@service/shared.service';
 import { SimpleCrowdsaleContract } from '@contract/simplecrowdsale.contract';
 import { SimpleTokenContract } from '@contract/simpletoken.contract';
 
-import { FixedSupply } from '@factory/fixed-supply.deployment';
+import { FixedSupplyDeployment } from '@factory/fixed-supply.deployment';
 import { ExistingTokenDeployment } from '@factory/existing-token.deployment';
 
 @Component({
@@ -22,7 +22,7 @@ export class ContainerComponent implements OnInit {
   contractType: string
 
   ExistingTokenDeployment: string = ExistingTokenDeployment._type
-  FixedSupply: string = FixedSupply._type
+  FixedSupplyDeployment: string = FixedSupplyDeployment._type
 
   constructor(
     public route: ActivatedRoute) {}

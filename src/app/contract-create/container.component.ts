@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ContractDeploymentFactory } from '@factory/contract-deployment.factory';
 
-import { FixedSupply } from '@factory/fixed-supply.deployment';
+import { FixedSupplyDeployment } from '@factory/fixed-supply.deployment';
 import { ExistingTokenDeployment } from '@factory/existing-token.deployment';
 
 @Component({
@@ -15,7 +15,7 @@ export class ContainerComponent implements OnInit {
   contractType: string
 
   ExistingTokenDeployment: string = ExistingTokenDeployment._type
-  FixedSupply: string = FixedSupply._type
+  FixedSupplyDeployment: string = FixedSupplyDeployment._type
 
   constructor(
     private route: ActivatedRoute,

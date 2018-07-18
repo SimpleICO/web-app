@@ -11,7 +11,7 @@ declare var require: any
 const ethers = require('ethers')
 const Web3 = require('web3')
 
-export class FixedSupply extends ContractDeployment {
+export class FixedSupplyDeployment extends ContractDeployment {
 
   static readonly _type: string = 'fixed-supply'
 
@@ -20,7 +20,7 @@ export class FixedSupply extends ContractDeployment {
   constructor(wallet: Wallet, eth: EthereumService){
     super(wallet, eth)
 
-    this.type = FixedSupply._type
+    this.type = FixedSupplyDeployment._type
   }
 
   createToken(){

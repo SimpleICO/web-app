@@ -3,7 +3,7 @@ import { WalletService } from '@service/wallet.service';
 import { ContractDeployment } from '@factory/contract-deployment';
 import { EthereumService } from '@service/ethereum.service';
 
-import { FixedSupply } from '@factory/fixed-supply.deployment';
+import { FixedSupplyDeployment } from '@factory/fixed-supply.deployment';
 import { ExistingTokenDeployment } from '@factory/existing-token.deployment';
 
 @Injectable({
@@ -21,7 +21,7 @@ export class ContractDeploymentFactory {
     private wallet: WalletService,
     private eth: EthereumService) {
 
-    this.deployment[FixedSupply._type] = FixedSupply
+    this.deployment[FixedSupplyDeployment._type] = FixedSupplyDeployment
     this.deployment[ExistingTokenDeployment._type] = ExistingTokenDeployment
 
   }
