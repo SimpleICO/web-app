@@ -15,8 +15,6 @@ export class ContainerComponent implements OnInit {
 
   contractType: string
 
-  withExistingToken: boolean = false
-
   ExistingTokenDeployment: string = ExistingTokenDeployment._type
   FixedSupplyDeployment: string = FixedSupplyDeployment._type
 

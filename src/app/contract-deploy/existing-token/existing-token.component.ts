@@ -188,6 +188,7 @@ export class ExistingTokenComponent implements OnInit {
   }
 
   async estimateTransactionCosts(){
+
     this.steps.tokenInfo.isCurrent = false
 
     this.steps.estimateTxCosts.isCurrent = true
@@ -196,6 +197,7 @@ export class ExistingTokenComponent implements OnInit {
     this.steps.estimateTxCosts.estimates = []
 
     try {
+      await this.wallet.getAccountBalance()
       await this.deployer.getTxCost()
 
       this.steps.estimateTxCosts.estimates.push({

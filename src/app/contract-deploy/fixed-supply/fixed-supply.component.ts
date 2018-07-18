@@ -122,6 +122,7 @@ export class FixedSupplyComponent implements OnInit {
     this.reset()
 
     try {
+      await this.wallet.getAccountBalance()
       await this.estimateTransactionCosts()
     } catch (error) {
       if (error instanceof InsufficientFundsError) {
