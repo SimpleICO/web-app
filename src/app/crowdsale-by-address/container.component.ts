@@ -3,6 +3,9 @@ import { SimpleICOContract } from '@contract/simpleico.contract';
 import { WalletService } from '@service/wallet.service';
 import { ContainerComponent as CrowdsaleIndexComponent } from '../crowdsale-index/container.component';
 
+import { FixedSupplyDeployment } from '@factory/fixed-supply.deployment';
+import { ExistingTokenDeployment } from '@factory/existing-token.deployment';
+
 @Component({
   selector: 'app-crowdsale-by-address',
   templateUrl: './container.component.html',
@@ -12,6 +15,9 @@ import { ContainerComponent as CrowdsaleIndexComponent } from '../crowdsale-inde
 export class ContainerComponent extends CrowdsaleIndexComponent {
 
   address: string
+
+  ExistingTokenDeployment: string = ExistingTokenDeployment._type
+  FixedSupplyDeployment: string = FixedSupplyDeployment._type
 
   constructor(
     public wallet: WalletService){
