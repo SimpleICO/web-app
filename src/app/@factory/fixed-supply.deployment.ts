@@ -1,4 +1,4 @@
-import { ContractDeployment } from '@factory/contract-deployment';
+import { ContractDeployment, ContractDeploymentInterface } from '@factory/contract-deployment';
 import { SimpleTokenContract } from '@contract/simpletoken.contract';
 import { SimpleCrowdsaleContract } from '@contract/simplecrowdsale.contract';
 import { Wallet } from '@model/wallet.model';
@@ -11,7 +11,9 @@ declare var require: any
 const ethers = require('ethers')
 const Web3 = require('web3')
 
-export class FixedSupplyDeployment extends ContractDeployment {
+export class FixedSupplyDeployment
+  extends ContractDeployment
+  implements ContractDeploymentInterface {
 
   static readonly _type: string = 'fixed-supply'
 

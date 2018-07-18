@@ -1,10 +1,15 @@
 import { Injectable } from '@angular/core';
 import { WalletService } from '@service/wallet.service';
-import { ContractDeployment } from '@factory/contract-deployment';
 import { EthereumService } from '@service/ethereum.service';
+import { DeploymentClassExistsError } from '@error/deployment-class-exists.error';
 
+import { ContractDeployment, ContractDeploymentInterface } from '@factory/contract-deployment';
 import { FixedSupplyDeployment } from '@factory/fixed-supply.deployment';
 import { ExistingTokenDeployment } from '@factory/existing-token.deployment';
+
+export interface Deployment {
+  [key: string]: ContractDeploymentInterface
+}
 
 @Injectable({
   providedIn: 'root'
@@ -15,25 +20,38 @@ export class ContractDeploymentFactory {
 
   deployer: ContractDeployment
 
-  deployment: any = {}
+  deployment: Deployment = {}
 
   constructor(
     private wallet: WalletService,
     private eth: EthereumService) {
 
-    this.deployment[FixedSupplyDeployment._type] = FixedSupplyDeployment
-    this.deployment[ExistingTokenDeployment._type] = ExistingTokenDeployment
+    this.registerContractDeployment(FixedSupplyDeployment._type, FixedSupplyDeployment)
+    this.registerContractDeployment(ExistingTokenDeployment._type, ExistingTokenDeployment)
+  }
 
+  registerContractDeployment(type: string, deployment: ContractDeploymentInterface){
+
+    let deploymentExists = this.deployment[type] != undefined;
+    if (deploymentExists) {
+      throw new DeploymentClassExistsError(`Contract deployment ${type} has already been used`)
+    }
+
+    this.deployment[type] = deployment
+
+    return this
   }
 
   /**
    *
    * @param {string} contractType [description]
-   * @return ContractDeployment
+   * @return ContractDeploymentInterface
    */
   init(contractType: string): ContractDeployment {
 
-    let deployer = new this.deployment[contractType](this.wallet.getInstance(), this.eth)
+    let deployment: any = this.deployment[contractType]
+
+    let deployer = new deployment(this.wallet.getInstance(), this.eth)
 
     this.deployer = deployer
 

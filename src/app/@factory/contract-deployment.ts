@@ -10,6 +10,10 @@ declare var require: any
 const ethers = require('ethers')
 const Web3 = require('web3')
 
+export interface ContractDeploymentInterface {
+
+}
+
 export abstract class ContractDeployment {
 
   static readonly CONTRACT_DUMMY_ADDRESS: string = '0x523a34E0A5FABDFaa39B3889D80b19Fe77F73aA6'
