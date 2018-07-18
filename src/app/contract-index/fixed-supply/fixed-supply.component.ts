@@ -4,26 +4,22 @@ import { SimpleICOContract } from '@contract/simpleico.contract';
 import { SimpleCrowdsaleContract } from '@contract/simplecrowdsale.contract';
 
 import { FixedSupplyDeployment } from '@factory/fixed-supply.deployment';
-import { ExistingTokenDeployment } from '@factory/existing-token.deployment';
-
-declare var require: any
 
 @Component({
-  selector: 'app-container',
-  templateUrl: './container.component.html',
-  styleUrls: ['./container.component.css']
+  selector: 'app-fixed-supply',
+  templateUrl: './fixed-supply.component.html',
+  styleUrls: ['./fixed-supply.component.css']
 })
-
-export class ContainerComponent implements OnInit {
+export class FixedSupplyComponent implements OnInit {
 
   simpleICO: SimpleICOContract
 
   crowdsales: Array<SimpleCrowdsaleContract> = []
 
-  ExistingTokenDeployment: string = ExistingTokenDeployment._type
   FixedSupplyDeployment: string = FixedSupplyDeployment._type
 
-  constructor(public wallet: WalletService) {}
+  constructor(
+    public wallet: WalletService) {}
 
   ngOnInit() {
     this.simpleICO = new SimpleICOContract(this.wallet.getInstance())
@@ -62,5 +58,4 @@ export class ContainerComponent implements OnInit {
 
     this.initCrowdsales(crowdsales)
   }
-
 }

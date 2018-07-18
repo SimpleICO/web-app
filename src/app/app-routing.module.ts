@@ -7,8 +7,8 @@ import { ContainerComponent as WalletComponent } from './wallet/container.compon
 import { ContainerComponent as AcceptTermsComponent } from './accept-terms/container.component';
 import { ContainerComponent as ContractShowComponent } from './contract-show/container.component';
 import { ContainerComponent as ContractShowPublicComponent } from './contract-show-public/container.component';
-import { ContainerComponent as CrowdsaleIndexComponent } from './crowdsale-index/container.component';
-import { ContainerComponent as CrowdsaleIndexPublicComponent } from './crowdsale-index-public/container.component';
+import { ContainerComponent as CrowdsaleIndexComponent } from './contract-index/container.component';
+import { ContainerComponent as CrowdsaleIndexPublicComponent } from './contract-index-public/container.component';
 import { ContainerComponent as ContractCreateComponent } from './contract-create/container.component';
 import { ContainerComponent as ContractDeployComponent } from './contract-deploy/container.component';
 import { ContainerComponent as CatalogComponent } from './catalog/container.component';
@@ -49,11 +49,11 @@ const routes: Routes = [
     component: ContractShowPublicComponent,
     canActivate: [AcceptTermsRouteGuard],
   },
-  { path: 'crowdsale/index',
+  { path: 'contract/:contractType/index',
     component: CrowdsaleIndexComponent,
     canActivate: [UnlockRouteGuard, AcceptTermsRouteGuard],
   },
-  { path: 'public/crowdsale/index',
+  { path: 'public/contract/:contractType/index',
     component: CrowdsaleIndexPublicComponent,
     canActivate: [AcceptTermsRouteGuard],
   },

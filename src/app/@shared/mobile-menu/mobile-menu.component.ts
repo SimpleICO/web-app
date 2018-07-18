@@ -3,6 +3,9 @@ import { SharedService } from '@service/shared.service';
 import { WalletService } from '@service/wallet.service';
 import { EthereumService } from '@service/ethereum.service';
 
+import { FixedSupplyDeployment } from '@factory/fixed-supply.deployment';
+import { ExistingTokenDeployment } from '@factory/existing-token.deployment';
+
 declare var document: any
 declare var require: any
 
@@ -14,6 +17,9 @@ declare var require: any
 export class MobileMenuComponent implements OnInit {
 
   display: boolean = false
+
+  ExistingTokenDeployment: string = ExistingTokenDeployment._type
+  FixedSupplyDeployment: string = FixedSupplyDeployment._type
 
   constructor(
     public shared: SharedService,

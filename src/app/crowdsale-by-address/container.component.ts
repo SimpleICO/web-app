@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SimpleICOContract } from '@contract/simpleico.contract';
 import { WalletService } from '@service/wallet.service';
-import { ContainerComponent as CrowdsaleIndexComponent } from '../crowdsale-index/container.component';
+import { FixedSupplyComponent } from '../contract-index/fixed-supply/fixed-supply.component';
 
 import { FixedSupplyDeployment } from '@factory/fixed-supply.deployment';
 import { ExistingTokenDeployment } from '@factory/existing-token.deployment';
@@ -12,7 +12,7 @@ import { ExistingTokenDeployment } from '@factory/existing-token.deployment';
   styleUrls: ['./container.component.css']
 })
 
-export class ContainerComponent extends CrowdsaleIndexComponent {
+export class ContainerComponent extends FixedSupplyComponent {
 
   address: string
 

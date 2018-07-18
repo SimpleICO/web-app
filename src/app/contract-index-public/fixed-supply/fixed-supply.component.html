@@ -1,0 +1,10 @@
+<section class="section">
+  <div class="container">
+    <h5 class="title">Crowdsales</h5>
+
+    <article class="token" *ngFor="let crowdsale of crowdsales">
+      <span class="name">{{ crowdsale.getToken().name }}</span>
+      <a [routerLink]="['/public/contract', crowdsale.getToken().crowdsale, 'show', FixedSupplyDeployment]" class="crowdsale text-truncate">{{ crowdsale.getToken().crowdsale }}</a>
+    </article>
+  </div>
+</section>

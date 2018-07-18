@@ -13,11 +13,11 @@ import { HomeModule } from './home/home.module';
 import { LoginModule } from './login/login.module';
 import { NewWalletModule } from './new-wallet/new-wallet.module';
 import { ContractShowModule } from './contract-show/contract-show.module';
-import { CrowdsaleIndexModule } from './crowdsale-index/crowdsale-index.module';
+import { ContractIndexModule } from './contract-index/contract-index.module';
 import { ContractCreateModule } from './contract-create/contract-create.module';
 import { ContractDeployModule } from './contract-deploy/contract-deploy.module';
 import { CrowdsaleByAddressModule } from './crowdsale-by-address/crowdsale-by-address.module';
-import { CrowdsaleIndexPublicModule } from './crowdsale-index-public/crowdsale-index-public.module';
+import { ContractIndexPublicModule } from './contract-index-public/contract-index-public.module';
 import { ContractShowPublicModule } from './contract-show-public/contract-show-public.module';
 import { CatalogModule } from './catalog/catalog.module';
 import { WalletModule } from './wallet/wallet.module';
@@ -36,12 +36,12 @@ import { SettingsModule } from './settings/settings.module';
     NewWalletModule,
     AcceptTermsModule,
     ContractShowModule,
-    CrowdsaleIndexModule,
+    ContractIndexModule,
     ContractCreateModule,
     ContractDeployModule,
     SharedModule,
     CrowdsaleByAddressModule,
-    CrowdsaleIndexPublicModule,
+    ContractIndexPublicModule,
     ContractShowPublicModule,
     CatalogModule,
     WalletModule,
