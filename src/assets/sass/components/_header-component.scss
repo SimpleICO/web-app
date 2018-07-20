@@ -1,0 +1,48 @@
+@mixin full-width-header {
+  .header {
+    .header-left,
+    .header-right {
+      height: $header-height-control + 21px;
+    }
+    .logo {
+      img {
+        width: 120px;
+      }
+    }
+  }
+}
+
+.header {
+  background-color: transparent;
+  border-bottom: none;
+  position: absolute;
+  z-index: 1000;
+  width: 100%;
+  right: 0;
+  left: 0;
+  top: 0;
+  .logo {
+    img {
+      height: auto;
+      width: 92px;
+    }
+  }
+  .header-right {
+    text-align: right;
+    a:not(.btn) {
+      color: white;
+    }
+    nav {
+      a {
+        margin-left: get-spacer(4);
+      }
+    }
+  }
+  .menu-trigger {
+    @include flex-column-center;
+    height: $header-height-control;
+    color: theme-color('primary');
+    font-weight: bold;
+    font-size: 35px;
+  }
+}

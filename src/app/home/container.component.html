@@ -1,11 +1,29 @@
 <main id="home-component">
-  <div class="container">
-    <div class="logo">
-      <img src="assets/img/logo-simpleico.svg" alt="SimpleICO">
+  <app-header-public></app-header-public>
+
+  <section id="introduction">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-7">
+          <div class="left-content">
+            <h1>Tokenize anything</h1>
+            <h5>SimpleICO makes it easy to deploy detailed ERC20 tokens<br>and create different types of crowdsale smart contracts</h5>
+            <nav>
+              <a [routerLink]="['/home']" fragment="contracts-catalog" class="btn btn-primary btn-lg">See the contracts catalog</a>
+              <a [routerLink]="['/scuis']" class="btn btn-outline-primary btn-lg">Or develop your own</a>
+            </nav>
+            <small>SimpleICO is powered by the <a [routerLink]="['/scuis']">SCUIs framework</a></small>
+          </div>
+        </div>
+        <div class="col-sm-5"></div>
+      </div>
     </div>
-    <div class="cta">
-      <a class="btn btn-primary btn-lg btn-block mb-3" [routerLink]="['/login']">Login</a>
-      <a class="btn btn-outline-primary btn-lg btn-block" [routerLink]="['/new-wallet']">Create new wallet</a>
+  </section>
+
+  <section class="section" id="contracts-catalog">
+    <div class="container">
+      <h2 class="title">Smart Contracts Catalog</h2>
     </div>
-  </div>
+  </section>
 </main>

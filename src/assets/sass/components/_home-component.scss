@@ -1,10 +1,40 @@
 #home-component {
-  @include main;
+  @include container-size(xl);
   @include flex-column-center;
-  background-color: $purple;
-  text-align: center;
+  @include main;
+  @include full-width-header;
 
-  .logo {
-    @include logo;
+  #introduction {
+    @include hero-overlay;
+    .left-content,
+    .img-wrapper {
+      @include flex-column-center;
+      min-height: 100vh;
+    }
+
+    .left-content {
+      color: white;
+      h1 {
+        @include bold;
+      }
+      h5 {
+        line-height: 1.85rem;
+      }
+      nav {
+        margin-top: get-spacer(4);
+        .btn {
+          margin-bottom: get-spacer(3);
+          margin-right: get-spacer(4);
+        }
+      }
+    }
+  }
+
+  .section {
+    min-height: 100vh;
+  }
+
+  #contracts-catalog {
+    background-color: $purple;
   }
 }

@@ -37,6 +37,29 @@
   to {transform:rotate(360deg);}
 }
 
+@mixin hero-overlay {
+  background: linear-gradient(45deg, $purple, darken($purple, 14%));
+  position: relative;
+  overflow: hidden;
+  .overlay {
+    @include bg-img-block;
+    background-image: url('/assets/img/scuis-background-separator.png');
+    background-position: center bottom;
+    position: absolute;
+    width: 100%;
+    bottom: -120px;
+    right: 0;
+    left: 0;
+    top: 0;
+  }
+  @include media-breakpoint-down(md, $grid-breakpoints) {
+    .overlay {
+      bottom: 0;
+    }
+  }
+}
+
+@import "sass/components/header-component";
 @import "sass/components/home-component";
 @import "sass/components/login-component";
 @import "sass/components/new-wallet-component";
@@ -52,34 +75,6 @@
 @import "sass/components/settings-component";
 @import "sass/components/scui-landing-page-component";
 
-.header {
-  background-color: transparent;
-  border-bottom: none;
-  position: absolute;
-  z-index: 1000;
-  width: 100%;
-  right: 0;
-  left: 0;
-  top: 0;
-  .logo {
-    img {
-      height: auto;
-      width: 92px;
-    }
-  }
-  .header-right {
-    text-align: right;
-    nav {
-    }
-  }
-  .menu-trigger {
-    @include flex-column-center;
-    height: $header-height-control;
-    color: theme-color('primary');
-    font-weight: bold;
-    font-size: 35px;
-  }
-}
 
 #mobile-menu {
   box-shadow: -1px 0 3px 3px rgba($black, 0.35);
