@@ -141,7 +141,7 @@ export class ExistingTokenComponent implements OnInit {
     try {
       this.deployer.addCrowdsaleToSimpleICOContract()
 
-      return this.router.navigate([`/contract/${this.crowdsale.address}/show`])
+      return this.router.navigate([`/contract/${this.crowdsale.address}/show/${this.deployer.type}`])
     } catch (error) {
       console.log(error)
     }

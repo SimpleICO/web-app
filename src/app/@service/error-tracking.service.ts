@@ -17,6 +17,7 @@ export class ErrorTrackingService {
   }
 
   handleError(error: any): void {
+    console.log(error)
     this.provider.captureException(error)
   }
 
