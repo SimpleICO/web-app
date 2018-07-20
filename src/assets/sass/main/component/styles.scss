@@ -2,8 +2,21 @@
 
 @import "sass/simpleico.scss";
 
+@mixin container-size($breakpoint: sm) {
+  @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
+    .container {
+      min-width: map-get($container-max-widths, $breakpoint);
+      max-width: map-get($container-max-widths, $breakpoint);
+    }
+  }
+}
+
+.site-wrapper {
+  @include container-size;
+}
+
 @mixin main {
-  min-height: 94vh;
+  min-height: 100vh;
 }
 
 @mixin with-header {
@@ -37,6 +50,7 @@
 @import "sass/components/wallet-component";
 @import "sass/components/catalog-component";
 @import "sass/components/settings-component";
+@import "sass/components/scui-landing-page-component";
 
 .header {
   background-color: transparent;

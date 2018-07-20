@@ -1,0 +1,65 @@
+#scui-landing-page {
+  @include container-size(xl);
+  @include main;
+
+  .header {
+    .header-left,
+    .header-right {
+      height: $header-height-control + 21px;
+    }
+    .logo {
+      img {
+        width: 120px;
+      }
+    }
+  }
+
+  background: linear-gradient(45deg, $purple, darken($purple, 14%));
+  overflow: hidden;
+  position: relative;
+
+  .overlay {
+    @include bg-img-block;
+    background-image: url('/assets/img/scuis-background-separator.png');
+    background-position: center bottom;
+    position: absolute;
+    width: 100%;
+    bottom: -120px;
+    right: 0;
+    left: 0;
+    top: 0;
+  }
+
+  @include media-breakpoint-down(md, $grid-breakpoints) {
+    .overlay {
+      bottom: 0;
+    }
+  }
+
+  .left-content,
+  .img-wrapper {
+    @include flex-column-center;
+    min-height: 100vh;
+  }
+
+  .left-content {
+    h1 {
+      @include bold;
+    }
+    h5 {
+      line-height: 1.85rem;
+    }
+    color: white;
+    nav {
+      margin-top: get-spacer(4);
+    }
+  }
+
+  .img-wrapper {
+    img {
+      height: auto;
+      width: 100%;
+    }
+  }
+
+}

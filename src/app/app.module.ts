@@ -22,10 +22,11 @@ import { ContractShowPublicModule } from './contract-show-public/contract-show-p
 import { CatalogModule } from './catalog/catalog.module';
 import { WalletModule } from './wallet/wallet.module';
 import { SettingsModule } from './settings/settings.module';
+import { ScuiLandingPageModule } from './scui-landing-page/scui-landing-page.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +47,7 @@ import { SettingsModule } from './settings/settings.module';
     CatalogModule,
     WalletModule,
     SettingsModule,
+    ScuiLandingPageModule,
   ],
   providers: [
     { provide: ErrorHandler, useClass: ErrorTrackingService }
