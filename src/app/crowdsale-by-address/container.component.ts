@@ -3,6 +3,7 @@ import { SimpleICOContract } from '@contract/simpleico.contract';
 import { WalletService } from '@service/wallet.service';
 import { SettingsService } from '@service/settings.service';
 import { FixedSupplyComponent } from '../contract-index/fixed-supply/fixed-supply.component';
+import { SimpleCrowdsaleContract } from '@contract/simplecrowdsale.contract';
 
 import { FixedSupplyDeployment } from '@factory/fixed-supply.deployment';
 
@@ -17,6 +18,8 @@ export class ContainerComponent extends FixedSupplyComponent {
   address: string
 
   FixedSupplyDeployment: string = FixedSupplyDeployment._type
+
+  crowdsales: Array<SimpleCrowdsaleContract> = []
 
   constructor(
     public wallet: WalletService,
