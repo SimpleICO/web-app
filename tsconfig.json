@@ -46,6 +46,12 @@
       ],
       "@environment/*": [
         "environments/*"
+      ],
+      "scui-lib": [
+        "../dist/scui-lib"
+      ],
+      "scui-lib/*": [
+        "../dist/scui-lib/*"
       ]
     }
   }

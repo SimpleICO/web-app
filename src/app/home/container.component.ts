@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { WalletService } from 'scui-lib';
 
 @Component({
   selector: 'app-container',
@@ -11,7 +12,11 @@ export class ContainerComponent implements OnInit {
 
   private fragment: string
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(
+    private route: ActivatedRoute,
+    private walletService: WalletService) {
+
+  }
 
   ngOnInit() {
     this.route.fragment.subscribe(fragment => {

@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './/app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AcceptTermsModule } from './accept-terms/accept-terms.module';
@@ -24,6 +24,8 @@ import { WalletModule } from './wallet/wallet.module';
 import { SettingsModule } from './settings/settings.module';
 import { ScuiLandingPageModule } from './scui-landing-page/scui-landing-page.module';
 import { HackatonModule } from './hackaton/hackaton.module';
+
+import { SCUILibModule } from 'scui-lib';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,13 @@ import { HackatonModule } from './hackaton/hackaton.module';
     SettingsModule,
     ScuiLandingPageModule,
     HackatonModule
+    SCUILibModule.forRoot({
+      wallet: {
+        networks: {
+          mainnet: 'something'
+        }
+      }
+    })
   ],
   providers: [
     { provide: ErrorHandler, useClass: ErrorTrackingService }

@@ -125,6 +125,46 @@
           }
         }
       }
+    },
+    "scui-lib": {
+      "root": "projects/scui-lib",
+      "sourceRoot": "projects/scui-lib/src",
+      "projectType": "library",
+      "prefix": "ssc",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/scui-lib/tsconfig.lib.json",
+            "project": "projects/scui-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/scui-lib/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/scui-lib/src/test.ts",
+            "tsConfig": "projects/scui-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/scui-lib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/scui-lib/tsconfig.lib.json",
+              "projects/scui-lib/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "simple-ico",
