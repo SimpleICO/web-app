@@ -31,10 +31,17 @@
   }
 
   .section {
+    padding: get-spacer(5) 0;
     min-height: 100vh;
+  }
+  .title {
+    @include bold;
   }
 
   #contracts-catalog {
     background-color: $purple;
+  }
+  #global-financial-inclusion {
+    background-color: $gray-500;
   }
 }

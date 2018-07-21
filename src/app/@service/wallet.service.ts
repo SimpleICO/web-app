@@ -33,7 +33,7 @@ export class WalletService {
 
   network: string
 
-  version: string = '4.0.0'
+  version: string = '5.0.0'
 
   constructor(
     private router: Router,
