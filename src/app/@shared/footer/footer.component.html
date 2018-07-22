@@ -1,6 +1,6 @@
 <footer class="footer">
   <div class="container">
-    <div *ngIf="wallet.isUnlocked()" class="network {{ wallet.network }}" (click)="toggleNetwork()">
+    <div class="network {{ wallet.network }}" (click)="toggleNetwork()">
       <span class="name">{{ wallet.network }}</span>
       <span class="toggle"></span>
     </div>

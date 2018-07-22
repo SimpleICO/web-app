@@ -21,10 +21,14 @@ export class SettingsService {
     private eth: EthereumService) {}
 
   setNetwork(network: string = Network.mainnet){
+
     this.wallet.setNetwork(network)
     this.wallet.setProviderByNetwork(network)
-    this.wallet.getAccountBalance()
     this.eth.setEtherScanURLByNetwork()
+
+    if (this.wallet.isUnlocked()) {
+      this.wallet.getAccountBalance()
+    }
 
     this.onNetworkChange.next(true)
   }

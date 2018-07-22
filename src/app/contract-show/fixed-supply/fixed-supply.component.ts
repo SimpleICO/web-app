@@ -3,8 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { EthereumService } from '@service/ethereum.service';
 import { WalletService } from '@service/wallet.service';
 import { SharedService } from '@service/shared.service';
+import { SettingsService } from '@service/settings.service';
 import { SimpleCrowdsaleContract } from '@contract/simplecrowdsale.contract';
 import { SimpleTokenContract } from '@contract/simpletoken.contract';
+import { Network } from '@model/network.model';
 
 declare var require: any
 
@@ -35,6 +37,7 @@ export class FixedSupplyComponent implements OnInit {
     public route: ActivatedRoute,
     public eth: EthereumService,
     public shared: SharedService,
+    public settings: SettingsService,
     public wallet: WalletService) {}
 
   ngOnInit() {

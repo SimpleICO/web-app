@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FixedSupplyComponent as PrivateFixedSupplyComponent } from '../../contract-show/fixed-supply/fixed-supply.component';
 import { SimpleCrowdsaleContract } from '@contract/simplecrowdsale.contract';
 import { SimpleTokenContract } from '@contract/simpletoken.contract';
+import { SettingsService } from '@service/settings.service';
+import { Network } from '@model/network.model';
 
 @Component({
   selector: 'app-fixed-supply',
@@ -11,6 +13,10 @@ import { SimpleTokenContract } from '@contract/simpletoken.contract';
 export class FixedSupplyComponent extends PrivateFixedSupplyComponent {
 
   ngOnInit() {
+    this.settings.onNetworkChange.subscribe((networkChanged) => {
+      this.ngOnInit()
+    })
+
     this.route.params.subscribe(({ contractAddress, contractType }) => {
       this.contractAddress = contractAddress
       this.contractType = contractType
@@ -27,5 +33,4 @@ export class FixedSupplyComponent extends PrivateFixedSupplyComponent {
       this.getTokenData()
     })
   }
-
 }
