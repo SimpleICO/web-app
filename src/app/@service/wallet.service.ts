@@ -39,13 +39,14 @@ export class WalletService {
     private router: Router,
     private errorTracking: ErrorTrackingService) {
 
-    if (env.local) {
-      this.network = Network.private
-    } else if (env.staging) {
-      this.network = Network.testnet
-    } else {
-      this.network = Network.mainnet
-    }
+    this.setEmptyWallet()
+    this.setNetwork()
+  }
+
+  setNetwork(network: string = Network.mainnet){
+    this.network = network
+    this.wallet.setNetwork(network)
+    return this
   }
 
   setBeneficiaryAddress(address: string){
@@ -66,6 +67,7 @@ export class WalletService {
   setEmptyWallet(){
     this.wallet = new Wallet()
     this.wallet.setLockedInstance()
+    return this
   }
 
   getInstance(): Wallet {
@@ -125,34 +127,31 @@ export class WalletService {
   }
 
   setProviderByNetwork(network: string = Network.mainnet){
-    this.network = network
-    this.wallet.setNetwork(network)
 
-    if (network == Network.mainnet) {
-      this.wallet.setMainnetProvider()
-      return
-    } else if (network == Network.testnet) {
-      this.wallet.setRopstenProvider()
-      return
-    }
 
-    this.wallet.setJsonRpcProvider()
-    return
+    let providerSetters = {}
+    providerSetters[Network.mainnet] = this.wallet.setMainnetProvider
+    providerSetters[Network.testnet] = this.wallet.setRopstenProvider
+    providerSetters[Network.private] = this.wallet.setJsonRpcProvider
+
+    providerSetters[network].call(this.wallet)
+
+    return this
   }
 
-  setProvider(){
-    if (env.local) {
-      this.wallet.setJsonRpcProvider()
-      return
-    } else if (env.staging) {
-      this.wallet.setRopstenProvider()
-      return
-    }
+  private _afterUnlockSuccess(){
+    this.isLocked = false
+    this.setNetwork()
+    this.setProviderByNetwork()
+    this.onUnlockSuccess.next(true)
+    this.errorTracking.setUserContext({ address: this.getAddress() })
+  }
 
-    this.wallet.setMainnetProvider()
-    this.wallet.setNetwork(this.network)
-
-    return false
+  private _onUnlockError(error){
+    this.isLocked = true
+    this.onUnlockError.next({
+      message: error.message
+    })
   }
 
   unlockFromMnemonic(mnemonic: string){
@@ -160,14 +159,9 @@ export class WalletService {
 
     try {
       this.wallet = instance.unlockFromMnemonic(mnemonic)
-      this.isLocked = false
-      this.onUnlockSuccess.next(true)
-      this.errorTracking.setUserContext({ address: this.getAddress() })
+      this._afterUnlockSuccess()
     } catch (error) {
-      this.isLocked = true
-      this.onUnlockError.next({
-        message: error.message
-      })
+      this._onUnlockError(error)
     }
   }
 
@@ -176,14 +170,9 @@ export class WalletService {
 
     try {
       this.wallet = instance.unlockFromPrivateKey(privateKey)
-      this.isLocked = false
-      this.onUnlockSuccess.next(true)
-      this.errorTracking.setUserContext({ address: this.getAddress() })
+      this._afterUnlockSuccess()
     } catch (error) {
-      this.isLocked = true
-      this.onUnlockError.next({
-        message: error.message
-      })
+      this._onUnlockError(error)
     }
   }
 }

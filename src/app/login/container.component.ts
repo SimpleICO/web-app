@@ -21,6 +21,7 @@ export class ContainerComponent implements OnInit {
     public wallet: WalletService,
     public eth: EthereumService,
     private router: Router) {
+
     wallet.onUnlockError.subscribe(error => {
       this.isInvalid = true
       this.errorMessage = error.message
@@ -29,7 +30,6 @@ export class ContainerComponent implements OnInit {
     wallet.onUnlockSuccess.subscribe(data => {
       this.isInvalid = false
       this.errorMessage = ''
-      this.wallet.setProvider()
       this.wallet.getAccountBalance().then(balance => {
         this.eth.getTotalEthInUsd(this.wallet.ethBalance)
       })

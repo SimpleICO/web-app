@@ -25,8 +25,7 @@ export class ContainerComponent implements OnInit {
     public wallet: WalletService) {}
 
   ngOnInit() {
-    this.wallet.setEmptyWallet()
-    this.wallet.setProvider()
+    this.wallet.setProviderByNetwork()
 
     this.route.params.subscribe(({ contractAddress, contractType }) => {
       this.contractAddress = contractAddress

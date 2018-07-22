@@ -47,6 +47,7 @@ export class Wallet {
     this.provider = provider
     this.instance.provider = provider
     this.web3 = new Web3(provider)
+    return this
   }
 
   setRopstenProvider(){
@@ -54,6 +55,7 @@ export class Wallet {
     this.provider = provider
     this.instance.provider = provider
     this.web3 = new Web3(provider)
+    return this
   }
 
   setMainnetProvider(){
@@ -61,10 +63,12 @@ export class Wallet {
     this.provider = provider
     this.instance.provider = provider
     this.web3 = new Web3(provider)
+    return this
   }
 
   setLockedInstance(){
     this.instance = $wallet
+    return this
   }
 
   unlockFromMnemonic(mnemonic: string){
