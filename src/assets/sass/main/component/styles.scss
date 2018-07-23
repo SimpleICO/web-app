@@ -16,11 +16,13 @@
 }
 
 @mixin main {
+  padding-bottom: $header-height-control + $container-fluid;
+  position: relative;
   min-height: 100vh;
 }
 
 @mixin with-header {
-  padding-top: $header-height-control + $container-fluid;
+  padding-top: $header-height-control;
 }
 
 @mixin logo {
@@ -60,6 +62,7 @@
 }
 
 @import "sass/components/header-component";
+@import "sass/components/footer-component";
 @import "sass/components/home-component";
 @import "sass/components/login-component";
 @import "sass/components/new-wallet-component";
@@ -77,9 +80,9 @@
 
 
 #mobile-menu {
+  padding-top: $header-height-control + $container-fluid;
   box-shadow: -1px 0 3px 3px rgba($black, 0.35);
   transition: transform 0.2s ease-in-out;
-  padding-top: $header-height-control;
   transform: translateX(110%);
   background-color: $purple;
   position: fixed;
@@ -247,46 +250,6 @@
   }
 }
 
-.footer {
-  background-color: darken($purple, 7%);
-  .copyright,
-  .network {
-    padding: get-spacer(2) 0;
-    text-align: right;
-    display: block;
-    color: white;
-    margin: 0;
-  }
-  .network {
-    @include flex-row-end;
-    > span {
-      @include flex-column-center;
-    }
-    .name {
-      font-size: $font-size-sm;
-    }
-    .toggle {
-      &:after {
-        margin-left: get-spacer(2);
-        font-family: 'icomoon';
-      }
-    }
-    &.mainnet {
-      .toggle:after {
-        content: '\e671';
-        color: $green;
-      }
-    }
-    &.ropsten {
-      .toggle:after {
-        content: '\e670';
-        color: $red;
-      }
-    }
-  }
-  .copyright {}
-}
-
 #qr-code {
   img {
     height: auto;
@@ -303,6 +266,13 @@
 @media #{$lg-only} {}
 @media #{$sm-down} {
   body {}
+  .header {
+    .logo {
+      img {
+        width: 98px;
+      }
+    }
+  }
 }
 @media #{$md-down} {}
 @media #{$lg-down} {}

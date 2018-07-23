@@ -2,8 +2,4 @@
   @include main;
   @include flex-column-center;
   background-color: $purple;
-
-  .logo {
-    @include logo;
-  }
 }

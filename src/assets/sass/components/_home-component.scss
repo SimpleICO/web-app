@@ -1,8 +1,9 @@
 #home-component {
   @include container-size(xl);
   @include flex-column-center;
-  @include main;
   @include full-width-header;
+  @include main;
+  background-color: $purple;
 
   #introduction {
     @include hero-overlay;

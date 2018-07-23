@@ -2,7 +2,7 @@
   .header {
     .header-left,
     .header-right {
-      height: $header-height-control + 21px;
+      height: $header-height-control;
     }
     .logo {
       img {
@@ -21,10 +21,14 @@
   right: 0;
   left: 0;
   top: 0;
+  .header-left,
+  .header-right {
+    height: $header-height-control;
+  }
   .logo {
     img {
       height: auto;
-      width: 92px;
+      width: 120px;
     }
   }
   .header-right {

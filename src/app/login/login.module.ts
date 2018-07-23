@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { ContainerComponent } from './container.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ],
   declarations: [ContainerComponent]
 })

@@ -1,0 +1,46 @@
+.footer {
+  background-color: darken($purple, 7%);
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  .copyright,
+  .network {
+    padding: get-spacer(2) 0;
+    text-align: right;
+    display: block;
+    color: white;
+    margin: 0;
+  }
+  .network {
+    @include flex-row-end;
+    &:hover {
+      cursor: pointer;
+    }
+    > span {
+      @include flex-column-center;
+    }
+    .name {
+      font-size: $font-size-sm;
+    }
+    .toggle {
+      &:after {
+        margin-left: get-spacer(2);
+        font-family: 'icomoon';
+      }
+    }
+    &.mainnet {
+      .toggle:after {
+        content: '\e671';
+        color: $green;
+      }
+    }
+    &.ropsten {
+      .toggle:after {
+        content: '\e670';
+        color: $red;
+      }
+    }
+  }
+  .copyright {}
+}

@@ -1,8 +1,7 @@
 <main id="login-component">
+  <app-header-public></app-header-public>
+
   <div class="container">
-    <div class="logo">
-      <img src="assets/img/logo-simpleico.svg" alt="SimpleICO">
-    </div>
     <fieldset class="form-group dark-theme">
       <textarea autofocus="autofocus" class="form-control" placeholder="Paste your 12 word seed phrase" [(ngModel)]="seed"></textarea>
     </fieldset>
@@ -18,4 +17,6 @@
       <small>Beta release {{ wallet.version }}<br>Ethereum {{ wallet.network }}</small>
     </div>
   </div>
+
+  <app-footer></app-footer>
 </main>

@@ -21,10 +21,6 @@
   @include main;
   background-color: $purple;
 
-  .logo {
-    @include logo;
-  }
-
   .new-wallet-wrapper {
     &.on-new-wallet {
       animation: on-new-wallet 0.3s ease-in-out 0.2s 1 forwards;
