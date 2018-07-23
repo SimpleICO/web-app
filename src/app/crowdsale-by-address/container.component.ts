@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { SimpleICOContract } from '@contract/simpleico.contract';
 import { WalletService } from '@service/wallet.service';
 import { SettingsService } from '@service/settings.service';
-import { FixedSupplyComponent } from '../contract-index/fixed-supply/fixed-supply.component';
 import { SimpleCrowdsaleContract } from '@contract/simplecrowdsale.contract';
 
 import { FixedSupplyDeployment } from '@factory/fixed-supply.deployment';
@@ -13,7 +12,9 @@ import { FixedSupplyDeployment } from '@factory/fixed-supply.deployment';
   styleUrls: ['./container.component.css']
 })
 
-export class ContainerComponent extends FixedSupplyComponent {
+export class ContainerComponent implements OnInit {
+
+  simpleICO: SimpleICOContract
 
   address: string
 
@@ -24,8 +25,6 @@ export class ContainerComponent extends FixedSupplyComponent {
   constructor(
     public wallet: WalletService,
     public settings: SettingsService){
-
-    super(wallet, settings)
 
     settings.onNetworkChange.subscribe((networkChanged) => {
       this.crowdsales = []
@@ -51,4 +50,25 @@ export class ContainerComponent extends FixedSupplyComponent {
     this.initCrowdsales(crowdsales)
   }
 
+  async initCrowdsales(crowdsales: Array<string>){
+    if (crowdsales.length <= 0) {
+      return false
+    }
+
+    let address = crowdsales.pop()
+
+    let crowdsale = new SimpleCrowdsaleContract(this.wallet.getInstance())
+    crowdsale.connect()
+    crowdsale.setAddress(address)
+
+    await crowdsale.setToken()
+
+    let token = crowdsale.getToken()
+    await token.getName()
+    await token.getSymbol()
+
+    this.crowdsales.push(crowdsale)
+
+    this.initCrowdsales(crowdsales)
+  }
 }
