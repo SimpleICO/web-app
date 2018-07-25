@@ -7,7 +7,7 @@
 
   #introduction {
     .left-content,
-    .img-wrapper {
+    .right-content {
       @include flex-column-center;
       min-height: 100vh;
     }

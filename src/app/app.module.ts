@@ -54,7 +54,7 @@ import { SCUILibModule, Network } from 'scui-lib';
     HackatonModule
     SCUILibModule.forRoot({
       network: Network.testnet
-    })
+    }),
   ],
   providers: [
     { provide: ErrorHandler, useClass: ErrorTrackingService }
