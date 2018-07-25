@@ -25,7 +25,7 @@ import { SettingsModule } from './settings/settings.module';
 import { ScuiLandingPageModule } from './scui-landing-page/scui-landing-page.module';
 import { HackatonModule } from './hackaton/hackaton.module';
 
-import { SCUILibModule } from 'scui-lib';
+import { SCUILibModule, Network } from 'scui-lib';
 
 @NgModule({
   declarations: [
@@ -53,11 +53,7 @@ import { SCUILibModule } from 'scui-lib';
     ScuiLandingPageModule,
     HackatonModule
     SCUILibModule.forRoot({
-      wallet: {
-        networks: {
-          mainnet: 'something'
-        }
-      }
+      network: Network.testnet
     })
   ],
   providers: [

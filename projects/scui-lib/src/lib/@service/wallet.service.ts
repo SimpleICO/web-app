@@ -7,13 +7,17 @@ import { Network } from '../@model/network.model';
 })
 export class WalletService {
 
+  wallet: Wallet
+
   network: string
 
   constructor(
     @Inject('config') private config: any) {
     console.log(config)
 
+    this.setEmptyWallet()
     this.setNetwork(config.network)
+    this.setProviderByNetwork(config.network)
   }
 
   setNetwork(network: string = Network.mainnet){
@@ -35,7 +39,7 @@ export class WalletService {
     providerSetters[Network.testnet] = this.wallet.setRopstenProvider
     providerSetters[Network.private] = this.wallet.setJsonRpcProvider
 
-    providerSetters[network](this.config.wallet.networks[network])
+    providerSetters[network].call(this.wallet, this.config.wallet.networks[network])
 
     return this
   }

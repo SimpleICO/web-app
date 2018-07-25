@@ -3,16 +3,18 @@ import { WalletService } from './@service/wallet.service';
 import { Network } from './@model/network.model';
 import merge from 'deepmerge';
 
-export const Config = {
+let config$ = {
   network: Network.mainnet,
   wallet: {
-    networks: {
-      mainnet: 'https://mainnet.infura.io/TNxOmHzkTOUaNtxDBxia',
-      testnet: 'https://ropsten.infura.io/TNxOmHzkTOUaNtxDBxia',
-      private: 'HTTP://127.0.0.1:7545',
-    }
+    networks: {}
   }
 }
+
+config$.wallet.networks[Network.mainnet] = 'https://mainnet.infura.io/TNxOmHzkTOUaNtxDBxia'
+config$.wallet.networks[Network.testnet] = 'https://ropsten.infura.io/TNxOmHzkTOUaNtxDBxia'
+config$.wallet.networks[Network.private] = 'HTTP://127.0.0.1:7545'
+
+export const Config = config$
 
 @NgModule({
   imports: [
