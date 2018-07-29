@@ -23,7 +23,7 @@ const routes: Routes = [
     component: HomeComponent,
     canActivate: [AcceptTermsRouteGuard],
   },
-  { path: 'scuis',
+  { path: 'smart-contracts-wallet',
     component: ScuiLandingPageComponent,
   },
   { path: 'login',

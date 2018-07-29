@@ -1,0 +1,24 @@
+<a [routerLink]="['/contract', FixedSupplyDeployment, 'create']" class="contract">
+  <div class="card">
+    <h5 class="card-header">Simple ERC20 Token</h5>
+    <div class="card-body">
+      <p class="card-text">Deploy an ERC20 token with a name, symbol, supply and a price. A crowdsale will take charge of exchanging your token for ETH.</p>
+    </div>
+  </div>
+</a>
+<a [routerLink]="['/contract', ExistingTokenDeployment, 'create']" class="contract">
+  <div class="card">
+    <h5 class="card-header">Existing ERC20 Token</h5>
+    <div class="card-body">
+      <p class="card-text">Deploy a crowdsale for an existing ERC20 token. You need to own a percentage of the token.</p>
+    </div>
+  </div>
+</a>
+<a [routerLink]="['/smart-contracts-wallet']" class="contract placeholder">
+  <div class="card">
+    <h5 class="card-header">Develop your own</h5>
+    <div class="card-body">
+      <p class="card-text">Connect to any smart contract using the SCUI framework.</p>
+    </div>
+  </div>
+</a>

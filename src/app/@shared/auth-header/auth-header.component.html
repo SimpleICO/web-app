@@ -1,8 +1,16 @@
 <header class="header auth-header">
   <div class="container">
     <div class="row">
-      <div class="col-5 header-left">
-        <a [routerLink]="['/login']" class="text-white text-uppercase"><i class="icon-chevron-left"></i> back</a>
+      <div class="col-3 header-left">
+        <a [routerLink]="['/home']" class="logo">
+          <img src="assets/img/logo-simpleico.svg" alt="SimpleICO">
+        </a>
+      </div>
+      <div class="col-9 header-right">
+        <nav>
+          <a href="https://github.com/SimpleICO/web-app" target="_blank" class="d-none d-sm-inline-block">GitHub</a>
+          <a [routerLink]="['/login']" class="btn btn-outline-light">Login</a>
+        </nav>
       </div>
     </div>
   </div>

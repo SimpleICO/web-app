@@ -41,8 +41,28 @@
 
   #contracts-catalog {
     background-color: $purple;
+    app-catalog-contracts {
+      @include make-row;
+      .contract {
+        @include make-col(6, $grid-columns);
+        @include make-col-ready();
+      }
+    }
   }
+
   #global-financial-inclusion {
     background-color: $gray-500;
+  }
+}
+
+@media #{$sm-down} {
+  #home-component {
+    #contracts-catalog {
+      app-catalog-contracts {
+        .contract {
+          @include make-col(12, $grid-columns);
+        }
+      }
+    }
   }
 }

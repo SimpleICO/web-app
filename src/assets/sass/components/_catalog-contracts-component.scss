@@ -1,0 +1,18 @@
+.contract {
+  margin-top: get-spacer(4);
+  display: block;
+  .card {
+    background-color: theme-color('primary');
+    border-color: theme-color('primary');
+    color: white;
+  }
+  .card-body {
+    min-height: 120px;
+  }
+
+  &.placeholder {
+    .card {
+      background-color: transparent;
+    }
+  }
+}
