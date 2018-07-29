@@ -23,6 +23,7 @@ import { CatalogModule } from './catalog/catalog.module';
 import { WalletModule } from './wallet/wallet.module';
 import { SettingsModule } from './settings/settings.module';
 import { ScuiLandingPageModule } from './scui-landing-page/scui-landing-page.module';
+import { HackatonModule } from './hackaton/hackaton.module';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { ScuiLandingPageModule } from './scui-landing-page/scui-landing-page.mod
     WalletModule,
     SettingsModule,
     ScuiLandingPageModule,
+    HackatonModule
   ],
   providers: [
     { provide: ErrorHandler, useClass: ErrorTrackingService }

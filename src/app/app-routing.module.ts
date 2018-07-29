@@ -14,6 +14,7 @@ import { ContainerComponent as ContractDeployComponent } from './contract-deploy
 import { ContainerComponent as CatalogComponent } from './catalog/container.component';
 import { ContainerComponent as SettingsComponent } from './settings/container.component';
 import { ContainerComponent as ScuiLandingPageComponent } from './scui-landing-page/container.component';
+import { ContainerComponent as HackatonComponent } from './hackaton/container.component';
 import { UnlockRouteGuard } from '@guard/unlock-route-guard';
 import { AcceptTermsRouteGuard } from '@guard/accept-terms-route-guard';
 
@@ -25,6 +26,9 @@ const routes: Routes = [
   },
   { path: 'smart-contracts-wallet',
     component: ScuiLandingPageComponent,
+  },
+  { path: 'hackaton',
+    component: HackatonComponent,
   },
   { path: 'login',
     component: LoginComponent,

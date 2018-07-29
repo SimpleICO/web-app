@@ -78,6 +78,7 @@
 @import "sass/components/catalog-contracts-component";
 @import "sass/components/settings-component";
 @import "sass/components/scui-landing-page-component";
+@import "sass/components/hackaton-component";
 
 
 #mobile-menu {
@@ -257,6 +258,31 @@
     width: 100%;
   }
 }
+
+/* RESPONSIVE FONT RESIZE */
+
+$headings-ratio-1-3: .675;
+$headings-ratio-4-6: .875;
+@include media-breakpoint-down(sm) {
+  h1 {
+    font-size: $h1-font-size * $headings-ratio-1-3;
+  }
+  h2 {
+    font-size: $h2-font-size * $headings-ratio-1-3;
+  }
+  h3 {
+    font-size: $h3-font-size * $headings-ratio-1-3;
+  }
+  h4 {
+    font-size: $h4-font-size * $headings-ratio-4-6;
+  }
+}
+
+// @include media-breakpoint-down(md) {
+//   html {
+//     font-size: $font-size-base * .995;
+//   }
+// }
 
 /*
   Media queries

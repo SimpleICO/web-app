@@ -1,0 +1,91 @@
+#hackaton {
+  @include container-size(xl);
+  background-color: theme-color('dark');
+
+  #intro {
+    @include flex-column-center;
+    @include with-header;
+    @include main;
+    text-align: center;
+    .rules,
+    .title {
+      color: white;
+    }
+    .rules {
+      @include bold;
+      margin-bottom: get-spacer(5);
+      text-transform: uppercase;
+    }
+    .title {
+
+    }
+    .place {
+      color: $gray-600;
+    }
+
+    footer.sections {
+      border-top: 1px black solid;
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      nav {
+        @include flex-row-space-between;
+        overflow-x: scroll;
+      }
+      a {
+        @include flex-column-center;
+        min-height: 70px;
+        color: white;
+        flex-grow: 1;
+        &:hover {
+          background-color: black;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  #objetivo {
+    @include flex-column-center;
+    min-height: 100vh;
+    color: white;
+    .title {
+      font-size: $display3-size;
+    }
+  }
+
+  #evaluacion {
+    .card {
+      margin-bottom: get-spacer(4);
+    }
+    .card-body {
+      min-height: 560px;
+    }
+  }
+}
+
+@media #{$sm-down} {
+  #hackaton {
+    #objetivo {
+      .title {
+        font-size: $h1-font-size;
+      }
+    }
+    #evaluacion {
+      .card-body {
+        min-height: auto;
+      }
+    }
+    #intro {
+      footer.sections {
+        nav {
+          a {
+            min-width: 120px;
+          }
+        }
+      }
+    }
+  }
+}
