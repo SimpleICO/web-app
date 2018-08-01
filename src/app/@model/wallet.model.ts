@@ -51,7 +51,10 @@ export class Wallet {
   }
 
   setRopstenProvider(){
-    let provider = new Web3.providers.HttpProvider('https://ropsten.infura.io/TNxOmHzkTOUaNtxDBxia')
+    let options = {
+      timeout: 900000
+    }
+    let provider = new Web3.providers.HttpProvider('https://ropsten.infura.io/v3/3ffb5509990b4964acd6de7991d5750d', options)
     this.provider = provider
     this.instance.provider = provider
     this.web3 = new Web3(provider)
@@ -59,7 +62,10 @@ export class Wallet {
   }
 
   setMainnetProvider(){
-    let provider = new Web3.providers.HttpProvider('https://mainnet.infura.io/TNxOmHzkTOUaNtxDBxia')
+    let options = {
+      timeout: 900000
+    }
+    let provider = new Web3.providers.HttpProvider('https://mainnet.infura.io/v3/3ffb5509990b4964acd6de7991d5750d', options)
     this.provider = provider
     this.instance.provider = provider
     this.web3 = new Web3(provider)

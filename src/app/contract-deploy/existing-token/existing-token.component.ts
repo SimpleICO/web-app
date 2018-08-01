@@ -14,6 +14,7 @@ import { Token } from '@model/token.model';
 
 declare var require: any
 const ethers = require('ethers')
+const Web3 = require('web3')
 
 @Component({
   selector: 'app-existing-token',
@@ -75,6 +76,8 @@ export class ExistingTokenComponent implements OnInit {
     public shared: SharedService) {
 
     this.deployer = contractFactory.deployer
+
+    this.gasPrice = Web3.utils.fromWei(eth.defaultGasPrice.toString(), 'gwei')
   }
 
   ngOnInit() {

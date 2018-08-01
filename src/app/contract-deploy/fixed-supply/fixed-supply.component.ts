@@ -76,7 +76,7 @@ export class FixedSupplyComponent implements OnInit {
 
     this.deployer = contractFactory.deployer
 
-    this.gasPrice = ethers.utils.bigNumberify(eth.defaultGasPrice.toString()).div(1e9.toString()).toString()
+    this.gasPrice = Web3.utils.fromWei(eth.defaultGasPrice.toString(), 'gwei')
   }
 
   ngOnInit() {

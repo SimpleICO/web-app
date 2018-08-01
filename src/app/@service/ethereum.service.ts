@@ -20,7 +20,7 @@ export class EthereumService {
 
   ethPrice: string = '0.0'
 
-  defaultGasPrice: number = 49000000000
+  defaultGasPrice: number = 7500000000
 
   etherscanURL: string
 
@@ -43,11 +43,10 @@ export class EthereumService {
   }
 
   /**
-   * [updateGasPrice Set the new ghas price in gwei 1e9]
+   * [updateGasPrice Set the new gas price in gwei 1e9]
    * @param {number} price Price should enter as an integer, eg. 36
    */
   updateGasPrice(price: number){
-
     this.defaultGasPrice = Web3.utils.toWei(price.toString(), 'gwei')
   }
 

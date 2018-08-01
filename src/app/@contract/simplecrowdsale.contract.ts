@@ -66,7 +66,7 @@ export class SimpleCrowdsaleContract extends Crowdsale {
 
     return web3.eth.subscribe('logs', {
       address: this.address,
-      topics: [],
+      topics: null,
     })
   }
 
