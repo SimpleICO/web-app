@@ -1,0 +1,38 @@
+<app-qr-code-modal [model]="token"></app-qr-code-modal>
+
+<div class="container">
+  <h1 class="token-name">{{ token.name }} ({{ token.symbol }})</h1>
+  <div class="eth-raised">
+    <span class="balance text-truncate" style="max-width: 210px">{{ token.address }}</span>
+    <small>Token address</small>
+    <span class="go-icon" (click)="shared.displayCrowdsaleShowModal()">
+      <i class="icon-copy"></i>
+    </span>
+  </div>
+  <article class="eth-raised">
+    <span class="balance">{{ token.name }}</span>
+    <small>Name</small>
+  </article>
+  <article class="eth-raised">
+    <span class="balance">{{ token.symbol }}</span>
+    <small>Symbol</small>
+  </article>
+  <article class="eth-raised">
+    <span class="balance">{{ token.decimals }}</span>
+    <small>Decimals</small>
+  </article>
+  <article class="eth-raised">
+    <span class="balance">{{ token.symbol }} {{ token.supply }}</span>
+    <small>Supply</small>
+  </article>
+</div>
+
+<section id="info" class="section">
+  <div class="container">
+    <h5 class="title">Contract information</h5>
+    <article class="info">
+      <small>ERC20 Token contract</small>
+      <a href="{{ eth.etherscanURL }}/token/{{ token.getAddress() }}" target="_blank" class="text-truncate">{{ token.getAddress() }}</a>
+    </article>
+  </div>
+</section>

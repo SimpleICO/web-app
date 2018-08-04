@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FixedSupplyComponent as PrivateFixedSupplyComponent } from '../../contract-show/fixed-supply/fixed-supply.component';
 import { SimpleCrowdsaleContract } from '@contract/simplecrowdsale.contract';
 import { SimpleTokenContract } from '@contract/simpletoken.contract';
-import { SettingsService } from '@service/settings.service';
-import { Network } from '@model/network.model';
 
 @Component({
   selector: 'app-fixed-supply',

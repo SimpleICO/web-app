@@ -1,13 +1,9 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { EthereumService } from '@service/ethereum.service';
-import { WalletService } from '@service/wallet.service';
-import { SharedService } from '@service/shared.service';
-import { SimpleCrowdsaleContract } from '@contract/simplecrowdsale.contract';
-import { SimpleTokenContract } from '@contract/simpletoken.contract';
 
 import { FixedSupplyDeployment } from '@factory/fixed-supply.deployment';
 import { ExistingTokenDeployment } from '@factory/existing-token.deployment';
+import { DetailedERC20Deployment } from '@factory/detailed-erc20.deployment';
 
 @Component({
   selector: 'app-container',
@@ -23,9 +19,10 @@ export class ContainerComponent implements OnInit {
 
   ExistingTokenDeployment: string = ExistingTokenDeployment._type
   FixedSupplyDeployment: string = FixedSupplyDeployment._type
+  DetailedERC20Deployment: string = DetailedERC20Deployment._type
 
   constructor(
-    public route: ActivatedRoute) {}
+    public route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.params.subscribe(({ contractAddress, contractType }) => {
