@@ -1,0 +1,76 @@
+<section class="step" id="step-1" *ngIf="steps.estimateTxCosts.isCurrent">
+  <div class="container">
+    <header class="step-header">
+      <h5>Step {{ steps.estimateTxCosts.step }} of {{ stepCount }}</h5>
+    </header>
+
+    <h4>Calculating transaction costs</h4>
+    <article class="estimate" *ngFor="let estimate of steps.estimateTxCosts.estimates">
+      <p>ETH {{ estimate.txCost }}</p>
+      <p>{{ estimate.text }}</p>
+    </article>
+
+    <fieldset class="form-group dark-theme" *ngIf="steps.estimateTxCosts.isComplete">
+      <label for="gas-price">Gas Price (GWEI)</label>
+      <div class="input-group">
+        <input name="gas-price" type="number" class="form-control" placeholder="eg. 32" [(ngModel)]="gasPrice">
+        <div class="input-group-append">
+          <button class="btn btn-outline-primary" (click)="updateGasPrice()">Update</button>
+        </div>
+      </div>
+    </fieldset>
+
+    <div *ngIf="steps.estimateTxCosts.hasError">
+      <p class="on-error">Insufficient funds to execute these transactions. Send ETH to your wallet address and retry.</p>
+      <button class="btn btn-primary btn-block mb-3" (click)="shared.displayCrowdsaleShowModal()">See wallet address</button>
+      <button class="btn btn-outline-primary btn-block" (click)="init()">Retry</button>
+    </div>
+
+    <div *ngIf="steps.estimateTxCosts.isComplete">
+      <button class="btn btn-primary btn-block" (click)="deployToken()">Next</button>
+    </div>
+  </div>
+</section>
+
+<section class="step" id="step-2" *ngIf="steps.deployToken.isCurrent">
+  <div class="container">
+    <header class="step-header">
+      <h5>Step {{ steps.deployToken.step }} of {{ stepCount }}</h5>
+    </header>
+
+    <h4>
+      <i class="icon-loading2 spin" *ngIf="!steps.deployToken.isComplete || steps.deployToken.hasError"></i> Deploying your ERC20 token</h4>
+    <p class="mb-2">Note: Transaction times depend on the Ethereum network. Do not refresh or close this page.</p>
+    <a class="mb-4 d-block" href="{{ eth.etherscanURL }}/address/{{ wallet.getAddress() }}" target="_blank">See transaction</a>
+    <article class="estimate">
+      <p>{{ token.name }}</p>
+      <p>Name</p>
+    </article>
+    <article class="estimate">
+      <p>{{ token.symbol }}</p>
+      <p>Symbol</p>
+    </article>
+    <article class="estimate">
+      <p>{{ token.decimals }}</p>
+      <p>Decimals</p>
+    </article>
+    <article class="estimate">
+      <p>{{ token.symbol }} {{ supply }}</p>
+      <p>Supply</p>
+    </article>
+
+    <div *ngIf="steps.deployToken.hasError">
+      <p class="on-error" [innerHTML]="steps.deployToken.errorMessage | keepHtml"></p>
+      <button class="btn btn-outline-primary btn-block" (click)="deployToken()">Retry</button>
+    </div>
+
+    <div *ngIf="!steps.deployToken.isComplete">
+      <button class="btn btn-outline-primary btn-block" (click)="init()">Retry with higher gas price</button>
+    </div>
+
+    <div *ngIf="steps.deployToken.isComplete">
+      <button class="btn btn-primary btn-block" (click)="finish()">Finish</button>
+    </div>
+
+  </div>
+</section>

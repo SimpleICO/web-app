@@ -58,6 +58,7 @@ export class EthereumService {
     return {
       cost: ethers.utils.bigNumberify(cost.toString()),
       ETH: ETH,
+      WEI: ethers.utils.parseEther(ETH),
       USD: (ETH * USD).toFixed(2)
     }
   }

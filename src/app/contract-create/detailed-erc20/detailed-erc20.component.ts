@@ -50,6 +50,13 @@ export class DetailedErc20Component implements OnInit {
       return false
     }
 
+
+    if (isNaN(Number(this.token.decimals)) || this.token.decimals <= 0) {
+      this.isInvalid = true
+      this.errorMessage = 'No token decimals were specified'
+      return false
+    }
+
     if (isNaN(Number(this.token.supply)) || this.token.supply <= 0) {
       this.isInvalid = true
       this.errorMessage = 'Supply value must be an integer greater than 0'

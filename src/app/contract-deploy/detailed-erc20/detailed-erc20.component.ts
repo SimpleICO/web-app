@@ -6,24 +6,21 @@ import { WalletService } from '@service/wallet.service';
 import { EthereumService } from '@service/ethereum.service';
 import { SharedService } from '@service/shared.service';
 import { Router } from '@angular/router';
-import { Crowdsale } from '@model/crowdsale.model';
 import { Token } from '@model/token.model';
 
 declare var require: any
-const ethers = require('ethers')
 const Web3 = require('web3')
+
 @Component({
-  selector: 'app-fixed-supply',
-  templateUrl: './fixed-supply.component.html',
-  styleUrls: ['./fixed-supply.component.css']
+  selector: 'app-detailed-erc20',
+  templateUrl: './detailed-erc20.component.html',
+  styleUrls: ['./detailed-erc20.component.css']
 })
-export class FixedSupplyComponent implements OnInit {
+export class DetailedErc20Component implements OnInit {
 
   deployer: ContractDeployment
 
   token: Token
-
-  crowdsale: Crowdsale
 
   stepCount: number = 0
 
@@ -44,20 +41,6 @@ export class FixedSupplyComponent implements OnInit {
       hasError: false,
       errorMessage: '',
     },
-    deployCrowdsale: {
-      step: 3,
-      isCurrent: false,
-      isComplete: false,
-      hasError: false,
-      errorMessage: '',
-    },
-    transferToken: {
-      step: 4,
-      isCurrent: false,
-      isComplete: false,
-      hasError: false,
-      errorMessage: '',
-    }
   }
 
   @Input() gasPrice: number
@@ -66,8 +49,8 @@ export class FixedSupplyComponent implements OnInit {
     private contractFactory: ContractDeploymentFactory,
     public wallet: WalletService,
     public eth: EthereumService,
-    private router: Router,
-    public shared: SharedService) {
+    public shared: SharedService,
+    private router: Router) {
 
     this.deployer = contractFactory.deployer
 
@@ -76,28 +59,14 @@ export class FixedSupplyComponent implements OnInit {
 
   ngOnInit() {
     this.token = this.deployer.getToken()
-    this.crowdsale = this.deployer.getCrowdsale()
-
     this.stepCount = Object.keys(this.steps).length
-
     this.init()
   }
 
   updateGasPrice() {
-
     this.deployer.gas = 0
     this.eth.updateGasPrice(this.gasPrice)
     this.init()
-  }
-
-  finish() {
-    try {
-      this.deployer.addCrowdsaleToSimpleICOContract()
-
-      return this.router.navigate([`/contract/${this.crowdsale.address}/show/${this.deployer.type}`])
-    } catch (error) {
-      console.log(error)
-    }
   }
 
   reset() {
@@ -110,6 +79,14 @@ export class FixedSupplyComponent implements OnInit {
 
     this.steps.estimateTxCosts.isCurrent = true
     this.steps.estimateTxCosts.estimates = []
+  }
+
+  finish() {
+    try {
+      return this.router.navigate([`/contract/${this.token.address}/show/${this.deployer.type}`])
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   async init() {
@@ -148,62 +125,13 @@ export class FixedSupplyComponent implements OnInit {
     }
   }
 
-  async deployCrowdsale() {
-    this.steps.deployToken.isCurrent = false
-    this.steps.deployCrowdsale.isCurrent = true
-    this.steps.deployCrowdsale.hasError = false
-
-    try {
-      await this.deployer.deployCrowdsale()
-
-      this.steps.deployCrowdsale.isComplete = true
-    } catch (error) {
-      console.log(error)
-      this.steps.deployCrowdsale.hasError = true
-      this.steps.deployCrowdsale.errorMessage = `Your crowdsale wasn't deployed but you didn't lose ETH funds. Retry this deployment or go to your token page`
-    }
-  }
-
-  async transferToken() {
-    this.steps.transferToken.isCurrent = true
-    this.steps.deployCrowdsale.isCurrent = false
-    this.steps.transferToken.hasError = false
-
-    try {
-      await this.deployer.transferToken()
-
-      this.steps.transferToken.isComplete = true
-    } catch (error) {
-      console.log(error)
-      this.steps.transferToken.hasError = true
-      this.steps.transferToken.errorMessage = `Something went wrong`
-    }
-  }
-
   async estimateTransactionCosts() {
     this.steps.estimateTxCosts.estimates.push({
       text: 'ERC20 token deployment',
       txCost: '...'
     })
-    let txCost = await this.deployer.estimateTokenDeploymentCost()
+    const txCost = await this.deployer.estimateTokenDeploymentCost()
     this.steps.estimateTxCosts.estimates[0].txCost = txCost.ETH
-
-    this.steps.estimateTxCosts.estimates.push({
-      text: 'Crowdsale contract deployment',
-      txCost: '...'
-    })
-    txCost = await this.deployer.estimateCrowdsaleDeploymentCost()
-    this.steps.estimateTxCosts.estimates[1].txCost = txCost.ETH
-
-    this.steps.estimateTxCosts.estimates.push({
-      text: 'Transfer token supply to crowdsale',
-      txCost: '...'
-    })
-    this.token.setAddress(ContractDeployment.CONTRACT_DUMMY_ADDRESS)
-    txCost = await this.deployer.estimateTokenTransferCost()
-    const simpleICOCost = await this.deployer.estimateSimpleICOCost()
-    const cost = txCost.cost.add(simpleICOCost.cost)
-    this.steps.estimateTxCosts.estimates[2].txCost = ethers.utils.formatEther(cost.toString())
 
     this.steps.estimateTxCosts.estimates.push({
       text: 'TOTAL',
@@ -221,4 +149,3 @@ export class FixedSupplyComponent implements OnInit {
   }
 
 }
-
