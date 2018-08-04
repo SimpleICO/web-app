@@ -22,7 +22,7 @@ export class ContainerComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private contractFactory: ContractDeploymentFactory,
-    public wallet: WalletService) {}
+    public wallet: WalletService) { }
 
   ngOnInit() {
     this.route.params.subscribe(({ contractType }) => {
@@ -30,7 +30,7 @@ export class ContainerComponent implements OnInit {
     })
   }
 
-  cancel(){
+  cancel() {
     return this.router.navigate([`/contract/${this.contractType}/create`])
   }
 

@@ -18,9 +18,9 @@ export class SettingsService {
 
   constructor(
     private wallet: WalletService,
-    private eth: EthereumService) {}
+    private eth: EthereumService) { }
 
-  setNetwork(network: string = Network.mainnet){
+  setNetwork(network: string = Network.mainnet) {
 
     this.wallet.setNetwork(network)
     this.wallet.setProviderByNetwork(network)

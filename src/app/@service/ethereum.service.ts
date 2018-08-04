@@ -31,9 +31,9 @@ export class EthereumService {
     this.setEtherScanURLByNetwork()
   }
 
-  setEtherScanURLByNetwork(){
+  setEtherScanURLByNetwork() {
 
-    let networks = {}
+    const networks = {}
     networks[Network.mainnet] = EthereumService.ETHERSCAN_MAINNET
     networks[Network.testnet] = EthereumService.ETHERSCAN_TESTNET
 
@@ -46,24 +46,25 @@ export class EthereumService {
    * [updateGasPrice Set the new gas price in gwei 1e9]
    * @param {number} price Price should enter as an integer, eg. 36
    */
-  updateGasPrice(price: number){
+  updateGasPrice(price: number) {
+
     this.defaultGasPrice = Web3.utils.toWei(price.toString(), 'gwei')
   }
 
-  async getTxCost(gas, gasPrice = this.defaultGasPrice){
-    let { USD } = await this.convertCurrency('ETH', 'USD')
-    let cost = gas * gasPrice
-    let ETH = ethers.utils.formatEther(cost.toString())
+  async getTxCost(gas, gasPrice = this.defaultGasPrice) {
+    const { USD } = await this.convertCurrency('ETH', 'USD')
+    const cost = gas * gasPrice
+    const ETH = ethers.utils.formatEther(cost.toString())
     return {
       cost: ethers.utils.bigNumberify(cost.toString()),
       ETH: ETH,
-      USD: ( ETH * USD ).toFixed(2)
+      USD: (ETH * USD).toFixed(2)
     }
   }
 
-  async getTotalEthInUsd(eth){
-    let { USD } = await this.convertCurrency('ETH', 'USD')
-    let total = eth * USD
+  async getTotalEthInUsd(eth) {
+    const { USD } = await this.convertCurrency('ETH', 'USD')
+    const total = eth * USD
     this.ethPrice = total.toFixed(2)
   }
 
@@ -73,7 +74,7 @@ export class EthereumService {
       .toPromise()
   }
 
-  async getNonce(contract: any){
+  async getNonce(contract: any) {
     return await contract.web3.eth.getTransactionCount(this.wallet.getAddress(), 'pending')
   }
 }

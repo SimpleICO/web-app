@@ -1,25 +1,16 @@
 <section class="section">
   <div class="container">
     <h4 class="text-white">Create your own ERC20 token and crowdsale</h4>
-    <p class="text-white mb-4">Got an existing ERC20 token? <a [routerLink]="['/contract', ExistingTokenDeployment, 'create']">Deploy crowdsale only</a></p>
+    <p class="text-white mb-4">Got an existing ERC20 token?
+      <a [routerLink]="['/contract', ExistingTokenDeployment, 'create']">Deploy crowdsale only</a>
+    </p>
     <fieldset class="form-group dark-theme">
       <label for="">Token name</label>
-      <input
-        required
-        autofocus="autofocus"
-        type="text"
-        class="form-control"
-        placeholder="eg. SimpleICO Coin"
-        [(ngModel)]="token.name">
+      <input required autofocus="autofocus" type="text" class="form-control" placeholder="eg. SimpleICO Coin" [(ngModel)]="token.name">
     </fieldset>
     <fieldset class="form-group dark-theme">
       <label for="">Token symbol</label>
-      <input
-        required
-        type="text"
-        class="form-control"
-        placeholder="eg. SIC"
-        [(ngModel)]="token.symbol">
+      <input required type="text" class="form-control" placeholder="eg. SIC" [(ngModel)]="token.symbol">
     </fieldset>
     <fieldset class="form-group dark-theme">
       <label for="">Token supply</label>
@@ -27,13 +18,7 @@
         <div class="input-group-prepend">
           <button class="btn btn-outline-light">{{ token.symbol || 'TOKEN' }}</button>
         </div>
-        <input
-          required
-          disabled="disabled"
-          type="number"
-          class="form-control disabled"
-          placeholder="eg. 100"
-          [(ngModel)]="token.supply">
+        <input required disabled="disabled" type="number" class="form-control disabled" placeholder="eg. 100" [(ngModel)]="token.supply">
       </div>
     </fieldset>
     <fieldset class="form-group dark-theme">
@@ -42,23 +27,12 @@
         <div class="input-group-prepend">
           <button class="btn btn-outline-light">ETH</button>
         </div>
-        <input
-          required
-          disabled="disabled"
-          type="number"
-          class="form-control disabled"
-          placeholder="eg. 1.00"
-          [(ngModel)]="token.price">
+        <input required disabled="disabled" type="number" class="form-control disabled" placeholder="eg. 1.00" [(ngModel)]="token.price">
       </div>
     </fieldset>
     <fieldset class="form-group dark-theme">
       <label for="">Beneficiary address</label>
-      <input
-        required
-        type="text"
-        class="form-control"
-        placeholder="eg. 0x123..."
-        [(ngModel)]="crowdsale.beneficiary">
+      <input required type="text" class="form-control" placeholder="eg. 0x123..." [(ngModel)]="crowdsale.beneficiary">
       <small class="text-primary" (click)="setBeneficiary()">Use this wallet address</small>
     </fieldset>
     <p *ngIf="isInvalid" class="on-error">{{ errorMessage }}</p>

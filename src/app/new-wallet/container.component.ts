@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WalletService } from '@service/wallet.service';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 
 declare var require: any
 
@@ -43,11 +43,11 @@ export class ContainerComponent implements OnInit {
   ngOnInit() {
   }
 
-  ngAfterViewInit(){
-    let self = this
+  ngAfterViewInit() {
+    const self = this
 
     new clipboard(`.copy-address`, {
-      text: function(trigger) {
+      text: function (trigger) {
 
         self.updateTrigger(trigger)
 
@@ -55,7 +55,7 @@ export class ContainerComponent implements OnInit {
       }
     })
     new clipboard(`.copy-private-key`, {
-      text: function(trigger) {
+      text: function (trigger) {
 
         self.updateTrigger(trigger)
 
@@ -63,7 +63,7 @@ export class ContainerComponent implements OnInit {
       }
     })
     new clipboard(`.copy-mnemonic`, {
-      text: function(trigger) {
+      text: function (trigger) {
 
         self.updateTrigger(trigger)
 
@@ -72,7 +72,7 @@ export class ContainerComponent implements OnInit {
     })
   }
 
-  updateTrigger(trigger){
+  updateTrigger(trigger) {
     trigger.innerHTML = '<i class="icon-checkmark-circle"></i>'
     trigger.classList.add('btn-success')
     trigger.classList.remove('btn-outline-white')
@@ -84,7 +84,7 @@ export class ContainerComponent implements OnInit {
     }, 2000);
   }
 
-  generateWallet(){
+  generateWallet() {
     this.wallet.generateWallet()
   }
 

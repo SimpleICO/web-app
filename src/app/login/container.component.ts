@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { WalletService } from '@service/wallet.service';
 import { EthereumService } from '@service/ethereum.service';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-container',

@@ -35,30 +35,30 @@ export class FixedSupplyComponent implements OnInit {
     this.simpleICO.connect()
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this.getCrowdsales()
   }
 
-  async getCrowdsales(){
-    let crowdsales = await this.simpleICO.instance.methods.getCrowdsales().call()
+  async getCrowdsales() {
+    const crowdsales = await this.simpleICO.instance.methods.getCrowdsales().call()
 
     this.initCrowdsales(crowdsales)
   }
 
-  async initCrowdsales(crowdsales: Array<string>){
+  async initCrowdsales(crowdsales: Array<string>) {
     if (crowdsales.length <= 0) {
       return false
     }
 
-    let address = crowdsales.pop()
+    const address = crowdsales.pop()
 
-    let crowdsale = new SimpleCrowdsaleContract(this.wallet.getInstance())
+    const crowdsale = new SimpleCrowdsaleContract(this.wallet.getInstance())
     crowdsale.connect()
     crowdsale.setAddress(address)
 
     await crowdsale.setToken()
 
-    let token = crowdsale.getToken()
+    const token = crowdsale.getToken()
     await token.getName()
     await token.getSymbol()
 

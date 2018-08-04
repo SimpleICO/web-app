@@ -43,28 +43,28 @@ export class WalletService {
     this.setNetwork()
   }
 
-  setNetwork(network: string = Network.mainnet){
+  setNetwork(network: string = Network.mainnet) {
     this.network = network
     this.wallet.setNetwork(network)
     return this
   }
 
-  setBeneficiaryAddress(address: string){
-    if (!Web3.utils.isAddress(address)) return false
+  setBeneficiaryAddress(address: string) {
+    if (!Web3.utils.isAddress(address)) { return false }
 
     this.wallet.setBeneficiary(address)
 
     return this
   }
 
-  async getAccountBalance(address: string = this.getAddress()){
-    let balance = await this.getInstance().getBalance()
+  async getAccountBalance(address: string = this.getAddress()) {
+    const balance = await this.getInstance().getBalance()
     this.balance = balance
     this.ethBalance = Eth.utils.formatEther(balance)
     return balance
   }
 
-  setEmptyWallet(){
+  setEmptyWallet() {
     this.wallet = new Wallet()
     this.wallet.setLockedInstance()
     return this
@@ -74,21 +74,21 @@ export class WalletService {
     return this.wallet
   }
 
-  generateWallet(){
-    let wallet = new Wallet()
+  generateWallet() {
+    const wallet = new Wallet()
 
-    let result = wallet.createRandom()
+    const result = wallet.createRandom()
 
     this.onNewWallet.next(result)
 
     return result
   }
 
-  getAddress(){
+  getAddress() {
     return this.wallet ? this.wallet.address : '0x00000000000000000'
   }
 
-  resolve(){
+  resolve() {
     if (!this.isUnlocked()) {
       return this.router.navigateByUrl('/login');
     }
@@ -96,19 +96,19 @@ export class WalletService {
     return this.isUnlocked()
   }
 
-  isUnlocked(){
-    return this.wallet != undefined &&
-          this.wallet != null &&
-          !this.isLocked
+  isUnlocked() {
+    return this.wallet !== undefined &&
+      this.wallet != null &&
+      !this.isLocked
   }
 
-  lock(){
+  lock() {
     this.wallet = null
 
     return this.router.navigateByUrl('/login')
   }
 
-  unlock(seed: string){
+  unlock(seed: string) {
     if (!seed) {
       this.onUnlockError.next({
         message: 'No input detected'
@@ -119,17 +119,17 @@ export class WalletService {
 
     seed = seed.trim().replace(/\s\s+/g, ' ')
 
-    if (seed.split(' ').length == 12) {
+    if (seed.split(' ').length === 12) {
       return this.unlockFromMnemonic(seed)
     }
 
     return this.unlockFromPrivateKey(seed)
   }
 
-  setProviderByNetwork(network: string = Network.mainnet){
+  setProviderByNetwork(network: string = Network.mainnet) {
 
 
-    let providerSetters = {}
+    const providerSetters = {}
     providerSetters[Network.mainnet] = this.wallet.setMainnetProvider
     providerSetters[Network.testnet] = this.wallet.setRopstenProvider
     providerSetters[Network.private] = this.wallet.setJsonRpcProvider
@@ -139,7 +139,7 @@ export class WalletService {
     return this
   }
 
-  private _afterUnlockSuccess(){
+  private _afterUnlockSuccess() {
     this.isLocked = false
     this.setNetwork()
     this.setProviderByNetwork()
@@ -147,15 +147,15 @@ export class WalletService {
     this.errorTracking.setUserContext({ address: this.getAddress() })
   }
 
-  private _onUnlockError(error){
+  private _onUnlockError(error) {
     this.isLocked = true
     this.onUnlockError.next({
       message: error.message
     })
   }
 
-  unlockFromMnemonic(mnemonic: string){
-    let instance = new Wallet()
+  unlockFromMnemonic(mnemonic: string) {
+    const instance = new Wallet()
 
     try {
       this.wallet = instance.unlockFromMnemonic(mnemonic)
@@ -165,8 +165,8 @@ export class WalletService {
     }
   }
 
-  unlockFromPrivateKey(privateKey: string){
-    let instance = new Wallet()
+  unlockFromPrivateKey(privateKey: string) {
+    const instance = new Wallet()
 
     try {
       this.wallet = instance.unlockFromPrivateKey(privateKey)

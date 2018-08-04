@@ -22,7 +22,7 @@ export class ContainerComponent implements OnInit {
 
   constructor(
     public route: ActivatedRoute,
-    public wallet: WalletService) {}
+    public wallet: WalletService) { }
 
   ngOnInit() {
     this.wallet.setProviderByNetwork()

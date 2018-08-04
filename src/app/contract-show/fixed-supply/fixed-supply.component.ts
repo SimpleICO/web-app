@@ -38,7 +38,7 @@ export class FixedSupplyComponent implements OnInit {
     public eth: EthereumService,
     public shared: SharedService,
     public settings: SettingsService,
-    public wallet: WalletService) {}
+    public wallet: WalletService) { }
 
   ngOnInit() {
     this.route.params.subscribe(({ contractAddress, contractType }) => {
@@ -58,12 +58,12 @@ export class FixedSupplyComponent implements OnInit {
     })
   }
 
-  refresh(){
+  refresh() {
     this.crowdsale.getEthRaised()
     this.crowdsale.getAvailableTokens(this.token)
   }
 
-  subscribe(){
+  subscribe() {
     this.crowdsale.subscribeToEvents()
       .on('data', event => {
         this.crowdsale.getEthRaised()
@@ -75,15 +75,15 @@ export class FixedSupplyComponent implements OnInit {
       })
   }
 
-  async getTransaction(hash: string){
-    if (this.txs.indexOf(hash) != -1) {
+  async getTransaction(hash: string) {
+    if (this.txs.indexOf(hash) !== -1) {
       return false
     }
 
     this.txs.push(hash)
 
     try {
-      let tx = await this.crowdsale.web3.eth.getTransaction(hash)
+      const tx = await this.crowdsale.web3.eth.getTransaction(hash)
 
       this.txHistory.unshift({
         hash: tx.hash,
@@ -96,7 +96,7 @@ export class FixedSupplyComponent implements OnInit {
     }
   }
 
-  async getCrowdsaleData(){
+  async getCrowdsaleData() {
     this.crowdsale.getEthRaised()
     this.crowdsale.getBeneficiary()
     this.crowdsale.getPrice()
@@ -111,8 +111,8 @@ export class FixedSupplyComponent implements OnInit {
     }).catch(err => console.log)
   }
 
-  async getTokenData(){
-    let tokenAddress = await this.crowdsale.instance.methods.token().call()
+  async getTokenData() {
+    const tokenAddress = await this.crowdsale.instance.methods.token().call()
     this.token.setAddress(tokenAddress)
 
     this.crowdsale.getAvailableTokens(this.token)

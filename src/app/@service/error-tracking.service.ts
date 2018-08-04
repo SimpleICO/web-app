@@ -21,7 +21,7 @@ export class ErrorTrackingService {
     this.provider.captureException(error)
   }
 
-  setUserContext({ address }){
+  setUserContext({ address }) {
     this.provider.setUserContext({
       id: address
     })

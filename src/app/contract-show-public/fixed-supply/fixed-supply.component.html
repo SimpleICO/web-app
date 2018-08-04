@@ -5,19 +5,24 @@
   <div class="eth-raised">
     <span class="balance text-truncate" style="max-width: 210px">{{ crowdsale.address }}</span>
     <small>Crowdsale address</small>
-    <span class="go-icon" (click)="shared.displayCrowdsaleShowModal()"><i class="icon-copy"></i></span>
+    <span class="go-icon" (click)="shared.displayCrowdsaleShowModal()">
+      <i class="icon-copy"></i>
+    </span>
   </div>
   <div class="eth-raised">
-    <span class="balance"><strong>ETH</strong> {{ crowdsale.ethRaised }}</span>
+    <span class="balance">
+      <strong>ETH</strong> {{ crowdsale.ethRaised }}</span>
     <small>Amount raised</small>
     <!-- <span class="go-icon" (click)="refresh()"><i class="icon-sync"></i></span> -->
   </div>
   <div class="eth-raised">
-    <span class="balance"><strong>ETH</strong> {{ crowdsale.price }}</span>
+    <span class="balance">
+      <strong>ETH</strong> {{ crowdsale.price }}</span>
     <small>Price</small>
   </div>
   <div class="eth-raised">
-    <span class="balance"><strong>{{ token.symbol }}</strong> {{ crowdsale.tokens }}</span>
+    <span class="balance">
+      <strong>{{ token.symbol }}</strong> {{ crowdsale.tokens }}</span>
     <small>Available</small>
   </div>
 </div>

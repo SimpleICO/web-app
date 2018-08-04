@@ -22,7 +22,7 @@ export class ContainerComponent implements OnInit {
   ngOnInit() {
   }
 
-  selectNetwork(){
+  selectNetwork() {
     this.settings.setNetwork(this.network)
   }
 }

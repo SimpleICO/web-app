@@ -24,7 +24,7 @@ export class ContainerComponent implements OnInit {
 
   constructor(
     public wallet: WalletService,
-    public settings: SettingsService){
+    public settings: SettingsService) {
 
     settings.onNetworkChange.subscribe((networkChanged) => {
       this.crowdsales = []
@@ -40,30 +40,30 @@ export class ContainerComponent implements OnInit {
     this.address = this.wallet.getAddress()
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this.getCrowdsalesByAddress()
   }
 
-  async getCrowdsalesByAddress(){
-    let crowdsales = await this.simpleICO.instance.methods.getCrowdsalesByAddress(this.address).call()
+  async getCrowdsalesByAddress() {
+    const crowdsales = await this.simpleICO.instance.methods.getCrowdsalesByAddress(this.address).call()
 
     this.initCrowdsales(crowdsales)
   }
 
-  async initCrowdsales(crowdsales: Array<string>){
+  async initCrowdsales(crowdsales: Array<string>) {
     if (crowdsales.length <= 0) {
       return false
     }
 
-    let address = crowdsales.pop()
+    const address = crowdsales.pop()
 
-    let crowdsale = new SimpleCrowdsaleContract(this.wallet.getInstance())
+    const crowdsale = new SimpleCrowdsaleContract(this.wallet.getInstance())
     crowdsale.connect()
     crowdsale.setAddress(address)
 
     await crowdsale.setToken()
 
-    let token = crowdsale.getToken()
+    const token = crowdsale.getToken()
     await token.getName()
     await token.getSymbol()
 

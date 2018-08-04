@@ -11,7 +11,7 @@ export class UnlockRouteGuard implements CanActivate {
   constructor(
     private wallet: WalletService,
     private cookie: CookieService,
-    private router: Router) {}
+    private router: Router) { }
 
   canActivate() {
     if (!this.cookie.hasAcceptedTerms()) {

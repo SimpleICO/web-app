@@ -37,20 +37,20 @@ export abstract class ContractDeployment {
 
   gasIncrement: number = 1000
 
-  constructor(wallet: Wallet, eth: EthereumService){
+  constructor(wallet: Wallet, eth: EthereumService) {
     this.wallet = wallet
     this.eth = eth
   }
 
-  getToken(){
+  getToken() {
     return this.token
   }
 
-  getCrowdsale(){
+  getCrowdsale() {
     return this.crowdsale
   }
 
-  getSimpleICO(){
+  getSimpleICO() {
     return this.simpleICO
   }
 
@@ -62,77 +62,77 @@ export abstract class ContractDeployment {
   abstract async transferToken()
   abstract async addCrowdsaleToSimpleICOContract()
 
-  async getTokenSupply(){
-    let tokenSupply = await this.token.instance.methods.totalSupply().call()
+  async getTokenSupply() {
+    const tokenSupply = await this.token.instance.methods.totalSupply().call()
     this.token.supply = tokenSupply
   }
 
-  async estimateTokenDeploymentCost(){
+  async estimateTokenDeploymentCost() {
 
-    let txObject = await this.token.deploy()
+    const txObject = await this.token.deploy()
 
-    let gas = await txObject.estimateGas()
+    const gas = await txObject.estimateGas()
     this.gas += gas + this.gasIncrement
 
-    let txCost = await this.eth.getTxCost(gas)
+    const txCost = await this.eth.getTxCost(gas)
     this.txCost = txCost
 
     return txCost
   }
 
-  async estimateCrowdsaleDeploymentCost(){
+  async estimateCrowdsaleDeploymentCost() {
 
-    let txObject = await this.crowdsale.deploy(this.token.price, ContractDeployment.DUMMY_ADDRESS)
+    const txObject = await this.crowdsale.deploy(this.token.price, ContractDeployment.DUMMY_ADDRESS)
 
-    let gas = await txObject.estimateGas()
+    const gas = await txObject.estimateGas()
     this.gas += gas + this.gasIncrement
 
-    let txCost = await this.eth.getTxCost(gas)
+    const txCost = await this.eth.getTxCost(gas)
 
     this.sumTxCost(txCost)
 
     return txCost
   }
 
-  async estimateTokenTransferCost(){
+  async estimateTokenTransferCost() {
 
-    let txObject = this.token.instance.methods.transfer(this.wallet.address, this.token.supply.toString())
+    const txObject = this.token.instance.methods.transfer(this.wallet.address, this.token.supply.toString())
 
-    let gas = await txObject.estimateGas()
+    const gas = await txObject.estimateGas()
     this.gas += gas + this.gasIncrement
 
-    let txCost = await this.eth.getTxCost(gas)
+    const txCost = await this.eth.getTxCost(gas)
 
     this.sumTxCost(txCost)
 
     return txCost
   }
 
-  async estimateSimpleICOCost(){
+  async estimateSimpleICOCost() {
 
-    let txObject = await this.simpleICO.instance.methods.addCrowdsale(ContractDeployment.CONTRACT_DUMMY_ADDRESS)
+    const txObject = await this.simpleICO.instance.methods.addCrowdsale(ContractDeployment.CONTRACT_DUMMY_ADDRESS)
 
-    let gas = await txObject.estimateGas()
+    const gas = await txObject.estimateGas()
     this.gas += gas + this.gasIncrement
 
-    let txCost = await this.eth.getTxCost(gas)
+    const txCost = await this.eth.getTxCost(gas)
 
     this.sumTxCost(txCost)
 
     return txCost
   }
 
-  createSimpleICO(){
+  createSimpleICO() {
     this.simpleICO = new SimpleICOContract(this.wallet)
     this.simpleICO.connect()
   }
 
-  async getTxCost(){
-    let txCost = await this.eth.getTxCost(0)
+  async getTxCost() {
+    const txCost = await this.eth.getTxCost(0)
     this.txCost = txCost
   }
 
-  sumTxCost(txCost){
+  sumTxCost(txCost) {
     this.txCost.cost = this.txCost.cost.add(txCost.cost)
     this.txCost.ETH = ethers.utils.formatEther(this.txCost.cost.toString())
     this.txCost.WEI = ethers.utils.parseEther(this.txCost.ETH)

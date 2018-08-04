@@ -27,7 +27,7 @@ export class ContainerComponent implements OnInit {
     this.route.params.subscribe(({ contractType }) => {
       this.contractType = contractType
 
-      let deployer = this.contractFactory.init(contractType)
+      const deployer = this.contractFactory.init(contractType)
     })
   }
 

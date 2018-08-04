@@ -9,10 +9,13 @@
       <article class="eth-raised">
         <a href="{{ eth.etherscanURL }}/address/{{ wallet.getAddress() }}" target="_blank" class="address text-truncate">{{ wallet.getAddress() }}</a>
         <small>Wallet address</small>
-        <span class="go-icon" (click)="shared.displayCrowdsaleShowModal()"><i class="icon-copy"></i></span>
+        <span class="go-icon" (click)="shared.displayCrowdsaleShowModal()">
+          <i class="icon-copy"></i>
+        </span>
       </article>
       <article class="eth-raised">
-        <span class="balance"><strong>ETH</strong> {{ wallet.ethBalance }}</span>
+        <span class="balance">
+          <strong>ETH</strong> {{ wallet.ethBalance }}</span>
         <small>Account Balance · {{ wallet.network }}</small>
       </article>
     </div>
