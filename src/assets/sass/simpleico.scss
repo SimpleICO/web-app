@@ -4,37 +4,18 @@
 @import "bootstrap/scss/functions";
 @import "bootstrap/scss/mixins";
 @import "sass/bootstrap-variables";
-@import "bootstrap/scss/reboot";
-@import "bootstrap/scss/print";
-@import "bootstrap/scss/type";
-@import "bootstrap/scss/images";
-@import "bootstrap/scss/bootstrap-grid";
-@import "bootstrap/scss/forms";
-@import "bootstrap/scss/input-group";
-@import "bootstrap/scss/buttons";
-@import "bootstrap/scss/breadcrumb";
-@import "bootstrap/scss/card";
-@import "bootstrap/scss/utilities";
 
 // EBM variables
 @import "sass/ebm-variables";
 @import "ebm/functions/ebm-functions";
 @import "ebm/helpers/ebm-helpers";
 @import "sass/ebm-fonts-setup";
-@import "sass/ebm-fonts";
-@import "sass/ebm-bootstrap-overrides";
-@import "ebm/control/ebm-text-responsive-control";
-@import "ebm/elements/ebm-icons";
-@import "ebm/control/ebm-container-control";
-@import "sass/ebm-overrides";
-@import "sass/ebm-global";
-@import "ebm/modules/ebm-header";
 
 @mixin container-size($breakpoint: sm) {
   @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
     .container {
-      min-width: map-get($container-max-widths, $breakpoint);
-      max-width: map-get($container-max-widths, $breakpoint);
+      min-width: map-get($container-max-widths, $breakpoint) !important;
+      max-width: map-get($container-max-widths, $breakpoint) !important;
     }
   }
 }

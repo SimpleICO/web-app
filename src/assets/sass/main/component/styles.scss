@@ -2,6 +2,25 @@
 
 @import "sass/simpleico.scss";
 
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/print";
+@import "bootstrap/scss/type";
+@import "bootstrap/scss/images";
+@import "bootstrap/scss/bootstrap-grid";
+@import "bootstrap/scss/forms";
+@import "bootstrap/scss/input-group";
+@import "bootstrap/scss/buttons";
+@import "bootstrap/scss/breadcrumb";
+@import "bootstrap/scss/card";
+@import "bootstrap/scss/utilities";
+
+@import "sass/ebm-fonts";
+@import "sass/ebm-bootstrap-overrides";
+@import "ebm/elements/ebm-icons";
+@import "ebm/control/ebm-container-control";
+@import "ebm/modules/ebm-header";
+@import "sass/ebm-global";
+
 #home-component {
   @include container-size(xl);
   @include full-width-header;
@@ -30,6 +49,12 @@
   }
 }
 
+#contract-create {
+  h4 {
+    margin-bottom: get-spacer(4);
+  }
+}
+
 @import "sass/components/header-component";
 @import "sass/components/login-component";
 @import "sass/components/new-wallet-component";
@@ -38,7 +63,6 @@
 @import "sass/components/token-new-component";
 @import "sass/components/crowdsale-show-component";
 @import "sass/components/crowdsale-index-component";
-@import "sass/components/contract-create-component";
 @import "sass/components/contract-deploy-component";
 @import "sass/components/wallet-component";
 @import "sass/components/catalog-component";
