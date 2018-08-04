@@ -3,7 +3,7 @@ import { environment } from '@environment/environment';
 
 declare let require: any
 
-let Cookies = require('cookies-js')
+const Cookies = require('cookies-js')
 
 @Injectable({
   providedIn: 'root'
@@ -22,20 +22,17 @@ export class CookieService {
     }
   }
 
-  ngOnInit() {
-  }
-
-  acceptTerms(){
+  acceptTerms() {
     Cookies.set(this.acceptedTermsCookieText, 'yes', { domain: this.domain });
   }
 
-  declineTerms(){
+  declineTerms() {
     Cookies.set(this.acceptedTermsCookieText, 'no', { domain: this.domain });
   }
 
-  hasAcceptedTerms(){
+  hasAcceptedTerms() {
     return Cookies.get(this.acceptedTermsCookieText) &&
-      Cookies.get(this.acceptedTermsCookieText) == 'yes'
+      Cookies.get(this.acceptedTermsCookieText) === 'yes'
   }
 
 }

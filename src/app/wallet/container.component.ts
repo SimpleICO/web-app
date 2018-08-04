@@ -13,7 +13,7 @@ export class ContainerComponent implements OnInit {
   constructor(
     public wallet: WalletService,
     public eth: EthereumService,
-    public shared: SharedService) {}
+    public shared: SharedService) { }
 
   ngOnInit() {
   }

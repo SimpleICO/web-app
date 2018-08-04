@@ -20,9 +20,9 @@ export class ContainerComponent implements OnInit {
   FixedSupplyDeployment: string = FixedSupplyDeployment._type
 
   constructor(
-    public route: ActivatedRoute) {}
+    public route: ActivatedRoute) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.route.params.subscribe(({ contractType }) => {
       this.contractType = contractType
     })

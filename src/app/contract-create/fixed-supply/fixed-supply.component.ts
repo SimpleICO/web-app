@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ContractDeploymentFactory } from '@factory/contract-deployment.factory';
 import { ContractDeployment } from '@factory/contract-deployment';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 import { Crowdsale } from '@model/crowdsale.model';
 import { Token } from '@model/token.model';
 import { EthereumService } from '@service/ethereum.service';
@@ -50,12 +50,12 @@ export class FixedSupplyComponent implements OnInit {
     this.crowdsale = this.deployer.getCrowdsale()
   }
 
-  setBeneficiary(){
-    let beneficiary = this.deployer.wallet.address
+  setBeneficiary() {
+    const beneficiary = this.deployer.wallet.address
     this.crowdsale.setBeneficiary(beneficiary)
   }
 
-  onCreateCrowdsale(){
+  onCreateCrowdsale() {
 
     if (this.token.name.length <= 0) {
       this.isInvalid = true

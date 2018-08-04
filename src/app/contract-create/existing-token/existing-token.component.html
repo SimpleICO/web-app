@@ -4,13 +4,7 @@
     <p class="text-white">Note: You need to own a percentage of the ERC20 token in order for this crowdsale to work.</p>
     <fieldset class="form-group dark-theme">
       <label for="">Token address</label>
-      <input
-        required
-        autofocus="autofocus"
-        type="text"
-        class="form-control"
-        placeholder="eg. 0x345gh457uh..."
-        [(ngModel)]="token.address">
+      <input required autofocus="autofocus" type="text" class="form-control" placeholder="eg. 0x345gh457uh..." [(ngModel)]="token.address">
     </fieldset>
     <fieldset class="form-group dark-theme">
       <label for="">Token price</label>
@@ -18,23 +12,12 @@
         <div class="input-group-prepend">
           <button class="btn btn-outline-light">ETH</button>
         </div>
-        <input
-          required
-          disabled="disabled"
-          type="number"
-          class="form-control disabled"
-          placeholder="eg. 1.00"
-          [(ngModel)]="token.price">
+        <input required disabled="disabled" type="number" class="form-control disabled" placeholder="eg. 1.00" [(ngModel)]="token.price">
       </div>
     </fieldset>
     <fieldset class="form-group dark-theme">
       <label for="">Beneficiary address</label>
-      <input
-        required
-        type="text"
-        class="form-control"
-        placeholder="eg. 0x123..."
-        [(ngModel)]="crowdsale.beneficiary">
+      <input required type="text" class="form-control" placeholder="eg. 0x123..." [(ngModel)]="crowdsale.beneficiary">
       <small class="text-primary" (click)="setBeneficiary()">Use this wallet address</small>
     </fieldset>
     <p *ngIf="isInvalid" class="on-error">{{ errorMessage }}</p>

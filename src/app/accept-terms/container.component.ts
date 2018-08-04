@@ -14,18 +14,18 @@ export class ContainerComponent implements OnInit {
   constructor(
     public cookie: CookieService,
     public wallet: WalletService,
-    private router: Router) {}
+    private router: Router) { }
 
   ngOnInit() {
   }
 
-  acceptTerms(){
+  acceptTerms() {
     this.cookie.acceptTerms()
 
     this.router.navigateByUrl('/home')
   }
 
-  declineTerms(){
+  declineTerms() {
     this.cookie.declineTerms()
 
     this.router.navigateByUrl('/home')

@@ -20,7 +20,7 @@ export abstract class Crowdsale {
 
   beneficiary: string
 
-  constructor(wallet: Wallet){
+  constructor(wallet: Wallet) {
     this.wallet = wallet
   }
 

@@ -30,7 +30,7 @@ export abstract class Token {
 
   balanceOf: number
 
-  constructor(wallet: Wallet){
+  constructor(wallet: Wallet) {
     this.wallet = wallet
   }
 

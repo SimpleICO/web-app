@@ -14,21 +14,21 @@ export class SharedService {
 
   constructor() { }
 
-  displayCrowdsaleShowModal(){
+  displayCrowdsaleShowModal() {
     this.onCrowdsaleShowModal.next({
       display: true,
       onQrCode: true,
     })
   }
 
-  toggleMobileMenu(){
+  toggleMobileMenu() {
     this.isMobileMenuOn = !this.isMobileMenuOn
     this.onMobileMenu.next({
       display: this.isMobileMenuOn
     })
   }
 
-  updateCopyTrigger(trigger){
+  updateCopyTrigger(trigger) {
     trigger.innerHTML = '<i class="icon-checkmark-circle"></i>'
     trigger.classList.add('btn-success')
     trigger.classList.remove('btn-outline-white')

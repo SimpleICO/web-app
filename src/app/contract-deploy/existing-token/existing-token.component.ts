@@ -8,7 +8,7 @@ import { InsufficientFundsError } from '@error/insufficient-funds.error';
 import { WalletService } from '@service/wallet.service';
 import { EthereumService } from '@service/ethereum.service';
 import { SharedService } from '@service/shared.service';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 import { Crowdsale } from '@model/crowdsale.model';
 import { Token } from '@model/token.model';
 
@@ -86,16 +86,16 @@ export class ExistingTokenComponent implements OnInit {
     this.init()
   }
 
-  updateGasPrice(){
+  updateGasPrice() {
 
     this.deployer.gas = 0
     this.eth.updateGasPrice(this.gasPrice)
     this.estimateTransactionCosts()
   }
 
-  reset(){
+  reset() {
     Object.keys(this.steps).forEach(key => {
-      let step = this.steps[key]
+      const step = this.steps[key]
       step.isCurrent = false
       step.isComplete = false
       step.hasError = false
@@ -105,7 +105,7 @@ export class ExistingTokenComponent implements OnInit {
     this.steps.estimateTxCosts.estimates = []
   }
 
-  async init(){
+  async init() {
 
     this.reset()
 
@@ -114,8 +114,8 @@ export class ExistingTokenComponent implements OnInit {
       this.token.getSymbol()
       await this.token.getBalanceOf()
 
-      let balanceOf = ethers.utils.bigNumberify(this.token.balanceOf)
-      let hasInsufficientOwnership = balanceOf.lte(ethers.utils.bigNumberify(0))
+      const balanceOf = ethers.utils.bigNumberify(this.token.balanceOf)
+      const hasInsufficientOwnership = balanceOf.lte(ethers.utils.bigNumberify(0))
 
       if (hasInsufficientOwnership) {
         throw new InsufficientFundsError(InsufficientFundsError.MESSAGE)
@@ -137,7 +137,7 @@ export class ExistingTokenComponent implements OnInit {
     }
   }
 
-  finish(){
+  finish() {
     try {
       this.deployer.addCrowdsaleToSimpleICOContract()
 
@@ -147,7 +147,7 @@ export class ExistingTokenComponent implements OnInit {
     }
   }
 
-  async deployCrowdsale(){
+  async deployCrowdsale() {
     this.steps.estimateTxCosts.isCurrent = false
     this.steps.estimateTxCosts.isComplete = true
 
@@ -166,7 +166,7 @@ export class ExistingTokenComponent implements OnInit {
     }
   }
 
-  async transferToken(){
+  async transferToken() {
     this.steps.transferToken.isCurrent = true
     this.steps.transferToken.hasError = false
     this.steps.deployCrowdsale.isCurrent = false
@@ -183,7 +183,7 @@ export class ExistingTokenComponent implements OnInit {
     }
   }
 
-  async estimateTransactionCosts(){
+  async estimateTransactionCosts() {
 
     this.steps.tokenInfo.isCurrent = false
 
@@ -208,8 +208,8 @@ export class ExistingTokenComponent implements OnInit {
         txCost: '...'
       })
       txCost = await this.deployer.estimateTokenTransferCost()
-      let simpleICOCost = await this.deployer.estimateSimpleICOCost()
-      let cost = txCost.cost.add(simpleICOCost.cost)
+      const simpleICOCost = await this.deployer.estimateSimpleICOCost()
+      const cost = txCost.cost.add(simpleICOCost.cost)
       this.steps.estimateTxCosts.estimates[1].txCost = ethers.utils.formatEther(cost.toString())
 
       this.steps.estimateTxCosts.estimates.push({
@@ -217,8 +217,8 @@ export class ExistingTokenComponent implements OnInit {
         txCost: this.deployer.txCost.ETH
       })
 
-      let wei = this.deployer.txCost.WEI
-      let hasInsufficientFunds = wei.gt(this.wallet.balance)
+      const wei = this.deployer.txCost.WEI
+      const hasInsufficientFunds = wei.gt(this.wallet.balance)
 
       if (hasInsufficientFunds) {
         throw new InsufficientFundsError(InsufficientFundsError.MESSAGE)

@@ -20,68 +20,83 @@ import { AcceptTermsRouteGuard } from '@guard/accept-terms-route-guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home',
+  {
+    path: 'home',
     component: HomeComponent,
     canActivate: [AcceptTermsRouteGuard],
   },
-  { path: 'smart-contracts-wallet',
+  {
+    path: 'smart-contracts-wallet',
     component: ScuiLandingPageComponent,
   },
-  { path: 'hackaton',
+  {
+    path: 'hackaton',
     component: HackatonComponent,
   },
-  { path: 'login',
+  {
+    path: 'login',
     component: LoginComponent,
     canActivate: [AcceptTermsRouteGuard],
   },
-  { path: 'new-wallet',
+  {
+    path: 'new-wallet',
     component: NewWalletComponent,
     canActivate: [AcceptTermsRouteGuard],
   },
-  { path: 'accept-terms',
+  {
+    path: 'accept-terms',
     component: AcceptTermsComponent,
   },
-  { path: 'wallet',
+  {
+    path: 'wallet',
     component: WalletComponent,
     canActivate: [UnlockRouteGuard, AcceptTermsRouteGuard],
   },
-  { path: 'catalog',
+  {
+    path: 'catalog',
     component: CatalogComponent,
     canActivate: [UnlockRouteGuard, AcceptTermsRouteGuard],
   },
-  { path: 'contract/:contractAddress/show/:contractType',
+  {
+    path: 'contract/:contractAddress/show/:contractType',
     component: ContractShowComponent,
     canActivate: [UnlockRouteGuard, AcceptTermsRouteGuard],
   },
-  { path: 'public/contract/:contractAddress/show/:contractType',
+  {
+    path: 'public/contract/:contractAddress/show/:contractType',
     component: ContractShowPublicComponent,
     canActivate: [AcceptTermsRouteGuard],
   },
-  { path: 'contract/:contractType/index',
+  {
+    path: 'contract/:contractType/index',
     component: CrowdsaleIndexComponent,
     canActivate: [UnlockRouteGuard, AcceptTermsRouteGuard],
   },
-  { path: 'public/contract/:contractType/index',
+  {
+    path: 'public/contract/:contractType/index',
     component: CrowdsaleIndexPublicComponent,
     canActivate: [AcceptTermsRouteGuard],
   },
-  { path: 'contract/:contractType/create',
+  {
+    path: 'contract/:contractType/create',
     component: ContractCreateComponent,
     canActivate: [UnlockRouteGuard, AcceptTermsRouteGuard],
   },
-  { path: 'contract/:contractType/deploy',
+  {
+    path: 'contract/:contractType/deploy',
     component: ContractDeployComponent,
     canActivate: [UnlockRouteGuard, AcceptTermsRouteGuard],
   },
-  { path: 'settings',
+  {
+    path: 'settings',
     component: SettingsComponent,
     canActivate: [UnlockRouteGuard, AcceptTermsRouteGuard],
   },
 ]
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 
 export class AppRoutingModule { }

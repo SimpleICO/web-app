@@ -30,9 +30,9 @@ export class ContractDeploymentFactory {
     this.registerContractDeployment(ExistingTokenDeployment._type, ExistingTokenDeployment)
   }
 
-  registerContractDeployment(type: string, deployment: ContractDeploymentInterface){
+  registerContractDeployment(type: string, deployment: ContractDeploymentInterface) {
 
-    let deploymentExists = this.deployment[type] != undefined;
+    const deploymentExists = this.deployment[type] !== undefined;
     if (deploymentExists) {
       throw new DeploymentClassExistsError(`Contract deployment ${type} has already been used`)
     }
@@ -49,9 +49,9 @@ export class ContractDeploymentFactory {
    */
   init(contractType: string): ContractDeployment {
 
-    let deployment: any = this.deployment[contractType]
+    const deployment: any = this.deployment[contractType]
 
-    let deployer = new deployment(this.wallet.getInstance(), this.eth)
+    const deployer = new deployment(this.wallet.getInstance(), this.eth)
 
     this.deployer = deployer
 

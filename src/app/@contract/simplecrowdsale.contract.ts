@@ -47,8 +47,8 @@ export class SimpleCrowdsaleContract extends Crowdsale {
     this.web3 = wallet.web3
   }
 
-  setWebsocketByNetwork(){
-    let websockets = {}
+  setWebsocketByNetwork() {
+    const websockets = {}
     websockets[Network.mainnet] = SimpleCrowdsaleContract.WEBSOCKET_MAINNET
     websockets[Network.testnet] = SimpleCrowdsaleContract.WEBSOCKET_TESTNET
     websockets[Network.private] = SimpleCrowdsaleContract.WEBSOCKET_PRIVATE
@@ -58,11 +58,11 @@ export class SimpleCrowdsaleContract extends Crowdsale {
     return this
   }
 
-  subscribeToEvents(){
+  subscribeToEvents() {
     this.setWebsocketByNetwork()
 
-    let provider = new Web3.providers.WebsocketProvider(this.websocket)
-    let web3 = new Web3(provider)
+    const provider = new Web3.providers.WebsocketProvider(this.websocket)
+    const web3 = new Web3(provider)
 
     return web3.eth.subscribe('logs', {
       address: this.address,
@@ -70,7 +70,7 @@ export class SimpleCrowdsaleContract extends Crowdsale {
     })
   }
 
-  setAddress(address: string){
+  setAddress(address: string) {
     this.instance.options.address = address
     this.instance._address = address
     this.address = address
@@ -82,31 +82,31 @@ export class SimpleCrowdsaleContract extends Crowdsale {
     return this.address
   }
 
-  async getEthRaised(){
-    let weiRaised = await this.instance.methods.weiRaised().call()
+  async getEthRaised() {
+    const weiRaised = await this.instance.methods.weiRaised().call()
     this.ethRaised = ethers.utils.formatEther(weiRaised)
   }
 
-  async getAvailableTokens(token: SimpleTokenContract){
-    let wei = await token.instance.methods.balanceOf(this.address).call()
+  async getAvailableTokens(token: SimpleTokenContract) {
+    const wei = await token.instance.methods.balanceOf(this.address).call()
     this.tokens = ethers.utils.formatEther(wei)
   }
 
-  setBeneficiary(address: string){
+  setBeneficiary(address: string) {
     this.beneficiary = address
   }
 
-  async getBeneficiary(){
+  async getBeneficiary() {
     this.beneficiary = await this.instance.methods.wallet().call()
   }
 
-  async getPrice(){
-    let price = await this.instance.methods.price().call()
+  async getPrice() {
+    const price = await this.instance.methods.price().call()
     this.price = ethers.utils.formatEther(price)
   }
 
-  async setToken(){
-    let address = await this.instance.methods.token().call()
+  async setToken() {
+    const address = await this.instance.methods.token().call()
     this.token = new SimpleTokenContract(this.wallet)
     this.token.connect()
     this.token.setAddress(address)
@@ -119,19 +119,19 @@ export class SimpleCrowdsaleContract extends Crowdsale {
     return this.token
   }
 
-  connect(){
-    let _contract = new this.web3.eth.Contract(SimpleCrowdsaleInterface.abi)
+  connect() {
+    const _contract = new this.web3.eth.Contract(SimpleCrowdsaleInterface.abi)
 
     this.instance = _contract
 
     return this
   }
 
-  async deploy(tokenPrice: number, tokenAddress: string){
+  async deploy(tokenPrice: number, tokenAddress: string) {
 
-    let price = ethers.utils.parseEther(tokenPrice.toString())
+    const price = ethers.utils.parseEther(tokenPrice.toString())
 
-    let beneficiary = this.beneficiary || this.wallet.address
+    const beneficiary = this.beneficiary || this.wallet.address
 
     try {
       return this.instance.deploy({

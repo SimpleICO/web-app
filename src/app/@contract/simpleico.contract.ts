@@ -30,9 +30,9 @@ export class SimpleICOContract extends SimpleICO {
     this.web3 = wallet.web3
   }
 
-  setContractAddressByNetwork(){
+  setContractAddressByNetwork() {
 
-    let addresses = {}
+    const addresses = {}
     addresses[Network.mainnet] = SimpleICOContract.MAINNET
     addresses[Network.testnet] = SimpleICOContract.TESTNET
     addresses[Network.private] = SimpleICOContract.PRIVATE
@@ -42,7 +42,7 @@ export class SimpleICOContract extends SimpleICO {
     return this
   }
 
-  setAddress(address: string){
+  setAddress(address: string) {
     this.instance.options.address = address
     this.instance._address = address
     this.address = address
@@ -50,12 +50,12 @@ export class SimpleICOContract extends SimpleICO {
     return this
   }
 
-  getAddress(){
+  getAddress() {
     return this.address
   }
 
-  connect(){
-    let _contract = new this.web3.eth.Contract(SimpleICOInterface.abi)
+  connect() {
+    const _contract = new this.web3.eth.Contract(SimpleICOInterface.abi)
 
     this.instance = _contract
 

@@ -8,7 +8,7 @@ import { InsufficientFundsError } from '@error/insufficient-funds.error';
 import { WalletService } from '@service/wallet.service';
 import { EthereumService } from '@service/ethereum.service';
 import { SharedService } from '@service/shared.service';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 import { Crowdsale } from '@model/crowdsale.model';
 import { Token } from '@model/token.model';
 
@@ -88,14 +88,14 @@ export class FixedSupplyComponent implements OnInit {
     this.init()
   }
 
-  updateGasPrice(){
+  updateGasPrice() {
 
     this.deployer.gas = 0
     this.eth.updateGasPrice(this.gasPrice)
     this.init()
   }
 
-  finish(){
+  finish() {
     try {
       this.deployer.addCrowdsaleToSimpleICOContract()
 
@@ -105,10 +105,10 @@ export class FixedSupplyComponent implements OnInit {
     }
   }
 
-  reset(){
+  reset() {
 
     Object.keys(this.steps).forEach(key => {
-      let step = this.steps[key]
+      const step = this.steps[key]
       step.isCurrent = false
       step.isComplete = false
       step.hasError = false
@@ -118,7 +118,7 @@ export class FixedSupplyComponent implements OnInit {
     this.steps.estimateTxCosts.estimates = []
   }
 
-  async init(){
+  async init() {
     this.reset()
 
     try {
@@ -131,7 +131,7 @@ export class FixedSupplyComponent implements OnInit {
     }
   }
 
-  async deployToken(){
+  async deployToken() {
     this.supply = this.token.supply.toString()
 
     this.steps.estimateTxCosts.isCurrent = false
@@ -139,7 +139,7 @@ export class FixedSupplyComponent implements OnInit {
     this.steps.deployToken.hasError = false
 
     try {
-      let receipt = await this.deployer.deployToken()
+      const receipt = await this.deployer.deployToken()
       this.token.setAddress(receipt.contractAddress)
 
       await this.deployer.getTokenSupply()
@@ -154,7 +154,7 @@ export class FixedSupplyComponent implements OnInit {
     }
   }
 
-  async deployCrowdsale(){
+  async deployCrowdsale() {
     this.steps.deployToken.isCurrent = false
     this.steps.deployCrowdsale.isCurrent = true
     this.steps.deployCrowdsale.hasError = false
@@ -170,7 +170,7 @@ export class FixedSupplyComponent implements OnInit {
     }
   }
 
-  async transferToken(){
+  async transferToken() {
     this.steps.transferToken.isCurrent = true
     this.steps.deployCrowdsale.isCurrent = false
     this.steps.transferToken.hasError = false
@@ -186,7 +186,7 @@ export class FixedSupplyComponent implements OnInit {
     }
   }
 
-  async estimateTransactionCosts(){
+  async estimateTransactionCosts() {
     this.steps.estimateTxCosts.estimates.push({
       text: 'ERC20 token deployment',
       txCost: '...'
@@ -207,8 +207,8 @@ export class FixedSupplyComponent implements OnInit {
     })
     this.token.setAddress(ContractDeployment.CONTRACT_DUMMY_ADDRESS)
     txCost = await this.deployer.estimateTokenTransferCost()
-    let simpleICOCost = await this.deployer.estimateSimpleICOCost()
-    let cost = txCost.cost.add(simpleICOCost.cost)
+    const simpleICOCost = await this.deployer.estimateSimpleICOCost()
+    const cost = txCost.cost.add(simpleICOCost.cost)
     this.steps.estimateTxCosts.estimates[2].txCost = ethers.utils.formatEther(cost.toString())
 
     this.steps.estimateTxCosts.estimates.push({
@@ -216,8 +216,8 @@ export class FixedSupplyComponent implements OnInit {
       txCost: this.deployer.txCost.ETH
     })
 
-    let wei = this.deployer.txCost.WEI
-    let hasInsufficientFunds = wei.gt(this.wallet.balance)
+    const wei = this.deployer.txCost.WEI
+    const hasInsufficientFunds = wei.gt(this.wallet.balance)
 
     if (hasInsufficientFunds) {
       throw new InsufficientFundsError(InsufficientFundsError.MESSAGE)

@@ -9,7 +9,7 @@ export class AcceptTermsRouteGuard implements CanActivate {
 
   constructor(
     private cookie: CookieService,
-    private router: Router) {}
+    private router: Router) { }
 
   canActivate() {
     if (!this.cookie.hasAcceptedTerms()) {

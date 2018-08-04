@@ -19,13 +19,13 @@ export class FixedSupplyDeployment
 
   type: string
 
-  constructor(wallet: Wallet, eth: EthereumService){
+  constructor(wallet: Wallet, eth: EthereumService) {
     super(wallet, eth)
 
     this.type = FixedSupplyDeployment._type
   }
 
-  createToken(){
+  createToken() {
     this.token = new SimpleTokenContract(this.wallet)
 
     this.token.connect()
@@ -33,7 +33,7 @@ export class FixedSupplyDeployment
     return this
   }
 
-  createCrowdsale(){
+  createCrowdsale() {
     this.crowdsale = new SimpleCrowdsaleContract(this.wallet)
 
     this.crowdsale.connect()
@@ -41,17 +41,17 @@ export class FixedSupplyDeployment
     return this
   }
 
-  async addCrowdsaleToSimpleICOContract(){
+  async addCrowdsaleToSimpleICOContract() {
 
     return new Promise(async (resolve, reject) => {
 
       try {
 
-        let nonce = await this.eth.getNonce(this.simpleICO)
+        const nonce = await this.eth.getNonce(this.simpleICO)
 
-        let txObject = this.simpleICO.instance.methods.addCrowdsale(this.crowdsale.getAddress())
+        const txObject = this.simpleICO.instance.methods.addCrowdsale(this.crowdsale.getAddress())
 
-        let txOptions = {
+        const txOptions = {
           from: this.wallet.address,
           to: this.simpleICO.getAddress(),
           value: '0x0',
@@ -62,9 +62,9 @@ export class FixedSupplyDeployment
           nonce: Web3.utils.toHex(nonce)
         }
 
-        let signedTx = await this.simpleICO.web3.eth.accounts.signTransaction(txOptions, this.wallet.privateKey)
+        const signedTx = await this.simpleICO.web3.eth.accounts.signTransaction(txOptions, this.wallet.privateKey)
 
-        let tx = this.simpleICO.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
+        const tx = this.simpleICO.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
 
         tx.on('transactionHash', hash => {
           this.simpleICO.tx = hash
@@ -83,17 +83,17 @@ export class FixedSupplyDeployment
     })
   }
 
-  async deployToken(){
+  async deployToken() {
 
     return new Promise(async (resolve, reject) => {
 
       try {
 
-        let nonce = await this.eth.getNonce(this.token)
+        const nonce = await this.eth.getNonce(this.token)
 
-        let txObject = await this.token.deploy()
+        const txObject = await this.token.deploy()
 
-        let txOptions = {
+        const txOptions = {
           from: this.wallet.address,
           value: '0x0',
           gas: Web3.utils.toHex(this.gas),
@@ -103,9 +103,9 @@ export class FixedSupplyDeployment
           nonce: Web3.utils.toHex(nonce)
         }
 
-        let signedTx = await this.token.web3.eth.accounts.signTransaction(txOptions, this.wallet.privateKey)
+        const signedTx = await this.token.web3.eth.accounts.signTransaction(txOptions, this.wallet.privateKey)
 
-        let tx = this.token.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
+        const tx = this.token.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
 
         tx.on('transactionHash', hash => {
           this.token.tx = hash
@@ -124,16 +124,16 @@ export class FixedSupplyDeployment
     })
   }
 
-  async deployCrowdsale(){
+  async deployCrowdsale() {
 
     return new Promise(async (resolve, reject) => {
 
       try {
-        let txObject = await this.crowdsale.deploy(this.token.price, this.token.getAddress())
+        const txObject = await this.crowdsale.deploy(this.token.price, this.token.getAddress())
 
-        let nonce = await this.eth.getNonce(this.crowdsale)
+        const nonce = await this.eth.getNonce(this.crowdsale)
 
-        let txOptions = {
+        const txOptions = {
           from: this.wallet.address,
           value: '0x0',
           gas: Web3.utils.toHex(this.gas),
@@ -143,9 +143,9 @@ export class FixedSupplyDeployment
           nonce: Web3.utils.toHex(nonce)
         }
 
-        let signedTx = await this.crowdsale.web3.eth.accounts.signTransaction(txOptions, this.wallet.privateKey)
+        const signedTx = await this.crowdsale.web3.eth.accounts.signTransaction(txOptions, this.wallet.privateKey)
 
-        let tx = this.crowdsale.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
+        const tx = this.crowdsale.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
 
         tx.on('transactionHash', hash => {
           this.crowdsale.tx = hash
@@ -165,17 +165,17 @@ export class FixedSupplyDeployment
     })
   }
 
-  async transferToken(){
+  async transferToken() {
 
     return new Promise(async (resolve, reject) => {
 
       try {
 
-        let nonce = await this.eth.getNonce(this.token)
+        const nonce = await this.eth.getNonce(this.token)
 
-        let txObject = this.token.instance.methods.transfer(this.crowdsale.getAddress(), this.token.supply)
+        const txObject = this.token.instance.methods.transfer(this.crowdsale.getAddress(), this.token.supply)
 
-        let txOptions = {
+        const txOptions = {
           from: this.wallet.address,
           to: this.token.getAddress(),
           value: '0x0',
@@ -186,9 +186,9 @@ export class FixedSupplyDeployment
           nonce: Web3.utils.toHex(nonce)
         }
 
-        let signedTx = await this.token.web3.eth.accounts.signTransaction(txOptions, this.wallet.privateKey)
+        const signedTx = await this.token.web3.eth.accounts.signTransaction(txOptions, this.wallet.privateKey)
 
-        let tx = this.token.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
+        const tx = this.token.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
 
         tx.on('transactionHash', hash => {
           this.token.tx = hash

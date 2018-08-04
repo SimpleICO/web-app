@@ -43,7 +43,7 @@ export class SimpleTokenContract extends Token {
     this.web3 = wallet.web3
   }
 
-  setAddress(address: string){
+  setAddress(address: string) {
     this.instance.options.address = address
     this.instance._address = address
     this.address = address
@@ -51,36 +51,36 @@ export class SimpleTokenContract extends Token {
     return this
   }
 
-  getAddress(){
+  getAddress() {
     return this.address
   }
 
-  async getBalanceOf(){
-    let balanceOf = await this.instance.methods.balanceOf(this.wallet.address).call()
+  async getBalanceOf() {
+    const balanceOf = await this.instance.methods.balanceOf(this.wallet.address).call()
     this.balanceOf = balanceOf
   }
 
-  async getName(){
+  async getName() {
     this.name = await this.instance.methods.name().call()
   }
 
-  async getSymbol(){
+  async getSymbol() {
     this.symbol = await this.instance.methods.symbol().call()
   }
 
-  async getTotalSupply(){
+  async getTotalSupply() {
     this.supply = await this.instance.methods.totalSupply().call()
   }
 
-  connect(){
-    let _contract = new this.web3.eth.Contract(SimpleTokenInterface.abi)
+  connect() {
+    const _contract = new this.web3.eth.Contract(SimpleTokenInterface.abi)
 
     this.instance = _contract
 
     return this
   }
 
-  async deploy(){
+  async deploy() {
 
     try {
       return this.instance.deploy({

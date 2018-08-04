@@ -28,7 +28,7 @@ export abstract class SimpleICO {
 
   price: any
 
-  constructor(wallet: Wallet){
+  constructor(wallet: Wallet) {
     this.wallet = wallet
   }
 

@@ -54,12 +54,7 @@
     <fieldset class="form-group dark-theme" *ngIf="steps.estimateTxCosts.isComplete">
       <label for="gas-price">Gas Price (GWEI)</label>
       <div class="input-group">
-        <input
-          name="gas-price"
-          type="number"
-          class="form-control"
-          placeholder="eg. 32"
-          [(ngModel)]="gasPrice">
+        <input name="gas-price" type="number" class="form-control" placeholder="eg. 32" [(ngModel)]="gasPrice">
         <div class="input-group-append">
           <button class="btn btn-outline-primary" (click)="updateGasPrice()">Update</button>
         </div>
@@ -84,7 +79,8 @@
       <h5>Step {{ steps.deployCrowdsale.step }} of {{ stepCount }}</h5>
     </header>
 
-    <h4><i class="icon-loading2 spin" *ngIf="!steps.deployCrowdsale.isComplete || steps.deployCrowdsale.hasError"></i> Deploying your capped crowdsale</h4>
+    <h4>
+      <i class="icon-loading2 spin" *ngIf="!steps.deployCrowdsale.isComplete || steps.deployCrowdsale.hasError"></i> Deploying your capped crowdsale</h4>
     <p>This step links your token address to a new capped crowdsale contract.</p>
     <p class="mb-2">This will allow the crowdsale to receive ETH and deliver your custom ERC20 token to sender.</p>
     <a class="mb-4 d-block" href="{{ eth.etherscanURL }}/address/{{ wallet.getAddress() }}" target="_blank">See transaction</a>
@@ -109,7 +105,8 @@
       <h5>Step {{ steps.transferToken.step }} of {{ stepCount }}</h5>
     </header>
 
-    <h4><i class="icon-loading2 spin" *ngIf="!steps.transferToken.isComplete || steps.transferToken.hasError"></i> Transferring the token supply to your crowdsale</h4>
+    <h4>
+      <i class="icon-loading2 spin" *ngIf="!steps.transferToken.isComplete || steps.transferToken.hasError"></i> Transferring the token supply to your crowdsale</h4>
     <p>This step will allow your crowdsale contract to manage the token supply and exchange it for ETH.</p>
     <p class="mb-2">The collected ETH will be transferred to the specified crowdsale beneficiary.</p>
     <a class="mb-4 d-block" href="{{ eth.etherscanURL }}/address/{{ wallet.getAddress() }}" target="_blank">See transaction</a>
