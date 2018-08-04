@@ -28,6 +28,9 @@
           margin-right: get-spacer(4);
         }
       }
+      &.mobile {
+        display: none;
+      }
     }
   }
 
@@ -55,8 +58,16 @@
   }
 }
 
-@media #{$sm-down} {
+@include media-breakpoint-down(sm) {
   #home-component {
+    #introduction {
+      .left-content {
+        display: none;
+        &.mobile {
+          display: flex;
+        }
+      }
+    }
     #contracts-catalog {
       app-catalog-contracts {
         .contract {
