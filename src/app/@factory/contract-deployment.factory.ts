@@ -6,6 +6,7 @@ import { DeploymentClassExistsError } from '@error/deployment-class-exists.error
 import { ContractDeployment, ContractDeploymentInterface } from '@factory/contract-deployment';
 import { FixedSupplyDeployment } from '@factory/fixed-supply.deployment';
 import { ExistingTokenDeployment } from '@factory/existing-token.deployment';
+import { DetailedERC20Deployment } from '@factory/detailed-erc20.deployment';
 
 export interface Deployment {
   [key: string]: ContractDeploymentInterface
@@ -28,6 +29,7 @@ export class ContractDeploymentFactory {
 
     this.registerContractDeployment(FixedSupplyDeployment._type, FixedSupplyDeployment)
     this.registerContractDeployment(ExistingTokenDeployment._type, ExistingTokenDeployment)
+    this.registerContractDeployment(DetailedERC20Deployment._type, DetailedERC20Deployment)
   }
 
   registerContractDeployment(type: string, deployment: ContractDeploymentInterface) {

@@ -10,9 +10,7 @@ declare var require: any
 const ethers = require('ethers')
 const Web3 = require('web3')
 
-export interface ContractDeploymentInterface {
-
-}
+export interface ContractDeploymentInterface { }
 
 export abstract class ContractDeployment {
 
@@ -42,6 +40,13 @@ export abstract class ContractDeployment {
     this.eth = eth
   }
 
+  createToken?()
+  createCrowdsale?()
+  async deployToken?(): Promise<any>
+  async deployCrowdsale?(): Promise<any>
+  async transferToken?(): Promise<any>
+  async addCrowdsaleToSimpleICOContract?(): Promise<any>
+
   getToken() {
     return this.token
   }
@@ -53,14 +58,6 @@ export abstract class ContractDeployment {
   getSimpleICO() {
     return this.simpleICO
   }
-
-
-  abstract createToken()
-  abstract createCrowdsale()
-  abstract async deployToken()
-  abstract async deployCrowdsale()
-  abstract async transferToken()
-  abstract async addCrowdsaleToSimpleICOContract()
 
   async getTokenSupply() {
     const tokenSupply = await this.token.instance.methods.totalSupply().call()

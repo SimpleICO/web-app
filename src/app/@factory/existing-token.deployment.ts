@@ -25,8 +25,6 @@ export class ExistingTokenDeployment
     this.type = ExistingTokenDeployment._type
   }
 
-  async deployToken() { }
-
   createToken() {
     this.token = new SimpleTokenContract(this.wallet)
 
