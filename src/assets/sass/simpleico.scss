@@ -29,3 +29,72 @@
 @import "sass/ebm-overrides";
 @import "sass/ebm-global";
 @import "ebm/modules/ebm-header";
+
+@mixin container-size($breakpoint: sm) {
+  @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
+    .container {
+      min-width: map-get($container-max-widths, $breakpoint);
+      max-width: map-get($container-max-widths, $breakpoint);
+    }
+  }
+}
+
+@mixin main {
+  padding-bottom: 180px;
+  position: relative;
+  min-height: 100vh;
+}
+
+@mixin with-header {
+  padding-top: $header-height-control;
+}
+
+@mixin logo {
+  margin-bottom: get-spacer(4) * 3;
+  text-align: center;
+  img {
+    height: auto;
+    width: 180px;
+  }
+}
+
+@keyframes spin {
+  from {transform:rotate(0deg);}
+  to {transform:rotate(360deg);}
+}
+
+@mixin hero-overlay {
+  background: linear-gradient(45deg, $purple, darken($purple, 14%));
+  position: relative;
+  overflow: hidden;
+  .overlay {
+    @include bg-img-block;
+    background-image: url('/assets/img/scuis-background-separator.png');
+    background-position: center bottom;
+    position: absolute;
+    width: 100%;
+    bottom: -120px;
+    right: 0;
+    left: 0;
+    top: 0;
+  }
+  @include media-breakpoint-down(md, $grid-breakpoints) {
+    .overlay {
+      bottom: 0;
+    }
+  }
+}
+
+@mixin full-width-header {
+  .header {
+    .header-left,
+    .header-right {
+      height: $header-height-control;
+    }
+    .logo {
+      img {
+        width: 120px;
+      }
+    }
+  }
+}

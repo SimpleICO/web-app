@@ -2,68 +2,35 @@
 
 @import "sass/simpleico.scss";
 
-@mixin container-size($breakpoint: sm) {
-  @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
-    .container {
-      min-width: map-get($container-max-widths, $breakpoint);
-      max-width: map-get($container-max-widths, $breakpoint);
+#home-component {
+  @include container-size(xl);
+  @include full-width-header;
+  background-color: $purple;
+
+  #contracts-catalog {
+    app-catalog-contracts {
+      @include make-row;
+      .contract {
+        @include make-col(6, $grid-columns);
+        @include make-col-ready();
+      }
     }
   }
-}
 
-.site-wrapper {
-  @include container-size;
 }
-
-@mixin main {
-  padding-bottom: $header-height-control + $container-fluid;
-  position: relative;
-  min-height: 100vh;
-}
-
-@mixin with-header {
-  padding-top: $header-height-control;
-}
-
-@mixin logo {
-  margin-bottom: get-spacer(4) * 3;
-  text-align: center;
-  img {
-    height: auto;
-    width: 180px;
-  }
-}
-
-@keyframes spin {
-  from {transform:rotate(0deg);}
-  to {transform:rotate(360deg);}
-}
-
-@mixin hero-overlay {
-  background: linear-gradient(45deg, $purple, darken($purple, 14%));
-  position: relative;
-  overflow: hidden;
-  .overlay {
-    @include bg-img-block;
-    background-image: url('/assets/img/scuis-background-separator.png');
-    background-position: center bottom;
-    position: absolute;
-    width: 100%;
-    bottom: -120px;
-    right: 0;
-    left: 0;
-    top: 0;
-  }
-  @include media-breakpoint-down(md, $grid-breakpoints) {
-    .overlay {
-      bottom: 0;
+@include media-breakpoint-down(sm) {
+  #home-component {
+    #contracts-catalog {
+      app-catalog-contracts {
+        .contract {
+          @include make-col(12, $grid-columns);
+        }
+      }
     }
   }
 }
 
 @import "sass/components/header-component";
-@import "sass/components/footer-component";
-@import "sass/components/home-component";
 @import "sass/components/login-component";
 @import "sass/components/new-wallet-component";
 @import "sass/components/accept-terms-component";
@@ -80,6 +47,9 @@
 @import "sass/components/scui-landing-page-component";
 @import "sass/components/hackaton-component";
 
+.site-wrapper {
+  @include container-size;
+}
 
 #mobile-menu {
   padding-top: $header-height-control + $container-fluid;
@@ -265,24 +235,18 @@ $headings-ratio-1-3: .675;
 $headings-ratio-4-6: .875;
 @include media-breakpoint-down(sm) {
   h1 {
-    font-size: $h1-font-size * $headings-ratio-1-3;
+    font-size: $h1-font-size * $headings-ratio-1-3 !important;
   }
   h2 {
-    font-size: $h2-font-size * $headings-ratio-1-3;
+    font-size: $h2-font-size * $headings-ratio-1-3 !important;
   }
   h3 {
-    font-size: $h3-font-size * $headings-ratio-1-3;
+    font-size: $h3-font-size * $headings-ratio-1-3 !important;
   }
   h4 {
-    font-size: $h4-font-size * $headings-ratio-4-6;
+    font-size: $h4-font-size * $headings-ratio-4-6 !important;
   }
 }
-
-// @include media-breakpoint-down(md) {
-//   html {
-//     font-size: $font-size-base * .995;
-//   }
-// }
 
 /*
   Media queries
@@ -292,7 +256,6 @@ $headings-ratio-4-6: .875;
 @media #{$md-only} {}
 @media #{$lg-only} {}
 @media #{$sm-down} {
-  body {}
   .header {
     .logo {
       img {

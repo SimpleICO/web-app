@@ -1,7 +1,7 @@
+@import "sass/simpleico.scss";
+
 #home-component {
-  @include container-size(xl);
   @include flex-column-center;
-  @include full-width-header;
   @include main;
   background-color: $purple;
 
@@ -44,13 +44,6 @@
 
   #contracts-catalog {
     background-color: $purple;
-    app-catalog-contracts {
-      @include make-row;
-      .contract {
-        @include make-col(6, $grid-columns);
-        @include make-col-ready();
-      }
-    }
   }
 
   #global-financial-inclusion {
@@ -65,13 +58,6 @@
         display: none;
         &.mobile {
           display: flex;
-        }
-      }
-    }
-    #contracts-catalog {
-      app-catalog-contracts {
-        .contract {
-          @include make-col(12, $grid-columns);
         }
       }
     }

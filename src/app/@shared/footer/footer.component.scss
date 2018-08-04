@@ -1,3 +1,5 @@
+@import "sass/simpleico.scss";
+
 .footer {
   background-color: darken($purple, 7%);
   position: absolute;
@@ -42,5 +44,15 @@
       }
     }
   }
-  .copyright {}
+  .copyright {
+    background-color: black;
+    .logo {
+      padding: get-spacer(3) 0;
+      display: block;
+      img {
+        width: 198px;
+        height: auto;
+      }
+    }
+  }
 }

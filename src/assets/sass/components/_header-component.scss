@@ -1,17 +1,3 @@
-@mixin full-width-header {
-  .header {
-    .header-left,
-    .header-right {
-      height: $header-height-control;
-    }
-    .logo {
-      img {
-        width: 120px;
-      }
-    }
-  }
-}
-
 .header {
   background-color: transparent;
   border-bottom: none;
