@@ -1,33 +1,56 @@
-<a [routerLink]="['/contract', DetailedERC20Deployment, 'create']" class="contract">
+<article class="contract">
   <div class="card">
     <h5 class="card-header">Detailed ERC20 Token</h5>
     <div class="card-body">
       <p class="card-text">Deploy an ERC20 token with a name, symbol and supply</p>
     </div>
+    <div class="card-footer">
+      <nav>
+        <a [routerLink]="['/contract', DetailedERC20Deployment, 'create']" class="btn btn-purple">Deploy one now</a>
+        <a href="https://github.com/SimpleICO/contracts/blob/master/contracts/simpletoken.sol" class="btn btn-outline-purple ml-3">See contract code</a>
+      </nav>
+    </div>
   </div>
-</a>
-<a [routerLink]="['/contract', FixedSupplyDeployment, 'create']" class="contract">
+</article>
+<article class="contract">
   <div class="card">
     <h5 class="card-header">Simple ERC20 Token Crowdsale</h5>
     <div class="card-body">
       <p class="card-text">Deploy an ERC20 token with a name, symbol, supply and a price. A crowdsale will take charge of exchanging your token
         for ETH.</p>
     </div>
+    <div class="card-footer">
+      <nav>
+        <a [routerLink]="['/contract', FixedSupplyDeployment, 'create']" class="btn btn-purple">Deploy one now</a>
+        <a href="https://github.com/SimpleICO/contracts/blob/master/contracts/simplecrowdsale.sol" class="btn btn-outline-purple ml-3">See contract code</a>
+      </nav>
+    </div>
   </div>
-</a>
-<a [routerLink]="['/contract', ExistingTokenDeployment, 'create']" class="contract">
+</article>
+<article class="contract">
   <div class="card">
     <h5 class="card-header">Existing ERC20 Token Crowdsale</h5>
     <div class="card-body">
       <p class="card-text">Deploy a crowdsale for an existing ERC20 token. You need to own a percentage of the token.</p>
     </div>
+    <div class="card-footer">
+      <nav>
+        <a [routerLink]="['/contract', ExistingTokenDeployment, 'create']" class="btn btn-purple">Deploy one now</a>
+        <a href="https://github.com/SimpleICO/contracts/blob/master/contracts/simplecrowdsale.sol" class="btn btn-outline-purple ml-3">See contract code</a>
+      </nav>
+    </div>
   </div>
-</a>
-<a [routerLink]="['/smart-contracts-wallet']" class="contract placeholder">
+</article>
+<article class="contract placeholder">
   <div class="card">
     <h5 class="card-header">Develop your own</h5>
     <div class="card-body">
       <p class="card-text">Connect to any smart contract using the SCUI framework.</p>
     </div>
+    <div class="card-footer">
+      <nav>
+        <a [routerLink]="['/smart-contracts-wallet']" class="btn btn-primary">Learn more</a>
+      </nav>
+    </div>
   </div>
-</a>
+</article>

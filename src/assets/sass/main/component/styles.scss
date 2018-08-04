@@ -33,6 +33,9 @@
         @include make-col(6, $grid-columns);
         @include make-col-ready();
       }
+      .card-body {
+        min-height: 124px;
+      }
     }
   }
 
