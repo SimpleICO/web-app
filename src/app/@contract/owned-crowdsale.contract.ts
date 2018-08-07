@@ -1,12 +1,11 @@
 import { Crowdsale } from '@model/crowdsale.model';
 import { Wallet } from '@model/wallet.model';
-import { SimpleTokenContract } from '@contract/simpletoken.contract';
 
 declare var require: any
 
 const ethers = require('ethers')
 const RATE = ethers.utils.bigNumberify(1)
-const OwnedCrowdsaleInterface = require('@abi/Crowdsale.json')
+const OwnedCrowdsaleInterface = require('@abi/OwnedCrowdsale.json')
 
 export class OwnedCrowdsaleContract extends Crowdsale {
 
@@ -36,14 +35,14 @@ export class OwnedCrowdsaleContract extends Crowdsale {
     return this
   }
 
-  async deploy(tokenPrice: number, tokenAddress: string) {
+  async deploy() {
 
     const beneficiary = this.beneficiary || this.wallet.address
 
     try {
       return this.instance.deploy({
         data: OwnedCrowdsaleInterface.bytecode,
-        arguments: [RATE, beneficiary, tokenAddress]
+        arguments: [RATE, beneficiary, this.token.getAddress()]
       })
     } catch (error) {
       console.log(error)

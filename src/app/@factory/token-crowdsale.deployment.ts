@@ -1,28 +1,25 @@
 import { ContractDeployment, ContractDeploymentInterface } from '@factory/contract-deployment';
 import { SimpleTokenContract } from '@contract/simpletoken.contract';
-import { SimpleCrowdsaleContract } from '@contract/simplecrowdsale.contract';
+import { OwnedCrowdsaleContract } from '@contract/owned-crowdsale.contract';
 import { Wallet } from '@model/wallet.model';
-import { SimpleICOContract } from '@contract/simpleico.contract';
 import { EthereumService } from '@service/ethereum.service';
-import { Subject } from 'rxjs';
 
 declare var require: any
 
-const ethers = require('ethers')
 const Web3 = require('web3')
 
-export class ExistingTokenDeployment
+export class ERC20TokenCrowdsaleDeployment
   extends ContractDeployment
   implements ContractDeploymentInterface {
 
-  static readonly _type: string = 'existing-token'
+  static readonly _type: string = 'erc20-token-crowdsale'
 
   type: string
 
   constructor(wallet: Wallet, eth: EthereumService) {
     super(wallet, eth)
 
-    this.type = ExistingTokenDeployment._type
+    this.type = ERC20TokenCrowdsaleDeployment._type
   }
 
   createToken() {
@@ -34,7 +31,7 @@ export class ExistingTokenDeployment
   }
 
   createCrowdsale() {
-    this.crowdsale = new SimpleCrowdsaleContract(this.wallet)
+    this.crowdsale = new OwnedCrowdsaleContract(this.wallet)
 
     this.crowdsale.connect()
 
@@ -47,7 +44,7 @@ export class ExistingTokenDeployment
 
       try {
 
-        const txObject = await this.crowdsale.deploy(this.token.price, this.token.getAddress())
+        const txObject = await this.crowdsale.deploy()
 
         const nonce = await this.eth.getNonce(this.crowdsale)
 
@@ -83,7 +80,51 @@ export class ExistingTokenDeployment
     })
   }
 
-  async transferToken() {
+  async setTokenPrice(price: number) {
+
+    return new Promise(async (resolve, reject) => {
+
+      try {
+
+        const txObject = await this.crowdsale.instance.methods.setPrice(price)
+
+        const nonce = await this.eth.getNonce(this.crowdsale)
+
+        const txOptions = {
+          from: this.wallet.address,
+          value: '0x0',
+          gas: Web3.utils.toHex(this.gas),
+          gasLimit: Web3.utils.toHex(this.gas),
+          gasPrice: Web3.utils.toHex(this.eth.defaultGasPrice),
+          data: txObject.encodeABI(),
+          nonce: Web3.utils.toHex(nonce)
+        }
+
+        const signedTx = await this.crowdsale.web3.eth.accounts.signTransaction(txOptions, this.wallet.privateKey)
+
+        const tx = this.crowdsale.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
+
+        tx.on('transactionHash', hash => {
+          this.crowdsale.tx = hash
+        })
+
+        tx.on('error', error => {
+          reject(error)
+        })
+
+        tx.on('receipt', async receipt => {
+          resolve(receipt)
+        })
+      } catch (error) {
+        reject(error)
+      }
+    })
+  }
+
+  /**
+   * @dev Approves the crowdsale to transfer N percentage of tokens in behalf the owner
+   */
+  async approve(amount: number) {
 
     return new Promise(async (resolve, reject) => {
 
@@ -91,7 +132,7 @@ export class ExistingTokenDeployment
 
         const nonce = await this.eth.getNonce(this.token)
 
-        const txObject = this.token.instance.methods.transfer(this.crowdsale.getAddress(), this.token.balanceOf)
+        const txObject = this.token.instance.methods.approve(this.crowdsale.getAddress(), this.token.balanceOf)
 
         const txOptions = {
           from: this.wallet.address,
@@ -126,7 +167,7 @@ export class ExistingTokenDeployment
 
   async estimateTokenTransferCost() {
 
-    const txObject = this.token.instance.methods.transfer(this.wallet.address, this.token.balanceOf)
+    const txObject = this.token.instance.methods.approve(this.wallet.address, this.token.balanceOf)
 
     const gas = await txObject.estimateGas({ from: this.wallet.address })
     this.gas += gas + this.gasIncrement

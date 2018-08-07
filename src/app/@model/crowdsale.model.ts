@@ -7,8 +7,6 @@ declare var require: any
 const Web3 = require('web3')
 const ethers = require('ethers')
 
-const contract = require('truffle-contract')
-
 export abstract class Crowdsale {
 
   static readonly WEBSOCKET_PRIVATE = 'ws://localhost:7545'

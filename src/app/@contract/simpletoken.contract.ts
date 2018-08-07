@@ -90,7 +90,5 @@ export class SimpleTokenContract extends Token {
     } catch (error) {
       console.log(error)
     }
-
   }
-
 }

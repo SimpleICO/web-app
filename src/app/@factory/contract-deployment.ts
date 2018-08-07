@@ -27,7 +27,7 @@ export abstract class ContractDeployment {
 
   simpleICO: SimpleICO
 
-  type: string
+  abstract type: string
 
   txCost: any
 
@@ -45,7 +45,6 @@ export abstract class ContractDeployment {
   async deployToken?(): Promise<any>
   async deployCrowdsale?(): Promise<any>
   async transferToken?(): Promise<any>
-  async addCrowdsaleToSimpleICOContract?(): Promise<any>
 
   getToken() {
     return this.token
@@ -136,4 +135,45 @@ export abstract class ContractDeployment {
     this.txCost.USD = (Number(this.txCost.USD) + Number(txCost.USD)).toFixed(2).toString()
   }
 
+  async addCrowdsaleToSimpleICOContract() {
+
+    return new Promise(async (resolve, reject) => {
+
+      try {
+
+        const nonce = await this.eth.getNonce(this.simpleICO)
+
+        const txObject = this.simpleICO.instance.methods.addCrowdsale(this.crowdsale.getAddress())
+
+        const txOptions = {
+          from: this.wallet.address,
+          to: this.simpleICO.getAddress(),
+          value: '0x0',
+          gas: Web3.utils.toHex(this.gas),
+          gasLimit: Web3.utils.toHex(this.gas),
+          gasPrice: Web3.utils.toHex(this.eth.defaultGasPrice),
+          data: txObject.encodeABI(),
+          nonce: Web3.utils.toHex(nonce)
+        }
+
+        const signedTx = await this.simpleICO.web3.eth.accounts.signTransaction(txOptions, this.wallet.privateKey)
+
+        const tx = this.simpleICO.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
+
+        tx.on('transactionHash', hash => {
+          this.simpleICO.tx = hash
+        })
+
+        tx.on('error', error => {
+          reject(error)
+        })
+
+        tx.on('receipt', async receipt => {
+          resolve(receipt)
+        })
+      } catch (error) {
+        reject(error)
+      }
+    })
+  }
 }
