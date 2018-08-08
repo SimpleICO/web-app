@@ -7,6 +7,7 @@ import { ContractDeployment, ContractDeploymentInterface } from '@factory/contra
 import { FixedSupplyDeployment } from '@factory/fixed-supply.deployment';
 import { ExistingTokenDeployment } from '@factory/existing-token.deployment';
 import { DetailedERC20Deployment } from '@factory/detailed-erc20.deployment';
+import { ERC20TokenCrowdsaleDeployment } from '@factory/token-crowdsale.deployment';
 
 export interface Deployment {
   [key: string]: ContractDeploymentInterface
@@ -27,9 +28,8 @@ export class ContractDeploymentFactory {
     private wallet: WalletService,
     private eth: EthereumService) {
 
-    this.registerContractDeployment(FixedSupplyDeployment._type, FixedSupplyDeployment)
-    this.registerContractDeployment(ExistingTokenDeployment._type, ExistingTokenDeployment)
     this.registerContractDeployment(DetailedERC20Deployment._type, DetailedERC20Deployment)
+    this.registerContractDeployment(ERC20TokenCrowdsaleDeployment._type, ERC20TokenCrowdsaleDeployment)
   }
 
   registerContractDeployment(type: string, deployment: ContractDeploymentInterface) {

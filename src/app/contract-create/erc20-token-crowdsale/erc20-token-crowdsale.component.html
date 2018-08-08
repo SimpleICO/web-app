@@ -1,0 +1,18 @@
+<section class="section">
+  <div class="container">
+    <h4 class="text-white">Create a crowdsale from an existing ERC20 token</h4>
+    <p class="text-white">
+      <strong>Note</strong>: You need to own a percentage of the ERC20 token in order for this crowdsale to work.</p>
+    <fieldset class="form-group dark-theme">
+      <label for="">Token address</label>
+      <input required autofocus="autofocus" type="text" class="form-control" placeholder="eg. 0x345gh457uh..." [(ngModel)]="token.address">
+    </fieldset>
+    <fieldset class="form-group dark-theme">
+      <label for="">Beneficiary address</label>
+      <input required type="text" class="form-control" placeholder="eg. 0x123..." [(ngModel)]="crowdsale.beneficiary">
+      <small class="text-primary" (click)="setBeneficiary()">Use this wallet address</small>
+    </fieldset>
+    <p *ngIf="isInvalid" class="on-error">{{ errorMessage }}</p>
+    <button class="btn btn-primary btn-lg btn-block" (click)="onCreateCrowdsale()">Create Token</button>
+  </div>
+</section>

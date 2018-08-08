@@ -7,36 +7,21 @@
     <div class="card-footer">
       <nav>
         <a [routerLink]="['/contract', DetailedERC20Deployment, 'create']" class="btn btn-purple">Deploy one now</a>
-        <a href="https://github.com/SimpleICO/contracts/blob/master/contracts/simpletoken.sol" class="btn btn-outline-purple ml-3">See contract code</a>
+        <a href="https://github.com/SimpleICO/contracts/blob/master/contracts/simpletoken.sol" class="btn btn-outline-purple">See contract code</a>
       </nav>
     </div>
   </div>
 </article>
 <article class="contract">
   <div class="card">
-    <h5 class="card-header">Simple ERC20 Token Crowdsale</h5>
+    <h5 class="card-header">ERC20 Token Crowdsale</h5>
     <div class="card-body">
-      <p class="card-text">Deploy an ERC20 token with a name, symbol, supply and a price. A crowdsale will take charge of exchanging your token
-        for ETH.</p>
+      <p class="card-text">Deploy a Crowdsale contract and set a price for each unit of your ERC20 token.</p>
     </div>
     <div class="card-footer">
       <nav>
-        <a [routerLink]="['/contract', FixedSupplyDeployment, 'create']" class="btn btn-purple">Deploy one now</a>
-        <a href="https://github.com/SimpleICO/contracts/blob/master/contracts/simplecrowdsale.sol" class="btn btn-outline-purple ml-3">See contract code</a>
-      </nav>
-    </div>
-  </div>
-</article>
-<article class="contract">
-  <div class="card">
-    <h5 class="card-header">Existing ERC20 Token Crowdsale</h5>
-    <div class="card-body">
-      <p class="card-text">Deploy a crowdsale for an existing ERC20 token. You need to own a percentage of the token.</p>
-    </div>
-    <div class="card-footer">
-      <nav>
-        <a [routerLink]="['/contract', ExistingTokenDeployment, 'create']" class="btn btn-purple">Deploy one now</a>
-        <a href="https://github.com/SimpleICO/contracts/blob/master/contracts/simplecrowdsale.sol" class="btn btn-outline-purple ml-3">See contract code</a>
+        <a [routerLink]="['/contract', ERC20TokenCrowdsaleDeployment, 'create']" class="btn btn-purple">Deploy one now</a>
+        <a href="https://github.com/SimpleICO/contracts/blob/master/contracts/OwnedCrowdsale.sol" class="btn btn-outline-purple">See contract code</a>
       </nav>
     </div>
   </div>

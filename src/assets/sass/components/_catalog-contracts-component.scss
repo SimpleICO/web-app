@@ -9,10 +9,38 @@
   .card-body {
     min-height: 120px;
   }
+  .card-footer {
+    nav {
+      a {
+        &:nth-child(n+2) {
+          margin-left: get-spacer(3);
+        }
+      }
+    }
+  }
 
   &.placeholder {
     .card {
       background-color: transparent;
+    }
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .contract {
+    .card-footer {
+      nav {
+        a {
+          margin-bottom: get-spacer(3);
+          display: block;
+          &:nth-child(n+2) {
+            margin-left: 0;
+          }
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
     }
   }
 }
