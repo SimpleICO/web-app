@@ -1,0 +1,8 @@
+@import "sass/simpleico.scss";
+
+#accept-terms {
+  @include flex-column-center;
+  @include with-header;
+  @include main;
+  background-color: $purple;
+}

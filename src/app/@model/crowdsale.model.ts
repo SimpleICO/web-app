@@ -109,5 +109,5 @@ export abstract class Crowdsale {
   }
 
   abstract connect()
-  abstract async deploy(tokenPrice: number, tokenAddress: string)
+  abstract async deploy(tokenPrice?: number, tokenAddress?: string)
 }
