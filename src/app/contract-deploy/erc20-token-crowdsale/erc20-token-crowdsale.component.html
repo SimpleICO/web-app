@@ -1,0 +1,126 @@
+<section class="step" id="step-1" *ngIf="steps.crowdsaleSetup.isCurrent">
+  <div class="container">
+    <header class="step-header">
+      <h5>Step {{ steps.crowdsaleSetup.step }} of {{ stepCount }}</h5>
+    </header>
+
+    <h4>Setup your crowdsale contract</h4>
+
+    <fieldset class="form-group dark-theme">
+      <label for="">Token price (in ETH)</label>
+      <input required autofocus="autofocus" type="text" class="form-control" placeholder="eg. 0.1" [(ngModel)]="crowdsale.price">
+    </fieldset>
+    <fieldset class="form-group dark-theme">
+      <label for="">Token percentage</label>
+      <div class="row">
+        <div class="col-5">
+          <div class="input-group">
+            <input required type="text" class="form-control" placeholder="eg. 10" [(ngModel)]="crowdsale.percentage">
+            <div class="input-group-append">
+              <button class="btn btn-outline-light">%</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <small class="text-white">How much percentage (%) of the token supply you are willing to sell.</small>
+    </fieldset>
+    <fieldset class="form-group dark-theme">
+      <label for="">Beneficiary address</label>
+      <input required type="text" class="form-control" placeholder="eg. 0x123..." [(ngModel)]="crowdsale.beneficiary">
+      <small class="text-primary" (click)="setBeneficiary()">Use this wallet address</small>
+    </fieldset>
+
+    <div *ngIf="steps.crowdsaleSetup.hasError">
+      <p class="on-error" [innerHTML]="steps.crowdsaleSetup.errorMessage | keepHtml"></p>
+    </div>
+
+    <div>
+      <button class="btn btn-primary btn-block" (click)="onCreateCrowdsale()">Next</button>
+    </div>
+
+  </div>
+</section>
+
+<section class="step" id="step-2" *ngIf="steps.estimateTxCosts.isCurrent">
+  <div class="container">
+    <header class="step-header">
+      <h5>Step {{ steps.estimateTxCosts.step }} of {{ stepCount }}</h5>
+    </header>
+
+    <h4>Calculating transaction costs</h4>
+    <article class="estimate" *ngFor="let estimate of steps.estimateTxCosts.estimates">
+      <p>ETH {{ estimate.txCost }}</p>
+      <p>{{ estimate.text }}</p>
+    </article>
+
+    <fieldset class="form-group dark-theme" *ngIf="steps.estimateTxCosts.isComplete">
+      <label for="gas-price">Gas Price (GWEI)</label>
+      <div class="input-group">
+        <input name="gas-price" type="number" class="form-control" placeholder="eg. 32" [(ngModel)]="gasPrice">
+        <div class="input-group-append">
+          <button class="btn btn-outline-primary" (click)="updateGasPrice()">Update</button>
+        </div>
+      </div>
+    </fieldset>
+
+    <div *ngIf="steps.estimateTxCosts.hasError">
+      <p class="on-error">Insufficient funds to execute these transactions. Send ETH to your wallet address and retry.</p>
+      <button class="btn btn-primary btn-block mb-3" (click)="shared.displayCrowdsaleShowModal()">See wallet address</button>
+      <button class="btn btn-outline-primary btn-block" (click)="estimateTransactionCosts()">Retry</button>
+    </div>
+
+    <div *ngIf="steps.estimateTxCosts.isComplete">
+      <button class="btn btn-primary btn-block" (click)="deployCrowdsale()">Next</button>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="step" id="step-3" *ngIf="steps.deployCrowdsale.isCurrent">
+  <div class="container">
+    <header class="step-header">
+      <h5>Step {{ steps.deployCrowdsale.step }} of {{ stepCount }}</h5>
+    </header>
+
+    <h4>
+      <i class="icon-loading2 spin" *ngIf="!steps.deployCrowdsale.isComplete || steps.deployCrowdsale.hasError"></i> Deploying your capped crowdsale</h4>
+    <p>This step links your token address to a new capped crowdsale contract.</p>
+    <p class="mb-2">This will allow the crowdsale to receive ETH and deliver your custom ERC20 token to sender.</p>
+    <a class="mb-4 d-block" href="{{ eth.etherscanURL }}/address/{{ wallet.getAddress() }}" target="_blank">See transaction</a>
+
+    <div *ngIf="steps.deployCrowdsale.hasError">
+      <p class="on-error" [innerHTML]="steps.deployCrowdsale.errorMessage | keepHtml"></p>
+      <button class="btn btn-outline-primary btn-block" (click)="deployCrowdsale()">Retry</button>
+      <button class="btn btn-outline-primary btn-block">Go to token page</button>
+    </div>
+
+    <div *ngIf="steps.deployCrowdsale.isComplete">
+      <button class="btn btn-primary btn-block" (click)="transferToken()">Next</button>
+      <a href="{{ eth.etherscanURL }}/address/{{ crowdsale.address }}" target="_blank" class="btn btn-outline-primary btn-block">See on etherscan</a>
+    </div>
+
+  </div>
+</section>
+
+<section class="step" id="step-3" *ngIf="steps.transferToken.isCurrent">
+  <div class="container">
+    <header class="step-header">
+      <h5>Step {{ steps.transferToken.step }} of {{ stepCount }}</h5>
+    </header>
+
+    <h4>
+      <i class="icon-loading2 spin" *ngIf="!steps.transferToken.isComplete || steps.transferToken.hasError"></i> Transferring the token supply to your crowdsale</h4>
+    <p>This step will allow your crowdsale contract to manage the token supply and exchange it for ETH.</p>
+    <p class="mb-2">The collected ETH will be transferred to the specified crowdsale beneficiary.</p>
+    <a class="mb-4 d-block" href="{{ eth.etherscanURL }}/address/{{ wallet.getAddress() }}" target="_blank">See transaction</a>
+
+    <div *ngIf="steps.transferToken.hasError">
+      <p class="on-error" [innerHTML]="steps.transferToken.errorMessage | keepHtml"></p>
+      <button class="btn btn-outline-primary btn-block" (click)="transferToken()">Retry</button>
+    </div>
+
+    <div *ngIf="steps.transferToken.isComplete">
+      <button class="btn btn-primary btn-block" (click)="finish()">Finish</button>
+    </div>
+
+  </div>
+</section> -->

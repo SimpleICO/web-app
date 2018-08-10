@@ -31,11 +31,13 @@ export abstract class Crowdsale {
 
   ethRaised: string = '0.0'
 
-  price: string
+  price: number
 
   token: SimpleTokenContract
 
   tokens: string
+
+  percentage: number = 0
 
   constructor(wallet: Wallet) {
     this.wallet = wallet
