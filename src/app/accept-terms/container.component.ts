@@ -16,13 +16,12 @@ export class ContainerComponent implements OnInit {
     public wallet: WalletService,
     private router: Router) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   acceptTerms() {
     this.cookie.acceptTerms()
 
-    this.router.navigateByUrl('/home')
+    this.router.navigateByUrl('/login')
   }
 
   declineTerms() {

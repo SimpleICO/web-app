@@ -4,15 +4,16 @@ import { ContractDeployment } from '@factory/contract-deployment';
 import { Router } from '@angular/router';
 import { Crowdsale } from '@model/crowdsale.model';
 import { Token } from '@model/token.model';
+import { InsufficientFundsError } from '@error/insufficient-funds.error';
 
 declare let require: any
 
 const Web3 = require('web3')
-
+const ethers = require('ethers')
 @Component({
   selector: 'app-erc20-token-crowdsale',
   templateUrl: './erc20-token-crowdsale.component.html',
-  styleUrls: ['./erc20-token-crowdsale.component.css']
+  styleUrls: ['./erc20-token-crowdsale.component.scss']
 })
 export class Erc20TokenCrowdsaleComponent implements OnInit {
 
@@ -25,12 +26,20 @@ export class Erc20TokenCrowdsaleComponent implements OnInit {
   isInvalid: boolean = false
   errorMessage: string
 
+  isTokenLoaded: boolean = false
+  hasInsufficientTokenFunds: boolean = false
+
+  supply: string
+
+  balanceOf: number = 0
+
+  percentage: number = 0
+
   constructor(
     private contractFactory: ContractDeploymentFactory,
     private router: Router) {
 
     this.deployer = contractFactory.deployer
-
   }
 
   ngOnInit() {
@@ -48,7 +57,16 @@ export class Erc20TokenCrowdsaleComponent implements OnInit {
     this.crowdsale.setBeneficiary(beneficiary)
   }
 
-  onCreateCrowdsale() {
+  reset() {
+    this.isTokenLoaded = false
+    this.hasInsufficientTokenFunds = false
+    this.isInvalid = false
+    this.errorMessage = ''
+  }
+
+  async onLoadTokenInfo() {
+
+    this.reset()
 
     if (this.token.address.length <= 0) {
       this.isInvalid = true
@@ -62,19 +80,51 @@ export class Erc20TokenCrowdsaleComponent implements OnInit {
       return false
     }
 
-    if (!Web3.utils.isAddress(this.crowdsale.beneficiary)) {
-      this.isInvalid = true
-      this.errorMessage = 'Beneficiary address is invalid'
-
-      return false
-    }
-
     this.isInvalid = false
     this.errorMessage = ''
 
-    this.token.setAddress(this.token.address)
-    this.crowdsale.setBeneficiary(this.crowdsale.beneficiary)
+    try {
+      this.token.setAddress(this.token.address)
+      await this.getTokenInfo()
+      this.isTokenLoaded = true
+    } catch (error) {
+      console.log(error)
 
+      if (error instanceof InsufficientFundsError) {
+        this.isTokenLoaded = false
+        this.hasInsufficientTokenFunds = true
+        this.isInvalid = true
+        this.errorMessage = `You don't have funds of ${this.token.symbol} token in order to create a crowdsale.`
+        return false
+      }
+
+      this.isInvalid = true
+      this.errorMessage = `The token contract address does not exist in the ${this.deployer.wallet.network} or the address is an invalid ERC20 contract`
+    }
+  }
+
+  private async getTokenInfo() {
+
+    this.token.getName()
+    this.token.getSymbol()
+    await this.token.getBalanceOf()
+
+    const balanceOf = ethers.utils.bigNumberify(this.token.balanceOf)
+    const hasInsufficientOwnership = balanceOf.lte(ethers.utils.bigNumberify(0))
+
+    if (hasInsufficientOwnership) {
+      throw new InsufficientFundsError(InsufficientFundsError.MESSAGE)
+    }
+
+    this.balanceOf = ethers.utils.formatEther(this.token.balanceOf)
+
+    await this.token.getTotalSupply()
+    this.supply = ethers.utils.bigNumberify(this.token.supply).div(1e18.toString()).toString()
+
+    this.percentage = balanceOf.div(ethers.utils.bigNumberify(this.token.supply)).mul(100).toString()
+  }
+
+  onSetupCrowdsale() {
     return this.router.navigate([`/contract/${this.deployer.type}/deploy`]);
   }
 }

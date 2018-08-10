@@ -1,4 +1,4 @@
-<section class="section">
+<section class="section" *ngIf="!isTokenLoaded">
   <div class="container">
     <h4 class="text-white">Create a crowdsale from an existing ERC20 token</h4>
     <p class="text-white">
@@ -7,12 +7,33 @@
       <label for="">Token address</label>
       <input required autofocus="autofocus" type="text" class="form-control" placeholder="eg. 0x345gh457uh..." [(ngModel)]="token.address">
     </fieldset>
-    <fieldset class="form-group dark-theme">
-      <label for="">Beneficiary address</label>
-      <input required type="text" class="form-control" placeholder="eg. 0x123..." [(ngModel)]="crowdsale.beneficiary">
-      <small class="text-primary" (click)="setBeneficiary()">Use this wallet address</small>
-    </fieldset>
     <p *ngIf="isInvalid" class="on-error">{{ errorMessage }}</p>
-    <button class="btn btn-primary btn-lg btn-block" (click)="onCreateCrowdsale()">Create Token</button>
+    <button class="btn btn-primary btn-lg btn-block" (click)="onLoadTokenInfo()">Next</button>
+  </div>
+</section>
+<section class="section" *ngIf="isTokenLoaded" id="token-info">
+  <div class="container">
+    <h4 class="text-white">Confirm your token info</h4>
+    <div>
+      <article class="estimate">
+        <p>{{ token.name }}</p>
+        <p>Name</p>
+      </article>
+      <article class="estimate">
+        <p>{{ token.symbol }}</p>
+        <p>Symbol</p>
+      </article>
+      <article class="estimate">
+        <p>{{ token.symbol }} {{ balanceOf }}</p>
+        <p>You own {{ percentage }}%</p>
+      </article>
+      <article class="estimate">
+        <p>{{ supply }}</p>
+        <p>Total supply</p>
+      </article>
+    </div>
+    <p *ngIf="isInvalid" class="on-error">{{ errorMessage }}</p>
+    <button class="btn btn-primary btn-lg btn-block" (click)="onLoadTokenInfo()">Next</button>
+    <button class="btn btn-outline-primary btn-lg btn-block mt-3" (click)="reset()">Back</button>
   </div>
 </section>
