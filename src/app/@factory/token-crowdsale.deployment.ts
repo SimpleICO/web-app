@@ -80,18 +80,20 @@ export class ERC20TokenCrowdsaleDeployment
     })
   }
 
-  async setTokenPrice(price: number) {
+  async setTokenPrice() {
 
     return new Promise(async (resolve, reject) => {
 
       try {
 
+        const price = Web3.utils.toWei(this.crowdsale.price, 'ether')
         const txObject = await this.crowdsale.instance.methods.setPrice(price)
 
         const nonce = await this.eth.getNonce(this.crowdsale)
 
         const txOptions = {
           from: this.wallet.address,
+          to: this.crowdsale.address,
           value: '0x0',
           gas: Web3.utils.toHex(this.gas),
           gasLimit: Web3.utils.toHex(this.gas),
@@ -132,7 +134,7 @@ export class ERC20TokenCrowdsaleDeployment
 
         const nonce = await this.eth.getNonce(this.token)
 
-        const txObject = this.token.instance.methods.approve(this.crowdsale.getAddress(), this.token.balanceOf)
+        const txObject = this.token.instance.methods.approve(this.crowdsale.getAddress(), amount)
 
         const txOptions = {
           from: this.wallet.address,

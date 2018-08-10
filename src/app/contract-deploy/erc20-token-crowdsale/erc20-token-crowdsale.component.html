@@ -22,7 +22,7 @@
           </div>
         </div>
       </div>
-      <small class="text-white">How much percentage (%) of the token supply you are willing to sell.</small>
+      <small class="text-white">How much percentage (%) of your token balance you are willing to sell.</small>
     </fieldset>
     <fieldset class="form-group dark-theme">
       <label for="">Beneficiary address</label>
@@ -75,7 +75,7 @@
   </div>
 </section>
 
-<!-- <section class="step" id="step-3" *ngIf="steps.deployCrowdsale.isCurrent">
+<section class="step" id="step-3" *ngIf="steps.deployCrowdsale.isCurrent">
   <div class="container">
     <header class="step-header">
       <h5>Step {{ steps.deployCrowdsale.step }} of {{ stepCount }}</h5>
@@ -83,8 +83,9 @@
 
     <h4>
       <i class="icon-loading2 spin" *ngIf="!steps.deployCrowdsale.isComplete || steps.deployCrowdsale.hasError"></i> Deploying your capped crowdsale</h4>
-    <p>This step links your token address to a new capped crowdsale contract.</p>
-    <p class="mb-2">This will allow the crowdsale to receive ETH and deliver your custom ERC20 token to sender.</p>
+    <p>This step links your token address to a new capped crowdsale contract and sets the price of the token.</p>
+    <p>This will allow the crowdsale to receive ETH and deliver your custom ERC20 token to the sender.</p>
+    <p class="mb-2">* You can adjust the price later.</p>
     <a class="mb-4 d-block" href="{{ eth.etherscanURL }}/address/{{ wallet.getAddress() }}" target="_blank">See transaction</a>
 
     <div *ngIf="steps.deployCrowdsale.hasError">
@@ -94,7 +95,7 @@
     </div>
 
     <div *ngIf="steps.deployCrowdsale.isComplete">
-      <button class="btn btn-primary btn-block" (click)="transferToken()">Next</button>
+      <button class="btn btn-primary btn-block" (click)="approve()">Next</button>
       <a href="{{ eth.etherscanURL }}/address/{{ crowdsale.address }}" target="_blank" class="btn btn-outline-primary btn-block">See on etherscan</a>
     </div>
 
@@ -108,14 +109,16 @@
     </header>
 
     <h4>
-      <i class="icon-loading2 spin" *ngIf="!steps.transferToken.isComplete || steps.transferToken.hasError"></i> Transferring the token supply to your crowdsale</h4>
-    <p>This step will allow your crowdsale contract to manage the token supply and exchange it for ETH.</p>
+      <i class="icon-loading2 spin" *ngIf="!steps.transferToken.isComplete || steps.transferToken.hasError"></i> Approving your crowdsale to transfer the token supply on your behalf</h4>
+    <p>This step will approve your crowdsale contract to manage the token supply and exchange it for ETH. You can always call
+      the
+      <code>decreaseApproval</code> method of your ERC20 contract to decrease the supply this crowdsale can transfer.</p>
     <p class="mb-2">The collected ETH will be transferred to the specified crowdsale beneficiary.</p>
     <a class="mb-4 d-block" href="{{ eth.etherscanURL }}/address/{{ wallet.getAddress() }}" target="_blank">See transaction</a>
 
     <div *ngIf="steps.transferToken.hasError">
       <p class="on-error" [innerHTML]="steps.transferToken.errorMessage | keepHtml"></p>
-      <button class="btn btn-outline-primary btn-block" (click)="transferToken()">Retry</button>
+      <button class="btn btn-outline-primary btn-block" (click)="approve()">Retry</button>
     </div>
 
     <div *ngIf="steps.transferToken.isComplete">
@@ -123,4 +126,4 @@
     </div>
 
   </div>
-</section> -->
+</section>

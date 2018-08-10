@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ContractDeploymentFactory } from '@factory/contract-deployment.factory';
-import { ContractDeployment } from '@factory/contract-deployment';
+import { ERC20TokenCrowdsaleDeployment } from '@factory/token-crowdsale.deployment';
 import { Router } from '@angular/router';
 import { Crowdsale } from '@model/crowdsale.model';
 import { Token } from '@model/token.model';
@@ -17,7 +17,7 @@ const ethers = require('ethers')
 })
 export class Erc20TokenCrowdsaleComponent implements OnInit {
 
-  deployer: ContractDeployment
+  deployer: ERC20TokenCrowdsaleDeployment
 
   @Input() token: Token
 
@@ -39,7 +39,7 @@ export class Erc20TokenCrowdsaleComponent implements OnInit {
     private contractFactory: ContractDeploymentFactory,
     private router: Router) {
 
-    this.deployer = contractFactory.deployer
+    this.deployer = contractFactory.deployer as ERC20TokenCrowdsaleDeployment
   }
 
   ngOnInit() {
