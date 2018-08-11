@@ -9,7 +9,7 @@ import { DetailedERC20Deployment } from '@factory/detailed-erc20.deployment';
 @Component({
   selector: 'app-container',
   templateUrl: './container.component.html',
-  styleUrls: ['./container.component.css']
+  styleUrls: ['./container.component.scss']
 })
 
 export class ContainerComponent implements OnInit {

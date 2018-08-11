@@ -6,7 +6,7 @@ import { SimpleTokenContract } from '@contract/simpletoken.contract';
 @Component({
   selector: 'app-fixed-supply',
   templateUrl: './fixed-supply.component.html',
-  styleUrls: ['./fixed-supply.component.css']
+  styleUrls: ['./fixed-supply.component.scss']
 })
 export class FixedSupplyComponent extends PrivateFixedSupplyComponent {
 
