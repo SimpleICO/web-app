@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FixedSupplyComponent as PrivateFixedSupplyComponent } from '../../contract-show/fixed-supply/fixed-supply.component';
 import { SimpleCrowdsaleContract } from '@contract/simplecrowdsale.contract';
 import { SimpleTokenContract } from '@contract/simpletoken.contract';
