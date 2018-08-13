@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { KeepHtmlPipe } from '@pipe/keep-html.pipe';
+import { WeiToEtherPipe } from '@pipe/wei-to-ether.pipe';
 import { AuthHeaderComponent } from './auth-header/auth-header.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { HeaderComponent } from './header/header.component';
@@ -25,6 +26,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
     QrCodeModalComponent,
     SpinnerComponent,
     KeepHtmlPipe,
+    WeiToEtherPipe,
   ],
   declarations: [
     AuthHeaderComponent,
@@ -35,6 +37,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
     QrCodeModalComponent,
     SpinnerComponent,
     KeepHtmlPipe,
+    WeiToEtherPipe,
   ]
 })
 export class SharedModule { }

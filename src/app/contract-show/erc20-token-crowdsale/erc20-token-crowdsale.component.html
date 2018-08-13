@@ -11,9 +11,8 @@
   </div>
   <div class="eth-raised">
     <span class="balance">
-      <strong>ETH</strong> {{ crowdsale.ethRaised }}</span>
-    <small>Amount raised</small>
-    <!-- <span class="go-icon" (click)="refresh()"><i class="icon-sync"></i></span> -->
+      <strong>{{ token.symbol }}</strong> {{ crowdsale.allowance | weiToEther }}</span>
+    <small>For sale ({{ percentageForSale }}%)</small>
   </div>
   <div class="eth-raised">
     <span class="balance">
@@ -22,8 +21,13 @@
   </div>
   <div class="eth-raised">
     <span class="balance">
-      <strong>{{ token.symbol }}</strong> {{ crowdsale.tokens }}</span>
-    <small>Available</small>
+      <strong>ETH</strong> {{ crowdsale.ethRaised }}</span>
+    <small>Amount raised</small>
+  </div>
+  <div class="eth-raised">
+    <span class="balance">
+      <strong>{{ token.symbol }}</strong> {{ token.supply | weiToEther }}</span>
+    <small>Total supply</small>
   </div>
 </div>
 

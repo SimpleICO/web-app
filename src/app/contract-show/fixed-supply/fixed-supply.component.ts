@@ -14,7 +14,7 @@ const ethers = require('ethers')
 @Component({
   selector: 'app-fixed-supply',
   templateUrl: './fixed-supply.component.html',
-  styleUrls: ['./fixed-supply.component.css']
+  styleUrls: ['./fixed-supply.component.scss']
 })
 export class FixedSupplyComponent implements OnInit {
 

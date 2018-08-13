@@ -32,6 +32,8 @@ export class Erc20TokenCrowdsaleComponent implements OnInit {
 
   txs: Array<string> = []
 
+  percentageForSale: number = 0
+
   constructor(
     public route: ActivatedRoute,
     public eth: EthereumService,
@@ -116,9 +118,14 @@ export class Erc20TokenCrowdsaleComponent implements OnInit {
     const tokenAddress = await this.crowdsale.instance.methods.token().call()
     this.token.setAddress(tokenAddress)
 
-    this.crowdsale.getAvailableTokens()
-
     this.token.getName()
     this.token.getSymbol()
+
+    await this.crowdsale.getAvailableTokens()
+    await this.token.getTotalSupply()
+    const supply = ethers.utils.bigNumberify(this.token.supply)
+    const allowance = ethers.utils.bigNumberify(this.crowdsale.allowance)
+    const percentage = allowance.mul(100).div(supply)
+    this.percentageForSale = percentage.toString()
   }
 }

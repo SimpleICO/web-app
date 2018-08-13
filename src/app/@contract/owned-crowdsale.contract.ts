@@ -18,8 +18,7 @@ export class OwnedCrowdsaleContract extends Crowdsale {
   }
 
   async getAvailableTokens() {
-    const wei = await this.token.instance.methods.allowance(this.beneficiary, this.address).call()
-    this.tokens = ethers.utils.formatEther(wei)
+    this.allowance = await this.token.instance.methods.allowance(this.beneficiary, this.address).call()
   }
 
   async setPrice(price: number) {

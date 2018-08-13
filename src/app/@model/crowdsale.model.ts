@@ -37,6 +37,8 @@ export abstract class Crowdsale {
 
   tokens: string
 
+  allowance: number = 0
+
   percentage: number = 0
 
   constructor(wallet: Wallet) {
