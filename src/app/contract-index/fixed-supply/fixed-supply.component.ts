@@ -4,7 +4,7 @@ import { SettingsService } from '@service/settings.service';
 import { SimpleICOContract } from '@contract/simpleico.contract';
 import { SimpleCrowdsaleContract } from '@contract/simplecrowdsale.contract';
 
-import { FixedSupplyDeployment } from '@factory/fixed-supply.deployment';
+import { ERC20TokenCrowdsaleDeployment } from '@factory/token-crowdsale.deployment';
 
 @Component({
   selector: 'app-fixed-supply',
@@ -17,7 +17,7 @@ export class FixedSupplyComponent implements OnInit {
 
   crowdsales: Array<SimpleCrowdsaleContract> = []
 
-  FixedSupplyDeployment: string = FixedSupplyDeployment._type
+  ERC20TokenCrowdsaleDeployment: string = ERC20TokenCrowdsaleDeployment._type
 
   constructor(
     public wallet: WalletService,

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FixedSupplyComponent as PrivateFixedSupplyComponent } from '../../contract-index/fixed-supply/fixed-supply.component';
 import { SimpleICOContract } from '@contract/simpleico.contract';
 
-import { FixedSupplyDeployment } from '@factory/fixed-supply.deployment';
+import { ERC20TokenCrowdsaleDeployment } from '@factory/token-crowdsale.deployment';
 
 @Component({
   selector: 'app-fixed-supply',
@@ -11,7 +11,7 @@ import { FixedSupplyDeployment } from '@factory/fixed-supply.deployment';
 })
 export class FixedSupplyComponent extends PrivateFixedSupplyComponent {
 
-  FixedSupplyDeployment: string = FixedSupplyDeployment._type
+  ERC20TokenCrowdsaleDeployment: string = ERC20TokenCrowdsaleDeployment._type
 
   ngOnInit() {
     this.simpleICO = new SimpleICOContract(this.wallet.getInstance())

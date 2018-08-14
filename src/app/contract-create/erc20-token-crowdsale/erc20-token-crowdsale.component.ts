@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ContractDeploymentFactory } from '@factory/contract-deployment.factory';
 import { ERC20TokenCrowdsaleDeployment } from '@factory/token-crowdsale.deployment';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Crowdsale } from '@model/crowdsale.model';
 import { Token } from '@model/token.model';
 import { InsufficientFundsError } from '@error/insufficient-funds.error';
@@ -37,6 +37,7 @@ export class Erc20TokenCrowdsaleComponent implements OnInit {
 
   constructor(
     private contractFactory: ContractDeploymentFactory,
+    private route: ActivatedRoute,
     private router: Router) {
 
     this.deployer = contractFactory.deployer as ERC20TokenCrowdsaleDeployment
@@ -50,6 +51,10 @@ export class Erc20TokenCrowdsaleComponent implements OnInit {
 
     this.token = this.deployer.getToken()
     this.crowdsale = this.deployer.getCrowdsale()
+
+    this.route.queryParams.subscribe(({ address }) => {
+      this.token.address = address
+    })
   }
 
   setBeneficiary() {

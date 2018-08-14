@@ -8,6 +8,8 @@ import { SharedService } from '@service/shared.service';
 import { Router } from '@angular/router';
 import { Token } from '@model/token.model';
 
+import { ERC20TokenCrowdsaleDeployment } from '@factory/token-crowdsale.deployment';
+
 declare var require: any
 const Web3 = require('web3')
 
@@ -17,6 +19,8 @@ const Web3 = require('web3')
   styleUrls: ['./detailed-erc20.component.css']
 })
 export class DetailedErc20Component implements OnInit {
+
+  ERC20TokenCrowdsaleDeployment: string = ERC20TokenCrowdsaleDeployment._type
 
   deployer: ContractDeployment
 

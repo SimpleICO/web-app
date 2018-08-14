@@ -69,7 +69,9 @@
     </div>
 
     <div *ngIf="steps.deployToken.isComplete">
-      <button class="btn btn-primary btn-block" (click)="finish()">Finish</button>
+      <a [routerLink]="['/contract', ERC20TokenCrowdsaleDeployment, 'create']" [queryParams]="{ address: this.token.address }"
+        class="btn btn-primary btn-block mb-3">Create crowdsale</a>
+      <button class="btn btn-outline-primary btn-block" (click)="finish()">See token</button>
     </div>
 
   </div>

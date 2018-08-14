@@ -4,7 +4,7 @@ import { DetailedErc20Component as PrivateDetailedERC20Component } from '../../c
 @Component({
   selector: 'app-detailed-erc20',
   templateUrl: './detailed-erc20.component.html',
-  styleUrls: ['./detailed-erc20.component.css']
+  styleUrls: ['./detailed-erc20.component.scss']
 })
 
 export class DetailedErc20Component extends PrivateDetailedERC20Component {

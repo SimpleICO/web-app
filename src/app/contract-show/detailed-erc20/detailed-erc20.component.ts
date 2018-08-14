@@ -9,7 +9,7 @@ import { SimpleTokenContract } from '@contract/simpletoken.contract';
 @Component({
   selector: 'app-detailed-erc20',
   templateUrl: './detailed-erc20.component.html',
-  styleUrls: ['./detailed-erc20.component.css']
+  styleUrls: ['./detailed-erc20.component.scss']
 })
 export class DetailedErc20Component implements OnInit {
 
