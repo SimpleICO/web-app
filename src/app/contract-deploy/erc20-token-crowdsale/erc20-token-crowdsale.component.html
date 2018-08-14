@@ -83,7 +83,6 @@
 
     <h4>
       <i class="icon-loading2 spin" *ngIf="!steps.deployCrowdsale.isComplete || steps.deployCrowdsale.hasError"></i> Deploying your capped crowdsale</h4>
-    <p class="mb-2">* You can adjust the token price later.</p>
     <a class="mb-4 d-block" href="{{ eth.etherscanURL }}/address/{{ wallet.getAddress() }}" target="_blank">See transaction</a>
 
     <div *ngIf="steps.deployCrowdsale.hasError">
