@@ -121,7 +121,7 @@ export class DetailedErc20Component implements OnInit {
       this.steps.deployToken.hasError = true
       this.steps.deployToken.errorMessage = `Your token wasn't deployed but you didn't lose ETH funds.
         This may be caused by the network performance.
-        If the <a href="${this.eth.etherscanURL}/address/${this.wallet.getAddress()}">transaction</a> is still running, wait before you retry.`
+        If the <a href="${this.eth.etherscanURL}/address/${this.wallet.getAddress()}" target="_blank">transaction</a> is still running, wait before you retry.`
     }
   }
 

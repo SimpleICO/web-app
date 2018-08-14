@@ -1,9 +1,9 @@
 #scui-landing-page {
   @include container-size(xl);
   @include main;
+  background-color: $purple;
 
   @include full-width-header;
-  @include hero-overlay;
 
   .left-content,
   .img-wrapper {
@@ -30,5 +30,12 @@
       width: 100%;
     }
   }
+}
 
+@include media-breakpoint-down(sm) {
+  #scui-landing-page {
+    .img-wrapper {
+      display: none;
+    }
+  }
 }

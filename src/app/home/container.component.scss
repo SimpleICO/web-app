@@ -6,7 +6,6 @@
   background-color: $purple;
 
   #introduction {
-    @include hero-overlay;
     .left-content,
     .img-wrapper {
       @include flex-column-center;

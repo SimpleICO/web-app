@@ -64,7 +64,6 @@ const routes: Routes = [
   {
     path: 'public/contract/:contractAddress/show/:contractType',
     component: ContractShowPublicComponent,
-    canActivate: [AcceptTermsRouteGuard],
   },
   {
     path: 'contract/:contractType/index',
@@ -74,7 +73,6 @@ const routes: Routes = [
   {
     path: 'public/contract/:contractType/index',
     component: CrowdsaleIndexPublicComponent,
-    canActivate: [AcceptTermsRouteGuard],
   },
   {
     path: 'contract/:contractType/create',

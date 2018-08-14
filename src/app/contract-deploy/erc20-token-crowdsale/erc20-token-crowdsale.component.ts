@@ -208,7 +208,7 @@ export class Erc20TokenCrowdsaleComponent implements OnInit {
       this.steps.estimateTxCosts.estimates[0].txCost = tx1.ETH
 
       this.steps.estimateTxCosts.estimates.push({
-        text: 'Approve crowdsale to transfer the token percentage in your behalf',
+        text: 'Approve crowdsale to transfer the token percentage on your behalf',
         txCost: '...'
       })
       const tx2 = await this.deployer.estimateTokenTransferCost()

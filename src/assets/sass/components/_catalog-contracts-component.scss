@@ -6,6 +6,9 @@
     border-color: theme-color('primary');
     color: white;
   }
+  .card-header {
+    @include bold;
+  }
   .card-body {
     min-height: 120px;
   }
