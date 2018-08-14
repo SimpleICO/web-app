@@ -18,10 +18,13 @@ input[type="submit"].btn,
   text-transform: uppercase;
   font-size: $font-size-sm;
   letter-spacing: 0.8px;
-  color: white;
   i {
     font-size: $font-size-sm;
     font-weight: bold;
+  }
+  &.btn-primary,
+  &.btn-outline-primary {
+    color: white;
   }
 }
 

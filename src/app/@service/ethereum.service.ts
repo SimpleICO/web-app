@@ -20,7 +20,7 @@ export class EthereumService {
 
   ethPrice: string = '0.0'
 
-  defaultGasPrice: number = 7500000000
+  defaultGasPrice: number = 15000000000
 
   etherscanURL: string
 

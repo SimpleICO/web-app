@@ -89,11 +89,10 @@
     <div *ngIf="steps.deployCrowdsale.hasError">
       <p class="on-error" [innerHTML]="steps.deployCrowdsale.errorMessage | keepHtml"></p>
       <button class="btn btn-outline-primary btn-block" (click)="deployCrowdsale()">Retry</button>
-      <button class="btn btn-outline-primary btn-block">Go to token page</button>
     </div>
 
     <div *ngIf="steps.deployCrowdsale.isComplete">
-      <button class="btn btn-primary btn-block" (click)="approve()">Sign</button>
+      <button class="btn btn-primary btn-block" (click)="approve()">Next</button>
       <a href="{{ eth.etherscanURL }}/address/{{ crowdsale.address }}" target="_blank" class="btn btn-outline-primary btn-block">See on etherscan</a>
     </div>
 
