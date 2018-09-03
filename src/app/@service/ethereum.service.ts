@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment as env } from '@environment/environment';
-import { WalletService } from '@service/wallet.service';
+import { WalletService } from 'scui-lib';
 import { Subject } from 'rxjs';
 import { Network } from '@model/network.model';
 

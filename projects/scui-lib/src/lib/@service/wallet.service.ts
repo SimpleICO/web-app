@@ -16,6 +16,8 @@ export class WalletService {
 
   network: string
 
+  onNewWallet: Subject<Wallet> = new Subject<Wallet>()
+
   onUnlockError: Subject<any> = new Subject<any>()
   onUnlockSuccess: Subject<any> = new Subject<any>()
 
@@ -43,6 +45,13 @@ export class WalletService {
     this.wallet = new Wallet()
     this.wallet.setLockedInstance()
     return this
+  }
+
+  generateWallet() {
+    const wallet = new Wallet()
+    const result = wallet.createRandom()
+    this.onNewWallet.next(result)
+    return result
   }
 
   setProviderByNetwork(network: string = Network.mainnet) {

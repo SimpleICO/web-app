@@ -4,7 +4,7 @@ import { ERC20TokenCrowdsaleDeployment } from '@factory/token-crowdsale.deployme
 import { ContractDeploymentFactory } from '@factory/contract-deployment.factory';
 import { Crowdsale } from '@model/crowdsale.model';
 import { Token } from '@model/token.model';
-import { WalletService } from '@service/wallet.service';
+import { WalletService } from 'scui-lib';
 import { EthereumService } from '@service/ethereum.service';
 import { SharedService } from '@service/shared.service';
 import { Router } from '@angular/router';

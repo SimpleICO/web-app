@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { WalletService } from '@service/wallet.service';
+import { WalletService } from 'scui-lib';
 import { EthereumService } from '@service/ethereum.service';
 import { Network } from '@model/network.model';
 import { Subject } from 'rxjs';

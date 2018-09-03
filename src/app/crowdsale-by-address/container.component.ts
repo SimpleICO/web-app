@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SimpleICOContract } from '@contract/simpleico.contract';
-import { WalletService } from '@service/wallet.service';
+import { WalletService } from 'scui-lib';
 import { SettingsService } from '@service/settings.service';
 import { SimpleCrowdsaleContract } from '@contract/simplecrowdsale.contract';
 

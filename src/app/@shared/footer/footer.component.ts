@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { WalletService } from '@service/wallet.service';
+import { WalletService } from 'scui-lib';
 import { SettingsService } from '@service/settings.service';
 import { Network } from '@model/network.model';
 

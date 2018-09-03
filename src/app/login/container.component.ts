@@ -28,7 +28,6 @@ export class ContainerComponent implements OnInit {
     })
 
     wallet.onUnlockSuccess.subscribe(data => {
-      console.log(this.wallet.getInstance())
       this.isInvalid = false
       this.errorMessage = ''
       this.wallet.getAccountBalance().then(balance => {

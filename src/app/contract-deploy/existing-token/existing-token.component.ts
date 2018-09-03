@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ContractDeploymentFactory } from '@factory/contract-deployment.factory';
 import { ContractDeployment } from '@factory/contract-deployment';
 import { InsufficientFundsError } from '@error/insufficient-funds.error';
-import { WalletService } from '@service/wallet.service';
+import { WalletService } from 'scui-lib';
 import { EthereumService } from '@service/ethereum.service';
 import { SharedService } from '@service/shared.service';
 import { Router } from '@angular/router';

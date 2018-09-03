@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { WalletService } from '@service/wallet.service';
+import { WalletService } from 'scui-lib';
 import { SharedService } from '@service/shared.service';
 import { EthereumService } from '@service/ethereum.service';
 
