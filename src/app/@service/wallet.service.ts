@@ -4,13 +4,11 @@ import { Wallet } from '@model/wallet.model';
 import { Network } from '@model/network.model';
 import { Router } from '@angular/router';
 import { ErrorTrackingService } from '@service/error-tracking.service';
-import { environment as env } from '@environment/environment';
 
 declare var require: any
 
 const Eth = require('ethers')
 const Web3 = require('web3')
-const Providers = Eth.providers
 
 @Injectable({
   providedIn: 'root'

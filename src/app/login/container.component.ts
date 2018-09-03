@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { WalletService } from '@service/wallet.service';
+import { WalletService } from 'scui-lib';
 import { EthereumService } from '@service/ethereum.service';
 import { Router } from '@angular/router';
 
@@ -28,6 +28,7 @@ export class ContainerComponent implements OnInit {
     })
 
     wallet.onUnlockSuccess.subscribe(data => {
+      console.log(this.wallet.getInstance())
       this.isInvalid = false
       this.errorMessage = ''
       this.wallet.getAccountBalance().then(balance => {

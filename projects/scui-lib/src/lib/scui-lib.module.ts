@@ -3,7 +3,7 @@ import { WalletService } from './@service/wallet.service';
 import { Network } from './@model/network.model';
 import merge from 'deepmerge';
 
-let config$ = {
+const config$ = {
   network: Network.mainnet,
   wallet: {
     networks: {}
@@ -25,7 +25,7 @@ export const Config = config$
 
 export class SCUILibModule {
   static forRoot(_config: any): ModuleWithProviders {
-    let config = merge(Config, _config)
+    const config = merge(Config, _config)
     return {
       ngModule: SCUILibModule,
       providers: [{ provide: 'config', useValue: config }]

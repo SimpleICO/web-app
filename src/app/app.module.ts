@@ -51,7 +51,7 @@ import { SCUILibModule, Network } from 'scui-lib';
     WalletModule,
     SettingsModule,
     ScuiLandingPageModule,
-    HackatonModule
+    HackatonModule,
     SCUILibModule.forRoot({
       network: Network.testnet
     }),

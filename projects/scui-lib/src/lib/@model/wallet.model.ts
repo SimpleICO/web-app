@@ -1,5 +1,3 @@
-declare var require: any
-
 const ethers = require('ethers')
 const Web3 = require('web3')
 const $wallet = ethers.Wallet
@@ -22,56 +20,39 @@ export class Wallet {
 
   network: string
 
-  constructor(){}
+  constructor() { }
 
-  getBalance(){
+  getBalance() {
     return this.web3.eth.getBalance(this.address)
   }
 
-  setNetwork(network: string){
+  setNetwork(network: string) {
     this.network = network
 
     return this
   }
 
-  setBeneficiary(address: string){
+  setBeneficiary(address: string) {
     this.beneficiary = address
 
     return this
   }
 
-  setJsonRpcProvider(network: string){
-    let provider = new Web3.providers.HttpProvider(network)
+  setProvider(provider) {
     this.provider = provider
     this.instance.provider = provider
     this.web3 = new Web3(provider)
     return this
   }
 
-  setRopstenProvider(network: string){
-    let provider = new Web3.providers.HttpProvider(network)
-    this.provider = provider
-    this.instance.provider = provider
-    this.web3 = new Web3(provider)
-    return this
-  }
-
-  setMainnetProvider(network: string){
-    let provider = new Web3.providers.HttpProvider(network)
-    this.provider = provider
-    this.instance.provider = provider
-    this.web3 = new Web3(provider)
-    return this
-  }
-
-  setLockedInstance(){
+  setLockedInstance() {
     this.instance = $wallet
     return this
   }
 
-  unlockFromMnemonic(mnemonic: string){
+  unlockFromMnemonic(mnemonic: string) {
     try {
-      let wallet = $wallet.fromMnemonic(mnemonic)
+      const wallet = $wallet.fromMnemonic(mnemonic)
       this.instance = wallet
       this.mnemonic = mnemonic
       this.privateKey = wallet.privateKey
@@ -83,9 +64,9 @@ export class Wallet {
     }
   }
 
-  unlockFromPrivateKey(privateKey: string){
+  unlockFromPrivateKey(privateKey: string) {
     try {
-      let wallet = new $wallet(privateKey)
+      const wallet = new $wallet(privateKey)
       this.instance = wallet
       this.privateKey = wallet.privateKey
       this.address = wallet.address
@@ -96,7 +77,7 @@ export class Wallet {
     }
   }
 
-  createRandom(){
+  createRandom() {
     return $wallet.createRandom()
   }
 }
