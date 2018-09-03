@@ -34,7 +34,7 @@ export class WalletService {
 
     this.setEmptyWallet()
     this.setNetwork(config.network)
-    this.setProviderByNetwork(config.network)
+    this.setProviderByNetwork()
   }
 
   setNetwork(network: string = Network.mainnet) {
@@ -56,8 +56,8 @@ export class WalletService {
     return result
   }
 
-  setProviderByNetwork(network: string = Network.mainnet) {
-    const networkURL = this.config.wallet.networks[network]
+  setProviderByNetwork() {
+    const networkURL = this.config.wallet.networks[this.network]
     this.wallet.setProvider(new Web3.providers.HttpProvider(networkURL))
     return this
   }
@@ -131,7 +131,6 @@ export class WalletService {
 
   private _afterUnlockSuccess() {
     this.isLocked = false
-    this.setNetwork()
     this.setProviderByNetwork()
     this.onUnlockSuccess.next(true)
   }

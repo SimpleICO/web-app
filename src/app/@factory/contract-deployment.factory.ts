@@ -27,9 +27,6 @@ export class ContractDeploymentFactory {
   constructor(
     private wallet: WalletService,
     private eth: EthereumService) {
-
-    this.registerContractDeployment(DetailedERC20Deployment._type, DetailedERC20Deployment)
-    this.registerContractDeployment(ERC20TokenCrowdsaleDeployment._type, ERC20TokenCrowdsaleDeployment)
   }
 
   registerContractDeployment(type: string, deployment: ContractDeploymentInterface) {

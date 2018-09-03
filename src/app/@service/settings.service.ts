@@ -23,7 +23,7 @@ export class SettingsService {
   setNetwork(network: string = Network.mainnet) {
 
     this.wallet.setNetwork(network)
-    this.wallet.setProviderByNetwork(network)
+    this.wallet.setProviderByNetwork()
     this.eth.setEtherScanURLByNetwork()
 
     if (this.wallet.isUnlocked()) {

@@ -14,7 +14,9 @@ export class FooterComponent implements OnInit {
 
   constructor(
     public wallet: WalletService,
-    public settings: SettingsService) { }
+    public settings: SettingsService) {
+    this.currentNetwork = Number(this.settings.networks.indexOf(this.wallet.network))
+  }
 
   ngOnInit() {
   }
