@@ -1,5 +1,5 @@
 import { Token } from '@model/token.model';
-import { Wallet } from '@model/wallet.model';
+import { Wallet } from 'scui-lib';
 
 declare var require: any
 

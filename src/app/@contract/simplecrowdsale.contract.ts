@@ -1,5 +1,5 @@
 import { Crowdsale } from '@model/crowdsale.model';
-import { Wallet } from '@model/wallet.model';
+import { Wallet } from 'scui-lib';
 import { SimpleTokenContract } from '@contract/simpletoken.contract';
 
 declare var require: any

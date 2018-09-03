@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Wallet } from '@model/wallet.model';
+import { Wallet } from 'scui-lib';
 import { Network } from '@model/network.model';
 import { Router } from '@angular/router';
 import { ErrorTrackingService } from '@service/error-tracking.service';
@@ -125,15 +125,7 @@ export class WalletService {
   }
 
   setProviderByNetwork(network: string = Network.mainnet) {
-
-
-    const providerSetters = {}
-    providerSetters[Network.mainnet] = this.wallet.setMainnetProvider
-    providerSetters[Network.testnet] = this.wallet.setRopstenProvider
-    providerSetters[Network.private] = this.wallet.setJsonRpcProvider
-
-    providerSetters[network].call(this.wallet)
-
+    this.wallet.setProvider(new Web3.providers.HttpProvider(network))
     return this
   }
 

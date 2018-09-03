@@ -21,6 +21,8 @@ export class WalletService {
   onUnlockError: Subject<any> = new Subject<any>()
   onUnlockSuccess: Subject<any> = new Subject<any>()
 
+  onLockSuccess: Subject<any> = new Subject<any>()
+
   isLocked: boolean = true
 
   balance = Eth.BigNumber
@@ -101,6 +103,7 @@ export class WalletService {
 
   lock() {
     this.wallet = null
+    this.onLockSuccess.next(true)
     return this
   }
 

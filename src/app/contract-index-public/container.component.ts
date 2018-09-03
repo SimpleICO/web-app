@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { WalletService } from 'scui-lib';
-import { Wallet } from '@model/wallet.model';
+import { Wallet } from 'scui-lib';
 import { SimpleICOContract } from '@contract/simpleico.contract';
 
 import { FixedSupplyDeployment } from '@factory/fixed-supply.deployment';

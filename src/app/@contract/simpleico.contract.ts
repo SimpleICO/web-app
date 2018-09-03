@@ -1,7 +1,6 @@
 import { SimpleICO } from '@model/simpleico.model';
-import { Wallet } from '@model/wallet.model';
+import { Wallet } from 'scui-lib';
 import { Network } from '@model/network.model';
-import { environment as env } from '@environment/environment';
 
 declare var require: any
 

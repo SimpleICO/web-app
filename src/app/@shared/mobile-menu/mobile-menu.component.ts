@@ -1,20 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { SharedService } from '@service/shared.service';
 import { WalletService } from 'scui-lib';
 import { EthereumService } from '@service/ethereum.service';
 
 import { FixedSupplyDeployment } from '@factory/fixed-supply.deployment';
 import { ExistingTokenDeployment } from '@factory/existing-token.deployment';
+import { Router } from '@angular/router';
 
 declare var document: any
-declare var require: any
 
 @Component({
   selector: 'app-mobile-menu',
   templateUrl: './mobile-menu.component.html',
   styleUrls: ['./mobile-menu.component.css']
 })
-export class MobileMenuComponent implements OnInit {
+export class MobileMenuComponent implements OnInit, AfterViewInit {
 
   display: boolean = false
 
@@ -24,15 +24,18 @@ export class MobileMenuComponent implements OnInit {
   constructor(
     public shared: SharedService,
     public eth: EthereumService,
+    public router: Router,
     public wallet: WalletService) {
+
+    wallet.onLockSuccess.subscribe(isLocked => {
+      router.navigate(['/login'])
+    })
   }
 
   ngOnInit() {
   }
 
   ngAfterViewInit() {
-    let self = this
-
     document.querySelectorAll('#mobile-menu a').forEach(anchor => {
       anchor.onclick = (e) => {
         this.shared.toggleMobileMenu()

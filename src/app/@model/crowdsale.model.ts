@@ -1,4 +1,4 @@
-import { Wallet } from '@model/wallet.model';
+import { Wallet } from 'scui-lib';
 import { Network } from '@model/network.model';
 import { SimpleTokenContract } from '@contract/simpletoken.contract';
 

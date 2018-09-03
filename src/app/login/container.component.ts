@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { WalletService } from 'scui-lib';
 import { EthereumService } from '@service/ethereum.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-container',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./container.component.css']
 })
 
-export class ContainerComponent implements OnInit {
+export class ContainerComponent implements OnInit, OnDestroy {
 
   errorMessage: string
 
@@ -17,17 +18,20 @@ export class ContainerComponent implements OnInit {
 
   @Input() seed: string
 
+  onUnlockError: Subscription
+  onUnlockSuccess: Subscription
+
   constructor(
     public wallet: WalletService,
     public eth: EthereumService,
     private router: Router) {
 
-    wallet.onUnlockError.subscribe(error => {
+    this.onUnlockError = wallet.onUnlockError.subscribe(error => {
       this.isInvalid = true
       this.errorMessage = error.message
     })
 
-    wallet.onUnlockSuccess.subscribe(data => {
+    this.onUnlockSuccess = wallet.onUnlockSuccess.subscribe(data => {
       this.isInvalid = false
       this.errorMessage = ''
       this.wallet.getAccountBalance().then(balance => {
@@ -39,6 +43,11 @@ export class ContainerComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ngOnDestroy() {
+    this.onUnlockError.unsubscribe()
+    this.onUnlockSuccess.unsubscribe()
   }
 
 }
