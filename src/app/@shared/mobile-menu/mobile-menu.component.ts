@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { SharedService } from '@service/shared.service';
 import { WalletService } from 'scui-lib';
-import { EthereumService } from '@service/ethereum.service';
+import { EthereumService } from 'scui-lib';
 
 import { FixedSupplyDeployment } from '@factory/fixed-supply.deployment';
 import { ExistingTokenDeployment } from '@factory/existing-token.deployment';

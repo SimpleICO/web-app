@@ -2,7 +2,7 @@ import { ContractDeployment, ContractDeploymentInterface } from '@factory/contra
 import { SimpleTokenContract } from '@contract/simpletoken.contract';
 import { OwnedCrowdsaleContract } from '@contract/owned-crowdsale.contract';
 import { Wallet } from 'scui-lib';
-import { EthereumService } from '@service/ethereum.service';
+import { EthereumService } from 'scui-lib';
 
 declare var require: any
 

@@ -4,7 +4,7 @@ import { ContractDeployment } from '@factory/contract-deployment';
 import { Router } from '@angular/router';
 import { Crowdsale } from '@model/crowdsale.model';
 import { Token } from '@model/token.model';
-import { EthereumService } from '@service/ethereum.service';
+import { EthereumService } from 'scui-lib';
 
 import { ExistingTokenDeployment } from '@factory/existing-token.deployment';
 

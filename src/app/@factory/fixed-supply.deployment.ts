@@ -3,7 +3,7 @@ import { SimpleTokenContract } from '@contract/simpletoken.contract';
 import { SimpleCrowdsaleContract } from '@contract/simplecrowdsale.contract';
 import { Wallet } from 'scui-lib';
 import { SimpleICOContract } from '@contract/simpleico.contract';
-import { EthereumService } from '@service/ethereum.service';
+import { EthereumService } from 'scui-lib';
 import { Subject } from 'rxjs';
 
 declare var require: any

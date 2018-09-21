@@ -3,7 +3,7 @@ import { ContractDeploymentFactory } from '@factory/contract-deployment.factory'
 import { ContractDeployment } from '@factory/contract-deployment';
 import { Router } from '@angular/router';
 import { Token } from '@model/token.model';
-import { EthereumService } from '@service/ethereum.service';
+import { EthereumService } from 'scui-lib';
 
 @Component({
   selector: 'app-detailed-erc20',

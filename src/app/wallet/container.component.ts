@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WalletService } from 'scui-lib';
 import { SharedService } from '@service/shared.service';
-import { EthereumService } from '@service/ethereum.service';
+import { EthereumService } from 'scui-lib';
 
 @Component({
   selector: 'app-container',

@@ -1,6 +1,6 @@
 import { Wallet } from 'scui-lib';
 import { SimpleICO } from '@model/simpleico.model';
-import { EthereumService } from '@service/ethereum.service';
+import { EthereumService } from 'scui-lib';
 import { Crowdsale } from '@model/crowdsale.model';
 import { Token } from '@model/token.model';
 import { SimpleICOContract } from '@contract/simpleico.contract';

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { WalletService } from 'scui-lib';
-import { EthereumService } from '@service/ethereum.service';
+import { EthereumService } from 'scui-lib';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 

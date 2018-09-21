@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { WalletService } from 'scui-lib';
-import { EthereumService } from '@service/ethereum.service';
+import { EthereumService } from 'scui-lib';
 import { DeploymentClassExistsError } from '@error/deployment-class-exists.error';
 
 import { ContractDeployment, ContractDeploymentInterface } from '@factory/contract-deployment';

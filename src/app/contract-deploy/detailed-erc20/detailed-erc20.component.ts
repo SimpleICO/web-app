@@ -3,7 +3,7 @@ import { ContractDeploymentFactory } from '@factory/contract-deployment.factory'
 import { ContractDeployment } from '@factory/contract-deployment';
 import { InsufficientFundsError } from '@error/insufficient-funds.error';
 import { WalletService } from 'scui-lib';
-import { EthereumService } from '@service/ethereum.service';
+import { EthereumService } from 'scui-lib';
 import { SharedService } from '@service/shared.service';
 import { Router } from '@angular/router';
 import { Token } from '@model/token.model';

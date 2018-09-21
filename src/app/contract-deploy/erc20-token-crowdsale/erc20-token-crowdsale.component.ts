@@ -5,7 +5,7 @@ import { ContractDeploymentFactory } from '@factory/contract-deployment.factory'
 import { Crowdsale } from '@model/crowdsale.model';
 import { Token } from '@model/token.model';
 import { WalletService } from 'scui-lib';
-import { EthereumService } from '@service/ethereum.service';
+import { EthereumService } from 'scui-lib';
 import { SharedService } from '@service/shared.service';
 import { Router } from '@angular/router';
 import { InsufficientFundsError } from '@error/insufficient-funds.error';

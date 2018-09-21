@@ -31,6 +31,8 @@ export class SimpleICOContract extends SimpleICO {
 
   setContractAddressByNetwork() {
 
+    console.log(this.wallet)
+
     const addresses = {}
     addresses[Network.mainnet] = SimpleICOContract.MAINNET
     addresses[Network.testnet] = SimpleICOContract.TESTNET
