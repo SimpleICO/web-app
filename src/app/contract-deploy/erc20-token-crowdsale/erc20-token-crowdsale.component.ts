@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ContractDeployment } from '@factory/contract-deployment';
 import { ERC20TokenCrowdsaleDeployment } from '@factory/token-crowdsale.deployment';
-import { ContractDeploymentFactory } from '@factory/contract-deployment.factory';
+import { ContractDeploymentFactory } from 'scui-lib';
 import { Crowdsale } from '@model/crowdsale.model';
 import { Token } from '@model/token.model';
 import { WalletService } from 'scui-lib';

@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ContractDeploymentFactory } from '@factory/contract-deployment.factory';
-import { ContractDeployment } from '@factory/contract-deployment';
+import { ContractDeploymentFactory } from 'scui-lib';
 import { Router } from '@angular/router';
 import { Token } from '@model/token.model';
 import { EthereumService } from 'scui-lib';
@@ -12,7 +11,7 @@ import { EthereumService } from 'scui-lib';
 })
 export class DetailedErc20Component implements OnInit {
 
-  deployer: ContractDeployment
+  deployer: any
 
   @Input() token: Token
 

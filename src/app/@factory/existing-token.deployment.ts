@@ -1,4 +1,5 @@
-import { ContractDeployment, ContractDeploymentInterface } from '@factory/contract-deployment';
+import { ContractDeploymentInterface } from 'scui-lib';
+import { ContractDeployment } from '@factory/contract-deployment';
 import { SimpleTokenContract } from '@contract/simpletoken.contract';
 import { SimpleCrowdsaleContract } from '@contract/simplecrowdsale.contract';
 import { Wallet } from 'scui-lib';
@@ -8,9 +9,7 @@ declare var require: any
 
 const Web3 = require('web3')
 
-export class ExistingTokenDeployment
-  extends ContractDeployment
-  implements ContractDeploymentInterface {
+export class ExistingTokenDeployment extends ContractDeployment {
 
   static readonly _type: string = 'existing-token'
 

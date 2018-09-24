@@ -1,33 +1,27 @@
 import { Wallet } from 'scui-lib';
-import { SimpleICO } from '@model/simpleico.model';
 import { EthereumService } from 'scui-lib';
+import { ContractDeployment as SCUIContractDeployment } from 'scui-lib';
+import { SimpleICO } from '@model/simpleico.model';
 import { Crowdsale } from '@model/crowdsale.model';
 import { Token } from '@model/token.model';
 import { SimpleICOContract } from '@contract/simpleico.contract';
 
 declare var require: any
 
-const ethers = require('ethers')
 const Web3 = require('web3')
 
-export interface ContractDeploymentInterface { }
-
-export abstract class ContractDeployment {
+export abstract class ContractDeployment extends SCUIContractDeployment {
 
   static readonly CONTRACT_DUMMY_ADDRESS: string = '0x523a34E0A5FABDFaa39B3889D80b19Fe77F73aA6'
   static readonly DUMMY_ADDRESS: string = '0x7af6C0ce41aFaf675e5430193066a8d57701A9AC'
 
-  wallet: Wallet
-
-  eth: EthereumService
+  abstract type: string
 
   token: Token
 
   crowdsale: Crowdsale
 
   simpleICO: SimpleICO
-
-  abstract type: string
 
   txCost: any
 
@@ -36,8 +30,7 @@ export abstract class ContractDeployment {
   gasIncrement: number = 1000
 
   constructor(wallet: Wallet, eth: EthereumService) {
-    this.wallet = wallet
-    this.eth = eth
+    super(wallet, eth)
   }
 
   createToken?()
@@ -121,18 +114,6 @@ export abstract class ContractDeployment {
   createSimpleICO() {
     this.simpleICO = new SimpleICOContract(this.wallet)
     this.simpleICO.connect()
-  }
-
-  async getTxCost() {
-    const txCost = await this.eth.getTxCost(0)
-    this.txCost = txCost
-  }
-
-  sumTxCost(txCost) {
-    this.txCost.cost = this.txCost.cost.add(txCost.cost)
-    this.txCost.ETH = ethers.utils.formatEther(this.txCost.cost.toString())
-    this.txCost.WEI = ethers.utils.parseEther(this.txCost.ETH)
-    this.txCost.USD = (Number(this.txCost.USD) + Number(txCost.USD)).toFixed(2).toString()
   }
 
   async addCrowdsaleToSimpleICOContract() {

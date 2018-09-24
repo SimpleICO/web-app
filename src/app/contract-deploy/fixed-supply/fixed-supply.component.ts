@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ContractDeploymentFactory } from '@factory/contract-deployment.factory';
+import { ContractDeploymentFactory } from 'scui-lib';
 import { ContractDeployment } from '@factory/contract-deployment';
 import { InsufficientFundsError } from '@error/insufficient-funds.error';
 import { WalletService } from 'scui-lib';
@@ -19,7 +19,7 @@ const Web3 = require('web3')
 })
 export class FixedSupplyComponent implements OnInit {
 
-  deployer: ContractDeployment
+  deployer: any
 
   token: Token
 
@@ -144,7 +144,8 @@ export class FixedSupplyComponent implements OnInit {
       this.steps.deployToken.hasError = true
       this.steps.deployToken.errorMessage = `Your token wasn't deployed but you didn't lose ETH funds.
         This may be caused by the network performance.
-        If the <a href="${this.eth.etherscanURL}/address/${this.wallet.getAddress()}">transaction</a> is still running, wait before you retry.`
+        If the <a href="${this.eth.etherscanURL}/address/${this.wallet.getAddress()}">transaction</a>
+        is still running, wait before you retry.`
     }
   }
 
@@ -160,7 +161,8 @@ export class FixedSupplyComponent implements OnInit {
     } catch (error) {
       console.log(error)
       this.steps.deployCrowdsale.hasError = true
-      this.steps.deployCrowdsale.errorMessage = `Your crowdsale wasn't deployed but you didn't lose ETH funds. Retry this deployment or go to your token page`
+      this.steps.deployCrowdsale.errorMessage = `Your crowdsale wasn't deployed but you didn't lose ETH funds.
+        Retry this deployment or go to your token page`
     }
   }
 

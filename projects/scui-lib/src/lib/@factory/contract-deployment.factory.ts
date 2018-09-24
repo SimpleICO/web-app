@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { WalletService } from 'scui-lib';
-import { EthereumService } from 'scui-lib';
-import { DeploymentClassExistsError } from '@error/deployment-class-exists.error';
-
-import { ContractDeployment, ContractDeploymentInterface } from '@factory/contract-deployment';
+import { WalletService } from '../@service/wallet.service';
+import { EthereumService } from '../@service/ethereum.service';
+import { DeploymentClassExistsError } from '../@error/deployment-class-exists.error';
 
 export interface Deployment {
-  [key: string]: ContractDeploymentInterface
+  [key: string]: any
 }
 
 @Injectable({
@@ -16,7 +14,7 @@ export class ContractDeploymentFactory {
 
   contractType: string
 
-  deployer: ContractDeployment
+  deployer: any
 
   deployment: Deployment = {}
 
@@ -25,32 +23,24 @@ export class ContractDeploymentFactory {
     private eth: EthereumService) {
   }
 
-  registerContractDeployment(type: string, deployment: ContractDeploymentInterface) {
-
+  registerContractDeployment(type: string, deployment) {
     const deploymentExists = this.deployment[type] !== undefined;
     if (deploymentExists) {
       throw new DeploymentClassExistsError(`Contract deployment ${type} has already been used`)
     }
-
     this.deployment[type] = deployment
-
     return this
   }
 
   /**
-   *
-   * @param {string} contractType [description]
+   * init
+   * @param contractType [description]
    * @return ContractDeploymentInterface
    */
-  init(contractType: string): ContractDeployment {
-
+  init(contractType: string) {
     const deployment: any = this.deployment[contractType]
-
     const deployer = new deployment(this.wallet.getInstance(), this.eth)
-
     this.deployer = deployer
-
     return deployer
   }
-
 }

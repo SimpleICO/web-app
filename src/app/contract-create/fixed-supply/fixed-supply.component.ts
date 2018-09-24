@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ContractDeploymentFactory } from '@factory/contract-deployment.factory';
-import { ContractDeployment } from '@factory/contract-deployment';
+import { ContractDeploymentFactory } from 'scui-lib';
 import { Router } from '@angular/router';
 import { Crowdsale } from '@model/crowdsale.model';
 import { Token } from '@model/token.model';
@@ -21,7 +20,7 @@ export class FixedSupplyComponent implements OnInit {
 
   ExistingTokenDeployment: string = ExistingTokenDeployment._type
 
-  deployer: ContractDeployment
+  deployer: any
 
   @Input() token: Token
 

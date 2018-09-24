@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ContractDeploymentFactory } from '@factory/contract-deployment.factory';
-import { ContractDeployment } from '@factory/contract-deployment';
+import { ContractDeploymentFactory } from 'scui-lib';
 import { InsufficientFundsError } from '@error/insufficient-funds.error';
 import { WalletService } from 'scui-lib';
 import { EthereumService } from 'scui-lib';
@@ -20,7 +19,7 @@ const Web3 = require('web3')
 })
 export class ExistingTokenComponent implements OnInit {
 
-  deployer: ContractDeployment
+  deployer: any
 
   token: Token
 
@@ -130,8 +129,10 @@ export class ExistingTokenComponent implements OnInit {
 
     } catch (error) {
       console.log(error)
+      const url = `${this.eth.etherscanURL}/token/${this.token.address}`
       this.steps.tokenInfo.errorMessage = `You have insufficient percentage of the
-        <a href="${this.eth.etherscanURL}/token/${this.token.address}" target="_blank" class="text-truncate d-inline-block" style="width: 98px; margin-bottom: -6px;">${this.token.address}</a> token`
+        <a href="${url}" target="_blank"
+        class="text-truncate d-inline-block" style="width: 98px; margin-bottom: -6px;">${this.token.address}</a> token`
       this.steps.tokenInfo.hasError = true
       this.steps.tokenInfo.isComplete = false
     }
@@ -162,7 +163,8 @@ export class ExistingTokenComponent implements OnInit {
       console.log(error)
       this.steps.deployCrowdsale.hasError = true
       this.steps.deployCrowdsale.isComplete = false
-      this.steps.deployCrowdsale.errorMessage = `Your crowdsale wasn't deployed but you didn't lose ETH funds. Retry this deployment or go to your token page`
+      this.steps.deployCrowdsale.errorMessage = `Your crowdsale wasn't deployed but you didn't lose ETH funds.
+        Retry this deployment or go to your token page`
     }
   }
 

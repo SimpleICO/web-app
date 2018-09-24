@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ContractDeploymentFactory } from '@factory/contract-deployment.factory';
+import { ContractDeploymentFactory } from 'scui-lib';
 import { ERC20TokenCrowdsaleDeployment } from '@factory/token-crowdsale.deployment';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Crowdsale } from '@model/crowdsale.model';
@@ -104,7 +104,8 @@ export class Erc20TokenCrowdsaleComponent implements OnInit {
       }
 
       this.isInvalid = true
-      this.errorMessage = `The token contract address does not exist in the ${this.deployer.wallet.network} or the address is an invalid ERC20 contract`
+      this.errorMessage = `The token contract address does not exist in the ${this.deployer.wallet.network}
+        or the address is an invalid ERC20 contract`
     }
   }
 

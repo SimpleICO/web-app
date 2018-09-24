@@ -1,4 +1,4 @@
-import { ContractDeployment, ContractDeploymentInterface } from '@factory/contract-deployment';
+import { ContractDeployment } from '@factory/contract-deployment';
 import { SimpleTokenContract } from '@contract/simpletoken.contract';
 import { Wallet } from 'scui-lib';
 import { EthereumService } from 'scui-lib';
@@ -7,9 +7,7 @@ declare var require: any
 
 const Web3 = require('web3')
 
-export class DetailedERC20Deployment
-  extends ContractDeployment
-  implements ContractDeploymentInterface {
+export class DetailedERC20Deployment extends ContractDeployment {
 
   static readonly _type: string = 'detailed-erc20'
 
@@ -17,7 +15,6 @@ export class DetailedERC20Deployment
 
   constructor(wallet: Wallet, eth: EthereumService) {
     super(wallet, eth)
-
     this.type = DetailedERC20Deployment._type
   }
 
