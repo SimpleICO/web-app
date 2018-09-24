@@ -1,16 +1,17 @@
 <div class="container">
-  <fieldset class="form-group dark-theme">
-    <textarea autofocus="autofocus" class="form-control" placeholder="Paste your 12 word seed phrase" [(ngModel)]="seed"></textarea>
+  <fieldset class="form-group unlock-input">
+    <input autofocus="autofocus" class="form-control" type="password" placeholder="Paste your 12 word seed phrase"
+      [(ngModel)]="seed">
   </fieldset>
-  <button class="btn btn-primary btn-lg btn-block" (click)="wallet.unlock(seed)">Unlock my wallet</button>
+  <button class="btn btn-primary btn-lg btn-block unlock-button" (click)="wallet.unlock(seed)">Unlock my wallet</button>
   <p *ngIf="isInvalid" class="on-error">{{ errorMessage }}</p>
 
-  <div class="text-center text-white mt-3">
+  <div class="text-center text-white mt-3 new-wallet">
     <small class="d-block">Don't have a wallet?</small>
     <a [routerLink]="['/new-wallet']">Create new wallet</a>
   </div>
 
-  <div class="text-center text-white mt-4">
+  <div class="text-center text-white mt-4 wallet-version">
     <small>Beta release {{ wallet.version }}
       <br>Ethereum {{ wallet.network }}</small>
   </div>

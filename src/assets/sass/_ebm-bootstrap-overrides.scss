@@ -28,21 +28,6 @@ input[type="submit"].btn,
   }
 }
 
-@mixin input-dark-theme {
-  border: 1px solid darken($purple, 14%);
-  background-color: darken($purple, 7%);
-  color: white;
-  &:focus {
-    background-color: darken($purple, 14%);
-  }
-  &:placeholder {
-    color: $gray-300;
-  }
-  &:disabled {
-    background-color: darken($purple, 14%);
-  }
-}
-
 .form-group {
   &.dark-theme {
     .form-control {

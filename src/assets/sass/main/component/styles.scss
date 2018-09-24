@@ -59,7 +59,6 @@
 }
 
 @import "sass/components/header-component";
-@import "sass/components/login-component";
 @import "sass/components/new-wallet-component";
 @import "sass/components/token-index-component";
 @import "sass/components/token-new-component";
@@ -251,6 +250,14 @@
   img {
     height: auto;
     width: 100%;
+  }
+}
+
+#login-component {
+  .unlock-input {
+    .form-control {
+      @include input-dark-theme;
+    }
   }
 }
 
