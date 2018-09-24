@@ -2,8 +2,6 @@ import { Wallet } from 'scui-lib';
 
 declare var require: any
 
-const contract = require('truffle-contract')
-
 export abstract class SimpleICO {
 
   instance: any

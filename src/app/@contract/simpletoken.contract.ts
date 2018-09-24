@@ -3,8 +3,6 @@ import { Wallet } from 'scui-lib';
 
 declare var require: any
 
-const ethers = require('ethers')
-
 const SimpleTokenInterface = require('@abi/simpletoken.abi.json')
 
 export class SimpleTokenContract extends Token {

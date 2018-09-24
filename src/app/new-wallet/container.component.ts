@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { WalletService } from 'scui-lib';
 import { Router } from '@angular/router';
 
@@ -12,7 +12,7 @@ const clipboard = require('clipboard')
   styleUrls: ['./container.component.css']
 })
 
-export class ContainerComponent implements OnInit {
+export class ContainerComponent implements OnInit, AfterViewInit {
 
   address: string
   privateKey: string

@@ -4,8 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { FixedSupplyDeployment } from '@factory/fixed-supply.deployment';
 import { ExistingTokenDeployment } from '@factory/existing-token.deployment';
 
-declare var require: any
-
 @Component({
   selector: 'app-container',
   templateUrl: './container.component.html',

@@ -23,7 +23,6 @@ import { CatalogModule } from './catalog/catalog.module';
 import { WalletModule } from './wallet/wallet.module';
 import { SettingsModule } from './settings/settings.module';
 import { ScuiLandingPageModule } from './scui-landing-page/scui-landing-page.module';
-import { HackatonModule } from './hackaton/hackaton.module';
 
 import { SCUILibModule, Network } from 'scui-lib';
 
@@ -51,7 +50,6 @@ import { SCUILibModule, Network } from 'scui-lib';
     WalletModule,
     SettingsModule,
     ScuiLandingPageModule,
-    HackatonModule,
     SCUILibModule.forRoot({
       network: Network.testnet
     }),

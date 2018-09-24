@@ -4,10 +4,6 @@ import { EthereumService } from 'scui-lib';
 import { DeploymentClassExistsError } from '@error/deployment-class-exists.error';
 
 import { ContractDeployment, ContractDeploymentInterface } from '@factory/contract-deployment';
-import { FixedSupplyDeployment } from '@factory/fixed-supply.deployment';
-import { ExistingTokenDeployment } from '@factory/existing-token.deployment';
-import { DetailedERC20Deployment } from '@factory/detailed-erc20.deployment';
-import { ERC20TokenCrowdsaleDeployment } from '@factory/token-crowdsale.deployment';
 
 export interface Deployment {
   [key: string]: ContractDeploymentInterface

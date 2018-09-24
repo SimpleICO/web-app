@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { Erc20TokenCrowdsaleComponent as PrivateErc20TokenCrowdsaleComponent } from '../../contract-show/erc20-token-crowdsale/erc20-token-crowdsale.component';
-import { SimpleCrowdsaleContract } from '@contract/simplecrowdsale.contract';
-import { SimpleTokenContract } from '@contract/simpletoken.contract';
 
 @Component({
   selector: 'app-erc20-token-crowdsale',
