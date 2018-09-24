@@ -11,3 +11,4 @@ export * from './lib/@error/deployment-class-exists.error';
 export * from './lib/@deployment/contract.deployment';
 export * from './lib/scui-lib.module';
 export * from './lib/@shared/shared.module';
+export * from './lib/login/login.module';
