@@ -1,5 +1,4 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { WalletService } from './@service/wallet.service';
 import { Network } from './@model/network.model';
 import merge from 'deepmerge';
 

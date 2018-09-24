@@ -1,6 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-declare var require: any
 const ethers = require('ethers')
 
 @Pipe({ name: 'weiToEther', pure: false })

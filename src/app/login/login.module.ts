@@ -10,7 +10,7 @@ import { SharedModule } from '@shared/shared.module';
     CommonModule,
     AppRoutingModule,
     FormsModule,
-    SharedModule
+    SharedModule,
   ],
   declarations: [ContainerComponent]
 })
