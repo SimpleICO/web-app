@@ -55,12 +55,6 @@
       ],
       "scui-lib/*": [
         "../dist/scui-lib/*"
-      ],
-      "contract-widgets": [
-        "../dist/contract-widgets"
-      ],
-      "contract-widgets/*": [
-        "../dist/contract-widgets/*"
       ]
     }
   }
