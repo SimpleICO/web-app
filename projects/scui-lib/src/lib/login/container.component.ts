@@ -18,13 +18,19 @@ export class ContainerComponent implements OnInit, OnDestroy {
 
   @Input() seed: string
 
+  _onUnlockSuccessFunc: any
+  @Input()
+  set onUnlockSuccessInput(onUnlockSuccessFunc) {
+    this._onUnlockSuccessFunc = onUnlockSuccessFunc
+  }
+
   onUnlockError: Subscription
   onUnlockSuccess: Subscription
 
   constructor(
     public wallet: WalletService,
     public eth: EthereumService,
-    private router: Router) {
+    public router: Router) {
 
     this.onUnlockError = wallet.onUnlockError.subscribe(error => {
       this.isInvalid = true
@@ -38,7 +44,7 @@ export class ContainerComponent implements OnInit, OnDestroy {
         this.eth.getTotalEthInUsd(this.wallet.ethBalance)
       })
 
-      return this.router.navigate(['/catalog']);
+      return this._onUnlockSuccessFunc()
     })
   }
 

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-container',
@@ -8,6 +9,12 @@ import { Component } from '@angular/core';
 
 export class ContainerComponent {
 
+  constructor(
+    public router: Router
+  ) { }
 
+  onUnlockSuccess() {
+    return this.router.navigate(['/catalog'])
+  }
 
 }
