@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ContractDeploymentFactory } from 'scui-lib';
+import { ContractDeploymentFactory } from '@decentralizedtechnologies/scui-lib';
 import { ERC20TokenCrowdsaleDeployment } from '@factory/token-crowdsale.deployment';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Crowdsale } from '@model/crowdsale.model';

@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ContractDeploymentFactory } from 'scui-lib';
+import { ContractDeploymentFactory } from '@decentralizedtechnologies/scui-lib';
 import { Router } from '@angular/router';
 import { Token } from '@model/token.model';
-import { EthereumService } from 'scui-lib';
+import { EthereumService } from '@decentralizedtechnologies/scui-lib';
 
 @Component({
   selector: 'app-detailed-erc20',

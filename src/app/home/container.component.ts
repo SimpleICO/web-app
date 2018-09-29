@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { WalletService } from 'scui-lib';
+import { WalletService } from '@decentralizedtechnologies/scui-lib';
 
 @Component({
   selector: 'app-container',

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { WalletService } from 'scui-lib';
-import { EthereumService } from 'scui-lib';
+import { WalletService } from '@decentralizedtechnologies/scui-lib';
+import { EthereumService } from '@decentralizedtechnologies/scui-lib';
 import { Network } from '@model/network.model';
 import { Subject } from 'rxjs';
 

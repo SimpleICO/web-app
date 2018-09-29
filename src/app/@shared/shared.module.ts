@@ -8,7 +8,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderPublicComponent } from './header-public/header-public.component';
 import { QrCodeModalComponent } from './qr-code-modal/qr-code-modal.component';
 import { SpinnerComponent } from './spinner/spinner.component';
-import { SharedModule as SCUISharedModule } from 'scui-lib';
+import { SharedModule as SCUISharedModule } from '@decentralizedtechnologies/scui-lib';
 
 @NgModule({
   imports: [

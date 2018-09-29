@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from '@service/cookie.service';
-import { WalletService } from 'scui-lib';
+import { WalletService } from '@decentralizedtechnologies/scui-lib';
 import { Router } from '@angular/router';
 
 @Component({

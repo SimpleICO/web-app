@@ -1,5 +1,5 @@
 import { SimpleICO } from '@model/simpleico.model';
-import { Wallet } from 'scui-lib';
+import { Wallet } from '@decentralizedtechnologies/scui-lib';
 import { Network } from '@model/network.model';
 
 declare var require: any

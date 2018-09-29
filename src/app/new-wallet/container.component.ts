@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { WalletService } from 'scui-lib';
+import { WalletService } from '@decentralizedtechnologies/scui-lib';
 import { Router } from '@angular/router';
 
 declare var require: any

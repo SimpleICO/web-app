@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Wallet } from 'scui-lib';
+import { Wallet } from '@decentralizedtechnologies/scui-lib';
 import { Network } from '@model/network.model';
 import { Router } from '@angular/router';
 import { ErrorTrackingService } from '@service/error-tracking.service';

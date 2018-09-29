@@ -24,7 +24,7 @@ import { WalletModule } from './wallet/wallet.module';
 import { SettingsModule } from './settings/settings.module';
 import { ScuiLandingPageModule } from './scui-landing-page/scui-landing-page.module';
 
-import { SCUILibModule, Network } from 'scui-lib';
+import { SCUILibModule, Network } from '@decentralizedtechnologies/scui-lib';
 
 @NgModule({
   declarations: [

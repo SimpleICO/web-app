@@ -1,5 +1,5 @@
 import { Crowdsale } from '@model/crowdsale.model';
-import { Wallet } from 'scui-lib';
+import { Wallet } from '@decentralizedtechnologies/scui-lib';
 
 declare var require: any
 

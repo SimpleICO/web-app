@@ -1,9 +1,9 @@
-import { ContractDeploymentInterface } from 'scui-lib';
+import { ContractDeploymentInterface } from '@decentralizedtechnologies/scui-lib';
 import { ContractDeployment } from '@factory/contract-deployment';
 import { SimpleTokenContract } from '@contract/simpletoken.contract';
 import { SimpleCrowdsaleContract } from '@contract/simplecrowdsale.contract';
-import { Wallet } from 'scui-lib';
-import { EthereumService } from 'scui-lib';
+import { Wallet } from '@decentralizedtechnologies/scui-lib';
+import { EthereumService } from '@decentralizedtechnologies/scui-lib';
 
 declare var require: any
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ContractDeploymentFactory } from 'scui-lib';
+import { ContractDeploymentFactory } from '@decentralizedtechnologies/scui-lib';
 
 import { DetailedERC20Deployment } from '@factory/detailed-erc20.deployment';
 import { ERC20TokenCrowdsaleDeployment } from '@factory/token-crowdsale.deployment';

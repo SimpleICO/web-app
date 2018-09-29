@@ -50,10 +50,10 @@
       "@environment/*": [
         "environments/*"
       ],
-      "scui-lib": [
+      "@decentralizedtechnologies/scui-lib": [
         "../dist/scui-lib"
       ],
-      "scui-lib/*": [
+      "@decentralizedtechnologies/scui-lib/*": [
         "../dist/scui-lib/*"
       ]
     }

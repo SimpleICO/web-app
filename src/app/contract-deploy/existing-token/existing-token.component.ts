@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ContractDeploymentFactory } from 'scui-lib';
+import { ContractDeploymentFactory } from '@decentralizedtechnologies/scui-lib';
 import { InsufficientFundsError } from '@error/insufficient-funds.error';
-import { WalletService } from 'scui-lib';
-import { EthereumService } from 'scui-lib';
+import { WalletService } from '@decentralizedtechnologies/scui-lib';
+import { EthereumService } from '@decentralizedtechnologies/scui-lib';
 import { SharedService } from '@service/shared.service';
 import { Router } from '@angular/router';
 import { Crowdsale } from '@model/crowdsale.model';

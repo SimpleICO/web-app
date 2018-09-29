@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ContractDeployment } from '@factory/contract-deployment';
 import { ERC20TokenCrowdsaleDeployment } from '@factory/token-crowdsale.deployment';
-import { ContractDeploymentFactory } from 'scui-lib';
+import { ContractDeploymentFactory } from '@decentralizedtechnologies/scui-lib';
 import { Crowdsale } from '@model/crowdsale.model';
 import { Token } from '@model/token.model';
-import { WalletService } from 'scui-lib';
-import { EthereumService } from 'scui-lib';
+import { WalletService } from '@decentralizedtechnologies/scui-lib';
+import { EthereumService } from '@decentralizedtechnologies/scui-lib';
 import { SharedService } from '@service/shared.service';
 import { Router } from '@angular/router';
 import { InsufficientFundsError } from '@error/insufficient-funds.error';

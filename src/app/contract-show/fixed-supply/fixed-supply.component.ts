@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { EthereumService } from 'scui-lib';
-import { WalletService } from 'scui-lib';
+import { EthereumService } from '@decentralizedtechnologies/scui-lib';
+import { WalletService } from '@decentralizedtechnologies/scui-lib';
 import { SharedService } from '@service/shared.service';
 import { SettingsService } from '@service/settings.service';
 import { SimpleCrowdsaleContract } from '@contract/simplecrowdsale.contract';
