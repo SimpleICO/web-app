@@ -31,6 +31,13 @@
         display: none;
       }
     }
+
+    .scui-framework {
+      margin-top: get-spacer(3);
+      a {
+        text-decoration: underline;
+      }
+    }
   }
 
   .section {
