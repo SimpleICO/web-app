@@ -1,8 +1,15 @@
 <footer class="footer">
   <div class="container">
-    <div class="network {{ wallet.network }}" (click)="toggleNetwork()">
-      <span class="name">{{ wallet.network }}</span>
-      <span class="toggle"></span>
+    <div class="row">
+      <div class="col-6">
+        <a class="whitepaper" href="https://www.dropbox.com/s/uolcmz826lpmgnb/SIMPLEICO_WHITEPAPER.pdf?dl=0" target="_blank">Whitepaper</a>
+      </div>
+      <div class="col-6">
+        <div class="network {{ wallet.network }}" (click)="toggleNetwork()">
+          <span class="name">{{ wallet.network }}</span>
+          <span class="toggle"></span>
+        </div>
+      </div>
     </div>
   </div>
   <section class="contact-wrapper">

@@ -8,12 +8,16 @@
   left: 0;
   .copyright,
   .contact,
+  .whitepaper,
   .network {
     padding: get-spacer(2) 0;
     text-align: right;
     display: block;
     color: white;
     margin: 0;
+  }
+  .whitepaper {
+    text-align: left;
   }
   .network {
     @include flex-row-end;
