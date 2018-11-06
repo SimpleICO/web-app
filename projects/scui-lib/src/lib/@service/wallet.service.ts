@@ -132,6 +132,7 @@ export class WalletService {
   private _afterUnlockSuccess() {
     this.isLocked = false
     this.setProviderByNetwork()
+    this.setNetwork(this.config.network)
     this.onUnlockSuccess.next(true)
   }
 
