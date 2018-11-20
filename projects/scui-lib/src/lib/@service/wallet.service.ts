@@ -46,6 +46,8 @@ export class WalletService {
   setEmptyWallet() {
     this.wallet = new Wallet()
     this.wallet.setLockedInstance()
+    this.setNetwork(this.config.network)
+    this.setProviderByNetwork()
     return this
   }
 
