@@ -16,6 +16,11 @@
       height: auto;
       width: 140px;
     }
+    @include media-breakpoint-down(sm) {
+      img {
+        width: 98px;
+      }
+    }
   }
   .header-right {
     text-align: right;
@@ -31,8 +36,8 @@
   .menu-trigger {
     @include flex-column-center;
     height: $header-height-control;
-    color: theme-color('primary');
     font-weight: bold;
     font-size: 35px;
+    color: $purple;
   }
 }

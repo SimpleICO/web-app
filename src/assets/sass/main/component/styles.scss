@@ -52,93 +52,17 @@
 }
 
 // @import "sass/components/header-component";
-// @import "sass/components/new-wallet-component";
 @import "sass/components/token-index-component";
 @import "sass/components/token-new-component";
 @import "sass/components/crowdsale-index-component";
 @import "sass/components/contract-deploy-component";
 @import "sass/components/wallet-component";
-@import "sass/components/catalog-component";
-// @import "sass/components/catalog-contracts-component";
 @import "sass/components/settings-component";
 @import "sass/components/scui-landing-page-component";
 @import "sass/components/hackaton-component";
 
 .site-wrapper {
   @include container-size;
-}
-
-#mobile-menu {
-  padding-top: $header-height-control + $container-fluid;
-  box-shadow: -1px 0 3px 3px rgba($black, 0.35);
-  transition: transform 0.2s ease-in-out;
-  transform: translateX(110%);
-  background-color: $purple;
-  position: fixed;
-  height: 100vh;
-  z-index: 900;
-  width: 100%;
-  bottom: 0;
-  right: 0;
-  top: 0;
-
-  > .container {
-    padding: 0;
-  }
-
-  &.display {
-    transform: translateX(0);
-  }
-
-  a {
-    @include flex-column-center;
-  }
-
-  .ether-balance {
-    margin-bottom: get-spacer(3);
-    padding: get-spacer(3);
-    position: relative;
-    color: white;
-    .balance,
-    .address {
-      @include light;
-      font-size: $h4-font-size;
-      padding-right: 70px;
-      display: block;
-    }
-    .address {
-      font-size: $h5-font-size;
-      max-width: 210px;
-      display: block;
-    }
-    small {
-      @include bold;
-      text-transform: uppercase;
-    }
-    .go-icon {
-      @include flex-column-center;
-      color: theme-color('primary');
-      text-align: center;
-      position: absolute;
-      width: 70px;
-      bottom: 0;
-      right: 0;
-      top: 0;
-      &.copy {
-        font-size: $h5-font-size;
-      }
-    }
-  }
-  .item {
-    border-bottom: 1px solid darken($indigo, 21%);
-    color: theme-color('primary');
-    padding: get-spacer(3);
-    display: block;
-  }
-  .cta {
-    margin-top: get-spacer(3);
-    padding: get-spacer(3);
-  }
 }
 
 .input-box {
@@ -278,28 +202,4 @@ $headings-ratio-4-6: .875;
     font-size: $h4-font-size * $headings-ratio-4-6 !important;
   }
 }
-
-/*
-  Media queries
-*/
-@media #{$xs-only} {}
-@media #{$sm-only} {}
-@media #{$md-only} {}
-@media #{$lg-only} {}
-@media #{$sm-down} {
-  .header {
-    .logo {
-      img {
-        width: 98px;
-      }
-    }
-  }
-}
-@media #{$md-down} {}
-@media #{$lg-down} {}
-@media #{$sm-up} {}
-@media #{$md-up} {}
-@media #{$lg-up} {}
-@media #{$xl-up} {}
-@media #{$xxl-up} {}
 

@@ -1,9 +1,0 @@
-#catalog {
-  @include with-header;
-  @include main;
-  background-color: $purple;
-
-  .title {
-    @include bold;
-  }
-}

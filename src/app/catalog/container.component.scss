@@ -1,1 +1,10 @@
 @import "sass/simpleico";
+
+#catalog {
+  @include with-header;
+  @include main;
+
+  .title {
+    @include bold;
+  }
+}
