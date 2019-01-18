@@ -10,6 +10,9 @@
     .right-content {
       @include flex-column-center;
       min-height: 63vh;
+      @include media-breakpoint-down(sm) {
+        min-height: 73vh;
+      }
     }
 
     .left-content {
@@ -40,16 +43,80 @@
     }
   }
 
-  .section {
-    padding: get-spacer(5) 0;
-    // min-height: 100vh;
-  }
-  .title {
-    @include bold;
-  }
-
   #global-financial-inclusion {
     background-color: $gray-500;
+  }
+}
+
+#use-cases {
+  background-color: darken($purple, 21%);
+  padding-bottom: 0;
+  .section-header {
+    .title {
+
+    }
+  }
+  .projects {
+    > .row {
+      &:nth-child(odd) {
+        > .col-sm-6 {
+          &:nth-child(odd) {
+            .project {
+              background-color: darken($purple, 24%);
+            }
+          }
+          &:nth-child(even) {
+            .project {
+              background-color: darken($purple, 21%);
+            }
+          }
+        }
+      }
+      &:nth-child(even) {
+        > .col-sm-6 {
+          &:nth-child(odd) {
+            .project {
+              background-color: darken($purple, 21%);
+            }
+          }
+          &:nth-child(even) {
+            .project {
+              background-color: darken($purple, 24%);
+            }
+          }
+        }
+      }
+    }
+    .project {
+      @include flex-row;
+      padding: get-spacer(5);
+      min-height: 420px;
+      @include media-breakpoint-down(sm) {
+        padding: get-spacer(3);
+        min-height: auto;
+      }
+      .title {
+        @include bold;
+      }
+      .img,
+      .info {
+        padding: get-spacer(4);
+        @include media-breakpoint-down(sm) {
+          padding: get-spacer(3);
+        }
+      }
+      .img {
+        width: 30%;
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+      .info {
+        color: white;
+        width: 70%;
+      }
+    }
   }
 }
 
