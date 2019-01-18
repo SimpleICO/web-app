@@ -6,7 +6,7 @@ import { ERC20TokenCrowdsaleDeployment } from '@factory/token-crowdsale.deployme
 @Component({
   selector: 'app-catalog-contracts',
   templateUrl: './contracts.component.html',
-  styleUrls: ['./contracts.component.css']
+  styleUrls: ['./contracts.component.scss']
 })
 export class ContractsComponent implements OnInit {
 

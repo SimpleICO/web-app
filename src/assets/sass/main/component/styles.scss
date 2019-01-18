@@ -30,22 +30,16 @@
     app-catalog-contracts {
       @include make-row;
       .contract {
-        @include make-col(6, $grid-columns);
+        @include make-col(4, $grid-columns);
         @include make-col-ready();
-      }
-      .card-body {
-        min-height: 124px;
-      }
-    }
-  }
-
-}
-@include media-breakpoint-down(sm) {
-  #home-component {
-    #contracts-catalog {
-      app-catalog-contracts {
-        .contract {
+        @include media-breakpoint-down(sm) {
           @include make-col(12, $grid-columns);
+        }
+        .body {
+          @include media-breakpoint-down(sm) {
+            min-height: 160px;
+          }
+          min-height: 280px;
         }
       }
     }
@@ -66,7 +60,7 @@
 @import "sass/components/contract-deploy-component";
 @import "sass/components/wallet-component";
 @import "sass/components/catalog-component";
-@import "sass/components/catalog-contracts-component";
+// @import "sass/components/catalog-contracts-component";
 @import "sass/components/settings-component";
 @import "sass/components/scui-landing-page-component";
 @import "sass/components/hackaton-component";
