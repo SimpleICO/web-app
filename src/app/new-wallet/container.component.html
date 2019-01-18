@@ -1,47 +1,46 @@
 <main id="new-wallet-component">
   <app-auth-header></app-auth-header>
-
   <div class="container">
     <div class="new-wallet-wrapper" [class.on-new-wallet]="onNewWallet">
       <article class="notice mb-3">
         <p>SimpleICO does not store your wallet credentials. Make sure you save them in a safe place.</p>
       </article>
-      <button class="btn btn-primary btn-lg btn-block btn-generate-wallet mb-4" (click)="generateWallet()">Generate new wallet</button>
+      <button class="btn btn-purple btn-lg btn-block btn-generate-wallet mb-4" (click)="generateWallet()">Generate new wallet</button>
 
       <div class="address-wrapper" [class.display]="display" *ngIf="display">
-        <fieldset class="form-group dark-theme mb-3">
+        <fieldset class="form-group mb-3">
           <label for="">Your new ETH address</label>
           <div class="input-group">
             <input type="text" class="form-control" value="{{ address }}">
             <div class="input-group-append">
-              <button class="btn btn-outline-white copy-address" type="button">copy</button>
+              <button class="btn btn-outline-purple copy-address" type="button">copy</button>
             </div>
           </div>
         </fieldset>
-        <fieldset class="form-group dark-theme mb-3">
+        <fieldset class="form-group mb-3">
           <label for="">Mnemonic seed phrase</label>
           <div class="input-group">
             <input type="text" class="form-control" value="{{ mnemonic }}">
             <div class="input-group-append">
-              <button class="btn btn-outline-white copy-mnemonic" type="button">copy</button>
+              <button class="btn btn-outline-purple copy-mnemonic" type="button">copy</button>
             </div>
           </div>
         </fieldset>
-        <fieldset class="form-group dark-theme mb-3">
+        <fieldset class="form-group mb-3">
           <label for="">Private key</label>
           <div class="input-group">
             <input type="text" class="form-control" value="{{ privateKey }}">
             <div class="input-group-append">
-              <button class="btn btn-outline-white copy-private-key" type="button">copy</button>
+              <button class="btn btn-outline-purple copy-private-key" type="button">copy</button>
             </div>
           </div>
         </fieldset>
         <fieldset class="form-group text-right">
-          <button class="btn btn-outline-primary btn-lg" (click)="wallet.unlock(mnemonic)">Next</button>
+          <a [routerLink]="['/login']" class="btn btn-purple btn-lg">Login</a>
         </fieldset>
       </div>
     </div>
   </div>
-
-  <app-footer></app-footer>
 </main>
+
+<app-footer></app-footer>

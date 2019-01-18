@@ -24,9 +24,8 @@
 #home-component {
   @include container-size(xl);
   @include full-width-header;
-  background-color: $purple;
-
   #contracts-catalog {
+    min-height: auto;
     app-catalog-contracts {
       @include make-row;
       .contract {
@@ -52,8 +51,8 @@
   }
 }
 
-@import "sass/components/header-component";
-@import "sass/components/new-wallet-component";
+// @import "sass/components/header-component";
+// @import "sass/components/new-wallet-component";
 @import "sass/components/token-index-component";
 @import "sass/components/token-new-component";
 @import "sass/components/crowdsale-index-component";
@@ -248,9 +247,15 @@
 }
 
 #login-component {
-  .unlock-input {
-    .form-control {
-      @include input-dark-theme;
+  .unlock-button {
+    @include button-variant($purple, $purple);
+  }
+  .new-wallet {
+    small {
+      color: $purple;
+    }
+    a {
+      color: $purple;
     }
   }
 }

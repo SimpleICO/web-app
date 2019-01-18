@@ -3,17 +3,17 @@
 #home-component {
   @include flex-column-center;
   @include main;
-  background-color: $purple;
+  min-height: auto;
 
   #introduction {
     .left-content,
     .right-content {
       @include flex-column-center;
-      min-height: 100vh;
+      min-height: 63vh;
     }
 
     .left-content {
-      color: white;
+      color: $purple;
       h1 {
         @include bold;
       }
@@ -42,19 +42,26 @@
 
   .section {
     padding: get-spacer(5) 0;
-    min-height: 100vh;
+    // min-height: 100vh;
   }
   .title {
     @include bold;
   }
 
-  #contracts-catalog {
-    background-color: $purple;
-    min-height: auto;
-  }
-
   #global-financial-inclusion {
     background-color: $gray-500;
+  }
+}
+
+#contracts-catalog {
+  background-color: $gray-100;
+  &.section {
+    .title {
+      color: $purple;
+    }
+  }
+  app-catalog-contracts {
+    margin-top: get-spacer(5);
   }
 }
 
