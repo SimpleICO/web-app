@@ -21,12 +21,7 @@
 @import "ebm/modules/ebm-header";
 @import "sass/ebm-global";
 
-@import "sass/components/token-index-component";
-@import "sass/components/token-new-component";
 @import "sass/components/crowdsale-index-component";
-@import "sass/components/settings-component";
-@import "sass/components/scui-landing-page-component";
-@import "sass/components/hackaton-component";
 
 #home-component {
   @include container-size(xl);

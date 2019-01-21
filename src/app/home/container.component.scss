@@ -16,9 +16,9 @@
     }
 
     .left-content {
-      color: $purple;
       h1 {
         @include bold;
+        color: $purple;
       }
       h5 {
         line-height: 1.85rem;

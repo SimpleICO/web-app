@@ -22,7 +22,6 @@ import { ContractShowPublicModule } from './contract-show-public/contract-show-p
 import { CatalogModule } from './catalog/catalog.module';
 import { WalletModule } from './wallet/wallet.module';
 import { SettingsModule } from './settings/settings.module';
-import { ScuiLandingPageModule } from './scui-landing-page/scui-landing-page.module';
 
 import { SCUILibModule, Network } from '@decentralizedtechnologies/scui-lib';
 
@@ -49,7 +48,6 @@ import { SCUILibModule, Network } from '@decentralizedtechnologies/scui-lib';
     CatalogModule,
     WalletModule,
     SettingsModule,
-    ScuiLandingPageModule,
     SCUILibModule.forRoot({
       network: Network.testnet
     }),

@@ -13,7 +13,6 @@ import { ContainerComponent as ContractCreateComponent } from './contract-create
 import { ContainerComponent as ContractDeployComponent } from './contract-deploy/container.component';
 import { ContainerComponent as CatalogComponent } from './catalog/container.component';
 import { ContainerComponent as SettingsComponent } from './settings/container.component';
-import { ContainerComponent as ScuiLandingPageComponent } from './scui-landing-page/container.component';
 import { UnlockRouteGuard } from '@guard/unlock-route-guard';
 import { AcceptTermsRouteGuard } from '@guard/accept-terms-route-guard';
 
@@ -22,10 +21,6 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-  },
-  {
-    path: 'smart-contracts-wallet',
-    component: ScuiLandingPageComponent,
   },
   {
     path: 'login',
@@ -87,7 +82,11 @@ const routes: Routes = [
 ]
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      // scrollPositionRestoration: 'top', anchorScrolling: 'enabled',
+    })
+  ],
   exports: [RouterModule]
 })
 

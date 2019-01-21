@@ -49,6 +49,12 @@
       ],
       "@environment/*": [
         "environments/*"
+      ],
+      "@decentralizedtechnologies/scui-lib": [
+        "../dist/scui-lib"
+      ],
+      "@decentralizedtechnologies/scui-lib/*": [
+        "../dist/scui-lib/*"
       ]
     }
   }
