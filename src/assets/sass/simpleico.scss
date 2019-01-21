@@ -14,13 +14,14 @@
 @mixin container-size($breakpoint: sm) {
   @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
     .container {
-      min-width: map-get($container-max-widths, $breakpoint) !important;
-      max-width: map-get($container-max-widths, $breakpoint) !important;
+      min-width: map-get($container-max-widths, $breakpoint);
+      max-width: map-get($container-max-widths, $breakpoint);
     }
   }
 }
 
 @mixin main {
+  padding-bottom: get-spacer(5);
   position: relative;
   min-height: 100vh;
 }
@@ -91,5 +92,16 @@
   }
   &:disabled {
     background-color: darken($purple, 14%);
+  }
+}
+
+@mixin crowdsale-index {
+  .token {
+    padding-top: get-spacer(3);
+    .name {}
+    .crowdsale {
+      max-width: 210px;
+      display: block;
+    }
   }
 }

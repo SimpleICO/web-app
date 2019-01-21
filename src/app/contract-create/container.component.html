@@ -2,10 +2,8 @@
 <app-mobile-menu></app-mobile-menu>
 
 <main id="contract-create">
-
   <app-detailed-erc20 *ngIf="DetailedERC20Deployment == contractType"></app-detailed-erc20>
-
   <app-erc20-token-crowdsale *ngIf="ERC20TokenCrowdsaleDeployment == contractType"></app-erc20-token-crowdsale>
-
-  <app-footer></app-footer>
 </main>
+
+<app-footer></app-footer>

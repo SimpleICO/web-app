@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-5 header-left">
         <a [routerLink]="['/catalog']" class="logo">
-          <img src="assets/img/logo-simpleico.svg" alt="SimpleICO">
+          <img src="assets/img/logo-simpleico-purple.svg" alt="SimpleICO">
         </a>
       </div>
       <div class="col-7 header-right">
@@ -24,5 +24,6 @@
   <app-detailed-erc20 *ngIf="DetailedERC20Deployment == contractType"></app-detailed-erc20>
   <app-erc20-token-crowdsale *ngIf="ERC20TokenCrowdsaleDeployment == contractType"></app-erc20-token-crowdsale>
 
-  <app-footer></app-footer>
 </main>
+
+<app-footer></app-footer>

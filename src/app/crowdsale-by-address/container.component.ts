@@ -7,68 +7,68 @@ import { SimpleCrowdsaleContract } from '@contract/simplecrowdsale.contract';
 import { FixedSupplyDeployment } from '@factory/fixed-supply.deployment';
 
 @Component({
-    selector: 'app-crowdsale-by-address',
-    templateUrl: './container.component.html',
-    styleUrls: ['./container.component.css']
+  selector: 'app-crowdsale-by-address',
+  templateUrl: './container.component.html',
+  styleUrls: ['./container.component.scss']
 })
 
 export class ContainerComponent implements OnInit, AfterViewInit {
 
-    simpleICO: SimpleICOContract
+  simpleICO: SimpleICOContract
 
-    address: string
+  address: string
 
-    FixedSupplyDeployment: string = FixedSupplyDeployment._type
+  FixedSupplyDeployment: string = FixedSupplyDeployment._type
 
-    crowdsales: Array<SimpleCrowdsaleContract> = []
+  crowdsales: Array<SimpleCrowdsaleContract> = []
 
-    constructor(
-        public wallet: WalletService,
-        public settings: SettingsService) {
+  constructor(
+    public wallet: WalletService,
+    public settings: SettingsService) {
 
-        settings.onNetworkChange.subscribe((networkChanged) => {
-            this.crowdsales = []
-            this.ngOnInit()
-            this.getCrowdsalesByAddress()
-        })
+    settings.onNetworkChange.subscribe((networkChanged) => {
+      this.crowdsales = []
+      this.ngOnInit()
+      this.getCrowdsalesByAddress()
+    })
+  }
+
+  ngOnInit() {
+    this.simpleICO = new SimpleICOContract(this.wallet.getInstance())
+    this.simpleICO.connect()
+
+    this.address = this.wallet.getAddress()
+  }
+
+  ngAfterViewInit() {
+    this.getCrowdsalesByAddress()
+  }
+
+  async getCrowdsalesByAddress() {
+    const crowdsales = await this.simpleICO.instance.methods.getCrowdsalesByAddress(this.address).call()
+
+    this.initCrowdsales(crowdsales)
+  }
+
+  async initCrowdsales(crowdsales: Array<string>) {
+    if (crowdsales.length <= 0) {
+      return false
     }
 
-    ngOnInit() {
-        this.simpleICO = new SimpleICOContract(this.wallet.getInstance())
-        this.simpleICO.connect()
+    const address = crowdsales.pop()
 
-        this.address = this.wallet.getAddress()
-    }
+    const crowdsale = new SimpleCrowdsaleContract(this.wallet.getInstance())
+    crowdsale.connect()
+    crowdsale.setAddress(address)
 
-    ngAfterViewInit() {
-        this.getCrowdsalesByAddress()
-    }
+    await crowdsale.setToken()
 
-    async getCrowdsalesByAddress() {
-        const crowdsales = await this.simpleICO.instance.methods.getCrowdsalesByAddress(this.address).call()
+    const token = crowdsale.getToken()
+    await token.getName()
+    await token.getSymbol()
 
-        this.initCrowdsales(crowdsales)
-    }
+    this.crowdsales.push(crowdsale)
 
-    async initCrowdsales(crowdsales: Array<string>) {
-        if (crowdsales.length <= 0) {
-            return false
-        }
-
-        const address = crowdsales.pop()
-
-        const crowdsale = new SimpleCrowdsaleContract(this.wallet.getInstance())
-        crowdsale.connect()
-        crowdsale.setAddress(address)
-
-        await crowdsale.setToken()
-
-        const token = crowdsale.getToken()
-        await token.getName()
-        await token.getSymbol()
-
-        this.crowdsales.push(crowdsale)
-
-        this.initCrowdsales(crowdsales)
-    }
+    this.initCrowdsales(crowdsales)
+  }
 }

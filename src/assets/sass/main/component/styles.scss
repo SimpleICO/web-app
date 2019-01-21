@@ -24,8 +24,6 @@
 @import "sass/components/token-index-component";
 @import "sass/components/token-new-component";
 @import "sass/components/crowdsale-index-component";
-@import "sass/components/contract-deploy-component";
-@import "sass/components/wallet-component";
 @import "sass/components/settings-component";
 @import "sass/components/scui-landing-page-component";
 @import "sass/components/hackaton-component";
@@ -87,6 +85,10 @@
 
 .site-wrapper {
   @include container-size;
+}
+
+.home-footer {
+  @include container-size(xl);
 }
 
 .input-box {
@@ -181,14 +183,31 @@
 }
 
 .section {
-  padding: get-spacer(5) 0;
+  padding-top: get-spacer(5);
   .section-header {
     .title {
       @include bold;
     }
   }
-  .title {
-    color: white;
+}
+
+.step {
+  // @extend .section;
+  .step-header {
+    margin-bottom: get-spacer(4);
+  }
+}
+
+#contract-deploy {
+  .estimate {
+    margin-bottom: get-spacer(3);
+    p {
+      margin: 0;
+      &:first-child {
+        @include bold;
+        font-size: $font-size-sm;
+      }
+    }
   }
 }
 

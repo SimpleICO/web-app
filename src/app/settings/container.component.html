@@ -4,9 +4,11 @@
 <main id="settings">
   <section class="section">
     <div class="container">
-      <h5 class="title">Settings</h5>
+      <header class="section-header">
+        <h5 class="title">Settings</h5>
+      </header>
 
-      <fieldset class="form-group dark-theme pt-3">
+      <fieldset class="form-group pt-3">
         <label for="network">Network</label>
         <select name="network" id="network" class="form-control" (change)="selectNetwork()" [(ngModel)]="network">
           <option [value]="_network" [selected]="_network == network ? true : null" *ngFor="let _network of settings.networks">{{ _network }}</option>
@@ -14,6 +16,6 @@
       </fieldset>
     </div>
   </section>
-
-  <app-footer></app-footer>
 </main>
+
+<app-footer></app-footer>

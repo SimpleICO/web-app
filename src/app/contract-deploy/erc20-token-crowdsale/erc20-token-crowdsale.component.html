@@ -2,29 +2,28 @@
   <div class="container">
     <header class="step-header">
       <h5>Step {{ steps.crowdsaleSetup.step }} of {{ stepCount }}</h5>
+      <h4>Setup your crowdsale contract</h4>
     </header>
 
-    <h4>Setup your crowdsale contract</h4>
-
-    <fieldset class="form-group dark-theme">
+    <fieldset class="form-group">
       <label for="">Token price (in ETH)</label>
       <input required autofocus="autofocus" type="text" class="form-control" placeholder="eg. 0.1" [(ngModel)]="crowdsale.price">
     </fieldset>
-    <fieldset class="form-group dark-theme">
+    <fieldset class="form-group">
       <label for="">Token percentage</label>
       <div class="row">
         <div class="col-5">
           <div class="input-group">
             <input required type="text" class="form-control" placeholder="eg. 10" [(ngModel)]="crowdsale.percentage">
             <div class="input-group-append">
-              <button class="btn btn-outline-light">%</button>
+              <button class="btn btn-outline-primary">%</button>
             </div>
           </div>
         </div>
       </div>
-      <small class="text-white">How much percentage (%) of your token balance you are willing to sell.</small>
+      <small>How much percentage (%) of your token balance you are willing to sell.</small>
     </fieldset>
-    <fieldset class="form-group dark-theme">
+    <fieldset class="form-group">
       <label for="">Beneficiary address</label>
       <input required type="text" class="form-control" placeholder="eg. 0x123..." [(ngModel)]="crowdsale.beneficiary">
       <small class="text-primary" (click)="setBeneficiary()">Use this wallet address</small>
@@ -45,15 +44,15 @@
   <div class="container">
     <header class="step-header">
       <h5>Step {{ steps.estimateTxCosts.step }} of {{ stepCount }}</h5>
+      <h4>Estimated transaction costs</h4>
     </header>
 
-    <h4>Estimated transaction costs</h4>
     <article class="estimate" *ngFor="let estimate of steps.estimateTxCosts.estimates">
-      <p>ETH {{ estimate.txCost }}</p>
       <p>{{ estimate.text }}</p>
+      <p>ETH {{ estimate.txCost }}</p>
     </article>
 
-    <fieldset class="form-group dark-theme" *ngIf="steps.estimateTxCosts.isComplete">
+    <fieldset class="form-group" *ngIf="steps.estimateTxCosts.isComplete">
       <label for="gas-price">Gas Price (GWEI)</label>
       <div class="input-group">
         <input name="gas-price" type="number" class="form-control" placeholder="eg. 32" [(ngModel)]="gasPrice">
@@ -79,11 +78,9 @@
   <div class="container">
     <header class="step-header">
       <h5>Step {{ steps.deployCrowdsale.step }} of {{ stepCount }}</h5>
+      <h4><i class="icon-loading2 spin" *ngIf="!steps.deployCrowdsale.isComplete || steps.deployCrowdsale.hasError"></i> Deploying your capped crowdsale</h4>
+      <a class="mb-4 d-block" href="{{ eth.etherscanURL }}/address/{{ wallet.getAddress() }}" target="_blank">See transaction</a>
     </header>
-
-    <h4>
-      <i class="icon-loading2 spin" *ngIf="!steps.deployCrowdsale.isComplete || steps.deployCrowdsale.hasError"></i> Deploying your capped crowdsale</h4>
-    <a class="mb-4 d-block" href="{{ eth.etherscanURL }}/address/{{ wallet.getAddress() }}" target="_blank">See transaction</a>
 
     <div *ngIf="steps.deployCrowdsale.hasError">
       <p class="on-error" [innerHTML]="steps.deployCrowdsale.errorMessage | keepHtml"></p>
@@ -102,11 +99,9 @@
   <div class="container">
     <header class="step-header">
       <h5>Step {{ steps.transferToken.step }} of {{ stepCount }}</h5>
+      <h4><i class="icon-loading2 spin" *ngIf="!steps.transferToken.isComplete || steps.transferToken.hasError"></i> Approving your crowdsale to transfer the token supply on your behalf</h4>
+      <a class="mb-4 d-block" href="{{ eth.etherscanURL }}/address/{{ wallet.getAddress() }}" target="_blank">See transaction</a>
     </header>
-
-    <h4>
-      <i class="icon-loading2 spin" *ngIf="!steps.transferToken.isComplete || steps.transferToken.hasError"></i> Approving your crowdsale to transfer the token supply on your behalf</h4>
-    <a class="mb-4 d-block" href="{{ eth.etherscanURL }}/address/{{ wallet.getAddress() }}" target="_blank">See transaction</a>
 
     <div *ngIf="steps.transferToken.hasError">
       <p class="on-error" [innerHTML]="steps.transferToken.errorMessage | keepHtml"></p>

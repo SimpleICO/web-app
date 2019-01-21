@@ -1,0 +1,6 @@
+@import "sass/simpleico";
+
+#settings {
+  @include with-header;
+  @include main;
+}

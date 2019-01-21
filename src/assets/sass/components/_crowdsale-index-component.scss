@@ -1,20 +1,10 @@
 #crowdsale-index {
   @include with-header;
   @include main;
-  background-color: $purple;
+
+  @include crowdsale-index;
 
   .title {
     @include bold;
-  }
-
-  .token {
-    padding: get-spacer(3) 0;
-    .name {
-      color: white;
-    }
-    .crowdsale {
-      max-width: 210px;
-      display: block;
-    }
   }
 }

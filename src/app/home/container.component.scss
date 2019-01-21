@@ -9,9 +9,9 @@
     .left-content,
     .right-content {
       @include flex-column-center;
-      min-height: 63vh;
+      min-height: 73vh;
       @include media-breakpoint-down(sm) {
-        min-height: 73vh;
+        min-height: 77vh;
       }
     }
 

@@ -10,7 +10,7 @@ import { ERC20TokenCrowdsaleDeployment } from '@factory/token-crowdsale.deployme
 @Component({
   selector: 'app-container',
   templateUrl: './container.component.html',
-  styleUrls: ['./container.component.css']
+  styleUrls: ['./container.component.scss']
 })
 export class ContainerComponent implements OnInit {
 

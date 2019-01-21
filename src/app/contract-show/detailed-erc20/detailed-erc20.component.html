@@ -1,31 +1,33 @@
 <app-qr-code-modal [model]="token"></app-qr-code-modal>
 
-<div class="container">
-  <h1 class="token-name">{{ token.name }} ({{ token.symbol }})</h1>
-  <div class="eth-raised">
-    <span class="balance text-truncate" style="max-width: 210px">{{ token.address }}</span>
-    <small>Token address</small>
-    <span class="go-icon" (click)="shared.displayCrowdsaleShowModal()">
-      <i class="icon-copy"></i>
-    </span>
+<section class="section">
+  <div class="container">
+    <h1 class="token-name">{{ token.name }} ({{ token.symbol }})</h1>
+    <div class="eth-raised">
+      <small>Token address</small>
+      <span class="balance text-truncate" style="max-width: 210px">{{ token.address }}</span>
+      <span class="go-icon" (click)="shared.displayCrowdsaleShowModal()">
+        <i class="icon-copy"></i>
+      </span>
+    </div>
+    <article class="eth-raised">
+      <small>Name</small>
+      <span class="balance">{{ token.name }}</span>
+    </article>
+    <article class="eth-raised">
+      <small>Symbol</small>
+      <span class="balance">{{ token.symbol }}</span>
+    </article>
+    <article class="eth-raised">
+      <small>Decimals</small>
+      <span class="balance">{{ token.decimals }}</span>
+    </article>
+    <article class="eth-raised">
+      <small>Supply</small>
+      <span class="balance">{{ token.symbol }} {{ token.supply }}</span>
+    </article>
   </div>
-  <article class="eth-raised">
-    <span class="balance">{{ token.name }}</span>
-    <small>Name</small>
-  </article>
-  <article class="eth-raised">
-    <span class="balance">{{ token.symbol }}</span>
-    <small>Symbol</small>
-  </article>
-  <article class="eth-raised">
-    <span class="balance">{{ token.decimals }}</span>
-    <small>Decimals</small>
-  </article>
-  <article class="eth-raised">
-    <span class="balance">{{ token.symbol }} {{ token.supply }}</span>
-    <small>Supply</small>
-  </article>
-</div>
+</section>
 
 <section id="info" class="section">
   <div class="container">

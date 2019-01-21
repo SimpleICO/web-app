@@ -1,0 +1,6 @@
+@import "sass/simpleico";
+
+#contract-deploy {
+  @include with-header;
+  @include main;
+}

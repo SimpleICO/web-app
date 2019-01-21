@@ -1,12 +1,11 @@
 @import "sass/simpleico.scss";
 
 #token-info {
-  color: white;
   .estimate {
     margin-bottom: get-spacer(3);
     p {
       margin: 0;
-      &:last-child {
+      &:first-child {
         @include bold;
         font-size: $font-size-sm;
       }

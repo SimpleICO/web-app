@@ -2,15 +2,15 @@
   <div class="container">
     <header class="step-header">
       <h5>Step {{ steps.estimateTxCosts.step }} of {{ stepCount }}</h5>
+      <h4>Calculating transaction costs</h4>
     </header>
 
-    <h4>Calculating transaction costs</h4>
     <article class="estimate" *ngFor="let estimate of steps.estimateTxCosts.estimates">
-      <p>ETH {{ estimate.txCost }}</p>
       <p>{{ estimate.text }}</p>
+      <p>ETH {{ estimate.txCost }}</p>
     </article>
 
-    <fieldset class="form-group dark-theme" *ngIf="steps.estimateTxCosts.isComplete">
+    <fieldset class="form-group" *ngIf="steps.estimateTxCosts.isComplete">
       <label for="gas-price">Gas Price (GWEI)</label>
       <div class="input-group">
         <input name="gas-price" type="number" class="form-control" placeholder="eg. 32" [(ngModel)]="gasPrice">
@@ -36,27 +36,26 @@
   <div class="container">
     <header class="step-header">
       <h5>Step {{ steps.deployToken.step }} of {{ stepCount }}</h5>
+      <h4><i class="icon-loading2 spin" *ngIf="!steps.deployToken.isComplete || steps.deployToken.hasError"></i> Deploying your ERC20 token</h4>
     </header>
 
-    <h4>
-      <i class="icon-loading2 spin" *ngIf="!steps.deployToken.isComplete || steps.deployToken.hasError"></i> Deploying your ERC20 token</h4>
     <p class="mb-2">Note: Transaction times depend on the Ethereum network. Do not refresh or close this page.</p>
     <a class="mb-4 d-block" href="{{ eth.etherscanURL }}/address/{{ wallet.getAddress() }}" target="_blank">See transaction</a>
     <article class="estimate">
-      <p>{{ token.name }}</p>
       <p>Name</p>
+      <p>{{ token.name }}</p>
     </article>
     <article class="estimate">
-      <p>{{ token.symbol }}</p>
       <p>Symbol</p>
+      <p>{{ token.symbol }}</p>
     </article>
     <article class="estimate">
-      <p>{{ token.decimals }}</p>
       <p>Decimals</p>
+      <p>{{ token.decimals }}</p>
     </article>
     <article class="estimate">
-      <p>{{ token.symbol }} {{ supply }}</p>
       <p>Supply</p>
+      <p>{{ token.symbol }} {{ supply }}</p>
     </article>
 
     <div *ngIf="steps.deployToken.hasError">
@@ -69,8 +68,7 @@
     </div>
 
     <div *ngIf="steps.deployToken.isComplete">
-      <a [routerLink]="['/contract', ERC20TokenCrowdsaleDeployment, 'create']" [queryParams]="{ address: this.token.address }"
-        class="btn btn-primary btn-block mb-3">Create crowdsale</a>
+      <a [routerLink]="['/contract', ERC20TokenCrowdsaleDeployment, 'create']" [queryParams]="{ address: this.token.address }" class="btn btn-primary btn-block mb-3">Create crowdsale</a>
       <button class="btn btn-outline-primary btn-block" (click)="finish()">See token</button>
     </div>
 
