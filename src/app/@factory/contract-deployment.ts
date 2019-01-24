@@ -6,8 +6,6 @@ import { Crowdsale } from '@model/crowdsale.model';
 import { Token } from '@model/token.model';
 import { SimpleICOContract } from '@contract/simpleico.contract';
 
-declare var require: any
-
 const Web3 = require('web3')
 
 export abstract class ContractDeployment extends SCUIContractDeployment {

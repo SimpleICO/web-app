@@ -1,0 +1,62 @@
+<app-qr-code-modal [model]="token"></app-qr-code-modal>
+
+<section class="section">
+  <div class="container">
+    <h1 class="token-name">{{ token.name }} ({{ token.symbol }})</h1>
+    <div class="eth-raised">
+      <span class="balance text-truncate" style="max-width: 210px">{{ token.address }}</span>
+      <small>Token address</small>
+      <span class="go-icon" (click)="shared.displayCrowdsaleShowModal()">
+        <i class="icon-copy"></i>
+      </span>
+    </div>
+    <article class="eth-raised">
+      <small>Name</small>
+      <span class="balance">{{ token.name }}</span>
+    </article>
+    <article class="eth-raised">
+      <small>Symbol</small>
+      <span class="balance">{{ token.symbol }}</span>
+    </article>
+    <article class="eth-raised">
+      <small>Decimals</small>
+      <span class="balance">{{ token.decimals }}</span>
+    </article>
+    <article class="eth-raised">
+      <small>Supply</small>
+      <span class="balance">{{ token.symbol }} {{ token.supply }}</span>
+    </article>
+
+    <nav>
+      <a [routerLink]="['/login']" class="btn btn-primary btn-block">Login to transfer this token</a>
+    </nav>
+  </div>
+</section>
+
+<section id="whitelist" class="section">
+  <div class="container">
+    <h5 class="title">Whitelist information</h5>
+    <article class="info">
+      <small>Admin members</small>
+      <a *ngFor="let member of token.adminMembers" href="{{ eth.etherscanURL }}/address/{{ member }}" target="_blank" class="text-truncate">{{ member }}</a>
+    </article>
+    <article class="info">
+      <small>Members</small>
+      <a *ngFor="let member of token.members" href="{{ eth.etherscanURL }}/address/{{ member }}" target="_blank" class="text-truncate">{{ member }}</a>
+    </article>
+    <article class="info" *ngIf="token.pendingMembers.length > 0">
+      <small>Pending requests</small>
+      <a *ngFor="let member of token.pendingMembers" href="{{ eth.etherscanURL }}/address/{{ member }}" target="_blank" class="text-truncate">{{ member }}</a>
+    </article>
+  </div>
+</section>
+
+<section id="info" class="section">
+  <div class="container">
+    <h5 class="title">Contract information</h5>
+    <article class="info">
+      <small>MVT20 Token contract</small>
+      <a href="{{ eth.etherscanURL }}/token/{{ token.getAddress() }}" target="_blank" class="text-truncate">{{ token.getAddress() }}</a>
+    </article>
+  </div>
+</section>

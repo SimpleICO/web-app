@@ -2,6 +2,7 @@ import { Token } from '@model/token.model';
 import { Wallet } from '@decentralizedtechnologies/scui-lib';
 
 const MVT20Interface = require('@abi/MVT20.abi.json')
+const Web3 = require('web3')
 
 export class MVT20Contract extends Token {
 
@@ -18,6 +19,9 @@ export class MVT20Contract extends Token {
   crowdsale: string
   tx: string
   balanceOf: number = 0
+  members = []
+  adminMembers = []
+  pendingMembers = []
 
   constructor(
     wallet: Wallet) {
@@ -51,6 +55,32 @@ export class MVT20Contract extends Token {
 
   async getTotalSupply() {
     this.supply = await this.instance.methods.totalSupply().call()
+  }
+
+  async getAdminMembers() {
+    const members = await this.instance.methods.adminMembers().call()
+    this.adminMembers = members.filter(member => {
+      return this.isAddress(member)
+    })
+  }
+
+  async getMembers() {
+    const members = await this.instance.methods.members().call()
+    this.members = members.filter(member => {
+      return this.isAddress(member)
+    })
+  }
+
+  async getPendingRequests() {
+    const members = await this.instance.methods.pendingWhitelistRequests().call()
+    this.pendingMembers = members.filter(member => {
+      return this.isAddress(member)
+    })
+  }
+
+  private isAddress(address) {
+    return address !== '0x0000000000000000000000000000000000000000' &&
+      Web3.utils.isAddress(address)
   }
 
   connect() {

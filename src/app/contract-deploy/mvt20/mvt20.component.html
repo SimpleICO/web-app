@@ -36,10 +36,10 @@
   <div class="container">
     <header class="step-header">
       <h5>Step {{ steps.deployToken.step }} of {{ stepCount }}</h5>
-      <h4><i class="icon-loading2 spin" *ngIf="!steps.deployToken.isComplete || steps.deployToken.hasError"></i> Deploying your ERC20 token</h4>
+      <h4><i class="icon-loading2 spin" *ngIf="!steps.deployToken.isComplete || steps.deployToken.hasError"></i> Deploying your MVT20 token</h4>
+      <p class="mb-2">Note: Transaction times depend on the Ethereum network. Do not refresh or close this page.</p>
     </header>
 
-    <p class="mb-2">Note: Transaction times depend on the Ethereum network. Do not refresh or close this page.</p>
     <a class="mb-4 d-block" href="{{ eth.etherscanURL }}/address/{{ wallet.getAddress() }}" target="_blank">See transaction</a>
     <article class="estimate">
       <p>Name</p>
@@ -68,9 +68,7 @@
     </div>
 
     <div *ngIf="steps.deployToken.isComplete">
-      <a [routerLink]="['/contract', ERC20TokenCrowdsaleDeployment, 'create']" [queryParams]="{ address: this.token.address }" class="btn btn-primary btn-block mb-3">Create crowdsale</a>
       <button class="btn btn-outline-primary btn-block" (click)="finish()">See token</button>
     </div>
-
   </div>
 </section>
