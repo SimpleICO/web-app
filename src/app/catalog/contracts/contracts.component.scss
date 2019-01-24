@@ -60,6 +60,7 @@ $contract-height: 160px;
   }
   header {
     @include normalize-text;
+    margin-bottom: get-spacer(3);
     padding-top: get-spacer(4);
     text-align: right;
     .name {

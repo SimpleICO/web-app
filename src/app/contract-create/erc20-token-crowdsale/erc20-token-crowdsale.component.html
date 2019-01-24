@@ -1,7 +1,11 @@
 <section class="section" *ngIf="!isTokenLoaded">
+  <header class="section-header">
+    <div class="container">
+      <h4 class="title">Create a crowdsale from an existing ERC20 token</h4>
+      <p><strong>Note</strong>: You need to own ERC20 for this crowdsale to work.</p>
+    </div>
+  </header>
   <div class="container">
-    <h4>Create a crowdsale from an existing ERC20 token</h4>
-    <p><strong>Note</strong>: You need to own ERC20 for this crowdsale to work.</p>
     <fieldset class="form-group">
       <label for="">Token address</label>
       <input required autofocus="autofocus" type="text" class="form-control" placeholder="eg. 0x345gh457uh..." [(ngModel)]="token.address">
@@ -11,8 +15,12 @@
   </div>
 </section>
 <section class="section" *ngIf="isTokenLoaded" id="token-info">
+  <header class="section-header">
+    <div class="container">
+      <h4 class="title">Confirm your token info</h4>
+    </div>
+  </header>
   <div class="container">
-    <h4>Confirm your token info</h4>
     <div>
       <article class="estimate">
         <p>Name</p>

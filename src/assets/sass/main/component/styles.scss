@@ -47,12 +47,6 @@
   }
 }
 
-#contract-create {
-  h4 {
-    margin-bottom: get-spacer(4);
-  }
-}
-
 .separator {
   margin-bottom: get-spacer(5);
   text-align: center;
@@ -180,6 +174,7 @@
 .section {
   padding-top: get-spacer(5);
   .section-header {
+    margin-bottom: get-spacer(4);
     .title {
       @include bold;
     }
@@ -243,6 +238,9 @@ $headings-ratio-4-6: .875;
   }
   h4 {
     font-size: $h4-font-size * $headings-ratio-4-6 !important;
+  }
+  h5 {
+    font-size: $h5-font-size * $headings-ratio-4-6 !important;
   }
 }
 

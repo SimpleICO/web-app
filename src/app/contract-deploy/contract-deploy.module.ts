@@ -7,6 +7,7 @@ import { FixedSupplyComponent } from './fixed-supply/fixed-supply.component';
 import { ExistingTokenComponent } from './existing-token/existing-token.component';
 import { DetailedErc20Component } from './detailed-erc20/detailed-erc20.component';
 import { Erc20TokenCrowdsaleComponent } from './erc20-token-crowdsale/erc20-token-crowdsale.component';
+import { MVT20Component } from './mvt20/mvt20.component';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { Erc20TokenCrowdsaleComponent } from './erc20-token-crowdsale/erc20-toke
     ExistingTokenComponent,
     DetailedErc20Component,
     Erc20TokenCrowdsaleComponent,
+    MVT20Component,
   ]
 })
 export class ContractDeployModule { }

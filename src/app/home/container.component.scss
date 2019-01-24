@@ -51,11 +51,6 @@
 #use-cases {
   background-color: darken($purple, 21%);
   padding-bottom: 0;
-  .section-header {
-    .title {
-
-    }
-  }
   .projects {
     > .row {
       &:nth-child(odd) {

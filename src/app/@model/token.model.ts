@@ -5,27 +5,16 @@ declare var require: any
 export abstract class Token {
 
   instance: any
-
   address: string
-
   wallet: Wallet
-
   web3: any
-
   tx: string
-
   txObject: any
-
   name: string
-
   symbol: string
-
   decimals: number
-
   supply: any
-
   price: any
-
   balanceOf: number
 
   constructor(wallet: Wallet) {

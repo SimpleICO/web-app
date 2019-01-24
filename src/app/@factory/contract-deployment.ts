@@ -57,57 +57,38 @@ export abstract class ContractDeployment extends SCUIContractDeployment {
   }
 
   async estimateTokenDeploymentCost() {
-
     const txObject = await this.token.deploy()
-
     const gas = await txObject.estimateGas()
     this.gas += gas + this.gasIncrement
-
     const txCost = await this.eth.getTxCost(gas)
     this.txCost = txCost
-
     return txCost
   }
 
   async estimateCrowdsaleDeploymentCost() {
-
     const txObject = await this.crowdsale.deploy(this.token.price, ContractDeployment.DUMMY_ADDRESS)
-
     const gas = await txObject.estimateGas()
     this.gas += gas + this.gasIncrement
-
     const txCost = await this.eth.getTxCost(gas)
-
     this.sumTxCost(txCost)
-
     return txCost
   }
 
   async estimateTokenTransferCost() {
-
     const txObject = this.token.instance.methods.transfer(this.wallet.address, this.token.supply.toString())
-
     const gas = await txObject.estimateGas()
     this.gas += gas + this.gasIncrement
-
     const txCost = await this.eth.getTxCost(gas)
-
     this.sumTxCost(txCost)
-
     return txCost
   }
 
   async estimateSimpleICOCost() {
-
     const txObject = await this.simpleICO.instance.methods.addCrowdsale(ContractDeployment.CONTRACT_DUMMY_ADDRESS)
-
     const gas = await txObject.estimateGas()
     this.gas += gas + this.gasIncrement
-
     const txCost = await this.eth.getTxCost(gas)
-
     this.sumTxCost(txCost)
-
     return txCost
   }
 
@@ -117,15 +98,10 @@ export abstract class ContractDeployment extends SCUIContractDeployment {
   }
 
   async addCrowdsaleToSimpleICOContract() {
-
     return new Promise(async (resolve, reject) => {
-
       try {
-
         const nonce = await this.eth.getNonce(this.simpleICO)
-
         const txObject = this.simpleICO.instance.methods.addCrowdsale(this.crowdsale.getAddress())
-
         const txOptions = {
           from: this.wallet.address,
           to: this.simpleICO.getAddress(),
@@ -136,19 +112,14 @@ export abstract class ContractDeployment extends SCUIContractDeployment {
           data: txObject.encodeABI(),
           nonce: Web3.utils.toHex(nonce)
         }
-
         const signedTx = await this.simpleICO.web3.eth.accounts.signTransaction(txOptions, this.wallet.privateKey)
-
         const tx = this.simpleICO.web3.eth.sendSignedTransaction(signedTx.rawTransaction)
-
         tx.on('transactionHash', hash => {
           this.simpleICO.tx = hash
         })
-
         tx.on('error', error => {
           reject(error)
         })
-
         tx.on('receipt', async receipt => {
           resolve(receipt)
         })

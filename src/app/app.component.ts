@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ContractDeploymentFactory } from '@decentralizedtechnologies/scui-lib';
 import { DetailedERC20Deployment } from '@factory/detailed-erc20.deployment';
 import { ERC20TokenCrowdsaleDeployment } from '@factory/token-crowdsale.deployment';
+import { MVT20Deployment } from '@factory/MVT20.deployment';
 
 @Component({
   selector: 'app-root',
@@ -17,5 +18,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.factory.registerContractDeployment(DetailedERC20Deployment._type, DetailedERC20Deployment)
     this.factory.registerContractDeployment(ERC20TokenCrowdsaleDeployment._type, ERC20TokenCrowdsaleDeployment)
+    this.factory.registerContractDeployment(MVT20Deployment._type, MVT20Deployment)
   }
 }

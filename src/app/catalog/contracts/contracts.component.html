@@ -2,6 +2,27 @@
   <div>
     <div class="overlay">
       <div>
+        <a [routerLink]="['/contract', MVT20Deployment, 'create']" class="btn btn-purple">Deploy one now</a>
+        <a href="https://github.com/SimpleICO/contracts/blob/master/contracts/MVT20.sol" class="btn btn-light" target="_blank">See contract code</a>
+      </div>
+    </div>
+    <header>
+      <p class="name">MVT20.sol</p>
+      <p class="short-description">Membership Verification ERC20 Token</p>
+    </header>
+    <div class="body">
+      <p>Deploy a detailed ERC20 token with whitelisting cappabilities.</p>
+      <p>The MVT20 may only be transferred if the holder is a member of the whitelist.</p>
+    </div>
+    <footer>
+      <p class="version">^0.4.24</p>
+    </footer>
+  </div>
+</article>
+<article class="contract">
+  <div>
+    <div class="overlay">
+      <div>
         <a [routerLink]="['/contract', DetailedERC20Deployment, 'create']" class="btn btn-purple">Deploy one now</a>
         <a href="https://github.com/SimpleICO/contracts/blob/master/contracts/simpletoken.sol" class="btn btn-light" target="_blank">See contract code</a>
       </div>

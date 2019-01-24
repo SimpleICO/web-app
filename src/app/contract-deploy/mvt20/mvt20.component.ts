@@ -5,23 +5,23 @@ import { WalletService } from '@decentralizedtechnologies/scui-lib';
 import { EthereumService } from '@decentralizedtechnologies/scui-lib';
 import { SharedService } from '@service/shared.service';
 import { Router } from '@angular/router';
-import { Token } from '@model/token.model';
-import { ERC20TokenCrowdsaleDeployment } from '@factory/token-crowdsale.deployment';
+import { MVT20Contract } from '@contract/MVT20.contract';
+import { MVT20Deployment } from '@factory/MVT20.deployment';
 
 const Web3 = require('web3')
 
 @Component({
-  selector: 'app-detailed-erc20',
-  templateUrl: './detailed-erc20.component.html',
-  styleUrls: ['./detailed-erc20.component.css']
+  selector: 'app-mvt20',
+  templateUrl: './mvt20.component.html',
+  styleUrls: ['./mvt20.component.scss']
 })
-export class DetailedErc20Component implements OnInit {
+export class MVT20Component implements OnInit {
 
-  ERC20TokenCrowdsaleDeployment: string = ERC20TokenCrowdsaleDeployment._type
+  MVT20Deployment: string = MVT20Deployment._type
 
   deployer: any
 
-  token: Token
+  token: MVT20Contract
 
   stepCount: number = 0
 
@@ -52,9 +52,7 @@ export class DetailedErc20Component implements OnInit {
     public eth: EthereumService,
     public shared: SharedService,
     private router: Router) {
-
-    this.deployer = contractFactory.deployer
-
+    this.deployer = this.contractFactory.deployer
     this.gasPrice = Web3.utils.fromWei(eth.defaultGasPrice.toString(), 'gwei')
   }
 
@@ -113,9 +111,7 @@ export class DetailedErc20Component implements OnInit {
     try {
       const receipt = await this.deployer.deployToken()
       this.token.setAddress(receipt.contractAddress)
-
       await this.deployer.getTokenSupply()
-
       this.steps.deployToken.isComplete = true
     } catch (error) {
       console.log(error)
@@ -129,17 +125,15 @@ export class DetailedErc20Component implements OnInit {
 
   async estimateTransactionCosts() {
     this.steps.estimateTxCosts.estimates.push({
-      text: 'ERC20 token deployment',
+      text: 'MVT20 token deployment',
       txCost: '...'
     })
     const txCost = await this.deployer.estimateTokenDeploymentCost()
     this.steps.estimateTxCosts.estimates[0].txCost = txCost.ETH
-
     this.steps.estimateTxCosts.estimates.push({
       text: 'TOTAL',
       txCost: this.deployer.txCost.ETH
     })
-
     const wei = this.deployer.txCost.WEI
     const hasInsufficientFunds = wei.gt(this.wallet.balance)
 
@@ -149,5 +143,4 @@ export class DetailedErc20Component implements OnInit {
 
     this.steps.estimateTxCosts.isComplete = true
   }
-
 }
