@@ -18,13 +18,9 @@ const Web3 = require('web3')
 export class MVT20Component implements OnInit {
 
   MVT20Deployment: string = MVT20Deployment._type
-
   deployer: any
-
   token: MVT20Contract
-
   stepCount: number = 0
-
   supply: string
 
   steps: any = {
@@ -124,23 +120,27 @@ export class MVT20Component implements OnInit {
   }
 
   async estimateTransactionCosts() {
-    this.steps.estimateTxCosts.estimates.push({
-      text: 'MVT20 token deployment',
-      txCost: '...'
-    })
-    const txCost = await this.deployer.estimateTokenDeploymentCost()
-    this.steps.estimateTxCosts.estimates[0].txCost = txCost.ETH
-    this.steps.estimateTxCosts.estimates.push({
-      text: 'TOTAL',
-      txCost: this.deployer.txCost.ETH
-    })
-    const wei = this.deployer.txCost.WEI
-    const hasInsufficientFunds = wei.gt(this.wallet.balance)
+    try {
+      this.steps.estimateTxCosts.estimates.push({
+        text: 'MVT20 token deployment',
+        txCost: '...'
+      })
+      const txCost = await this.deployer.estimateTokenDeploymentCost()
+      this.steps.estimateTxCosts.estimates[0].txCost = txCost.ETH
+      this.steps.estimateTxCosts.estimates.push({
+        text: 'TOTAL',
+        txCost: this.deployer.txCost.ETH
+      })
+      const wei = this.deployer.txCost.WEI
+      const hasInsufficientFunds = wei.gt(this.wallet.balance)
 
-    if (hasInsufficientFunds) {
-      throw new InsufficientFundsError(InsufficientFundsError.MESSAGE)
+      if (hasInsufficientFunds) {
+        throw new InsufficientFundsError(InsufficientFundsError.MESSAGE)
+      }
+
+      this.steps.estimateTxCosts.isComplete = true
+    } catch (error) {
+      console.error(error)
     }
-
-    this.steps.estimateTxCosts.isComplete = true
   }
 }

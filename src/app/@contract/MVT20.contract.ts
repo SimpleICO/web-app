@@ -1,8 +1,6 @@
 import { Token } from '@model/token.model';
 import { Wallet } from '@decentralizedtechnologies/scui-lib';
 
-declare var require: any
-
 const MVT20Interface = require('@abi/MVT20.abi.json')
 
 export class MVT20Contract extends Token {
@@ -56,15 +54,17 @@ export class MVT20Contract extends Token {
   }
 
   connect() {
-    const _contract = new this.web3.eth.Contract(MVT20Interface.abi)
-    this.instance = _contract
+    const contract = new this.web3.eth.Contract(MVT20Interface.abi, {
+      from: this.wallet.address,
+      data: MVT20Interface.bytecode,
+    })
+    this.instance = contract
     return this
   }
 
   async deploy() {
     try {
       return this.instance.deploy({
-        data: MVT20Interface.bytecode,
         arguments: [this.supply, this.name, this.symbol, this.decimals]
       })
     } catch (error) {
