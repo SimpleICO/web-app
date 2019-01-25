@@ -21,6 +21,20 @@
     </div>
   </section>
 
+  <section id="tokens" class="section" *ngIf="tokens.length > 0">
+    <header class="section-header">
+      <div class="container">
+        <h5 class="title">Tokens</h5>
+      </div>
+    </header>
+    <div class="container">
+      <article class="token" *ngFor="let token of tokens">
+        <span class="name">{{ token.tokenInfo.name }}</span>
+        <a [routerLink]="['/contract', token.tokenInfo.address, 'show', DetailedERC20Deployment]" class="crowdsale text-truncate">{{ token.tokenInfo.address }}</a>
+      </article>
+    </div>
+  </section>
+
   <app-crowdsale-by-address></app-crowdsale-by-address>
 </main>
 

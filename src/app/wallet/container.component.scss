@@ -1,5 +1,7 @@
 @import "sass/simpleico";
 
+@include crowdsale-index;
+
 #wallet {
   @include with-header;
   @include main;
