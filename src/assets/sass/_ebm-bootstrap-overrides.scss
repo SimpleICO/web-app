@@ -29,6 +29,9 @@ input[type="submit"].btn,
 }
 
 .form-group {
+  label {
+    @include bold;
+  }
   &.dark-theme {
     .form-control {
       @include input-dark-theme;

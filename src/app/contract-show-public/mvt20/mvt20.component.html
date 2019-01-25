@@ -1,15 +1,18 @@
 <app-qr-code-modal [model]="token"></app-qr-code-modal>
 
 <section class="section">
-  <div class="container">
-    <h1 class="token-name">{{ token.name }} ({{ token.symbol }})</h1>
-    <div class="eth-raised">
-      <span class="balance text-truncate" style="max-width: 210px">{{ token.address }}</span>
-      <small>Token address</small>
-      <span class="go-icon" (click)="shared.displayCrowdsaleShowModal()">
-        <i class="icon-copy"></i>
-      </span>
+  <header class="section-header">
+    <div class="container">
+      <h1 class="token-name">{{ token.name }} ({{ token.symbol }})</h1>
+      <div class="eth-raised">
+        <span class="balance text-truncate" style="max-width: 210px">{{ token.address }}</span>
+        <span class="go-icon" (click)="shared.displayCrowdsaleShowModal()">
+          <i class="icon-copy"></i>
+        </span>
+      </div>
     </div>
+  </header>
+  <div class="container">
     <article class="eth-raised">
       <small>Name</small>
       <span class="balance">{{ token.name }}</span>
@@ -28,7 +31,7 @@
     </article>
 
     <nav>
-      <a [routerLink]="['/login']" class="btn btn-primary btn-block">Login to transfer this token</a>
+      <button (click)="requestMembership()" class="btn btn-primary btn-block">Request Access</button>
     </nav>
   </div>
 </section>

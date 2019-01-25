@@ -6,19 +6,8 @@ const Web3 = require('web3')
 
 export class MVT20Contract extends Token {
 
-  name: string = ''
-  symbol: string = ''
-  decimals: number = 18
-  supply: any = 10
-  price: any = '0.1'
-  web3: any
-  truffleContract: any
-  txObject: any
   bytecode = MVT20Interface.bytecode
-  address: string = ''
   crowdsale: string
-  tx: string
-  balanceOf: number = 0
   members = []
   adminMembers = []
   pendingMembers = []
@@ -26,7 +15,6 @@ export class MVT20Contract extends Token {
   constructor(
     wallet: Wallet) {
     super(wallet)
-    this.web3 = wallet.web3
   }
 
   setAddress(address: string) {
@@ -60,27 +48,22 @@ export class MVT20Contract extends Token {
   async getAdminMembers() {
     const members = await this.instance.methods.adminMembers().call()
     this.adminMembers = members.filter(member => {
-      return this.isAddress(member)
+      return this._isAddress(member)
     })
   }
 
   async getMembers() {
     const members = await this.instance.methods.members().call()
     this.members = members.filter(member => {
-      return this.isAddress(member)
+      return this._isAddress(member)
     })
   }
 
   async getPendingRequests() {
     const members = await this.instance.methods.pendingWhitelistRequests().call()
     this.pendingMembers = members.filter(member => {
-      return this.isAddress(member)
+      return this._isAddress(member)
     })
-  }
-
-  private isAddress(address) {
-    return address !== '0x0000000000000000000000000000000000000000' &&
-      Web3.utils.isAddress(address)
   }
 
   connect() {
@@ -100,5 +83,28 @@ export class MVT20Contract extends Token {
     } catch (error) {
       console.error(error)
     }
+  }
+
+  async requestMembership() {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const txObject = await this.instance.methods.requestMembership()
+        const tx = txObject.send({
+          from: this.wallet.address,
+          value: '0x0',
+        })
+        tx.on('transactionHash', hash => {
+          this.tx = hash
+        })
+        tx.on('error', error => {
+          reject(error)
+        })
+        tx.on('receipt', async receipt => {
+          resolve(receipt)
+        })
+      } catch (error) {
+        reject(error)
+      }
+    })
   }
 }

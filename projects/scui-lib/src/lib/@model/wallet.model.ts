@@ -5,19 +5,12 @@ const $wallet = ethers.Wallet
 export class Wallet {
 
   instance: any
-
   address: string
-
   privateKey: string
-
   mnemonic: string
-
   provider: any
-
   web3: any
-
   beneficiary: string
-
   network: string
 
   constructor() { }
@@ -28,13 +21,11 @@ export class Wallet {
 
   setNetwork(network: string) {
     this.network = network
-
     return this
   }
 
   setBeneficiary(address: string) {
     this.beneficiary = address
-
     return this
   }
 
