@@ -2,10 +2,10 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { SharedService } from '@service/shared.service';
 import { WalletService } from '@decentralizedtechnologies/scui-lib';
 import { EthereumService } from '@decentralizedtechnologies/scui-lib';
-
 import { FixedSupplyDeployment } from '@factory/fixed-supply.deployment';
 import { ExistingTokenDeployment } from '@factory/existing-token.deployment';
 import { Router } from '@angular/router';
+import { MVT20Deployment } from '@factory/MVT20.deployment';
 
 declare var document: any
 
@@ -20,6 +20,7 @@ export class MobileMenuComponent implements OnInit, AfterViewInit {
 
   ExistingTokenDeployment: string = ExistingTokenDeployment._type
   FixedSupplyDeployment: string = FixedSupplyDeployment._type
+  MVT20Deployment: string = MVT20Deployment._type
 
   constructor(
     public shared: SharedService,

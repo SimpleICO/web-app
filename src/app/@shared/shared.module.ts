@@ -17,7 +17,7 @@ import { SharedModule as SCUISharedModule } from '@decentralizedtechnologies/scu
     SCUISharedModule,
   ],
   exports: [
-    AppRoutingModule,
+    CommonModule,
     AuthHeaderComponent,
     HeaderComponent,
     MobileMenuComponent,

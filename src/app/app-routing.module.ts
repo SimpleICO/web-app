@@ -15,6 +15,7 @@ import { ContainerComponent as CatalogComponent } from './catalog/container.comp
 import { ContainerComponent as SettingsComponent } from './settings/container.component';
 import { UnlockRouteGuard } from '@guard/unlock-route-guard';
 import { AcceptTermsRouteGuard } from '@guard/accept-terms-route-guard';
+import { ContainerComponent as ContractSearchComponent } from './contract-search/container.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -78,6 +79,10 @@ const routes: Routes = [
     path: 'settings',
     component: SettingsComponent,
     canActivate: [UnlockRouteGuard, AcceptTermsRouteGuard],
+  },
+  {
+    path: 'search/:contractType',
+    component: ContractSearchComponent
   },
 ]
 

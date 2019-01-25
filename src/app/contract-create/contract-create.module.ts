@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { SharedModule } from '@shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { ContainerComponent } from './container.component';
@@ -11,7 +10,6 @@ import { MVT20Component } from './mvt20/mvt20.component';
 
 @NgModule({
   imports: [
-    CommonModule,
     FormsModule,
     SharedModule
   ],

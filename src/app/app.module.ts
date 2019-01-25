@@ -19,11 +19,11 @@ import { ContractDeployModule } from './contract-deploy/contract-deploy.module';
 import { CrowdsaleByAddressModule } from './crowdsale-by-address/crowdsale-by-address.module';
 import { ContractIndexPublicModule } from './contract-index-public/contract-index-public.module';
 import { ContractShowPublicModule } from './contract-show-public/contract-show-public.module';
-import { CatalogModule } from './catalog/catalog.module';
 import { WalletModule } from './wallet/wallet.module';
 import { SettingsModule } from './settings/settings.module';
 
 import { SCUILibModule, Network } from '@decentralizedtechnologies/scui-lib';
+import { ContractSearchModule } from './contract-search/contract-search.module';
 
 @NgModule({
   declarations: [
@@ -41,13 +41,12 @@ import { SCUILibModule, Network } from '@decentralizedtechnologies/scui-lib';
     ContractIndexModule,
     ContractCreateModule,
     ContractDeployModule,
-    SharedModule,
     CrowdsaleByAddressModule,
     ContractIndexPublicModule,
     ContractShowPublicModule,
-    CatalogModule,
     WalletModule,
     SettingsModule,
+    ContractSearchModule,
     SCUILibModule.forRoot({
       network: Network.testnet
     }),

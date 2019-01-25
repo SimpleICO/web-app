@@ -1,0 +1,15 @@
+<section id="search" class="section">
+  <header class="section-header">
+    <div class="container">
+      <h4 class="title">Search for a MVT20 Token</h4>
+    </div>
+  </header>
+  <div class="container">
+    <fieldset class="form-group">
+      <input [(ngModel)]="address" autofocus="autofocus" type="text" class="form-control input-lg" placeholder="Ethereum address...">
+    </fieldset>
+    <fieldset class="form-group">
+      <a [routerLink]="['/contract', address, 'show', MVT20Deployment]" class="btn btn-primary">Search</a>
+    </fieldset>
+  </div>
+</section>

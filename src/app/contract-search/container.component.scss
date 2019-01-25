@@ -1,0 +1,6 @@
+@import "sass/simpleico.scss";
+
+#contract-search {
+  @include with-header;
+  @include main;
+}
