@@ -15,16 +15,11 @@ export abstract class ContractDeployment extends SCUIContractDeployment {
 
   abstract type: string
 
-  token: Token
-
+  token: any
   crowdsale: Crowdsale
-
   simpleICO: SimpleICO
-
   txCost: any
-
   gas: number = 0
-
   gasIncrement: number = 1000
 
   constructor(wallet: Wallet, eth: EthereumService) {

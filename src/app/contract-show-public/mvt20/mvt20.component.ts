@@ -64,7 +64,7 @@ export class MVT20Component extends PrivateMVT20Component implements OnInit {
         wallet.setProvider(window.web3.givenProvider)
         window.web3 = wallet.web3
         if (navigator.userAgent.match(/Trust/i)) {
-          wallet.setAddress(wallet.web3.eth.defaultAccount)
+          wallet.setAddress(window.web3.eth.defaultAccount)
         } else {
           wallet.setAddress(wallet.web3.givenProvider.selectedAddress)
         }

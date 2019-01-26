@@ -26,7 +26,7 @@ export class ContainerComponent implements OnInit, AfterViewInit {
     private router: Router) {
     wallet.onNewWallet.subscribe(result => {
       this.onNewWallet = true
-      this.address = result.address
+      this.address = result.address.toString()
       this.privateKey = result.privateKey
       this.mnemonic = result.mnemonic
 

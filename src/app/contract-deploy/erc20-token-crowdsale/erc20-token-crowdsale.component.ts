@@ -101,7 +101,7 @@ export class Erc20TokenCrowdsaleComponent implements OnInit {
   }
 
   setBeneficiary() {
-    const beneficiary = this.deployer.wallet.address
+    const beneficiary = this.deployer.wallet.address.toString()
     this.crowdsale.setBeneficiary(beneficiary)
   }
 

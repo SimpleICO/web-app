@@ -1,16 +1,22 @@
-import { Token } from '@model/token.model';
 import { Wallet, Address } from '@decentralizedtechnologies/scui-lib';
-import { Member, MembershipLevel } from '@model/member.model';
+import { Member } from '@model/member.model';
+import { DetailedToken } from '@model/detailed-token.model';
+import { IContract } from '@model/icontract.model';
 
 const MVT20Interface = require('@abi/MVT20.abi.json')
 
-export class MVT20Contract extends Token {
+export class MVT20Contract extends DetailedToken implements IContract {
 
   bytecode = MVT20Interface.bytecode
   crowdsale: string
+
   members: Array<Member> = []
   adminMembers: Array<Member> = []
   pendingMembers: Array<Member> = []
+  private _members = []
+  private _adminMembers = []
+  private _pendingMembers = []
+
   address: Address
 
   private _member: Member
@@ -18,17 +24,6 @@ export class MVT20Contract extends Token {
   constructor(
     wallet: Wallet) {
     super(wallet)
-  }
-
-  setAddress(address: string) {
-    this.instance.options.address = address
-    this.instance._address = address
-    this.address = new Address(address)
-    return this
-  }
-
-  getAddress(): Address {
-    return this.address
   }
 
   setMember() {
@@ -40,28 +35,11 @@ export class MVT20Contract extends Token {
     return this._member
   }
 
-  async getBalanceOf() {
-    const address: Address = this.wallet.address.toChecksumAddress()
-    const balanceOf = await this.instance.methods.balanceOf(address).call()
-    this.balanceOf = balanceOf
-  }
-
-  async getName() {
-    this.name = await this.instance.methods.name().call()
-  }
-
-  async getSymbol() {
-    this.symbol = await this.instance.methods.symbol().call()
-  }
-
-  async getTotalSupply() {
-    this.supply = await this.instance.methods.totalSupply().call()
-  }
-
   async getAdminMembers() {
     const members = await this.instance.methods.adminMembers().call()
-    this.adminMembers = members.map(_member => {
-      const member = new Member(_member, MembershipLevel.admin)
+    this.adminMembers = members.map((_member: string) => {
+      this._adminMembers.push(_member.toUpperCase())
+      const member = new Member(_member)
       member.setWallet(this.wallet)
       return member
     }).filter((member: Member) => member.isValid())
@@ -69,8 +47,9 @@ export class MVT20Contract extends Token {
 
   async getMembers() {
     const members = await this.instance.methods.members().call()
-    this.members = members.map(_member => {
-      const member = new Member(_member, MembershipLevel.member)
+    this.members = members.map((_member: string) => {
+      this._members.push(_member.toUpperCase())
+      const member = new Member(_member)
       member.setWallet(this.wallet)
       return member
     }).filter((member: Member) => member.isValid())
@@ -78,32 +57,38 @@ export class MVT20Contract extends Token {
 
   async getPendingRequests() {
     const members = await this.instance.methods.pendingWhitelistRequests().call()
-    this.pendingMembers = members.map(_member => {
-      const member = new Member(_member, MembershipLevel.pending)
+    this.pendingMembers = members.map((_member: string) => {
+      this._pendingMembers.push(_member.toUpperCase())
+      const member = new Member(_member)
       member.setWallet(this.wallet)
       return member
     }).filter((member: Member) => member.isValid())
   }
 
-  isAdminMember(member: Member): boolean {
-    return member.level === MembershipLevel.admin
+  isAdminMember(): boolean {
+    return this._walletBelongsIn(this._adminMembers, this.wallet.address)
   }
 
-  isMember(member: Member): boolean {
-    return member.level === MembershipLevel.member
+  isMember(): boolean {
+    return this._walletBelongsIn(this._members, this.wallet.address)
   }
 
-  isPendingMember(member: Member): boolean {
-    return member.level === MembershipLevel.pending
+  isPendingMember(): boolean {
+    return this._walletBelongsIn(this._pendingMembers, this.wallet.address)
   }
 
   isThisMember(member: Member): boolean {
-    return this.isMember(member) &&
-      this.address.toUpperCase() === this.wallet.address.toUpperCase()
+    return this.isMember() &&
+      member.address.toUpperCase() === this.wallet.address.toUpperCase()
   }
 
-  isGuest(member: Member): boolean {
-    return !this.isAdminMember(member) && !this.isMember(member) && !this.isPendingMember(member)
+  isGuest(): boolean {
+    return !this.isAdminMember() && !this.isMember() && !this.isPendingMember()
+  }
+
+  _walletBelongsIn(members, address: Address): boolean {
+    if (address === undefined) { return false }
+    return members.indexOf(address.toUpperCase()) !== -1
   }
 
   connect() {
