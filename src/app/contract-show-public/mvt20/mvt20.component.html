@@ -53,22 +53,29 @@
       <small>Admin members</small>
       <div class="member" *ngFor="let member of token.adminMembers">
         <a href="{{ eth.etherscanURL }}/address/{{ member }}" target="_blank" class="text-truncate">{{ member }}</a>
-        <div *ngIf="token.isAdminMember()" class="renounce"><span (click)="renounceAdminMembership()" class="badge badge-light">Renounce</span></div>
+        <div *ngIf="token.isAdminMember()" class="renounce">
+          <span (click)="renounceWhitelistAdmin()" class="badge badge-light">Renounce</span>
+        </div>
       </div>
     </article>
     <article class="info">
       <small>Members</small>
       <div class="member" *ngFor="let member of token.members">
         <a href="{{ eth.etherscanURL }}/address/{{ member }}" target="_blank" class="text-truncate">{{ member }}</a>
-        <div *ngIf="token.isAdminMember()" class="reject"><span (click)="removeMembership()" class="badge badge-light">Remove</span></div>
-        <div *ngIf="!token.isAdminMember() && token.isMember()" class="renounce"><span (click)="renounceMembership()" class="badge badge-light">Renounce</span></div>
+        <div class="reject">
+          <span *ngIf="token.isAdminMember()" (click)="removeWhitelisted()" class="badge badge-light">Remove</span>
+          <span *ngIf="token.isThisMember(member)" (click)="renounceWhitelisted()" class="badge badge-light">Renounce</span>
+        </div>
       </div>
     </article>
     <article class="info" *ngIf="token.pendingMembers.length > 0">
       <small>Pending requests</small>
       <div class="member" *ngFor="let member of token.pendingMembers">
         <a href="{{ eth.etherscanURL }}/address/{{ member }}" target="_blank" class="text-truncate">{{ member }}</a>
-        <div *ngIf="token.isAdminMember()" class="approve"><span (click)="approve()" class="badge badge-light">Approve</span></div>
+        <div *ngIf="token.isAdminMember()" class="approve">
+          <span (click)="addWhitelisted()" class="badge badge-light">Approve</span>
+          <span (click)="revokeMembershipRequest()" class="badge badge-light">Reject</span>
+        </div>
       </div>
     </article>
   </div>

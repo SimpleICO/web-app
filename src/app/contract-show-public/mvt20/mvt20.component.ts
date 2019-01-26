@@ -48,8 +48,7 @@ export class MVT20Component extends PrivateMVT20Component implements OnInit {
       wallet.setProvider(window.web3.givenProvider)
       window.web3 = wallet.web3
       if (navigator.userAgent.match(/Trust/i)) {
-        const address = await wallet.web3.eth.getAccounts()
-        wallet.setAddress(address)
+        wallet.setAddress(wallet.web3.eth.defaultAccount)
       } else {
         wallet.setAddress(wallet.web3.givenProvider.selectedAddress)
       }
@@ -68,9 +67,9 @@ export class MVT20Component extends PrivateMVT20Component implements OnInit {
     }
   }
 
-  async removeMembership() { }
-  async renounceMembership() { }
-  async renounceAdminMembership() { }
+  async removeWhitelisted() { }
+  async renounceWhitelisted() { }
+  async renounceWhitelistAdmin() { }
+  async addWhitelisted() { }
   async transfer() { }
-  async approve() { }
 }

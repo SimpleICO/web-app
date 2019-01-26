@@ -99,6 +99,10 @@ export class MVT20Contract extends Token {
     return this.members.indexOf(this.wallet.address) !== -1
   }
 
+  isThisMember(member: string): boolean {
+    return this.isMember() && member === this.wallet.address;
+  }
+
   isPendingMember(): boolean {
     return this.pendingMembers.indexOf(this.wallet.address) !== -1
   }

@@ -8,10 +8,14 @@
 #whitelist {
   .member {
     @include flex-row;
+    margin-bottom: get-spacer(1);
     .approve,
     .reject,
     .renounce {
       margin-left: auto;
+      .badge {
+        margin-left: get-spacer(1);
+      }
     }
   }
 }
