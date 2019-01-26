@@ -76,7 +76,7 @@ export class WalletService {
   }
 
   getAddress() {
-    return this.wallet ? this.wallet.address : '0x00000000000000000'
+    return this.wallet ? this.wallet.address.toString() : '0x00000000000000000'
   }
 
   unlock(seed: string) {

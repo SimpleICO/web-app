@@ -40,6 +40,7 @@ export class MVT20Component implements OnInit {
   async getTokenData() {
     this.token.getName()
     this.token.getSymbol()
+    this.token.getTotalSupply()
     this.token.getAdminMembers()
     this.token.getMembers()
     this.token.getPendingRequests()

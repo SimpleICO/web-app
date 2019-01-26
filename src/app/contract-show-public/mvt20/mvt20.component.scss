@@ -9,6 +9,9 @@
   .member {
     @include flex-row;
     margin-bottom: get-spacer(1);
+    .text-truncate {
+      max-width: 140px;
+    }
     .approve,
     .reject,
     .renounce {

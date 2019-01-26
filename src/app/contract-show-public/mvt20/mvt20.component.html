@@ -27,20 +27,24 @@
     </article>
     <article class="eth-raised">
       <small>Supply</small>
-      <span class="balance">{{ token.symbol }} {{ token.supply }}</span>
+      <span class="balance">{{ token.symbol }} {{ token.supply | weiToEther }}</span>
+    </article>
+    <article class="eth-raised">
+      <small>Balance</small>
+      <span class="balance">{{ token.symbol }} {{ token.balanceOf | weiToEther }}</span>
     </article>
     <article class="eth-raised">
       <small>Membership level</small>
-      <span class="balance" *ngIf="token.isAdminMember()">Admin member</span>
-      <span class="balance" *ngIf="!token.isAdminMember() && token.isMember()">Member</span>
-      <span class="balance" *ngIf="token.isPendingMember()">Requested</span>
-      <span class="balance" *ngIf="token.isGuest()">None</span>
+      <span class="balance" *ngIf="token.isAdminMember(member)">Admin member</span>
+      <span class="balance" *ngIf="!token.isAdminMember(member) && token.isMember(member)">Member</span>
+      <span class="balance" *ngIf="token.isPendingMember(member)">Requested</span>
+      <span class="balance" *ngIf="token.isGuest(member)">None</span>
     </article>
 
     <nav>
-      <button *ngIf="token.isGuest()" (click)="requestMembership()" class="btn btn-primary btn-block">Request Access</button>
+      <button *ngIf="token.isGuest(member)" (click)="requestMembership()" class="btn btn-primary btn-block">Request Access</button>
     </nav>
-    <nav *ngIf="token.isAdminMember() || token.isMember()">
+    <nav *ngIf="token.isAdminMember(member) || token.isMember(member)">
       <button (click)="transfer()" class="btn btn-primary btn-block">Transfer funds</button>
     </nav>
   </div>
@@ -51,28 +55,28 @@
     <h5 class="title">Whitelist information</h5>
     <article class="info">
       <small>Admin members</small>
-      <div class="member" *ngFor="let member of token.adminMembers">
-        <a href="{{ eth.etherscanURL }}/address/{{ member }}" target="_blank" class="text-truncate">{{ member }}</a>
-        <div *ngIf="token.isAdminMember()" class="renounce">
+      <div class="member" *ngFor="let m of token.adminMembers">
+        <a href="{{ eth.etherscanURL }}/address/{{ m.address.toString() }}" target="_blank" class="text-truncate">{{ m.address.toString() }}</a>
+        <div *ngIf="token.isAdminMember(m)" class="renounce">
           <span (click)="renounceWhitelistAdmin()" class="badge badge-light">Renounce</span>
         </div>
       </div>
     </article>
     <article class="info">
       <small>Members</small>
-      <div class="member" *ngFor="let member of token.members">
-        <a href="{{ eth.etherscanURL }}/address/{{ member }}" target="_blank" class="text-truncate">{{ member }}</a>
+      <div class="member" *ngFor="let m of token.members">
+        <a href="{{ eth.etherscanURL }}/address/{{ m.address.toString() }}" target="_blank" class="text-truncate">{{ m.address.toString() }}</a>
         <div class="reject">
-          <span *ngIf="token.isAdminMember()" (click)="removeWhitelisted()" class="badge badge-light">Remove</span>
-          <span *ngIf="token.isThisMember(member)" (click)="renounceWhitelisted()" class="badge badge-light">Renounce</span>
+          <span *ngIf="token.isAdminMember(m)" (click)="removeWhitelisted()" class="badge badge-light">Remove</span>
+          <span *ngIf="token.isThisMember(m)" (click)="renounceWhitelisted()" class="badge badge-light">Renounce</span>
         </div>
       </div>
     </article>
     <article class="info" *ngIf="token.pendingMembers.length > 0">
       <small>Pending requests</small>
-      <div class="member" *ngFor="let member of token.pendingMembers">
-        <a href="{{ eth.etherscanURL }}/address/{{ member }}" target="_blank" class="text-truncate">{{ member }}</a>
-        <div *ngIf="token.isAdminMember()" class="approve">
+      <div class="member" *ngFor="let m of token.pendingMembers">
+        <a href="{{ eth.etherscanURL }}/address/{{ m.address.toString() }}" target="_blank" class="text-truncate">{{ m.address.toString() }}</a>
+        <div *ngIf="token.isAdminMember(m)" class="approve">
           <span (click)="addWhitelisted()" class="badge badge-light">Approve</span>
           <span (click)="revokeMembershipRequest()" class="badge badge-light">Reject</span>
         </div>
