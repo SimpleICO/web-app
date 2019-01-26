@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MVT20Component as PrivateMVT20Component } from '../../contract-show/mvt20/mvt20.component';
+import { Wallet } from '@decentralizedtechnologies/scui-lib';
 
 declare const window: any
 
@@ -21,17 +22,24 @@ export class MVT20Component extends PrivateMVT20Component implements OnInit {
     this.enableEthereumBrowser()
   }
 
+  detectAccountChange() {
+    const wallet: Wallet = this.wallet.getInstance()
+    wallet.web3.currentProvider.publicConfigStore.on('update', (account) => {
+      wallet.setAddress(account.selectedAddress)
+    })
+  }
+
   async enableEthereumBrowser() {
-    this.token.setEthereumService(this.eth)
-    const wallet = this.wallet.getInstance()
+    const wallet: Wallet = this.wallet.getInstance()
 
     if (window.ethereum) {
       this.token.instance.setProvider(window.ethereum)
       wallet.setProvider(window.ethereum)
       window.web3 = wallet.web3
       try {
-        const enable = await window.ethereum.enable()
-        wallet.address = wallet.web3.givenProvider.selectedAddress
+        await window.ethereum.enable()
+        wallet.setAddress(wallet.web3.givenProvider.selectedAddress)
+        this.detectAccountChange()
       } catch (error) {
         console.error(error)
       }
@@ -40,10 +48,12 @@ export class MVT20Component extends PrivateMVT20Component implements OnInit {
       wallet.setProvider(window.web3.givenProvider)
       window.web3 = wallet.web3
       if (navigator.userAgent.match(/Trust/i)) {
-        wallet.address = await wallet.web3.eth.getAccounts()
+        const address = await wallet.web3.eth.getAccounts()
+        wallet.setAddress(address)
       } else {
-        wallet.address = wallet.web3.givenProvider.selectedAddress
+        wallet.setAddress(wallet.web3.givenProvider.selectedAddress)
       }
+      this.detectAccountChange()
     } else {
       throw new Error('No-Ethereum browser detected. You should consider trying MetaMask!')
     }
@@ -57,4 +67,10 @@ export class MVT20Component extends PrivateMVT20Component implements OnInit {
       console.error(error)
     }
   }
+
+  async removeMembership() { }
+  async renounceMembership() { }
+  async renounceAdminMembership() { }
+  async transfer() { }
+  async approve() { }
 }

@@ -4,3 +4,14 @@
 .token-name {
   margin-bottom: 0;
 }
+
+#whitelist {
+  .member {
+    @include flex-row;
+    .approve,
+    .reject,
+    .renounce {
+      margin-left: auto;
+    }
+  }
+}

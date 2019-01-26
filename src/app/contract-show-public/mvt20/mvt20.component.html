@@ -5,7 +5,7 @@
     <div class="container">
       <h1 class="token-name">{{ token.name }} ({{ token.symbol }})</h1>
       <div class="eth-raised">
-        <span class="balance text-truncate" style="max-width: 210px">{{ token.address }}</span>
+        <a href="{{ eth.etherscanURL }}/token/{{ token.getAddress() }}" target="_blank" class="text-truncate" class="balance text-truncate" style="max-width: 210px">{{ token.address }}</a>
         <span class="go-icon" (click)="shared.displayCrowdsaleShowModal()">
           <i class="icon-copy"></i>
         </span>
@@ -29,9 +29,19 @@
       <small>Supply</small>
       <span class="balance">{{ token.symbol }} {{ token.supply }}</span>
     </article>
+    <article class="eth-raised">
+      <small>Membership level</small>
+      <span class="balance" *ngIf="token.isAdminMember()">Admin member</span>
+      <span class="balance" *ngIf="!token.isAdminMember() && token.isMember()">Member</span>
+      <span class="balance" *ngIf="token.isPendingMember()">Requested</span>
+      <span class="balance" *ngIf="token.isGuest()">None</span>
+    </article>
 
     <nav>
-      <button (click)="requestMembership()" class="btn btn-primary btn-block">Request Access</button>
+      <button *ngIf="token.isGuest()" (click)="requestMembership()" class="btn btn-primary btn-block">Request Access</button>
+    </nav>
+    <nav *ngIf="token.isAdminMember() || token.isMember()">
+      <button (click)="transfer()" class="btn btn-primary btn-block">Transfer funds</button>
     </nav>
   </div>
 </section>
@@ -41,25 +51,25 @@
     <h5 class="title">Whitelist information</h5>
     <article class="info">
       <small>Admin members</small>
-      <a *ngFor="let member of token.adminMembers" href="{{ eth.etherscanURL }}/address/{{ member }}" target="_blank" class="text-truncate">{{ member }}</a>
+      <div class="member" *ngFor="let member of token.adminMembers">
+        <a href="{{ eth.etherscanURL }}/address/{{ member }}" target="_blank" class="text-truncate">{{ member }}</a>
+        <div *ngIf="token.isAdminMember()" class="renounce"><span (click)="renounceAdminMembership()" class="badge badge-light">Renounce</span></div>
+      </div>
     </article>
     <article class="info">
       <small>Members</small>
-      <a *ngFor="let member of token.members" href="{{ eth.etherscanURL }}/address/{{ member }}" target="_blank" class="text-truncate">{{ member }}</a>
+      <div class="member" *ngFor="let member of token.members">
+        <a href="{{ eth.etherscanURL }}/address/{{ member }}" target="_blank" class="text-truncate">{{ member }}</a>
+        <div *ngIf="token.isAdminMember()" class="reject"><span (click)="removeMembership()" class="badge badge-light">Remove</span></div>
+        <div *ngIf="!token.isAdminMember() && token.isMember()" class="renounce"><span (click)="renounceMembership()" class="badge badge-light">Renounce</span></div>
+      </div>
     </article>
     <article class="info" *ngIf="token.pendingMembers.length > 0">
       <small>Pending requests</small>
-      <a *ngFor="let member of token.pendingMembers" href="{{ eth.etherscanURL }}/address/{{ member }}" target="_blank" class="text-truncate">{{ member }}</a>
-    </article>
-  </div>
-</section>
-
-<section id="info" class="section">
-  <div class="container">
-    <h5 class="title">Contract information</h5>
-    <article class="info">
-      <small>MVT20 Token contract</small>
-      <a href="{{ eth.etherscanURL }}/token/{{ token.getAddress() }}" target="_blank" class="text-truncate">{{ token.getAddress() }}</a>
+      <div class="member" *ngFor="let member of token.pendingMembers">
+        <a href="{{ eth.etherscanURL }}/address/{{ member }}" target="_blank" class="text-truncate">{{ member }}</a>
+        <div *ngIf="token.isAdminMember()" class="approve"><span (click)="approve()" class="badge badge-light">Approve</span></div>
+      </div>
     </article>
   </div>
 </section>

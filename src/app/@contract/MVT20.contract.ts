@@ -47,23 +47,29 @@ export class MVT20Contract extends Token {
 
   async getAdminMembers() {
     const members = await this.instance.methods.adminMembers().call()
-    this.adminMembers = members.filter(member => {
-      return this._isAddress(member)
-    })
+    this.adminMembers = members.map(member => {
+      if (this._isAddress(member)) {
+        return member.toUpperCase()
+      }
+    }).filter(member => member !== undefined)
   }
 
   async getMembers() {
     const members = await this.instance.methods.members().call()
-    this.members = members.filter(member => {
-      return this._isAddress(member)
-    })
+    this.members = members.map(member => {
+      if (this._isAddress(member)) {
+        return member.toUpperCase()
+      }
+    }).filter(member => member !== undefined)
   }
 
   async getPendingRequests() {
     const members = await this.instance.methods.pendingWhitelistRequests().call()
-    this.pendingMembers = members.filter(member => {
-      return this._isAddress(member)
-    })
+    this.pendingMembers = members.map(member => {
+      if (this._isAddress(member)) {
+        return member.toUpperCase()
+      }
+    }).filter(member => member !== undefined)
   }
 
   connect() {
@@ -83,6 +89,22 @@ export class MVT20Contract extends Token {
     } catch (error) {
       console.error(error)
     }
+  }
+
+  isAdminMember(): boolean {
+    return this.adminMembers.indexOf(this.wallet.address) !== -1
+  }
+
+  isMember(): boolean {
+    return this.members.indexOf(this.wallet.address) !== -1
+  }
+
+  isPendingMember(): boolean {
+    return this.pendingMembers.indexOf(this.wallet.address) !== -1
+  }
+
+  isGuest(): boolean {
+    return !this.isAdminMember() && !this.isMember() && !this.isPendingMember()
   }
 
   async requestMembership() {

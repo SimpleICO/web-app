@@ -41,6 +41,18 @@ export class Wallet {
     return this
   }
 
+  setAddress(address: string) {
+    if (this._isAddress(address)) {
+      this.address = address.toUpperCase()
+    }
+    return this
+  }
+
+  _isAddress(address) {
+    return address !== '0x0000000000000000000000000000000000000000' &&
+      Web3.utils.isAddress(address)
+  }
+
   unlockFromMnemonic(mnemonic: string) {
     try {
       const wallet = $wallet.fromMnemonic(mnemonic)
