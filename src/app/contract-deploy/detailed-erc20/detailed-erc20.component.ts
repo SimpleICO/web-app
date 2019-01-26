@@ -84,7 +84,7 @@ export class DetailedErc20Component implements OnInit {
 
   finish() {
     try {
-      return this.router.navigate([`/contract/${this.token.address}/show/${this.deployer.type}`])
+      return this.router.navigate([`/contract/${this.token.address}/details/${this.deployer.type}`])
     } catch (error) {
       console.log(error)
     }

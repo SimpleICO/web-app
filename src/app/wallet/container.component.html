@@ -30,7 +30,7 @@
     <div class="container">
       <article class="token" *ngFor="let token of tokens">
         <span class="name">{{ token.tokenInfo.name }}</span>
-        <a [routerLink]="['/contract', token.tokenInfo.address, 'show', DetailedERC20Deployment]" class="crowdsale text-truncate">{{ token.tokenInfo.address }}</a>
+        <a [routerLink]="['/contract', token.tokenInfo.address, 'details', DetailedERC20Deployment]" class="crowdsale text-truncate">{{ token.tokenInfo.address }}</a>
       </article>
     </div>
   </section>

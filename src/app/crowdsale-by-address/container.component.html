@@ -7,7 +7,7 @@
   <div class="container">
     <article class="token" *ngFor="let crowdsale of crowdsales">
       <span class="name">{{ crowdsale.getToken().name }}</span>
-      <a [routerLink]="['/contract', crowdsale.getToken().crowdsale, 'show', FixedSupplyDeployment]" class="crowdsale text-truncate">{{ crowdsale.getToken().crowdsale }}</a>
+      <a [routerLink]="['/contract', crowdsale.getToken().crowdsale, 'details', FixedSupplyDeployment]" class="crowdsale text-truncate">{{ crowdsale.getToken().crowdsale }}</a>
     </article>
   </div>
 </section>

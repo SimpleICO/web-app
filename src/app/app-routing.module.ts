@@ -48,12 +48,12 @@ const routes: Routes = [
     canActivate: [UnlockRouteGuard, AcceptTermsRouteGuard],
   },
   {
-    path: 'contract/:contractAddress/show/:contractType',
+    path: 'contract/:contractAddress/details/:contractType',
     component: ContractShowComponent,
     canActivate: [UnlockRouteGuard, AcceptTermsRouteGuard],
   },
   {
-    path: 'public/contract/:contractAddress/show/:contractType',
+    path: 'public/contract/:contractAddress/details/:contractType',
     component: ContractShowPublicComponent,
   },
   {
