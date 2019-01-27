@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MVT20Component as PrivateMVT20Component } from '../../contract-show/mvt20/mvt20.component';
-import { Wallet } from '@decentralizedtechnologies/scui-lib';
+import { Wallet, Address } from '@decentralizedtechnologies/scui-lib';
 import { Member } from '@model/member.model';
 
 declare const window: any
@@ -15,6 +15,17 @@ const Web3 = require('web3');
 export class MVT20Component extends PrivateMVT20Component implements OnInit {
 
   member: Member = new Member('')
+  display = false
+
+  error = {
+    display: false,
+    msg: '',
+  }
+
+  payload = {
+    receiver: '',
+    amount: 0,
+  }
 
   ngOnInit() {
     this.settings.onNetworkChange.subscribe((networkChanged) => {
@@ -28,8 +39,7 @@ export class MVT20Component extends PrivateMVT20Component implements OnInit {
   async init() {
     try {
       await this.enableEthereumBrowser()
-      this.token.getBalanceOf()
-      this.token.setMember()
+      this.refresh()
     } catch (error) {
       console.error(error)
     }
@@ -39,8 +49,13 @@ export class MVT20Component extends PrivateMVT20Component implements OnInit {
     const wallet: Wallet = this.wallet.getInstance()
     wallet.web3.currentProvider.publicConfigStore.on('update', (account) => {
       wallet.setAddress(account.selectedAddress)
-      this.token.setMember()
+      this.refresh()
     })
+  }
+
+  refresh() {
+    this.token.setMember()
+    this.token.getBalanceOf()
   }
 
   enableEthereumBrowser() {
@@ -88,5 +103,39 @@ export class MVT20Component extends PrivateMVT20Component implements OnInit {
   async renounceWhitelisted() { }
   async renounceWhitelistAdmin() { }
   async addWhitelisted() { }
-  async transfer() { }
+
+  async transfer() {
+    try {
+      // const isAdminMember = this.token._addressBelongsIn(this.token._adminMembers, this.payload.receiver)
+      const receiver = new Address(this.payload.receiver)
+      const isMember = this.token._addressBelongsIn(this.token._members, receiver)
+      if (!isMember) {
+        this.error.display = true
+        this.error.msg = `Address <span class="text-truncate address">${receiver.toChecksumAddress()}</span> is not a member`
+        return false
+      }
+
+      if (isNaN(Number(this.payload.amount)) || this.payload.amount <= 0) {
+        this.error.display = true
+        this.error.msg = `Address <span class="text-truncate address">${receiver.toChecksumAddress()}</span> is not a member`
+        return false
+      }
+
+      this.error.display = false
+      this.error.msg = ''
+
+      const receipt = this.token.transfer(receiver, this.payload.amount)
+      console.log(receipt)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  displayModal() {
+    this.display = true
+  }
+
+  resetModal() {
+    this.display = false
+  }
 }

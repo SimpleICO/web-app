@@ -48,6 +48,13 @@
   }
 }
 
+.text-truncate {
+  &.address {
+    max-width: 140px;
+    display: block;
+  }
+}
+
 .separator {
   margin-bottom: get-spacer(5);
   text-align: center;
@@ -113,6 +120,19 @@
   right: 0;
   left: 0;
   top: 0;
+  .title {
+    @include bold;
+  }
+  .error {
+    border-radius: $border-radius;
+    margin-bottom: get-spacer(3);
+    padding: get-spacer(2);
+    background-color: $red;
+    color: white;
+    .message {
+      margin: 0;
+    }
+  }
   .modal-body {
     border-radius: $border-radius-lg;
     background-color: white;

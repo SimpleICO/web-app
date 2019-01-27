@@ -1,5 +1,39 @@
 <app-qr-code-modal [model]="token"></app-qr-code-modal>
 
+<div class="modal" *ngIf="display" id="qr-code-modal">
+  <div class="close" (click)="resetModal()">
+    <div class="container">
+      <i class="icon-cross-circle"></i>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-sm-8">
+        <div class="modal-body">
+          <h4 class="title">Transfer {{ token.symbol }}</h4>
+          <p>Note that you can only transfer to whitelisted addresses</p>
+          <fieldset class="form-group">
+            <label for="receiver">Receiver</label>
+            <input [(ngModel)]="payload.receiver" type="text" class="form-control" placeholder="Ethereum address...">
+          </fieldset>
+          <fieldset class="form-group">
+            <label for="amount">Amount ({{ token.symbol }})</label>
+            <input [(ngModel)]="payload.amount" type="text" class="form-control" placeholder="Enter {{ token.symbol }} amount">
+          </fieldset>
+          <div class="error" *ngIf="error.display">
+            <p class="message" [innerHTML]="error.msg | keepHtml"></p>
+          </div>
+          <fieldset class="form-group mb-0 text-right">
+            <button (click)="transfer()" class="btn btn-primary">Transfer {{ token.symbol }}</button>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <section class="section">
   <header class="section-header">
     <div class="container">
@@ -45,7 +79,7 @@
       <button *ngIf="token.isGuest()" (click)="requestMembership()" class="btn btn-primary btn-block">Request Access</button>
     </nav>
     <nav *ngIf="token.isAdminMember() || token.isMember()">
-      <button (click)="transfer()" class="btn btn-primary btn-block">Transfer funds</button>
+      <button (click)="displayModal()" class="btn btn-primary btn-block">Transfer funds</button>
     </nav>
   </div>
 </section>

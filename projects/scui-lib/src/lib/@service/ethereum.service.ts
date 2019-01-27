@@ -28,13 +28,10 @@ export class EthereumService {
   }
 
   setEtherScanURLByNetwork() {
-
     const networks = {}
     networks[Network.mainnet] = EthereumService.ETHERSCAN_MAINNET
     networks[Network.testnet] = EthereumService.ETHERSCAN_TESTNET
-
     this.etherscanURL = networks[this.wallet.network]
-
     return this
   }
 
@@ -43,7 +40,6 @@ export class EthereumService {
    * @param price Price should enter as an integer, eg. 36
    */
   updateGasPrice(price: number) {
-
     this.defaultGasPrice = Web3.utils.toWei(price.toString(), 'gwei')
   }
 

@@ -13,9 +13,9 @@ export class MVT20Contract extends DetailedToken implements IContract {
   members: Array<Member> = []
   adminMembers: Array<Member> = []
   pendingMembers: Array<Member> = []
-  private _members = []
-  private _adminMembers = []
-  private _pendingMembers = []
+  _members = []
+  _adminMembers = []
+  _pendingMembers = []
 
   address: Address
 
@@ -66,15 +66,15 @@ export class MVT20Contract extends DetailedToken implements IContract {
   }
 
   isAdminMember(): boolean {
-    return this._walletBelongsIn(this._adminMembers, this.wallet.address)
+    return this._addressBelongsIn(this._adminMembers, this.wallet.address)
   }
 
   isMember(): boolean {
-    return this._walletBelongsIn(this._members, this.wallet.address)
+    return this._addressBelongsIn(this._members, this.wallet.address)
   }
 
   isPendingMember(): boolean {
-    return this._walletBelongsIn(this._pendingMembers, this.wallet.address)
+    return this._addressBelongsIn(this._pendingMembers, this.wallet.address)
   }
 
   isThisMember(member: Member): boolean {
@@ -86,9 +86,9 @@ export class MVT20Contract extends DetailedToken implements IContract {
     return !this.isAdminMember() && !this.isMember() && !this.isPendingMember()
   }
 
-  _walletBelongsIn(members, address: Address): boolean {
+  _addressBelongsIn(members, address: Address): boolean {
     if (address === undefined) { return false }
-    return members.indexOf(address.toUpperCase()) !== -1
+    return members.includes(address.toUpperCase())
   }
 
   connect() {
@@ -110,12 +110,36 @@ export class MVT20Contract extends DetailedToken implements IContract {
     }
   }
 
+  async transfer(to: Address, _value: any) {
+    const value = this.wallet.web3.utils.toWei(_value, 'ether')
+    return new Promise(async (resolve, reject) => {
+      try {
+        const txObject = await this.instance.methods.transfer(to.toChecksumAddress(), value)
+        const tx = txObject.send({
+          from: this.wallet.address.toChecksumAddress(),
+          value: '0x0',
+        })
+        tx.on('transactionHash', hash => {
+          this.tx = hash
+        })
+        tx.on('error', error => {
+          reject(error)
+        })
+        tx.on('receipt', async receipt => {
+          resolve(receipt)
+        })
+      } catch (error) {
+        reject(error)
+      }
+    })
+  }
+
   async requestMembership() {
     return new Promise(async (resolve, reject) => {
       try {
         const txObject = await this.instance.methods.requestMembership()
         const tx = txObject.send({
-          from: this.wallet.address,
+          from: this.wallet.address.toChecksumAddress(),
           value: '0x0',
         })
         tx.on('transactionHash', hash => {

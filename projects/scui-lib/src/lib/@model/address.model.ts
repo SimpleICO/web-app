@@ -25,6 +25,6 @@ export class Address {
   }
 
   toChecksumAddress(): string {
-    return Web3.utils.toChecksumAddress(this.address)
+    return this.isValid() ? Web3.utils.toChecksumAddress(this.address) : ''
   }
 }
