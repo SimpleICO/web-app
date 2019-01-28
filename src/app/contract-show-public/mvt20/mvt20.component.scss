@@ -5,7 +5,15 @@
   margin-bottom: 0;
 }
 
-
+.request-access {
+  border-radius: $border-radius;
+  border: 2px solid $black;
+  padding: get-spacer(3);
+  h5 {
+    @include bold;
+    text-align: center;
+  }
+}
 
 #whitelist {
   .member {
