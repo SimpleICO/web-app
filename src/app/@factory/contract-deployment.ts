@@ -96,7 +96,7 @@ export abstract class ContractDeployment extends SCUIContractDeployment {
         const nonce = await this.eth.getNonce(this.simpleICO)
         const txObject = this.simpleICO.instance.methods.addCrowdsale(this.crowdsale.getAddress())
         const txOptions = {
-          from: this.wallet.address,
+          from: this.wallet.address.toChecksumAddress(),
           to: this.simpleICO.getAddress(),
           value: '0x0',
           gas: Web3.utils.toHex(this.gas),

@@ -93,7 +93,7 @@ export class MVT20Contract extends DetailedToken implements IContract {
 
   connect() {
     const contract = new this.web3.eth.Contract(MVT20Interface.abi, {
-      from: this.wallet.address,
+      from: this.wallet.address.toChecksumAddress(),
       data: MVT20Interface.bytecode,
     })
     this.instance = contract

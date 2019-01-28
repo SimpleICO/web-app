@@ -2,7 +2,7 @@ const Web3 = require('web3')
 
 export class Address {
 
-  address = '0x0'
+  address = '0x0000000000000000000000000000000000000000'
 
   constructor(address: string) {
     if (this.isValid(address)) {

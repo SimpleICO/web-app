@@ -15,7 +15,9 @@ export class Wallet {
   beneficiary: string
   network: string
 
-  constructor() { }
+  constructor() {
+    this.setAddress('')
+  }
 
   getBalance() {
     return this.web3.eth.getBalance(this._address.toString())

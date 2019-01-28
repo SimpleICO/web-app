@@ -46,7 +46,7 @@ export class ERC20TokenCrowdsaleDeployment extends ContractDeployment {
         const nonce = await this.eth.getNonce(this.crowdsale)
 
         const txOptions = {
-          from: this.wallet.address,
+          from: this.wallet.address.toChecksumAddress(),
           value: '0x0',
           gas: Web3.utils.toHex(this.gas),
           gasLimit: Web3.utils.toHex(this.gas),
@@ -89,7 +89,7 @@ export class ERC20TokenCrowdsaleDeployment extends ContractDeployment {
         const nonce = await this.eth.getNonce(this.crowdsale)
 
         const txOptions = {
-          from: this.wallet.address,
+          from: this.wallet.address.toChecksumAddress(),
           to: this.crowdsale.address,
           value: '0x0',
           gas: Web3.utils.toHex(this.gas),
@@ -134,7 +134,7 @@ export class ERC20TokenCrowdsaleDeployment extends ContractDeployment {
         const txObject = this.token.instance.methods.approve(this.crowdsale.getAddress(), amount)
 
         const txOptions = {
-          from: this.wallet.address,
+          from: this.wallet.address.toChecksumAddress(),
           to: this.token.getAddress(),
           value: '0x0',
           gas: Web3.utils.toHex(this.gas),

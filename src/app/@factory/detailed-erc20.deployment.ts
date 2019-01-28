@@ -37,7 +37,7 @@ export class DetailedERC20Deployment extends ContractDeployment {
         const txObject = await this.token.deploy()
 
         const txOptions = {
-          from: this.wallet.address,
+          from: this.wallet.address.toChecksumAddress(),
           value: '0x0',
           gas: Web3.utils.toHex(this.gas),
           gasLimit: Web3.utils.toHex(this.gas),
