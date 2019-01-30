@@ -79,7 +79,7 @@ export class MVT20Component extends PrivateMVT20Component implements OnInit {
         wallet.setProvider(window.web3.givenProvider)
         window.web3 = wallet.web3
         if (navigator.userAgent.match(/Trust/i)) {
-          wallet.setAddress(window.web3.eth.defaultAccount)
+          wallet.setAddress(wallet.web3.givenProvider.selectedAddress)
         } else {
           wallet.setAddress(wallet.web3.givenProvider.selectedAddress)
         }
@@ -99,14 +99,48 @@ export class MVT20Component extends PrivateMVT20Component implements OnInit {
     }
   }
 
-  async removeWhitelisted() { }
-  async renounceWhitelisted() { }
-  async renounceWhitelistAdmin() { }
-  async addWhitelisted() { }
+  async removeWhitelisted(member) {
+    try {
+      await this.token.removeWhitelisted(member)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  async renounceWhitelisted() {
+    try {
+      await this.token.renounceWhitelisted()
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  async renounceWhitelistAdmin() {
+    try {
+      await this.token.renounceWhitelistAdmin()
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  async addWhitelisted(member: Member) {
+    try {
+      await this.token.addWhitelisted(member)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  async revokeMembershipRequest(member: Member) {
+    try {
+      await this.token.revokeMembershipRequest(member)
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   async transfer() {
     try {
-      // const isAdminMember = this.token._addressBelongsIn(this.token._adminMembers, this.payload.receiver)
       const receiver = new Address(this.payload.receiver)
       const isMember = this.token._addressBelongsIn(this.token._members, receiver)
       if (!isMember) {
@@ -124,8 +158,7 @@ export class MVT20Component extends PrivateMVT20Component implements OnInit {
       this.error.display = false
       this.error.msg = ''
 
-      const receipt = this.token.transfer(receiver, this.payload.amount)
-      console.log(receipt)
+      const receipt = await this.token.transfer(receiver, this.payload.amount)
     } catch (error) {
       console.error(error)
     }

@@ -110,6 +110,121 @@ export class MVT20Contract extends DetailedToken implements IContract {
     }
   }
 
+  async addWhitelisted(member: Member) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const txObject = await this.instance.methods.addWhitelisted(member.address.toChecksumAddress())
+        const tx = txObject.send({
+          from: this.wallet.address.toChecksumAddress(),
+          value: '0x0',
+        })
+        tx.on('transactionHash', hash => {
+          this.tx = hash
+        })
+        tx.on('error', error => {
+          reject(error)
+        })
+        tx.on('receipt', async receipt => {
+          resolve(receipt)
+        })
+      } catch (error) {
+        reject(error)
+      }
+    })
+  }
+
+  async revokeMembershipRequest(member: Member) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const txObject = await this.instance.methods.revokeMembershipRequest(member.address.toChecksumAddress())
+        const tx = txObject.send({
+          from: this.wallet.address.toChecksumAddress(),
+          value: '0x0',
+        })
+        tx.on('transactionHash', hash => {
+          this.tx = hash
+        })
+        tx.on('error', error => {
+          reject(error)
+        })
+        tx.on('receipt', async receipt => {
+          resolve(receipt)
+        })
+      } catch (error) {
+        reject(error)
+      }
+    })
+  }
+
+  async renounceWhitelisted() {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const txObject = await this.instance.methods.renounceWhitelisted()
+        const tx = txObject.send({
+          from: this.wallet.address.toChecksumAddress(),
+          value: '0x0',
+        })
+        tx.on('transactionHash', hash => {
+          this.tx = hash
+        })
+        tx.on('error', error => {
+          reject(error)
+        })
+        tx.on('receipt', async receipt => {
+          resolve(receipt)
+        })
+      } catch (error) {
+        reject(error)
+      }
+    })
+  }
+
+  async renounceWhitelistAdmin() {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const txObject = await this.instance.methods.renounceWhitelistAdmin()
+        const tx = txObject.send({
+          from: this.wallet.address.toChecksumAddress(),
+          value: '0x0',
+        })
+        tx.on('transactionHash', hash => {
+          this.tx = hash
+        })
+        tx.on('error', error => {
+          reject(error)
+        })
+        tx.on('receipt', async receipt => {
+          resolve(receipt)
+        })
+      } catch (error) {
+        reject(error)
+      }
+    })
+  }
+
+  async removeWhitelisted(member: Member) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const txObject = await this.instance.methods.removeWhitelisted(member.address.toChecksumAddress())
+        const tx = txObject.send({
+          from: this.wallet.address.toChecksumAddress(),
+          value: '0x0',
+        })
+        tx.on('transactionHash', hash => {
+          this.tx = hash
+        })
+        tx.on('error', error => {
+          reject(error)
+        })
+        tx.on('receipt', async receipt => {
+          resolve(receipt)
+        })
+      } catch (error) {
+        reject(error)
+      }
+    })
+  }
+
   async transfer(to: Address, _value: any) {
     const value = this.wallet.web3.utils.toWei(_value, 'ether')
     return new Promise(async (resolve, reject) => {

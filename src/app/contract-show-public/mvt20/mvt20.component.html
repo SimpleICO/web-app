@@ -102,7 +102,7 @@
       <div class="member" *ngFor="let member of token.members">
         <a href="{{ eth.etherscanURL }}/address/{{ member.address.toString() }}" target="_blank" class="text-truncate">{{ member.address.toString() }}</a>
         <div class="reject">
-          <span *ngIf="token.isAdminMember()" (click)="removeWhitelisted()" class="badge badge-light">Remove</span>
+          <span *ngIf="token.isAdminMember()" (click)="removeWhitelisted(member)" class="badge badge-light">Remove</span>
           <span *ngIf="token.isThisMember(member)" (click)="renounceWhitelisted()" class="badge badge-light">Renounce</span>
         </div>
       </div>
@@ -112,8 +112,8 @@
       <div class="member" *ngFor="let member of token.pendingMembers">
         <a href="{{ eth.etherscanURL }}/address/{{ member.address.toString() }}" target="_blank" class="text-truncate">{{ member.address.toString() }}</a>
         <div class="approve" *ngIf="token.isAdminMember()">
-          <span (click)="addWhitelisted()" class="badge badge-light">Approve</span>
-          <span (click)="revokeMembershipRequest()" class="badge badge-light">Reject</span>
+          <span (click)="addWhitelisted(member)" class="badge badge-light">Approve</span>
+          <span (click)="revokeMembershipRequest(member)" class="badge badge-light">Reject</span>
         </div>
       </div>
     </article>
